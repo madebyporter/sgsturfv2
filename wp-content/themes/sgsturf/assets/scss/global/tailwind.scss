@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/** Tailwind mixins, apply and extends **/
+
+body {
+  @apply antialiased;
+}
+
+.grid-main {
+  @apply grid px-8 py-4 gap-4 grid-cols-12;
+}
+
+.grid-sub {
+  @apply grid grid-cols-12;
+}

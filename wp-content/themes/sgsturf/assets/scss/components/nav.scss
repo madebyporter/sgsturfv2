@@ -1,0 +1,12 @@
+.nav {
+  a {
+    color: $color-gray-dark;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.02rem;
+    text-transform: uppercase;
+    &:hover {
+      color: $color-black;
+    }
+  }
+}

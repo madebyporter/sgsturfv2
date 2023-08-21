@@ -1,0 +1,98 @@
+/** Buttons **/
+  .button {
+    align-items: center;
+    border-radius: $radius-primary;
+    display: inline-flex;
+    gap: 20px;
+    justify-content: center;
+    padding: 10px 20px;
+  }
+  .button-label {
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: -0.04rem;
+    line-height: 1;
+  }
+  .button-arrow {
+    align-items: center;
+    background: $color-white;
+    border-radius: 40px;
+    display: flex;
+    height: 40px;
+    justify-content: center;
+    width: 40px;
+  }
+
+  /** Colors **/
+  .button-primary {
+    background: $color-orange;
+    color: $color-white;
+    &:hover {
+      background: darken($color-orange,5%);
+      color: $color-white;
+      .button-arrow {
+        background: $color-white;
+        svg path {
+          fill: $color-black;
+        }
+      }
+    }
+  }
+  .button-secondary {
+    background: transparent;
+    border: 1px solid $color-black;
+    color: $color-black;
+    .button-arrow {
+      background: $color-black;
+      svg path {
+        fill: $color-white;
+      }
+    }
+    &:hover {
+      background: $color-black;
+      color: $color-white;
+      .button-arrow {
+        background: $color-white;
+        svg path {
+          fill: $color-black;
+        }
+      }
+    }
+  }
+  .button-tertiary {
+    background: transparent;
+    border: 1px solid $color-white;
+    color: $color-white;
+    .button-arrow {
+      background: $color-white;
+      svg path {
+        fill: $color-black;
+      }
+    }
+    &:hover {
+      background: $color-white;
+      color: $color-black;
+      .button-arrow {
+        background: $color-black;
+        svg path {
+          fill: $color-white;
+        }
+      }
+    }
+  }
+
+  /** Sizes **/
+  .button-small {
+    padding: 5px 10px;
+    .button-label {
+      font-size: 1rem;
+    }
+    .button-arrow {
+      height: 20px;
+      width: 20px;
+      svg {
+        width: 9px;
+        height: 9px;
+      }
+    }
+  }

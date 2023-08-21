@@ -1,0 +1,16 @@
+.footer {
+  a {
+    color: $color-gray;
+    font-size: 1rem;
+    &:hover {
+      color: $color-gray-light;
+    }
+  }
+  p {
+    color: $color-gray;
+    font-size: 1rem;
+  }
+  .footer-copyright p {
+    color: $color-gray-dark;
+  }
+}

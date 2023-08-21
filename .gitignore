@@ -1,0 +1,39 @@
+# WordPress core files
+wp-config.php
+wp-content/uploads/
+
+# Cache and temporary files
+wp-content/cache/
+wp-content/advanced-cache.php
+wp-content/backup-db/
+wp-content/upgrade/
+wp-content/backup/
+
+# Plugin and theme generated files
+wp-content/plugins/*/node_modules/
+wp-content/themes/*/node_modules/
+wp-content/plugins/*/vendor/
+wp-content/themes/*/vendor/
+wp-content/plugins/*/dist/
+wp-content/themes/*/dist/
+wp-content/plugins/*/build/
+wp-content/themes/*/build/
+wp-content/plugins/*/tmp/
+wp-content/themes/*/tmp/
+wp-content/plugins/*/log/
+wp-content/themes/*/log/
+
+# Debug log
+debug.log
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Editor/IDE specific files
+.vscode/
+.idea/
+
+# Composer files (if used)
+composer.lock
+/vendor/

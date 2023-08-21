@@ -1,0 +1,68 @@
+/** Base **/
+  body {
+    background: $color-green-pale;
+    font-family: $font-primary;
+  }
+
+  p {
+    font-size: 1.5rem;
+    font-weight: 400;
+    letter-spacing: -0.02rem;
+    line-height: 1.3;
+  }
+  p.small {
+    font-size: 1.125rem;
+    font-weight: 400;
+    letter-spacing: -0.02rem;
+    line-height: 1.3;
+  }
+
+  .h1 {
+    font-size: 3rem;
+    font-weight: 600;
+    letter-spacing: -0.08rem;
+    line-height: 1.2;
+  }
+  .h2 {
+    font-size: 2.25rem;
+    font-weight: 600;
+    letter-spacing: -0.08rem;
+    line-height: 1.2;
+  }
+  .h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: -0.08rem;
+    line-height: 1.2;
+  }
+  .h4 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    letter-spacing: -0.08rem;
+    line-height: 1.2;
+  }
+
+  .theme-white {
+    background: $color-white;
+    & > * {
+      color: $color-black;
+    }
+  }
+  .theme-black {
+    background: $color-black;
+    & > * {
+      color: $color-white;
+    }
+  }
+  .theme-orange {
+    background: $color-orange;
+    & > * {
+      color: $color-white;
+    }
+  }
+  .theme-green {
+    background: $color-green;
+    & > * {
+      color: $color-white;
+    }
+  }

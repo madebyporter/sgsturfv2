@@ -1,0 +1,40 @@
+.card {
+}
+
+.card-product {
+  @extend .theme-white;
+  border-radius: $radius-primary;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  min-width: 288px;
+  width: 288px;
+  &:hover {
+    .card-product-bottom-container {
+      height: 105%;
+    }
+  }
+}
+.card-product-top {
+  padding: 40px 20px;
+}
+.card-product-bottom {
+  height: 200px;
+  position: relative;
+}
+.card-product-bottom-container {
+  border-radius: $radius-primary;
+  bottom: 0;
+  height: 100%;
+  overflow: hidden;
+  position: absolute;
+  transform-origin: bottom;
+  transition: 200ms linear;
+  width: 100%;
+  img {
+    bottom: 0;
+    position: absolute;
+    height: 300px;
+    width: 100%;
+  }
+}

@@ -1,0 +1,11 @@
+.slider {
+  overflow-x: scroll;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+  .pattern-card {
+    width: auto;
+  }
+}
+.slider::-webkit-scrollbar {
+  display: none;
+}

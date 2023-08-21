@@ -1,0 +1,19 @@
+.hero-content {
+  background: $color-white;
+  border-radius: $radius-primary;
+}
+.hero-masonry-col {
+  img {
+    border-radius: $radius-primary;
+    object-fit: cover;
+  }
+}
+.hero-product {
+  img {
+    height: 100%;
+    width: 100%;
+  }
+  .hero-masonry-col {
+    width: 100%;
+  }
+}

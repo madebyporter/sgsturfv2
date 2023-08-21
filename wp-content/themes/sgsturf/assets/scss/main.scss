@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+@import 'global/reset';
+@import 'global/tailwind';
+@import 'global/tokens';
+@import 'global/base';
+@import 'global/header';
+@import 'global/footer';
+
+@import 'components/button';
+@import 'components/nav';
+@import 'components/card';
+@import 'components/tag';
+@import 'components/slider';
+@import 'components/photo-gallery';
+
+@import 'patterns/hero';
+@import 'patterns/content';

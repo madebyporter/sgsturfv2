@@ -1,0 +1,36 @@
+/** Content-Halves **/
+  .content-halves {
+    gap: 0 !important;
+    min-height: 540px;
+    .content-halves-col {
+      &:first-child {
+        border-radius: $radius-primary 0 0 $radius-primary;
+      }
+      &:last-child {
+        border-radius: 0 $radius-primary $radius-primary 0;
+      }
+    }
+  }
+
+/** Content-Full **/
+  .content-full {
+    .content-full-container {
+      border-radius: $radius-primary;
+      overflow: hidden;
+    }
+  }
+
+/** Content Headers **/
+  .content-heading-bordered {
+    border-bottom: 1px solid $color-gray;
+  }
+
+/** Content Paragraph **/
+  .content-paragraph-small p {
+    @extend .small;
+    color: $color-gray-dark;
+    margin-bottom: 10px;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
