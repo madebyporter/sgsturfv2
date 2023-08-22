@@ -33,6 +33,14 @@ function mytheme_add_woocommerce_support() {
 add_action( 'after_setup_theme', 'mytheme_add_woocommerce_support' );
 
 // Disable Woocommerce CSS
+// Remove each style one by one
+add_filter( 'woocommerce_enqueue_styles', 'jk_dequeue_styles' );
+function jk_dequeue_styles( $enqueue_styles ) {
+	unset( $enqueue_styles['woocommerce-general'] );	// Remove the gloss
+	// unset( $enqueue_styles['woocommerce-layout'] );		// Remove the layout
+	// unset( $enqueue_styles['woocommerce-smallscreen'] );	// Remove the smallscreen optimisation
+	return $enqueue_styles;
+}
 // add_filter( 'woocommerce_enqueue_styles', '__return_empty_array' );
 
 // Activate Woocommerce Product Gallery
@@ -43,4 +51,16 @@ add_action( 'after_setup_theme', function() {
 // Disable Checkout
 add_filter( 'woocommerce_is_purchasable', '__return_false' );
 
+// Disable Prices
+add_filter( 'woocommerce_get_price_html', 'remove_price');
+function remove_price($price){ 
+return ;
+}
 
+// Disable Product Sidebar
+function disable_woocommerce_sidebar() {
+    if (is_product()) {
+        remove_action('woocommerce_sidebar', 'woocommerce_get_sidebar', 10);
+    }
+}
+add_action('template_redirect', 'disable_woocommerce_sidebar');

@@ -1,105 +1,115 @@
 <?php
-/**
- * The Template for displaying product archives, including the main shop page which is a post type archive
- *
- * This template can be overridden by copying it to yourtheme/woocommerce/archive-product.php.
- *
- * HOWEVER, on occasion WooCommerce will need to update template files and you
- * (the theme developer) will need to copy the new files to your theme to
- * maintain compatibility. We try to do this as little as possible, but it does
- * happen. When this occurs the version of the template file will be bumped and
- * the readme will list any important changes.
- *
- * @see https://docs.woocommerce.com/document/template-structure/
- * @package WooCommerce\Templates
- * @version 3.4.0
- */
+defined('ABSPATH') || exit;
 
-defined( 'ABSPATH' ) || exit;
+get_header('shop');
 
-get_header( 'shop' );
+// Get all product categories
+$product_categories = get_terms('product_cat');
 
-/**
- * Hook: woocommerce_before_main_content.
- *
- * @hooked woocommerce_output_content_wrapper - 10 (outputs opening divs for the content)
- * @hooked woocommerce_breadcrumb - 20
- * @hooked WC_Structured_Data::generate_website_data() - 30
- */
-do_action( 'woocommerce_before_main_content' );
+// Get selected category filters (if any)
+$category_filters = isset($_GET['category']) ? (array) $_GET['category'] : array();
 
-?>
-<header class="woocommerce-products-header">
-	<?php if ( apply_filters( 'woocommerce_show_page_title', true ) ) : ?>
-		<h1 class="woocommerce-products-header__title page-title"><?php woocommerce_page_title(); ?></h1>
-	<?php endif; ?>
+// Set up the query arguments
+$query_args = array(
+	'status' => 'publish',
+	'limit' => -1,
+	'type' => 'grouped',
+);
 
-	<?php
-	/**
-	 * Hook: woocommerce_archive_description.
-	 *
-	 * @hooked woocommerce_taxonomy_archive_description - 10
-	 * @hooked woocommerce_product_archive_description - 10
-	 */
-	do_action( 'woocommerce_archive_description' );
-	?>
-</header>
-<?php
-if ( woocommerce_product_loop() ) {
-
-	/**
-	 * Hook: woocommerce_before_shop_loop.
-	 *
-	 * @hooked woocommerce_output_all_notices - 10
-	 * @hooked woocommerce_result_count - 20
-	 * @hooked woocommerce_catalog_ordering - 30
-	 */
-	do_action( 'woocommerce_before_shop_loop' );
-
-	woocommerce_product_loop_start();
-
-	if ( wc_get_loop_prop( 'total' ) ) {
-		while ( have_posts() ) {
-			the_post();
-
-			/**
-			 * Hook: woocommerce_shop_loop.
-			 */
-			do_action( 'woocommerce_shop_loop' );
-
-			wc_get_template_part( 'content', 'product' );
-		}
-	}
-
-	woocommerce_product_loop_end();
-
-	/**
-	 * Hook: woocommerce_after_shop_loop.
-	 *
-	 * @hooked woocommerce_pagination - 10
-	 */
-	do_action( 'woocommerce_after_shop_loop' );
-} else {
-	/**
-	 * Hook: woocommerce_no_products_found.
-	 *
-	 * @hooked wc_no_products_found - 10
-	 */
-	do_action( 'woocommerce_no_products_found' );
+// Apply category filter if selected
+if (!empty($category_filters)) {
+	$query_args['category'] = $category_filters;
 }
 
-/**
- * Hook: woocommerce_after_main_content.
- *
- * @hooked woocommerce_output_content_wrapper_end - 10 (outputs closing divs for the content)
- */
-do_action( 'woocommerce_after_main_content' );
+?>
 
-/**
- * Hook: woocommerce_sidebar.
- *
- * @hooked woocommerce_get_sidebar - 10
- */
-do_action( 'woocommerce_sidebar' );
+<!--Archive Loop Start-->
 
-get_footer( 'shop' );
+<section class="grid-main hero hero-sub min-h-[300px]">
+	<div class="theme-white hero-content col-start-1 col-end-13 p-10 flex flex-col justify-end">
+		<div class="collection-overview grid-sub">
+			<div class="collection-breadcrumbs">
+				<?php
+				do_action('woocommerce_before_main_content');
+				?>
+			</div>
+			<div class="collection-meta col-start-1 col-end-13">
+				<div class="content-heading">
+					<?php if (apply_filters('woocommerce_show_page_title', true)): ?>
+						<h1 class="h1 woocommerce-products-header__title page-title">
+							<?php woocommerce_page_title(); ?>
+						</h1>
+					<?php endif; ?>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="grid-main content-full">
+	<div class="theme-black content-full-container col-start-1 col-end-13 grid-sub flex flex-col gap-16 p-20">
+		<div class="col-start-1 col-end-4">
+			<form action="<?php echo esc_url(get_permalink(get_option('woocommerce_shop_page_id'))); ?>" method="get">
+				<label>Filter by Category:</label><br>
+				<?php foreach ($product_categories as $category): ?>
+					<label>
+						<input type="checkbox" name="category[]" value="<?php echo esc_attr($category->slug); ?>" <?php if (in_array($category->slug, $category_filters))
+								 echo 'checked'; ?>>
+						<?php echo esc_html($category->name); ?>
+					</label><br>
+				<?php endforeach; ?>
+				<button type="submit">Apply Filter</button>
+			</form>
+		</div>
+		<div class="col-start-4 col-end-13">
+			<div class="pattern-card flex gap-8 justify-start">
+				<!-- Start grouped products loop -->
+				<?php
+				$grouped_products = wc_get_products($query_args);
+
+				foreach ($grouped_products as $product):
+					$category_list = wc_get_product_category_list($product->get_id(), ', ');
+					$categories = explode(', ', $category_list);
+					?>
+					<div class="card card-product">
+						<div class="card-product-top">
+							<h3 class="h3 mb-2">
+								<?php echo esc_html($product->get_name()); ?>
+							</h3>
+							<div class="pattern-tag flex gap-2 mb-8">
+								<?php foreach ($categories as $category_name): ?>
+									<div class="tag">
+										<?php echo esc_html(wp_strip_all_tags($category_name)); ?>
+									</div>
+								<?php endforeach; ?>
+							</div>
+							<a href="<?php echo esc_url(get_permalink($product->get_id())); ?>"
+								class="button button-secondary button-small">
+								<span class="button-label">View Series</span>
+								<span class="button-arrow">
+									<svg width="20" height="16" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<path
+											d="M18.1978 8.94987L12.2806 15.029L11.3766 16L9.48636 14.058L10.4315 13.1293L14.0886 9.32981H2.17207H0.857143V6.62797H2.17207H14.0886L10.4315 2.87071L9.48636 1.89974L11.3766 0L12.2806 0.970976L18.1978 7.05013L19.1429 7.97889L18.1978 8.94987Z"
+											fill="#242423" />
+									</svg>
+								</span>
+							</a>
+						</div>
+						<div class="card-product-bottom">
+							<div class="card-product-bottom-container">
+								<img
+									src="<?php echo esc_url($product->get_image_id() ? wp_get_attachment_url($product->get_image_id()) : wc_placeholder_img_src()); ?>"
+									alt="Product" />
+							</div>
+						</div>
+					</div>
+				<?php endforeach; ?>
+				<!-- End grouped products loop -->
+			</div>
+		</div>
+	</div>
+</section>
+
+<!--Archive Loop Ends-->
+
+<?php get_footer();

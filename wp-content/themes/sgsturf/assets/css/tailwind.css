@@ -584,6 +584,18 @@ video {
   right: 2.5rem;
 }
 
+.col-span-7 {
+  grid-column: span 7 / span 7;
+}
+
+.col-span-full {
+  grid-column: 1 / -1;
+}
+
+.col-span-6 {
+  grid-column: span 6 / span 6;
+}
+
 .col-start-1 {
   grid-column-start: 1;
 }
@@ -703,6 +715,14 @@ video {
 
 .min-h-\[700px\] {
   min-height: 700px;
+}
+
+.min-h-\[50\%\] {
+  min-height: 50%;
+}
+
+.min-h-\[300px\] {
+  min-height: 300px;
 }
 
 .w-1\/2 {
