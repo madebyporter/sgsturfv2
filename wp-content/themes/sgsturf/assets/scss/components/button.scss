@@ -4,24 +4,56 @@
     border-radius: $radius-primary;
     cursor: pointer;
     display: inline-flex;
-    gap: 20px;
+    gap: 10px;
     justify-content: center;
     padding: 10px 20px;
+    @media only screen and (min-width: $bp-lg) {
+      gap: 20px;
+    }
   }
   .button-label {
-    font-size: 1.5rem;
     font-weight: 600;
     letter-spacing: -0.04rem;
     line-height: 1;
+    font-size: $font-size-18;
+    white-space: nowrap;
+    @media only screen and (min-width: $bp-lg) {
+      .button-label {
+        font-size: $font-size-20;
+      }
+    }
+    @media only screen and (min-width: $bp-xl) {
+      .button-label {
+        font-size: $font-size-24;
+      }
+    }
   }
   .button-arrow {
     align-items: center;
     background: $color-white;
-    border-radius: 40px;
     display: flex;
-    height: 40px;
     justify-content: center;
-    width: 40px;
+    border-radius: 20px;
+    height: 20px;
+    width: 20px;
+    svg {
+      width: 15px;
+      height: 15px;
+    }
+    @media only screen and (min-width: $bp-lg) {
+      border-radius: 30px;
+      height: 30px;
+      width: 30px;
+      svg {
+        width: 20px;
+        height: 20px;
+      }
+    }
+    @media only screen and (min-width: $bp-xl) {
+      border-radius: 40px;
+      height: 40px;
+      width: 40px;
+    }
   }
 
   /** Colors **/
@@ -101,15 +133,35 @@
   /** Sizes **/
   .button-small {
     padding: 5px 10px;
-    .button-label {
-      font-size: 1rem;
-    }
+    
     .button-arrow {
       height: 20px;
+      min-width: 20px;
       width: 20px;
       svg {
-        width: 9px;
-        height: 9px;
+        width: 10px;
+        height: 10px;
+      }
+    }
+    .button-label {
+      font-size: $font-size-14;
+    }
+    @media only screen and (min-width: $bp-lg) {
+      .button-label {
+        font-size: $font-size-14;
+      }
+    }
+    @media only screen and (min-width: $bp-xl) {
+      .button-label {
+        font-size: $font-size-16;
+      }
+      .button-arrow {
+        height: 20px;
+        width: 20px;
+        svg {
+          width: 10px;
+          height: 10px;
+        }
       }
     }
   }

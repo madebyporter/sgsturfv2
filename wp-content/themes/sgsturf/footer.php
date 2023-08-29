@@ -5,7 +5,7 @@
     <div class="col-start-1 col-end-4">
       <?php include('components/logo-orange.php'); ?>
     </div>
-    <div class="col-start-4 col-end-6">
+    <div class="md:col-start-4 md:col-end-8 xl:col-start-4 xl:col-end-6">
       <div class="nav-footer">
         <h4>Navigation</h4>
         <nav class="site-nav flex flex-col gap-2 mt-4">
@@ -15,7 +15,7 @@
         </nav>
       </div>
     </div>
-    <div class="col-start-6 col-end-8">
+    <div class="md:col-start-8 md:col-end-13 xl:col-start-6 xl:col-end-8">
       <div class="nav-footer">
         <h4>Social Media</h4>
         <nav class="site-nav flex flex-col gap-2 mt-4">
@@ -25,14 +25,14 @@
         </nav>
       </div>
     </div>
-    <div class="col-start-8 col-end-10">
+    <div class="md:col-start-4 md:col-end-8 xl:col-start-8 xl:col-end-10">
       <h4>Contact Us</h4>
       <div class="footer-content flex flex-col gap-2 mt-4">
         <a href="#">info@sgsturf.com</a>
         <p>Mon to Fri<br />7:00am to 4:00pm</p>
       </div>
     </div>
-    <div class="col-start-10 col-end-12">
+    <div class="md:col-start-8 md:col-end-13 xl:col-start-10 xl:col-end-13">
       <h4>California</h4>
       <div class="footer-content flex flex-col gap-2 mt-4 mb-8">
         <p>690 Ridgeway St.<br />Pomona, CA 91768<br />Phone: (909) 629-8400</p>

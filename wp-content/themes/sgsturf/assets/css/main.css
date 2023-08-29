@@ -4,6 +4,11 @@ html, body {
   margin: 0;
 }
 
+/** Tokens **/
+/** Breakpoints **/
+/** Colors **/
+/** Fonts **/
+/** Radius **/
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -13,17 +18,18 @@ body {
 }
 
 .grid-main {
-  @apply grid px-8 py-4 gap-4 grid-cols-12;
+  @apply grid px-8 py-4 gap-x-4 gap-y-8 grid-cols-12;
 }
 
+@media only screen and (min-width: 1280px) {
+  .grid-main {
+    @apply grid px-8 py-4 gap-4 grid-cols-12;
+  }
+}
 .grid-sub {
   @apply grid grid-cols-12;
 }
 
-/** Tokens **/
-/** Colors **/
-/** Fonts **/
-/** Radius **/
 /** Base **/
 body {
   background: #EFF0ED;
@@ -31,45 +37,105 @@ body {
 }
 
 p {
-  font-size: 1.5rem;
   font-weight: 400;
   letter-spacing: -0.02rem;
   line-height: 1.3;
+  font-size: 1rem;
+}
+@media only screen and (min-width: 1024px) {
+  p {
+    font-size: 1.125rem;
+  }
+}
+@media only screen and (min-width: 1280px) {
+  p {
+    font-size: 1.5rem;
+  }
 }
 
 p.small, .content-paragraph-small p {
-  font-size: 1.125rem;
   font-weight: 400;
   letter-spacing: -0.02rem;
   line-height: 1.3;
+  font-size: 0.875rem;
+}
+@media only screen and (min-width: 1024px) {
+  p.small, .content-paragraph-small p {
+    font-size: 1rem;
+  }
+}
+@media only screen and (min-width: 1280px) {
+  p.small, .content-paragraph-small p {
+    font-size: 1.125rem;
+  }
 }
 
 .h1 {
-  font-size: 3rem;
   font-weight: 600;
   letter-spacing: -0.08rem;
   line-height: 1.2;
+  font-size: 1.875rem;
+}
+@media only screen and (min-width: 1024px) {
+  .h1 {
+    font-size: 2.25rem;
+  }
+}
+@media only screen and (min-width: 1280px) {
+  .h1 {
+    font-size: 3rem;
+  }
 }
 
 .h2 {
-  font-size: 2.25rem;
   font-weight: 600;
   letter-spacing: -0.08rem;
   line-height: 1.2;
+  font-size: 1.5rem;
+}
+@media only screen and (min-width: 1024px) {
+  .h2 {
+    font-size: 1.875rem;
+  }
+}
+@media only screen and (min-width: 1280px) {
+  .h2 {
+    font-size: 2.25rem;
+  }
 }
 
 .h3 {
-  font-size: 1.5rem;
   font-weight: 600;
   letter-spacing: -0.08rem;
   line-height: 1.2;
+  font-size: 1.125rem;
+}
+@media only screen and (min-width: 1024px) {
+  .h3 {
+    font-size: 1.25rem;
+  }
+}
+@media only screen and (min-width: 1280px) {
+  .h3 {
+    font-size: 1.5rem;
+  }
 }
 
 .h4 {
-  font-size: 1.125rem;
   font-weight: 600;
   letter-spacing: -0.08rem;
   line-height: 1.2;
+  font-size: 0.875rem;
+}
+@media only screen and (min-width: 1024px) {
+  .h4 {
+    font-size: 1rem;
+  }
+}
+@media only screen and (min-width: 1280px) {
+  .h4 {
+    font-size: 1.125rem;
+  }
 }
 
 .theme-white, .card-product {
@@ -126,26 +192,64 @@ p.small, .content-paragraph-small p {
   border-radius: 0.625rem;
   cursor: pointer;
   display: inline-flex;
-  gap: 20px;
+  gap: 10px;
   justify-content: center;
   padding: 10px 20px;
 }
+@media only screen and (min-width: 1024px) {
+  .button, .gform_wrapper.sgsform_wrapper button.gform_save_link.button, .gform_wrapper.sgsform_wrapper input.gform_button {
+    gap: 20px;
+  }
+}
 
 .button-label {
-  font-size: 1.5rem;
   font-weight: 600;
   letter-spacing: -0.04rem;
   line-height: 1;
+  font-size: 1.125rem;
+  white-space: nowrap;
+}
+@media only screen and (min-width: 1024px) {
+  .button-label .button-label {
+    font-size: 1.25rem;
+  }
+}
+@media only screen and (min-width: 1280px) {
+  .button-label .button-label {
+    font-size: 1.5rem;
+  }
 }
 
 .button-arrow {
   align-items: center;
   background: #FFF;
-  border-radius: 40px;
   display: flex;
-  height: 40px;
   justify-content: center;
-  width: 40px;
+  border-radius: 20px;
+  height: 20px;
+  width: 20px;
+}
+.button-arrow svg {
+  width: 15px;
+  height: 15px;
+}
+@media only screen and (min-width: 1024px) {
+  .button-arrow {
+    border-radius: 30px;
+    height: 30px;
+    width: 30px;
+  }
+  .button-arrow svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+@media only screen and (min-width: 1280px) {
+  .button-arrow {
+    border-radius: 40px;
+    height: 40px;
+    width: 40px;
+  }
 }
 
 /** Colors **/
@@ -229,24 +333,53 @@ p.small, .content-paragraph-small p {
 .button-small {
   padding: 5px 10px;
 }
-.button-small .button-label {
-  font-size: 1rem;
-}
 .button-small .button-arrow {
   height: 20px;
+  min-width: 20px;
   width: 20px;
 }
 .button-small .button-arrow svg {
-  width: 9px;
-  height: 9px;
+  width: 10px;
+  height: 10px;
+}
+.button-small .button-label {
+  font-size: 0.875rem;
+}
+@media only screen and (min-width: 1024px) {
+  .button-small .button-label {
+    font-size: 0.875rem;
+  }
+}
+@media only screen and (min-width: 1280px) {
+  .button-small .button-label {
+    font-size: 1rem;
+  }
+  .button-small .button-arrow {
+    height: 20px;
+    width: 20px;
+  }
+  .button-small .button-arrow svg {
+    width: 10px;
+    height: 10px;
+  }
 }
 
 .nav a {
   color: #666666;
-  font-size: 1rem;
+  font-size: 0.875rem;
   font-weight: 600;
   letter-spacing: 0.02rem;
   text-transform: uppercase;
+}
+@media only screen and (min-width: 1024px) {
+  .nav a {
+    font-size: 0.875rem;
+  }
+}
+@media only screen and (min-width: 1280px) {
+  .nav a {
+    font-size: 1rem;
+  }
 }
 .nav a:hover {
   color: #242423;
@@ -257,8 +390,14 @@ p.small, .content-paragraph-small p {
   display: flex;
   flex-direction: column;
   justify-content: end;
-  min-width: 288px;
-  width: 288px;
+  min-width: auto;
+  width: 100%;
+}
+@media only screen and (min-width: 1024px) {
+  .card-product {
+    min-width: 288px;
+    width: auto;
+  }
 }
 .card-product:hover .card-product-bottom-container {
   height: 105%;

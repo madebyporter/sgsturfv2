@@ -10,9 +10,9 @@ if (!defined('ABSPATH')) {
 get_header(); ?>
 
 <section class="grid-main hero hero-home">
-  <div class="hero-content col-start-1 col-end-7 p-20 grid-sub content-end">
+  <div class="hero-content md:col-start-1 md:col-end-9 lg:col-start-1 lg:col-end-7 md:p-10 lg:p-20 grid-sub content-end">
     <div class="content-heading-cta col-start-1 col-end-12">
-      <h1 class="h1 mb-8">Get beautiful, artificial turf within days &amp; not break the bank.</h1>
+      <h1 class="h1 md:mb-4 lg:mb-8">Get beautiful, artificial turf within days &amp; not break the bank.</h1>
       <div class="pattern-button">
         <a href="#" class="button button-primary">
           <span class="button-label">Shop our Turf</span>
@@ -27,15 +27,15 @@ get_header(); ?>
       </div>
     </div>
   </div>
-  <div class="hero-masonry flex gap-4 col-start-7 col-end-13">
-    <div class="hero-masonry-col flex flex-col gap-4 justify-around">
-      <img src="<?php echo SGSTURF_IMAGES_DIR; ?>/fpo-home-hero-2.jpg" alt="Turf">
-      <img src="<?php echo SGSTURF_IMAGES_DIR; ?>/fpo-home-hero-3.jpg" alt="Turf">
+  <div class="hero-masonry flex gap-4 md:col-start-9 md:col-end-13 lg:col-start-7 lg:col-end-13">
+    <div class="hero-masonry-col flex flex-col gap-4 justify-between w-full xl:w-auto">
+      <img src="<?php echo SGSTURF_IMAGES_DIR; ?>/fpo-home-hero-2.jpg" alt="Turf" class="md:h-full lg:h-auto xl:block">
+      <img src="<?php echo SGSTURF_IMAGES_DIR; ?>/fpo-home-hero-3.jpg" alt="Turf" class="hidden xl:block">
     </div>
-    <div class="hero-masonry-col flex flex-col gap-4 justify-around">
-      <img src="<?php echo SGSTURF_IMAGES_DIR; ?>/fpo-home-hero-4.jpg" alt="Turf">
-      <img src="<?php echo SGSTURF_IMAGES_DIR; ?>/fpo-home-hero-5.jpg" alt="Turf">
-      <img src="<?php echo SGSTURF_IMAGES_DIR; ?>/fpo-home-hero-6.jpg" alt="Turf">
+    <div class="hero-masonry-col hidden xl:flex flex-col gap-4 justify-between">
+      <img src="<?php echo SGSTURF_IMAGES_DIR; ?>/fpo-home-hero-4.jpg" alt="Turf" class="hidden xl:block">
+      <img src="<?php echo SGSTURF_IMAGES_DIR; ?>/fpo-home-hero-5.jpg" alt="Turf" class="hidden xl:block">
+      <img src="<?php echo SGSTURF_IMAGES_DIR; ?>/fpo-home-hero-6.jpg" alt="Turf" class="hidden xl:block">
     </div>
   </div>
 </section>
@@ -47,7 +47,7 @@ get_header(); ?>
     </div>
   </div>
   <div class="theme-green content-halves-col col-start-7 col-end-13 p-20 grid-sub">
-    <div class="content-paragraph col-start-2 col-end-12">
+    <div class="content-paragraph col-start-1 col-end-13">
       <p class="mb-8">
         With locations in Southern California and Northern Texas, you’re able to quickly order high quality synthetic
         grass and pick it up all within seven days.
@@ -186,7 +186,7 @@ get_header(); ?>
   </div>
 </section>
 
-<section class="grid-main content-halves min-h-[700px]">
+<section class="grid-main content-halves lg:min-h-[700px]">
   <div class="theme-green content-halves-col col-start-1 col-end-7 p-20 grid-sub content-end">
     <div class="content-heading-cta col-start-1 col-end-12">
       <h2 class="h2 mb-4">New Customers</h2>

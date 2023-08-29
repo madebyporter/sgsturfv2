@@ -7,8 +7,13 @@
   display: flex;
   flex-direction: column;
   justify-content: end;
-  min-width: 288px;
-  width: 288px;
+  min-width: auto;
+  width: 100%;
+  @media only screen and (min-width: $bp-lg) {
+    min-width: 288px;
+    width: auto;
+  }
+
   &:hover {
     .card-product-bottom-container {
       height: 105%;
