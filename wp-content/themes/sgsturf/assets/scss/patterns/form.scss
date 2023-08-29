@@ -1,0 +1,59 @@
+.gform_wrapper.sgsform_wrapper {
+  // Form Heading 
+  .gform_heading {display: none;}
+
+  // Section Heading
+  .gfield--type-section {
+    margin: 0.625rem 0;
+    .gsection_title {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+  }
+
+  // Input Text Field
+  .gfield--type-text, .gfield--type-email, .gfield--type-select, .gfield--type-number, .gfield--type-textarea {
+    background: lighten($color-green-pale,2%);
+    border-radius: $radius-secondary;
+    padding: 0.625rem;
+
+    .gfield_label {
+      font-size: 0.875rem;
+      font-weight: 500;
+      margin: 0;
+    }
+    .ginput_container input.medium, 
+    .ginput_container select.medium, 
+    .ginput_container textarea.medium {
+      background: transparent;
+      border: 0;
+      border-radius: 2px;
+      color: $color-black;
+      font-size: 1.125rem;
+      font-weight: 700;
+      padding: 0.3125rem 0;
+      width: 100%;
+      &:focus {
+        background: darken($color-green-pale,5%);
+        outline: 1px solid darken($color-green-pale,7%);
+        padding: 0.3125rem 0.125rem;
+      }
+    }
+  }
+
+  // Button
+  input.gform_button {
+    @extend .button;
+    @extend .button-primary;
+  }
+  button.gform_save_link.button {
+    @extend .button;
+    @extend .button-text;
+    svg {display: none !important}
+  }
+
+  // Description
+  div.gsection_description li {
+    font-size: 0.75rem;
+  }
+}

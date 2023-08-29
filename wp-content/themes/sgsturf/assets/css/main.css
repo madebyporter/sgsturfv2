@@ -121,9 +121,10 @@ p.small, .content-paragraph-small p {
 }
 
 /** Buttons **/
-.button {
+.button, .gform_wrapper.sgsform_wrapper button.gform_save_link.button, .gform_wrapper.sgsform_wrapper input.gform_button {
   align-items: center;
   border-radius: 0.625rem;
+  cursor: pointer;
   display: inline-flex;
   gap: 20px;
   justify-content: center;
@@ -148,18 +149,18 @@ p.small, .content-paragraph-small p {
 }
 
 /** Colors **/
-.button-primary {
+.button-primary, .gform_wrapper.sgsform_wrapper input.gform_button {
   background: #FC9827;
   color: #FFF;
 }
-.button-primary:hover {
+.button-primary:hover, .gform_wrapper.sgsform_wrapper input.gform_button:hover {
   background: #fc8c0e;
   color: #FFF;
 }
-.button-primary:hover .button-arrow {
+.button-primary:hover .button-arrow, .gform_wrapper.sgsform_wrapper input.gform_button:hover .button-arrow {
   background: #FFF;
 }
-.button-primary:hover .button-arrow svg path {
+.button-primary:hover .button-arrow svg path, .gform_wrapper.sgsform_wrapper input.gform_button:hover .button-arrow svg path {
   fill: #242423;
 }
 
@@ -205,6 +206,23 @@ p.small, .content-paragraph-small p {
 }
 .button-tertiary:hover .button-arrow svg path {
   fill: #FFF;
+}
+
+.button-text, .gform_wrapper.sgsform_wrapper button.gform_save_link.button {
+  background: transparent;
+  border: 0px;
+  color: #242423;
+  text-decoration: underline;
+}
+.button-text .button-arrow, .gform_wrapper.sgsform_wrapper button.gform_save_link.button .button-arrow {
+  display: none;
+}
+.button-text:hover, .gform_wrapper.sgsform_wrapper button.gform_save_link.button:hover {
+  background: transparent;
+  color: #242423;
+}
+.button-text:hover .button-arrow, .gform_wrapper.sgsform_wrapper button.gform_save_link.button:hover .button-arrow {
+  display: none;
 }
 
 /** Sizes **/
@@ -347,6 +365,68 @@ p.small, .content-paragraph-small p {
 }
 .content-paragraph-small p:last-child {
   margin-bottom: 0;
+}
+
+.gform_wrapper.sgsform_wrapper .gform_heading {
+  display: none;
+}
+.gform_wrapper.sgsform_wrapper .gfield--type-section {
+  margin: 0.625rem 0;
+}
+.gform_wrapper.sgsform_wrapper .gfield--type-section .gsection_title {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+.gform_wrapper.sgsform_wrapper .gfield--type-text, .gform_wrapper.sgsform_wrapper .gfield--type-email, .gform_wrapper.sgsform_wrapper .gfield--type-select, .gform_wrapper.sgsform_wrapper .gfield--type-number, .gform_wrapper.sgsform_wrapper .gfield--type-textarea {
+  background: #f4f5f3;
+  border-radius: 0.3125rem;
+  padding: 0.625rem;
+}
+.gform_wrapper.sgsform_wrapper .gfield--type-text .gfield_label, .gform_wrapper.sgsform_wrapper .gfield--type-email .gfield_label, .gform_wrapper.sgsform_wrapper .gfield--type-select .gfield_label, .gform_wrapper.sgsform_wrapper .gfield--type-number .gfield_label, .gform_wrapper.sgsform_wrapper .gfield--type-textarea .gfield_label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin: 0;
+}
+.gform_wrapper.sgsform_wrapper .gfield--type-text .ginput_container input.medium,
+.gform_wrapper.sgsform_wrapper .gfield--type-text .ginput_container select.medium,
+.gform_wrapper.sgsform_wrapper .gfield--type-text .ginput_container textarea.medium, .gform_wrapper.sgsform_wrapper .gfield--type-email .ginput_container input.medium,
+.gform_wrapper.sgsform_wrapper .gfield--type-email .ginput_container select.medium,
+.gform_wrapper.sgsform_wrapper .gfield--type-email .ginput_container textarea.medium, .gform_wrapper.sgsform_wrapper .gfield--type-select .ginput_container input.medium,
+.gform_wrapper.sgsform_wrapper .gfield--type-select .ginput_container select.medium,
+.gform_wrapper.sgsform_wrapper .gfield--type-select .ginput_container textarea.medium, .gform_wrapper.sgsform_wrapper .gfield--type-number .ginput_container input.medium,
+.gform_wrapper.sgsform_wrapper .gfield--type-number .ginput_container select.medium,
+.gform_wrapper.sgsform_wrapper .gfield--type-number .ginput_container textarea.medium, .gform_wrapper.sgsform_wrapper .gfield--type-textarea .ginput_container input.medium,
+.gform_wrapper.sgsform_wrapper .gfield--type-textarea .ginput_container select.medium,
+.gform_wrapper.sgsform_wrapper .gfield--type-textarea .ginput_container textarea.medium {
+  background: transparent;
+  border: 0;
+  border-radius: 2px;
+  color: #242423;
+  font-size: 1.125rem;
+  font-weight: 700;
+  padding: 0.3125rem 0;
+  width: 100%;
+}
+.gform_wrapper.sgsform_wrapper .gfield--type-text .ginput_container input.medium:focus,
+.gform_wrapper.sgsform_wrapper .gfield--type-text .ginput_container select.medium:focus,
+.gform_wrapper.sgsform_wrapper .gfield--type-text .ginput_container textarea.medium:focus, .gform_wrapper.sgsform_wrapper .gfield--type-email .ginput_container input.medium:focus,
+.gform_wrapper.sgsform_wrapper .gfield--type-email .ginput_container select.medium:focus,
+.gform_wrapper.sgsform_wrapper .gfield--type-email .ginput_container textarea.medium:focus, .gform_wrapper.sgsform_wrapper .gfield--type-select .ginput_container input.medium:focus,
+.gform_wrapper.sgsform_wrapper .gfield--type-select .ginput_container select.medium:focus,
+.gform_wrapper.sgsform_wrapper .gfield--type-select .ginput_container textarea.medium:focus, .gform_wrapper.sgsform_wrapper .gfield--type-number .ginput_container input.medium:focus,
+.gform_wrapper.sgsform_wrapper .gfield--type-number .ginput_container select.medium:focus,
+.gform_wrapper.sgsform_wrapper .gfield--type-number .ginput_container textarea.medium:focus, .gform_wrapper.sgsform_wrapper .gfield--type-textarea .ginput_container input.medium:focus,
+.gform_wrapper.sgsform_wrapper .gfield--type-textarea .ginput_container select.medium:focus,
+.gform_wrapper.sgsform_wrapper .gfield--type-textarea .ginput_container textarea.medium:focus {
+  background: #e3e4df;
+  outline: 1px solid #dee0da;
+  padding: 0.3125rem 0.125rem;
+}
+.gform_wrapper.sgsform_wrapper button.gform_save_link.button svg {
+  display: none !important;
+}
+.gform_wrapper.sgsform_wrapper div.gsection_description li {
+  font-size: 0.75rem;
 }
 
 /*# sourceMappingURL=main.css.map */

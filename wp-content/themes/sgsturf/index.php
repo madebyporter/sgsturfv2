@@ -11,7 +11,7 @@ get_header(); ?>
 
 <section class="grid-main hero hero-home">
   <div class="hero-content col-start-1 col-end-7 p-20 grid-sub content-end">
-    <div class="content-heading-cta col-start-2 col-end-12">
+    <div class="content-heading-cta col-start-1 col-end-12">
       <h1 class="h1 mb-8">Get beautiful, artificial turf within days &amp; not break the bank.</h1>
       <div class="pattern-button">
         <a href="#" class="button button-primary">
@@ -42,7 +42,7 @@ get_header(); ?>
 
 <section class="grid-main content-halves">
   <div class="theme-orange content-halves-col col-start-1 col-end-7 p-20 grid-sub">
-    <div class="content-heading col-start-2 col-end-12">
+    <div class="content-heading col-start-1 col-end-12">
       <h2 class="h2">There’s a turf demand on the West Coast. How can you keep up?</h2>
     </div>
   </div>
@@ -85,7 +85,7 @@ get_header(); ?>
       </div>
     </div>
     <div class="content-full-row grid-sub">
-      <div class="pattern-card col-start-1 col-end-13 flex gap-8 justify-between">
+      <div class="pattern-card col-start-1 col-end-13 flex gap-8 justify-start">
         <!-- Start grouped products loop -->
         <?php
         $grouped_products = wc_get_products(
@@ -188,7 +188,7 @@ get_header(); ?>
 
 <section class="grid-main content-halves min-h-[700px]">
   <div class="theme-green content-halves-col col-start-1 col-end-7 p-20 grid-sub content-end">
-    <div class="content-heading-cta col-start-2 col-end-12">
+    <div class="content-heading-cta col-start-1 col-end-12">
       <h2 class="h2 mb-4">New Customers</h2>
       <p class="mb-8">First time here? Request some sample turf to get a feel for our line.</p>
       <a href="#" class="button button-tertiary">
@@ -204,7 +204,7 @@ get_header(); ?>
     </div>
   </div>
   <div class="theme-orange content-halves-col col-start-7 col-end-13 p-20 grid-sub content-end">
-    <div class="content-heading-cta col-start-2 col-end-12">
+    <div class="content-heading-cta col-start-1 col-end-12">
       <h2 class="h2 mb-4">Existing Customers</h2>
       <p class="mb-8">Ready to purchase more turf for your next project? Let’s get you going.</p>
       <a href="#" class="button button-tertiary">

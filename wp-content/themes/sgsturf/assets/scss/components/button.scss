@@ -2,6 +2,7 @@
   .button {
     align-items: center;
     border-radius: $radius-primary;
+    cursor: pointer;
     display: inline-flex;
     gap: 20px;
     justify-content: center;
@@ -77,6 +78,22 @@
         svg path {
           fill: $color-white;
         }
+      }
+    }
+  }
+  .button-text {
+    background: transparent;
+    border: 0px;
+    color: $color-black;
+    text-decoration: underline;
+    .button-arrow {
+      display: none;
+    }
+    &:hover {
+      background: transparent;
+      color: $color-black;
+      .button-arrow {
+        display: none;
       }
     }
   }

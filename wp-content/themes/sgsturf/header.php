@@ -24,7 +24,7 @@
         ?>
       </div>
       <div class="flex justify-end col-start-11 col-end-13">
-        <a href="#" class="button button-secondary button-small">
+        <a href="./request-a-quote/" class="button button-secondary button-small">
           <span class="button-label">Request Quote</span>
           <span class="button-arrow">
             <svg width="20" height="16" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
