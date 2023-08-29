@@ -7,7 +7,7 @@
 get_header(); ?>
 
   <section class="grid-main hero hero-sub min-h-[300px]">
-    <div class="theme-white hero-content col-start-1 col-end-13 p-10 flex flex-col justify-end">
+    <div class="theme-white hero-content col-start-1 col-end-13 px-20 py-10 flex flex-col justify-end">
       <div class="product-overview grid-sub">
         <div class="product-meta col-start-1 col-end-13">
           <div class="content-heading">
@@ -18,7 +18,7 @@ get_header(); ?>
     </div>
   </section>
   <section class="grid-main content-full">
-    <div class="theme-white content-full-container p-10 col-start-1 col-end-13 grid-sub gap-4">
+    <div class="theme-white content-full-container p-20 col-start-1 col-end-13 grid-sub gap-4">
       <div class="col-start-1 col-end-5">
         <p class="small mb-10">Note: All orders for next day delivery will need to be received & confirmed before 10:00 am. Orders & delivery are placed in the order received.  All onsite deliveries are curb-side only and require offload assistance.</p>
         <p class="small mb-10">SPECIFIED DELIVERY TIMES ARE NOT GUARANTEED</p>
