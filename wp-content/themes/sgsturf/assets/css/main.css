@@ -390,8 +390,8 @@ p.small, .content-paragraph-small p {
   display: flex;
   flex-direction: column;
   justify-content: end;
-  min-width: auto;
-  width: 100%;
+  min-width: 288px;
+  width: auto;
 }
 @media only screen and (min-width: 1024px) {
   .card-product {

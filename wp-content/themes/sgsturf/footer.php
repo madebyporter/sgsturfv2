@@ -1,6 +1,6 @@
 </main>
 
-<footer id="footer" class="footer theme-black mt-4 px-28 !py-12">
+<footer id="footer" class="footer theme-black mt-4 md:p-10 lg:px-28 lg:!py-12">
   <div class="footer-row grid-main !px-0">
     <div class="col-start-1 col-end-4">
       <?php include('components/logo-orange.php'); ?>

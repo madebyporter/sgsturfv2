@@ -11,10 +11,10 @@
 
   <header id="header" class="header mt-4">
     <div class="header-bar grid-main items-center">
-      <div class="flex col-start-1 col-end-3">
+      <div class="flex md:col-start-1 md:col-end-4 lg:col-start-1 lg:col-end-3">
         <?php include('components/logo-gray.php'); ?>
       </div>
-      <div class="flex justify-center col-start-3 col-end-11">
+      <div class="flex justify-center md:col-start-4 md:col-end-10 lg:col-start-3 lg:col-end-11">
         <!-- Header Menu -->
         <?php
           wp_nav_menu(array(
@@ -23,7 +23,7 @@
           ));
         ?>
       </div>
-      <div class="flex justify-end col-start-11 col-end-13">
+      <div class="flex justify-end md:col-start-10 md:col-end-13 lg:col-start-11 lg:col-end-13">
         <a href="./request-a-quote/" class="button button-secondary button-small">
           <span class="button-label">Request Quote</span>
           <span class="button-arrow">

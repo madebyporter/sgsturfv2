@@ -69,8 +69,8 @@ if ( $group_product->is_type( 'grouped' ) ) :
     </div>
     <div class="content-full-row grid-sub">
       <div class="slider col-start-1 col-end-13">
-        <div class="slider-container pl-20">
-          <div class="pattern-card mr-20 flex gap-8 justify-start content-start">
+        <div class="slider-container mx-20">
+          <div class="pattern-card flex gap-8 justify-start content-start">
             <?php
             $subproducts = $group_product->get_children();
             foreach ($subproducts as $subproduct_id) {
@@ -101,6 +101,23 @@ if ( $group_product->is_type( 'grouped' ) ) :
             ?>
           </div>
         </div>
+        <script>
+          // Function to calculate and update slider width
+          function updateSliderWidth() {
+            const cardWidth = document.querySelector('.card-product').offsetWidth;
+            const gap = parseFloat(getComputedStyle(document.querySelector('.pattern-card')).gap);
+            const cardCount = document.querySelectorAll('.card-product').length;
+            const totalWidth = (cardWidth * cardCount) + (gap * (cardCount - 1));
+
+            document.querySelector('.slider-container').style.width = totalWidth + 'px';
+          }
+
+          // Initial call to update slider width
+          updateSliderWidth();
+
+          // Event listener for window resize
+          window.addEventListener('resize', updateSliderWidth);
+        </script>
       </div>
     </div>
   </div>
