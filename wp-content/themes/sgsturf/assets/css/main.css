@@ -390,12 +390,16 @@ p.small, .content-paragraph-small p {
   display: flex;
   flex-direction: column;
   justify-content: end;
-  min-width: 288px;
-  width: auto;
+}
+@media only screen and (min-width: 768px) {
+  .card-product {
+    min-width: 296px;
+    width: auto;
+  }
 }
 @media only screen and (min-width: 1024px) {
   .card-product {
-    min-width: 288px;
+    min-width: 296px;
     width: auto;
   }
 }
@@ -445,7 +449,7 @@ p.small, .content-paragraph-small p {
   scrollbar-width: none; /* Firefox */
 }
 .slider .pattern-card {
-  width: auto;
+  width: 100%;
 }
 
 .slider::-webkit-scrollbar {

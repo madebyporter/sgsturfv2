@@ -53,8 +53,8 @@ if ( $group_product->is_type( 'grouped' ) ) :
 </section>
 
 <section id="products" class="grid-main content-full">
-  <div class="theme-black content-full-container col-start-1 col-end-13 flex flex-col gap-16 pb-20">
-    <div class="content-full-row grid-sub p-20 pb-0">
+  <div class="theme-black content-full-container col-start-1 col-end-13 flex flex-col gap-0">
+    <div class="content-full-row grid-sub md:p-10 lg:p-20">
       <div class="content-heading col-start-1 col-end-6">
         <h2 class="h2">Products</h2>
       </div>
@@ -62,14 +62,14 @@ if ( $group_product->is_type( 'grouped' ) ) :
         <p class="mb-4">
           Explore our <?php echo esc_html($group_product->get_name()); ?>:
         </p>
-        <p class="mb-8">
+        <p>
           <?php echo wp_strip_all_tags( $group_product->get_short_description() ); ?>
         </p>
       </div>
     </div>
-    <div class="content-full-row grid-sub">
+    <div class="content-full-row grid-sub md:py-10 lg:py-20">
       <div class="slider col-start-1 col-end-13">
-        <div class="slider-container mx-20">
+        <div class="slider-container md:mx-10 lg:mx-20">
           <div class="pattern-card flex gap-8 justify-start content-start">
             <?php
             $subproducts = $group_product->get_children();

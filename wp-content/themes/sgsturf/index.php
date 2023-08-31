@@ -10,9 +10,10 @@ if (!defined('ABSPATH')) {
 get_header(); ?>
 
 <section class="grid-main hero hero-home md:min-h-[50vh]">
-  <div class="hero-content md:col-start-1 md:col-end-8 lg:col-start-1 lg:col-end-7 md:p-10 lg:p-20 grid-sub content-end">
-    <div class="content-heading-cta col-start-1 col-end-12">
-      <h1 class="h1 md:mb-4 lg:mb-8">Get beautiful, artificial turf within days &amp; not break the bank.</h1>
+  <div class="hero-content md:col-start-1 md:col-end-7 lg:col-start-1 lg:col-end-7 md:p-10 lg:p-20 grid-sub content-end">
+    <div class="content-heading-cta col-start-1 col-end-13">
+      <h1 class="h1 md:mb-2 lg:mb-4">The natural look and feel of actual beautiful grass.</h1>
+      <p class="md:mb-4 lg:mb-8">Save water for your flowers and trees.</p>
       <div class="pattern-button">
         <a href="#" class="button button-primary">
           <span class="button-label">Shop our Turf</span>
@@ -27,7 +28,7 @@ get_header(); ?>
       </div>
     </div>
   </div>
-  <div class="hero-masonry flex gap-4 md:col-start-8 md:col-end-13 lg:col-start-7 lg:col-end-13">
+  <div class="hero-masonry flex gap-4 md:col-start-7 md:col-end-13 lg:col-start-7 lg:col-end-13">
     <div class="hero-masonry-col flex flex-col gap-4 justify-between w-full xl:w-auto">
       <img src="<?php echo SGSTURF_IMAGES_DIR; ?>/fpo-home-hero-2.jpg" alt="Turf" class="md:h-full lg:h-auto xl:block">
       <img src="<?php echo SGSTURF_IMAGES_DIR; ?>/fpo-home-hero-3.jpg" alt="Turf" class="hidden xl:block">
@@ -56,23 +57,23 @@ get_header(); ?>
 </section>
 
 <section id="products" class="grid-main content-full">
-  <div class="theme-black content-full-container col-start-1 col-end-13 flex flex-col gap-16 pb-20">
-    <div class="content-full-row grid-sub p-20 pb-0">
+  <div class="theme-black content-full-container col-start-1 col-end-13 flex flex-col gap-0">
+    <div class="content-full-row grid-sub md:p-10 lg:p-20 pb-0">
       <div class="content-heading col-start-1 col-end-6">
-        <h2 class="h2">Featured Series Lines</h2>
+        <h2 class="h2">Featured Series &amp; Lines</h2>
       </div>
       <div class="content-paragraph col-start-8 col-end-13">
         <p class="mb-4">
           Experience the Perfect Green:
         </p>
-        <p class="mb-8">
+        <p>
           Premium Synthetic Grass for Landscapes, Pets, Sports and Golf by SGSTurf.
         </p>
       </div>
     </div>
-    <div class="content-full-row grid-sub">
+    <div class="content-full-row grid-sub md:py-10 lg:py-20">
       <div class="slider col-start-1 col-end-13">
-        <div class="slider-container mx-20">
+        <div class="slider-container md:mx-10 lg:mx-20">
           <div class="pattern-card flex gap-8 justify-start content-start">
             <!-- Start grouped products loop -->
             <?php
