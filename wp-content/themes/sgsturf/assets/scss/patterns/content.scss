@@ -1,13 +1,24 @@
 /** Content-Halves **/
   .content-halves {
     gap: 0 !important;
-    min-height: 540px;
+    min-height: 340px;
     .content-halves-col {
       &:first-child {
-        border-radius: $radius-primary 0 0 $radius-primary;
+        border-radius: $radius-primary $radius-primary 0 0;
       }
       &:last-child {
-        border-radius: 0 $radius-primary $radius-primary 0;
+        border-radius: 0 0 $radius-primary $radius-primary;
+      }
+    }
+    @media only screen and (min-width: $bp-md) {
+      min-height: 540px;
+      .content-halves-col {
+        &:first-child {
+          border-radius: $radius-primary 0 0 $radius-primary;
+        }
+        &:last-child {
+          border-radius: 0 $radius-primary $radius-primary 0;
+        }
       }
     }
   }

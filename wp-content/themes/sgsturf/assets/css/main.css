@@ -18,9 +18,14 @@ body {
 }
 
 .grid-main {
-  @apply grid px-8 py-4 gap-x-4 gap-y-8 grid-cols-12;
+  @apply grid px-4 py-2 gap-x-4 gap-y-4 grid-cols-12;
 }
 
+@media only screen and (min-width: 768px) {
+  .grid-main {
+    @apply grid px-8 py-4 gap-x-4 gap-y-8 grid-cols-12;
+  }
+}
 @media only screen and (min-width: 1280px) {
   .grid-main {
     @apply grid px-8 py-4 gap-4 grid-cols-12;
@@ -184,6 +189,23 @@ p.small, .content-paragraph-small p {
 }
 .footer .footer-copyright p {
   color: #666666;
+}
+
+.header .logo {
+  overflow: hidden;
+  width: 74px;
+}
+.header .logo img {
+  min-width: 160px;
+}
+@media only screen and (min-width: 768px) {
+  .header .logo {
+    overflow: hidden;
+    width: 100%;
+  }
+  .header .logo img {
+    min-width: 160px;
+  }
 }
 
 /** Buttons **/
@@ -390,6 +412,8 @@ p.small, .content-paragraph-small p {
   display: flex;
   flex-direction: column;
   justify-content: end;
+  min-width: 100%;
+  width: auto;
 }
 @media only screen and (min-width: 768px) {
   .card-product {
@@ -405,6 +429,23 @@ p.small, .content-paragraph-small p {
 }
 .card-product:hover .card-product-bottom-container {
   height: 105%;
+}
+
+.slider .card-product {
+  min-width: 276px;
+  width: auto;
+}
+@media only screen and (min-width: 768px) {
+  .slider .card-product {
+    min-width: 296px;
+    width: auto;
+  }
+}
+@media only screen and (min-width: 1024px) {
+  .slider .card-product {
+    min-width: 296px;
+    width: auto;
+  }
 }
 
 .card-product-top {
@@ -481,13 +522,24 @@ p.small, .content-paragraph-small p {
 /** Content-Halves **/
 .content-halves {
   gap: 0 !important;
-  min-height: 540px;
+  min-height: 340px;
 }
 .content-halves .content-halves-col:first-child {
-  border-radius: 0.625rem 0 0 0.625rem;
+  border-radius: 0.625rem 0.625rem 0 0;
 }
 .content-halves .content-halves-col:last-child {
-  border-radius: 0 0.625rem 0.625rem 0;
+  border-radius: 0 0 0.625rem 0.625rem;
+}
+@media only screen and (min-width: 768px) {
+  .content-halves {
+    min-height: 540px;
+  }
+  .content-halves .content-halves-col:first-child {
+    border-radius: 0.625rem 0 0 0.625rem;
+  }
+  .content-halves .content-halves-col:last-child {
+    border-radius: 0 0.625rem 0.625rem 0;
+  }
 }
 
 /** Content-Full **/

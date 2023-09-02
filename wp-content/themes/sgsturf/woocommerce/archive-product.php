@@ -26,7 +26,7 @@ if (!empty($category_filters)) {
 <!--Archive Loop Start-->
 
 <section class="grid-main hero hero-sub md:min-h-[250px] lg:min-h-[300px]">
-	<div class="theme-white hero-content col-start-1 col-end-13 md:px-10 md:py-10 lg:px-20 lg:py-10 flex flex-col justify-end">
+	<div class="theme-white hero-content col-start-1 col-end-13 p-10 lg:px-20 lg:py-10 flex flex-col justify-end">
 		<div class="collection-overview grid-sub">
 			<div class="collection-breadcrumbs">
 				<?php
@@ -47,23 +47,23 @@ if (!empty($category_filters)) {
 </section>
 
 <section class="grid-main content-full">
-	<div class="theme-black content-full-container col-start-1 col-end-13 grid-sub flex flex-col md:gap-4 lg:gap-16 md:p-10 lg:p-20">
-		<div class="md:col-start-1 md:col-end-13 lg:col-start-1 lg:col-end-4">
+	<div class="theme-black content-full-container col-start-1 col-end-13 grid-sub flex flex-col md:gap-4 lg:gap-16 p-10 lg:p-20">
+		<div class="col-start-1 col-end-13 lg:col-start-1 lg:col-end-4 mb-4 md:mb-0">
 			<form action="<?php echo esc_url(get_permalink(get_option('woocommerce_shop_page_id'))); ?>" method="get">
 				<label>Filter by Category:</label><br>
-				<fieldset class="group-checkbox flex md:justify-between md:items-center md:flex-wrap md:flex-row md:mb-4 lg:flex-col gap-4">
+				<fieldset class="group-checkbox flex flex-col md:justify-between md:items-center md:flex-wrap md:flex-row md:mb-4 md:gap-4 lg:flex-col lg:items-start lg:justify-start lg:gap-2 my-4">
 					<?php foreach ($product_categories as $category): ?>
 						<label>
 							<input type="checkbox" name="category[]" value="<?php echo esc_attr($category->slug); ?>" <?php if (in_array($category->slug, $category_filters))
 									echo 'checked'; ?>>
 							<?php echo esc_html($category->name); ?>
-						</label><br>
+						</label>
 					<?php endforeach; ?>
-					<button type="submit" class="button button-tertiary">Apply Filter</button>
+					<button type="submit" class="button button-tertiary mt-4">Apply Filter</button>
 				</fieldset>
 			</form>
 		</div>
-		<div class="md:col-start-1 md:col-end-13 lg:col-start-4 lg:col-end-13">
+		<div class="col-start-1 col-end-13 lg:col-start-4 lg:col-end-13">
 			<div class="pattern-card flex gap-8 md:justify-between lg:justify-start flex-wrap">
 				<!-- Start grouped products loop -->
 				<?php

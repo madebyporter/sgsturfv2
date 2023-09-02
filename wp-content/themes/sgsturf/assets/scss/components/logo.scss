@@ -1,0 +1,18 @@
+.header {
+  .logo {
+    overflow: hidden;
+    width: 74px;
+  }
+  .logo img {
+    min-width: 160px;
+  }
+  @media only screen and (min-width: $bp-md) {
+    .logo {
+      overflow: hidden;
+      width: 100%;
+    }
+    .logo img {
+      min-width: 160px;
+    }
+  }
+}

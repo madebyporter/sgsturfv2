@@ -9,7 +9,12 @@ body {
 }
 
 .grid-main {
-  @apply grid px-8 py-4 gap-x-4 gap-y-8 grid-cols-12;
+  @apply grid px-4 py-2 gap-x-4 gap-y-4 grid-cols-12;
+}
+@media only screen and (min-width: $bp-md) {
+  .grid-main {
+    @apply grid px-8 py-4 gap-x-4 gap-y-8 grid-cols-12;
+  }
 }
 @media only screen and (min-width: $bp-xl) {
   .grid-main {
