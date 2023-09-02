@@ -26,7 +26,7 @@ if (!empty($category_filters)) {
 <!--Archive Loop Start-->
 
 <section class="grid-main hero hero-sub md:min-h-[250px] lg:min-h-[300px]">
-	<div class="theme-white hero-content col-start-1 col-end-13 p-10 lg:px-20 lg:py-10 flex flex-col justify-end">
+	<div class="theme-white hero-content col-start-1 col-end-13 p-5 md:p-10 lg:px-20 lg:py-10 flex flex-col justify-end">
 		<div class="collection-overview grid-sub">
 			<div class="collection-breadcrumbs">
 				<?php
@@ -47,7 +47,7 @@ if (!empty($category_filters)) {
 </section>
 
 <section class="grid-main content-full">
-	<div class="theme-black content-full-container col-start-1 col-end-13 grid-sub flex flex-col md:gap-4 lg:gap-16 p-10 lg:p-20">
+	<div class="theme-black content-full-container col-start-1 col-end-13 grid-sub flex flex-col md:gap-4 lg:gap-16 p-5 md:p-10 lg:p-20">
 		<div class="col-start-1 col-end-13 lg:col-start-1 lg:col-end-4 mb-4 md:mb-0">
 			<form action="<?php echo esc_url(get_permalink(get_option('woocommerce_shop_page_id'))); ?>" method="get">
 				<label>Filter by Category:</label><br>
@@ -78,7 +78,7 @@ if (!empty($category_filters)) {
 							<h3 class="h3 mb-2">
 								<?php echo esc_html($product->get_name()); ?>
 							</h3>
-							<div class="pattern-tag flex gap-2 mb-8">
+							<div class="pattern-tag flex gap-2 mb-4 md:mb-8">
 								<?php foreach ($categories as $category_name): ?>
 									<div class="tag">
 										<?php echo esc_html(wp_strip_all_tags($category_name)); ?>

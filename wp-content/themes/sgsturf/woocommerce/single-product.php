@@ -11,12 +11,12 @@ if ( $group_product->is_type( 'grouped' ) ) :
 ?>
 
 <section class="grid-main hero hero-product">
-  <div class="hero-masonry flex gap-4 col-start-1 col-end-7">
+  <div class="hero-masonry flex gap-4 col-start-1 col-end-13 md:col-start-1 md:col-end-7">
     <div class="hero-masonry-col flex flex-col gap-4 justify-around">
       <img src="<?php echo wp_get_attachment_image_src(get_post_thumbnail_id($group_product->get_id()), 'full')[0]; ?>" alt="<?php echo esc_attr($group_product->get_name()); ?>">
     </div>
   </div>
-  <div class="hero-content col-start-7 col-end-13 p-10 flex flex-col justify-between">
+  <div class="hero-content col-start-1 col-end-13 md:col-start-7 md:col-end-13 p-5 md:p-10 flex flex-col justify-between">
     <div class="product-overview grid-sub">
       <div class="product-meta col-start-1 col-end-13">
         <div class="content-heading-bordered mb-4">
@@ -54,11 +54,11 @@ if ( $group_product->is_type( 'grouped' ) ) :
 
 <section id="products" class="grid-main content-full">
   <div class="theme-black content-full-container col-start-1 col-end-13 flex flex-col gap-0">
-    <div class="content-full-row grid-sub md:p-10 lg:p-20">
-      <div class="content-heading col-start-1 col-end-6">
+    <div class="content-full-row grid-sub p-5 md:p-10 lg:p-20">
+      <div class="content-heading col-start-1 col-end-13 mb-4 md:col-start-1 md:col-end-6 md:mb-0">
         <h2 class="h2">Products</h2>
       </div>
-      <div class="content-paragraph col-start-8 col-end-13">
+      <div class="content-paragraph col-start-1 col-end-13 md:col-start-8 md:col-end-13">
         <p class="mb-4">
           Explore our <?php echo esc_html($group_product->get_name()); ?>:
         </p>
@@ -67,10 +67,10 @@ if ( $group_product->is_type( 'grouped' ) ) :
         </p>
       </div>
     </div>
-    <div class="content-full-row grid-sub md:py-10 lg:py-20">
+    <div class="content-full-row grid-sub py-5 md:py-10 lg:py-20">
       <div class="slider col-start-1 col-end-13">
-        <div class="slider-container md:mx-10 lg:mx-20">
-          <div class="pattern-card flex gap-8 justify-start content-start">
+        <div class="slider-container mx-5 md:mx-10 lg:mx-20">
+          <div class="pattern-card flex gap-4 md:gap-8 justify-start content-start">
             <?php
             $subproducts = $group_product->get_children();
             foreach ($subproducts as $subproduct_id) {
@@ -139,7 +139,7 @@ if ( $group_product->is_type( 'grouped' ) ) :
       foreach ($product_gallery_images as $image_id) {
         $image_url = wp_get_attachment_image_src($image_id, 'full')[0];
         ?>
-        <div class="col-span-6">
+        <div class="col-span-full md:col-span-6">
           <img src="<?php echo esc_url($image_url); ?>" alt="Turf">
         </div>
         <?php

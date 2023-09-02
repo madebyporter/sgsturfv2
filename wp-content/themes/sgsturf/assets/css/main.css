@@ -432,7 +432,7 @@ p.small, .content-paragraph-small p {
 }
 
 .slider .card-product {
-  min-width: 276px;
+  min-width: 206px;
   width: auto;
 }
 @media only screen and (min-width: 768px) {
@@ -449,7 +449,12 @@ p.small, .content-paragraph-small p {
 }
 
 .card-product-top {
-  padding: 40px 20px;
+  padding: 20px 10px;
+}
+@media only screen and (min-width: 768px) {
+  .card-product-top {
+    padding: 40px 20px;
+  }
 }
 
 .card-product-bottom {
@@ -472,6 +477,7 @@ p.small, .content-paragraph-small p {
   position: absolute;
   height: 300px;
   width: 100%;
+  object-fit: cover;
 }
 
 .tag {
