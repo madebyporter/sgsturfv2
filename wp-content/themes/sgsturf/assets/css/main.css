@@ -629,5 +629,24 @@ p.small, .content-paragraph-small p {
 .gform_wrapper.sgsform_wrapper div.gsection_description li {
   font-size: 0.75rem;
 }
+.gform_wrapper.sgsform_wrapper .gform_footer {
+  flex-direction: column;
+  gap: 1rem;
+}
+.gform_wrapper.sgsform_wrapper .gform_footer .gform_button {
+  margin: 0;
+  width: 100%;
+}
+.gform_wrapper.sgsform_wrapper .gform_footer button.gform_save_link.button {
+  margin: 0;
+}
+@media only screen and (min-width: 768px) {
+  .gform_wrapper.sgsform_wrapper .gform_footer {
+    flex-direction: row;
+  }
+  .gform_wrapper.sgsform_wrapper .gform_footer .gform_button {
+    width: auto;
+  }
+}
 
 /*# sourceMappingURL=main.css.map */

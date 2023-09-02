@@ -7,7 +7,7 @@
 get_header(); ?>
 
   <section class="grid-main hero hero-sub md:min-h-[250px] lg:min-h-[300px]">
-    <div class="theme-white hero-content col-start-1 col-end-13 md:px-10 md:py-10 lg:px-20 lg:py-10 flex flex-col justify-end">
+    <div class="theme-white hero-content col-start-1 col-end-13 md:px-10 p-5 md:py-10 lg:px-20 lg:py-10 flex flex-col justify-end">
       <div class="product-overview grid-sub">
         <div class="product-meta col-start-1 col-end-13">
           <div class="content-heading">
@@ -18,13 +18,13 @@ get_header(); ?>
     </div>
   </section>
   <section class="grid-main content-full">
-    <div class="theme-white content-full-container md:p-10 lg:p-20 col-start-1 col-end-13 grid-sub md:gap-8 lg:gap-4">
-      <div class="md:col-start-1 md:col-end-13 lg:col-start-1 lg:col-end-5">
+    <div class="theme-white content-full-container p-5 md:p-10 lg:p-20 col-start-1 col-end-13 grid-sub md:gap-8 lg:gap-4">
+      <div class="col-start-1 col-end-13 lg:col-start-1 lg:col-end-5">
         <p class="small md:mb-5 lg:mb-10">Note: All orders for next day delivery will need to be received & confirmed before 10:00 am. Orders & delivery are placed in the order received.  All onsite deliveries are curb-side only and require offload assistance.</p>
         <p class="small md:m-0 lg:mb-10">SPECIFIED DELIVERY TIMES ARE NOT GUARANTEED</p>
-        <img src="<?php echo SGSTURF_IMAGES_DIR; ?>/fpo-orderform-sidebar.jpg" alt="Warehouse" class="md:hidden lg:block">
+        <img src="<?php echo SGSTURF_IMAGES_DIR; ?>/fpo-orderform-sidebar.jpg" alt="Warehouse" class="hidden lg:block">
       </div>
-      <div class="md:col-start-1 md:col-end-13 lg:col-start-6 lg:col-end-13">
+      <div class="col-start-1 col-end-13 lg:col-start-6 lg:col-end-13">
         <?php
           // Display WordPress page content
           while (have_posts()) {

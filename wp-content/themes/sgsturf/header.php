@@ -9,7 +9,7 @@
 
 <body <?php body_class(); ?>>
 
-  <header id="header" class="header mt-4">
+  <header id="header" class="header my-4">
     <div class="header-bar grid-main items-center">
       <div class="flex col-start-1 col-end-7 sm:col-start-1 sm:col-end-4 md:col-start-1 md:col-end-4 lg:col-start-1 lg:col-end-3">
         <?php include('components/logo-gray.php'); ?>
