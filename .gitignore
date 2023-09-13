@@ -1,6 +1,7 @@
 # WordPress core files
 wp-config.php
 wp-content/uploads/
+wp-content/wflogs/
 
 # Cache and temporary files
 wp-content/cache/
@@ -27,8 +28,10 @@ wp-content/themes/*/log/
 debug.log
 
 # OS generated files
+.htaccess
 .DS_Store
-Thumbs.db
+thumbs.db
+wp-config-sample.php
 
 # Editor/IDE specific files
 .vscode/
@@ -37,3 +40,9 @@ Thumbs.db
 # Composer files (if used)
 composer.lock
 /vendor/
+
+# Ignore development and build files (e.g., node_modules if using npm)
+node_modules/
+.sass-cache/
+Gruntfile.js
+package.json
