@@ -64,7 +64,7 @@ if (!empty($category_filters)) {
 			</form>
 		</div>
 		<div class="col-start-1 col-end-13 lg:col-start-4 lg:col-end-13">
-			<div class="pattern-card flex gap-8 md:justify-start md:items-stretch lg:justify-start flex-wrap">
+			<div class="pattern-card flex gap-4 md:justify-start md:items-stretch lg:justify-start flex-wrap">
 				<!-- Start grouped products loop -->
 				<?php
 				$grouped_products = wc_get_products($query_args);
@@ -78,7 +78,7 @@ if (!empty($category_filters)) {
 							<h3 class="h3 mb-2">
 								<?php echo esc_html($product->get_name()); ?>
 							</h3>
-							<div class="pattern-tag flex gap-2 mb-4 md:mb-8">
+							<div class="pattern-tag flex gap-1 mb-4 md:mb-8">
 								<?php foreach ($categories as $category_name): ?>
 									<div class="tag">
 										<?php echo esc_html(wp_strip_all_tags($category_name)); ?>
