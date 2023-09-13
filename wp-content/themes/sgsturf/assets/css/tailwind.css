@@ -1117,6 +1117,10 @@ body {
     justify-content: space-between;
   }
 
+  .md\:justify-stretch {
+    justify-content: stretch;
+  }
+
   .md\:gap-2 {
     gap: 0.5rem;
   }
