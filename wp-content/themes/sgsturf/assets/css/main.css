@@ -568,6 +568,32 @@ p.small, .content-paragraph-small p {
   margin-bottom: 0;
 }
 
+.group-checkbox label {
+  border: 1px solid #666666;
+  border-radius: 0.3125rem;
+  position: relative;
+  cursor: pointer;
+}
+.group-checkbox label:has(input:checked) {
+  border: 1px solid #FFF;
+}
+.group-checkbox input {
+  position: absolute;
+  opacity: 0;
+}
+.group-checkbox .checkmark {
+  position: relative;
+  height: 20px; /* Adjust as needed for your design */
+  width: 20px; /* Adjust as needed for your design */
+  background-color: #FFF; /* Set the background color */
+  border: 4px solid #FFF;
+  border-radius: 4px; /* Adjust as needed for your design */
+}
+.group-checkbox input:checked ~ .checkmark {
+  background-color: #FFF; /* Set the selected color */
+  border: 4px solid #FC9827;
+}
+
 .gform_wrapper.sgsform_wrapper .gform_heading {
   display: none;
 }

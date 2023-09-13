@@ -50,16 +50,17 @@ if (!empty($category_filters)) {
 	<div class="theme-black content-full-container col-start-1 col-end-13 grid-sub flex flex-col md:gap-4 lg:gap-16 p-5 md:p-10 lg:p-20">
 		<div class="col-start-1 col-end-13 lg:col-start-1 lg:col-end-4 mb-4 md:mb-0">
 			<form action="<?php echo esc_url(get_permalink(get_option('woocommerce_shop_page_id'))); ?>" method="get">
-				<label>Filter by Category:</label><br>
-				<fieldset class="group-checkbox flex flex-col md:justify-between md:items-center md:flex-wrap md:flex-row md:mb-4 md:gap-4 lg:flex-col lg:items-start lg:justify-start lg:gap-2 lg:my-4">
+				<label class="uppercase border-b border-[#666666] pb-1 w-full block">Filter by Category</label>
+				<fieldset class="group-checkbox flex flex-col md:justify-between md:items-center md:flex-wrap md:flex-row md:mb-4 md:gap-4 lg:flex-col lg:items-start lg:justify-start lg:items-stretch lg:gap-2 lg:my-4">
 					<?php foreach ($product_categories as $category): ?>
-						<label>
+						<label class="px-2.5 py-2 flex gap-2 items-center">
 							<input type="checkbox" name="category[]" value="<?php echo esc_attr($category->slug); ?>" <?php if (in_array($category->slug, $category_filters))
 									echo 'checked'; ?>>
+							<span class="checkmark"></span>
 							<?php echo esc_html($category->name); ?>
 						</label>
 					<?php endforeach; ?>
-					<button type="submit" class="button button-tertiary mt-4 md:mt-0">Apply Filter</button>
+					<button type="submit" class="button button-tertiary mt-4 md:mt-0 lg:mt-4">Apply Filter</button>
 				</fieldset>
 			</form>
 		</div>
