@@ -1157,6 +1157,14 @@ body {
   .md\:pl-4 {
     padding-left: 1rem;
   }
+
+  .md\:pl-10 {
+    padding-left: 2.5rem;
+  }
+
+  .md\:pl-12 {
+    padding-left: 3rem;
+  }
 }
 
 @media (min-width: 1024px) {

@@ -80,7 +80,14 @@ p.small, .content-paragraph-small p {
   font-weight: 600;
   letter-spacing: -0.08rem;
   line-height: 1.2;
-  font-size: clamp(0.5rem, 0.7143rem + 2.2857vw, 1.25rem);
+  font-size: clamp(0.75rem, 0.7143rem + 2.2857vw, 1.875rem);
+}
+
+.h5 {
+  font-weight: 600;
+  letter-spacing: -0.08rem;
+  line-height: 1.2;
+  font-size: clamp(0.625rem, 0.7143rem + 2.2857vw, 1.5rem);
 }
 
 .theme-white, .card-product {

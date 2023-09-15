@@ -59,7 +59,7 @@ if ( $group_product->is_type( 'grouped' ) ) :
         <h2 class="h2">Products</h2>
       </div>
       <div class="col-start-1 col-end-13 md:col-start-7 md:col-end-13">
-        <div class="content-paragraph md:pl-4">
+        <div class="content-paragraph md:pl-12">
           <p class="mb-4">
             Explore our <?php echo esc_html($group_product->get_name()); ?>:
           </p>
@@ -85,7 +85,7 @@ if ( $group_product->is_type( 'grouped' ) ) :
                 ?>
                 <div class="card card-product">
                   <div class="card-product-top">
-                    <h3 class="h3 mb-2"><?php echo esc_html($subproduct->get_name()); ?></h3>
+                    <h3 class="h5 mb-2"><?php echo esc_html($subproduct->get_name()); ?></h3>
                     <div class="pattern-tag flex gap-2">
                       <?php foreach ($subproduct_categories as $category_name) : ?>
                         <div class="tag"><?php echo esc_html($category_name); ?></div>
