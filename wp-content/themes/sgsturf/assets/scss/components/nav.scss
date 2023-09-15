@@ -1,16 +1,10 @@
 .nav {
   a {
     color: $color-gray-dark;
-    font-size: $font-size-14;
+    font-size: $font-size-12;
     font-weight: 600;
     letter-spacing: 0.02rem;
     text-transform: uppercase;
-    @media only screen and (min-width: $bp-lg) {
-      font-size: $font-size-14;
-    }
-    @media only screen and (min-width: $bp-xl) {
-      font-size: $font-size-16;
-    }
     &:hover {
       color: $color-black;
     }

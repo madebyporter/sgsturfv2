@@ -58,19 +58,22 @@ if ( $group_product->is_type( 'grouped' ) ) :
       <div class="content-heading col-start-1 col-end-13 mb-4 md:col-start-1 md:col-end-6 md:mb-0">
         <h2 class="h2">Products</h2>
       </div>
-      <div class="content-paragraph col-start-1 col-end-13 md:col-start-8 md:col-end-13">
-        <p class="mb-4">
-          Explore our <?php echo esc_html($group_product->get_name()); ?>:
-        </p>
-        <p>
-          <?php echo wp_strip_all_tags( $group_product->get_short_description() ); ?>
-        </p>
+      <div class="col-start-1 col-end-13 md:col-start-7 md:col-end-13">
+        <div class="content-paragraph md:pl-4">
+          <p class="mb-4">
+            Explore our <?php echo esc_html($group_product->get_name()); ?>:
+          </p>
+          <p>
+            <?php echo wp_strip_all_tags( $group_product->get_short_description() ); ?>
+          </p>
+        </div>
       </div>
     </div>
     <div class="content-full-row grid-sub py-5 md:py-10 lg:py-20">
       <div class="slider col-start-1 col-end-13">
-        <div class="slider-container mx-5 md:mx-10 lg:mx-20">
+        <div class="slider-container mx-5 md:mx-10 lg:mx-20 overflow-y-hidden">
           <div class="pattern-card flex gap-4 md:gap-8 justify-start content-start">
+            <!-- Start Simple Product Loop inside the Group Product Loop -->
             <?php
             $subproducts = $group_product->get_children();
             foreach ($subproducts as $subproduct_id) {
@@ -90,10 +93,70 @@ if ( $group_product->is_type( 'grouped' ) ) :
                     </div>
                   </div>
                   <div class="card-product-bottom">
-                    <div class="card-product-bottom-container">
-                      <img src="<?php echo wp_get_attachment_image_src(get_post_thumbnail_id($subproduct_id), 'full')[0]; ?>" alt="Product" />
+                    <div class="card-product-bottom-container card-product-bottom-specs px-5 pb-12 flex flex-col gap-1">
+                      <?php
+                        // Get the ACF fields for the current simple product
+                        $field1 = get_field('specs_pile_height', $subproduct_id);
+                        $field2 = get_field('specs_total_weight', $subproduct_id);
+                        $field3 = get_field('specs_blade', $subproduct_id);
+                        $field4 = get_field('specs_turf_gauge', $subproduct_id);
+                        $checkbox_field = get_field('specs_blade_colors', $subproduct_id);
+
+                        // Display the ACF fields as needed
+                        echo '<div class="spec-item"><div>Pile Height:</div><div class="spec-item-value">' . esc_html($field1) . '</div></div>';
+                        echo '<div class="spec-item"><div>Total Weight:</div><div class="spec-item-value">' . esc_html($field2) . '</div></div>';
+                        echo '<div class="spec-item"><div>Blade:</div><div class="spec-item-value">' . esc_html($field3) . '</div></div>';
+                        echo '<div class="spec-item"><div>Turf Gauge:</div><div class="spec-item-value">' . esc_html($field4) . '</div></div>';
+                        
+                        // Check if any options are selected in the checkbox field
+                        if (!empty($checkbox_field)) {
+                            echo '<div class="spec-item"><div>Blade Colors:</div>';
+                            echo '<ul class="spec-item-colors">';
+                            foreach ($checkbox_field as $option) {
+                                echo '<li class="spec-item-value">' . esc_html($option) . '</li>';
+                            }
+                            echo '</ul></div>';
+                        } else {
+                            echo '<div class="spec-item"><div>Blade Colors:</div></div>';
+                        }
+                      ?>
+                    </div>
+                    <div class="card-product-bottom-container card-product-bottom-image">
+                      <?php
+                      $thumbnail_id = get_post_thumbnail_id($subproduct_id);
+                      $image_url = $thumbnail_id ? wp_get_attachment_image_src($thumbnail_id, 'full')[0] : SGSTURF_IMAGES_DIR . '/ui-state-zero-simpleproduct.jpg';
+                      ?>
+                      <img src="<?php echo esc_url($image_url); ?>" alt="Product" />
+                    </div>
+
+                    <div class="card-product-bottom-button absolute bottom-2 left-2 right-2 z-50">
+                      <button class="button button-secondary button-small w-full">
+                        <span class="button-label">View Specs</span>
+                      </button>
                     </div>
                   </div>
+
+                  <script>
+                    document.addEventListener('DOMContentLoaded', function () {
+                      const productCards = document.querySelectorAll('.card-product-bottom');
+
+                      productCards.forEach(function (productCard) {
+                        const specsButton = productCard.querySelector('.button');
+
+                        specsButton.addEventListener('click', function () {
+                          productCard.classList.toggle('specs-active');
+                          const buttonText = specsButton.querySelector('.button-label');
+
+                          if (productCard.classList.contains('specs-active')) {
+                            buttonText.textContent = 'Hide Specs';
+                          } else {
+                            buttonText.textContent = 'View Specs';
+                          }
+                        });
+                      });
+                    });
+                  </script>
+
                 </div>
                 <?php
               }
@@ -132,7 +195,7 @@ if ( $group_product->is_type( 'grouped' ) ) :
       $image_url = wp_get_attachment_image_src($product_gallery_images[0], 'full')[0];
       ?>
       <div class="col-span-full">
-        <img src="<?php echo esc_url($image_url); ?>" alt="Turf">
+        <img src="<?php echo esc_url($image_url); ?>" alt="Turf" class="w-full">
       </div>
       <?php
     } elseif (count($product_gallery_images) === 2) {
@@ -140,7 +203,7 @@ if ( $group_product->is_type( 'grouped' ) ) :
         $image_url = wp_get_attachment_image_src($image_id, 'full')[0];
         ?>
         <div class="col-span-full md:col-span-6">
-          <img src="<?php echo esc_url($image_url); ?>" alt="Turf">
+          <img src="<?php echo esc_url($image_url); ?>" alt="Turf" class="w-full">
         </div>
         <?php
       }

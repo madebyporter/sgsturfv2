@@ -576,12 +576,28 @@ video {
   position: relative;
 }
 
+.bottom-2 {
+  bottom: 0.5rem;
+}
+
 .bottom-5 {
   bottom: 1.25rem;
 }
 
+.left-2 {
+  left: 0.5rem;
+}
+
+.right-2 {
+  right: 0.5rem;
+}
+
 .right-5 {
   right: 1.25rem;
+}
+
+.z-50 {
+  z-index: 50;
 }
 
 .order-1 {
@@ -774,6 +790,10 @@ video {
   gap: 2rem;
 }
 
+.overflow-y-hidden {
+  overflow-y: hidden;
+}
+
 .border {
   border-width: 1px;
 }
@@ -799,27 +819,9 @@ video {
   padding: 1.25rem;
 }
 
-.p-2 {
-  padding: 0.5rem;
-}
-
-.p-2\.5 {
-  padding: 0.625rem;
-}
-
 .\!px-0 {
   padding-left: 0px !important;
   padding-right: 0px !important;
-}
-
-.py-10 {
-  padding-top: 2.5rem;
-  padding-bottom: 2.5rem;
-}
-
-.py-5 {
-  padding-top: 1.25rem;
-  padding-bottom: 1.25rem;
 }
 
 .px-2 {
@@ -832,9 +834,14 @@ video {
   padding-right: 0.625rem;
 }
 
-.py-1 {
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
+.px-5 {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
+.py-10 {
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
 }
 
 .py-2 {
@@ -842,13 +849,21 @@ video {
   padding-bottom: 0.5rem;
 }
 
-.py-2\.5 {
-  padding-top: 0.625rem;
-  padding-bottom: 0.625rem;
+.py-5 {
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
 }
 
 .pb-0 {
   padding-bottom: 0px;
+}
+
+.pb-1 {
+  padding-bottom: 0.25rem;
+}
+
+.pb-12 {
+  padding-bottom: 3rem;
 }
 
 .pb-20 {
@@ -857,10 +872,6 @@ video {
 
 .pl-20 {
   padding-left: 5rem;
-}
-
-.pb-1 {
-  padding-bottom: 0.25rem;
 }
 
 .uppercase {
@@ -1113,10 +1124,6 @@ body {
     justify-content: flex-start;
   }
 
-  .md\:justify-between {
-    justify-content: space-between;
-  }
-
   .md\:justify-stretch {
     justify-content: stretch;
   }
@@ -1145,6 +1152,10 @@ body {
   .md\:py-10 {
     padding-top: 2.5rem;
     padding-bottom: 2.5rem;
+  }
+
+  .md\:pl-4 {
+    padding-left: 1rem;
   }
 }
 
@@ -1243,10 +1254,6 @@ body {
     flex-direction: column;
   }
 
-  .lg\:content-center {
-    align-content: center;
-  }
-
   .lg\:items-start {
     align-items: flex-start;
   }
@@ -1257,14 +1264,6 @@ body {
 
   .lg\:justify-start {
     justify-content: flex-start;
-  }
-
-  .lg\:justify-center {
-    justify-content: center;
-  }
-
-  .lg\:justify-stretch {
-    justify-content: stretch;
   }
 
   .lg\:gap-16 {

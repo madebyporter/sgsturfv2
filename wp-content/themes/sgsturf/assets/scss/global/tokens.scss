@@ -19,20 +19,22 @@
 
   /** Fonts **/
   $font-primary: 'Inter', sans-serif;
+  $font-vpmin: 0.7143;
+  $font-vpmax: 2.2857;
 
-  $font-size-12: 0.75rem;
-  $font-size-14: 0.875rem;
-  $font-size-16: 1rem;
-  $font-size-18: 1.125rem;
-  $font-size-20: 1.25rem;
-  $font-size-24: 1.5rem;
-  $font-size-30: 1.875rem;
-  $font-size-36: 2.25rem;
-  $font-size-48: 3rem;
-  $font-size-60: 3.75rem;
-  $font-size-72: 4.5rem;
-  $font-size-96: 6rem;
-  $font-size-128: 8rem;
+  $font-size-12: clamp(0.5rem, #{$font-vpmin}rem + #{$font-vpmax}vw, 1rem); // 0.75rem;
+  $font-size-14: clamp(0.5rem, #{$font-vpmin}rem + #{$font-vpmax}vw, 1.25rem); // 0.875rem;
+  $font-size-16: clamp(0.625rem, #{$font-vpmin}rem + #{$font-vpmax}vw, 1.5rem); // 1rem;
+  $font-size-18: clamp(0.75rem, #{$font-vpmin}rem + #{$font-vpmax}vw, 1.875rem); // 1.125rem;
+  $font-size-20: clamp(0.875rem, #{$font-vpmin}rem + #{$font-vpmax}vw, 2.25rem); // 1.25rem;
+  $font-size-24: clamp(1rem, #{$font-vpmin}rem + #{$font-vpmax}vw, 3rem); // 1.5rem;
+  $font-size-30: clamp(1.125rem, #{$font-vpmin}rem + #{$font-vpmax}vw, 3.75rem); // 1.875rem;
+  $font-size-36: clamp(1.5rem, #{$font-vpmin}rem + #{$font-vpmax}vw, 4.5rem); // 2.25rem;
+  $font-size-48: clamp(1.875rem, #{$font-vpmin}rem + #{$font-vpmax}vw, 6rem); // 3rem;
+  $font-size-60: clamp(2.25rem, #{$font-vpmin}rem + #{$font-vpmax}vw, 8rem); // 3.75rem;
+  $font-size-72: clamp(3rem, #{$font-vpmin}rem + #{$font-vpmax}vw, 11.71rem); // 4.5rem;
+  $font-size-96: clamp(3.75rem, #{$font-vpmin}rem + #{$font-vpmax}vw, 16rem); // 6rem;
+  $font-size-128: clamp(4.5rem, #{$font-vpmin}rem + #{$font-vpmax}vw, 24rem); // 8rem;
 
   /** Radius **/
   $radius-primary: 0.625rem;

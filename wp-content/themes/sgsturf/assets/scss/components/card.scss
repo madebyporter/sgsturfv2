@@ -6,7 +6,8 @@
   border-radius: $radius-primary;
   display: flex;
   flex-direction: column;
-  justify-content: end;
+  justify-content: start;
+  overflow: hidden;
   min-width: 100%;
   width: auto;
   @media only screen and (min-width: $bp-md) {
@@ -17,24 +18,20 @@
     min-width: 296px;
     width: auto;
   }
+  @media only screen and (min-width: $bp-2xl) {
+    min-width: 396px;
+    width: auto;
+  }
 
   &:hover {
-    .card-product-bottom-container {
-      height: 105%;
+    .card-product-bottom-image {
+      // height: 105%;
     }
   }
 }
 .slider .card-product {
-  min-width: 206px;
+  min-width: 296px;
   width: auto;
-  @media only screen and (min-width: $bp-md) {
-    min-width: 296px;
-    width: auto;
-  }
-  @media only screen and (min-width: $bp-lg) {
-    min-width: 296px;
-    width: auto;
-  }
 }
 .card-product-top {
   padding: 20px 10px;
@@ -43,23 +40,69 @@
   }
 }
 .card-product-bottom {
-  height: 200px;
+  background: $color-white;
+  border-radius: $radius-primary;
+  height: 100%;
+  min-height: 256px;
   position: relative;
+  &:hover {
+    .button {
+      background: $color-black;
+      color: $color-white;
+    }
+  }
+  &.specs-active {
+    .card-product-bottom-image {
+      transform: translateY(84%);
+      @media only screen and (min-width: $bp-lg) {
+        transform: translateY(83%);
+      }
+    }
+    .button {
+      background: $color-black;
+      color: $color-white;
+    }
+  }
 }
 .card-product-bottom-container {
   border-radius: $radius-primary;
+}
+.card-product-bottom-image {
+  transform: translateY(0);
+  border-radius: $radius-primary;
+  top: 0;
   bottom: 0;
-  height: 100%;
   overflow: hidden;
   position: absolute;
-  transform-origin: bottom;
-  transition: 200ms linear;
+  // transform-origin: bottom;
+  transition: 400ms cubic-bezier(.14, .62, .39, 1);
   width: 100%;
   img {
     bottom: 0;
     position: absolute;
-    height: 300px;
+    height: 100%;
     width: 100%;
     object-fit: cover;
+    object-position: center top;
+  }
+}
+.card-product-bottom-specs {
+  .spec-item {
+    border-bottom: 1px solid $color-gray-light;
+    display: flex;
+    justify-content: space-between;
+    font-size: $font-size-14;
+    padding-bottom: 0.25rem;
+    &:last-child {
+      border-bottom: 0;
+    }
+  }
+  .spec-item-value {
+    font-weight: 700;
+  }
+  .spec-item-colors {
+    li {
+      text-align: right;
+    }
   }
 }

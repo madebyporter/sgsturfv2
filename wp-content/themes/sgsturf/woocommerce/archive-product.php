@@ -99,10 +99,12 @@ if (!empty($category_filters)) {
 							</a>
 						</div>
 						<div class="card-product-bottom">
-							<div class="card-product-bottom-container">
-								<img
-									src="<?php echo esc_url($product->get_image_id() ? wp_get_attachment_url($product->get_image_id()) : wc_placeholder_img_src()); ?>"
-									alt="Product" />
+							<div class="card-product-bottom-container card-product-bottom-image">
+								<?php
+								$image_id = $product->get_image_id();
+								$image_url = $image_id ? wp_get_attachment_image_src($image_id, 'full')[0] : get_template_directory_uri() . '/assets/images/ui-state-zero-simpleproduct.jpg';
+								?>
+								<img src="<?php echo esc_url($image_url); ?>" alt="Product" />
 							</div>
 						</div>
 					</div>
