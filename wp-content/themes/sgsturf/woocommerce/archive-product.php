@@ -14,6 +14,8 @@ $query_args = array(
 	'status' => 'publish',
 	'limit' => -1,
 	'type' => 'grouped',
+	'orderby' => 'title', // Sort by product title
+	'order' => 'ASC',     // Sort in ascending order (A to Z)
 );
 
 // Apply category filter if selected
