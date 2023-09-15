@@ -874,6 +874,14 @@ video {
   padding-left: 5rem;
 }
 
+.pb-16 {
+  padding-bottom: 4rem;
+}
+
+.pb-5 {
+  padding-bottom: 1.25rem;
+}
+
 .uppercase {
   text-transform: uppercase;
 }
@@ -1165,6 +1173,10 @@ body {
   .md\:pl-12 {
     padding-left: 3rem;
   }
+
+  .md\:pb-10 {
+    padding-bottom: 2.5rem;
+  }
 }
 
 @media (min-width: 1024px) {
@@ -1214,6 +1226,10 @@ body {
 
   .lg\:col-end-7 {
     grid-column-end: 7;
+  }
+
+  .lg\:col-end-6 {
+    grid-column-end: 6;
   }
 
   .lg\:mx-20 {
@@ -1312,6 +1328,10 @@ body {
 
   .lg\:py-20 {
     padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+
+  .lg\:pb-20 {
     padding-bottom: 5rem;
   }
 }

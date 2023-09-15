@@ -64,3 +64,11 @@ function disable_woocommerce_sidebar() {
     }
 }
 add_action('template_redirect', 'disable_woocommerce_sidebar');
+
+// Sort Series Products ABC Order
+add_filter( 'woocommerce_grouped_children_args', 'kia_grouped_children_args' );
+function kia_grouped_children_args( $args ){
+    $args['orderby'] = 'title';
+    $args['order'] = 'ASC';
+    return $args;
+}

@@ -24,8 +24,8 @@
         ?>
       </div>
       <div class="flex justify-end col-start-7 col-end-13 sm:col-start-10 sm:col-end-13 lg:col-start-11 lg:col-end-13">
-        <a href="./request-a-quote/" class="button button-secondary button-small">
-          <span class="button-label"><span class="hidden md:inline-block">Request</span> Quote</span>
+        <a href="./place-order/" class="button button-secondary button-small">
+          <span class="button-label"><span class="hidden md:inline-block">Place</span> Order</span>
           <span class="button-arrow">
             <svg width="20" height="16" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M18.1978 8.94987L12.2806 15.029L11.3766 16L9.48636 14.058L10.4315 13.1293L14.0886 9.32981H2.17207H0.857143V6.62797H2.17207H14.0886L10.4315 2.87071L9.48636 1.89974L11.3766 0L12.2806 0.970976L18.1978 7.05013L19.1429 7.97889L18.1978 8.94987Z" fill="#242423"/>

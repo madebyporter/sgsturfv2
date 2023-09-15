@@ -302,7 +302,7 @@ p.small, .content-paragraph-small p {
   height: 10px;
 }
 .button-small .button-label {
-  font-size: clamp(0.5rem, 0.7143rem + 2.2857vw, 1rem);
+  font-size: clamp(0.3rem, 0.7143rem + 2.2857vw, 1rem);
 }
 @media only screen and (min-width: 1280px) {
   .button-small .button-arrow {
@@ -317,7 +317,7 @@ p.small, .content-paragraph-small p {
 
 .nav a {
   color: #666666;
-  font-size: clamp(0.5rem, 0.7143rem + 2.2857vw, 1rem);
+  font-size: clamp(0.3rem, 0.7143rem + 2.2857vw, 1rem);
   font-weight: 600;
   letter-spacing: 0.02rem;
   text-transform: uppercase;
@@ -418,7 +418,7 @@ p.small, .content-paragraph-small p {
   border-bottom: 1px solid #D9D9D9;
   display: flex;
   justify-content: space-between;
-  font-size: clamp(0.5rem, 0.7143rem + 2.2857vw, 1.25rem);
+  font-size: clamp(0.3rem, 0.7143rem + 2.2857vw, 1rem);
   padding-bottom: 0.25rem;
 }
 .card-product-bottom-specs .spec-item:last-child {
@@ -555,25 +555,42 @@ p.small, .content-paragraph-small p {
   font-size: 1.5rem;
   font-weight: 700;
 }
-.gform_wrapper.sgsform_wrapper .gfield--type-text, .gform_wrapper.sgsform_wrapper .gfield--type-email, .gform_wrapper.sgsform_wrapper .gfield--type-select, .gform_wrapper.sgsform_wrapper .gfield--type-number, .gform_wrapper.sgsform_wrapper .gfield--type-textarea {
+.gform_wrapper.sgsform_wrapper .gfield--type-text,
+.gform_wrapper.sgsform_wrapper .gfield--type-email,
+.gform_wrapper.sgsform_wrapper .gfield--type-phone,
+.gform_wrapper.sgsform_wrapper .gfield--type-select,
+.gform_wrapper.sgsform_wrapper .gfield--type-number,
+.gform_wrapper.sgsform_wrapper .gfield--type-textarea {
   background: #f4f5f3;
   border-radius: 0.3125rem;
   padding: 0.625rem;
 }
-.gform_wrapper.sgsform_wrapper .gfield--type-text .gfield_label, .gform_wrapper.sgsform_wrapper .gfield--type-email .gfield_label, .gform_wrapper.sgsform_wrapper .gfield--type-select .gfield_label, .gform_wrapper.sgsform_wrapper .gfield--type-number .gfield_label, .gform_wrapper.sgsform_wrapper .gfield--type-textarea .gfield_label {
+.gform_wrapper.sgsform_wrapper .gfield--type-text .gfield_label,
+.gform_wrapper.sgsform_wrapper .gfield--type-email .gfield_label,
+.gform_wrapper.sgsform_wrapper .gfield--type-phone .gfield_label,
+.gform_wrapper.sgsform_wrapper .gfield--type-select .gfield_label,
+.gform_wrapper.sgsform_wrapper .gfield--type-number .gfield_label,
+.gform_wrapper.sgsform_wrapper .gfield--type-textarea .gfield_label {
   font-size: 0.875rem;
   font-weight: 500;
   margin: 0;
 }
 .gform_wrapper.sgsform_wrapper .gfield--type-text .ginput_container input.medium,
 .gform_wrapper.sgsform_wrapper .gfield--type-text .ginput_container select.medium,
-.gform_wrapper.sgsform_wrapper .gfield--type-text .ginput_container textarea.medium, .gform_wrapper.sgsform_wrapper .gfield--type-email .ginput_container input.medium,
+.gform_wrapper.sgsform_wrapper .gfield--type-text .ginput_container textarea.medium,
+.gform_wrapper.sgsform_wrapper .gfield--type-email .ginput_container input.medium,
 .gform_wrapper.sgsform_wrapper .gfield--type-email .ginput_container select.medium,
-.gform_wrapper.sgsform_wrapper .gfield--type-email .ginput_container textarea.medium, .gform_wrapper.sgsform_wrapper .gfield--type-select .ginput_container input.medium,
+.gform_wrapper.sgsform_wrapper .gfield--type-email .ginput_container textarea.medium,
+.gform_wrapper.sgsform_wrapper .gfield--type-phone .ginput_container input.medium,
+.gform_wrapper.sgsform_wrapper .gfield--type-phone .ginput_container select.medium,
+.gform_wrapper.sgsform_wrapper .gfield--type-phone .ginput_container textarea.medium,
+.gform_wrapper.sgsform_wrapper .gfield--type-select .ginput_container input.medium,
 .gform_wrapper.sgsform_wrapper .gfield--type-select .ginput_container select.medium,
-.gform_wrapper.sgsform_wrapper .gfield--type-select .ginput_container textarea.medium, .gform_wrapper.sgsform_wrapper .gfield--type-number .ginput_container input.medium,
+.gform_wrapper.sgsform_wrapper .gfield--type-select .ginput_container textarea.medium,
+.gform_wrapper.sgsform_wrapper .gfield--type-number .ginput_container input.medium,
 .gform_wrapper.sgsform_wrapper .gfield--type-number .ginput_container select.medium,
-.gform_wrapper.sgsform_wrapper .gfield--type-number .ginput_container textarea.medium, .gform_wrapper.sgsform_wrapper .gfield--type-textarea .ginput_container input.medium,
+.gform_wrapper.sgsform_wrapper .gfield--type-number .ginput_container textarea.medium,
+.gform_wrapper.sgsform_wrapper .gfield--type-textarea .ginput_container input.medium,
 .gform_wrapper.sgsform_wrapper .gfield--type-textarea .ginput_container select.medium,
 .gform_wrapper.sgsform_wrapper .gfield--type-textarea .ginput_container textarea.medium {
   background: transparent;
@@ -587,13 +604,20 @@ p.small, .content-paragraph-small p {
 }
 .gform_wrapper.sgsform_wrapper .gfield--type-text .ginput_container input.medium:focus,
 .gform_wrapper.sgsform_wrapper .gfield--type-text .ginput_container select.medium:focus,
-.gform_wrapper.sgsform_wrapper .gfield--type-text .ginput_container textarea.medium:focus, .gform_wrapper.sgsform_wrapper .gfield--type-email .ginput_container input.medium:focus,
+.gform_wrapper.sgsform_wrapper .gfield--type-text .ginput_container textarea.medium:focus,
+.gform_wrapper.sgsform_wrapper .gfield--type-email .ginput_container input.medium:focus,
 .gform_wrapper.sgsform_wrapper .gfield--type-email .ginput_container select.medium:focus,
-.gform_wrapper.sgsform_wrapper .gfield--type-email .ginput_container textarea.medium:focus, .gform_wrapper.sgsform_wrapper .gfield--type-select .ginput_container input.medium:focus,
+.gform_wrapper.sgsform_wrapper .gfield--type-email .ginput_container textarea.medium:focus,
+.gform_wrapper.sgsform_wrapper .gfield--type-phone .ginput_container input.medium:focus,
+.gform_wrapper.sgsform_wrapper .gfield--type-phone .ginput_container select.medium:focus,
+.gform_wrapper.sgsform_wrapper .gfield--type-phone .ginput_container textarea.medium:focus,
+.gform_wrapper.sgsform_wrapper .gfield--type-select .ginput_container input.medium:focus,
 .gform_wrapper.sgsform_wrapper .gfield--type-select .ginput_container select.medium:focus,
-.gform_wrapper.sgsform_wrapper .gfield--type-select .ginput_container textarea.medium:focus, .gform_wrapper.sgsform_wrapper .gfield--type-number .ginput_container input.medium:focus,
+.gform_wrapper.sgsform_wrapper .gfield--type-select .ginput_container textarea.medium:focus,
+.gform_wrapper.sgsform_wrapper .gfield--type-number .ginput_container input.medium:focus,
 .gform_wrapper.sgsform_wrapper .gfield--type-number .ginput_container select.medium:focus,
-.gform_wrapper.sgsform_wrapper .gfield--type-number .ginput_container textarea.medium:focus, .gform_wrapper.sgsform_wrapper .gfield--type-textarea .ginput_container input.medium:focus,
+.gform_wrapper.sgsform_wrapper .gfield--type-number .ginput_container textarea.medium:focus,
+.gform_wrapper.sgsform_wrapper .gfield--type-textarea .ginput_container input.medium:focus,
 .gform_wrapper.sgsform_wrapper .gfield--type-textarea .ginput_container select.medium:focus,
 .gform_wrapper.sgsform_wrapper .gfield--type-textarea .ginput_container textarea.medium:focus {
   background: #e3e4df;

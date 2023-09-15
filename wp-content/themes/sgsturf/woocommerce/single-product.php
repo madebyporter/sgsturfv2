@@ -13,7 +13,11 @@ if ( $group_product->is_type( 'grouped' ) ) :
 <section class="grid-main hero hero-product">
   <div class="hero-masonry flex gap-4 col-start-1 col-end-13 md:col-start-1 md:col-end-7">
     <div class="hero-masonry-col flex flex-col gap-4 justify-around">
-      <img src="<?php echo wp_get_attachment_image_src(get_post_thumbnail_id($group_product->get_id()), 'full')[0]; ?>" alt="<?php echo esc_attr($group_product->get_name()); ?>">
+      <?php
+      $image_id = $product->get_image_id();
+      $image_url = $image_id ? wp_get_attachment_image_src(get_post_thumbnail_id($group_product->get_id()), 'full')[0] : get_template_directory_uri() . '/assets/images/ui-state-zero-series.jpg';
+      ?>
+      <img src="<?php echo esc_url($image_url); ?>" alt="Product" />
     </div>
   </div>
   <div class="hero-content col-start-1 col-end-13 md:col-start-7 md:col-end-13 p-5 md:p-10 flex flex-col justify-between">
@@ -40,8 +44,8 @@ if ( $group_product->is_type( 'grouped' ) ) :
       </div>
     </div>
     <div class="product-cta">
-      <a href="#products" class="button button-primary">
-        <span class="button-label">View Products</span>
+      <a href="#requestquote" class="button button-primary">
+        <span class="button-label">Request a Quote</span>
         <span class="button-arrow">
           <svg width="20" height="16" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M18.1978 8.94987L12.2806 15.029L11.3766 16L9.48636 14.058L10.4315 13.1293L14.0886 9.32981H2.17207H0.857143V6.62797H2.17207H14.0886L10.4315 2.87071L9.48636 1.89974L11.3766 0L12.2806 0.970976L18.1978 7.05013L19.1429 7.97889L18.1978 8.94987Z" fill="#242423"/>
@@ -69,7 +73,7 @@ if ( $group_product->is_type( 'grouped' ) ) :
         </div>
       </div>
     </div>
-    <div class="content-full-row grid-sub py-5 md:py-10 lg:py-20">
+    <div class="content-full-row grid-sub pb-5 md:pb-10 lg:pb-20">
       <div class="slider col-start-1 col-end-13">
         <div class="slider-container mx-5 md:mx-10 lg:mx-20 overflow-y-hidden">
           <div class="pattern-card flex gap-4 md:gap-8 justify-start content-start">
@@ -93,7 +97,7 @@ if ( $group_product->is_type( 'grouped' ) ) :
                     </div>
                   </div>
                   <div class="card-product-bottom">
-                    <div class="card-product-bottom-container card-product-bottom-specs px-5 pb-12 flex flex-col gap-1">
+                    <div class="card-product-bottom-container card-product-bottom-specs px-5 pb-16 flex flex-col gap-1">
                       <?php
                         // Get the ACF fields for the current simple product
                         $field1 = get_field('specs_pile_height', $subproduct_id);
@@ -210,6 +214,17 @@ if ( $group_product->is_type( 'grouped' ) ) :
     }
   }
   ?>
+</section>
+
+<section id="requestquote" class="grid-main content-full">
+  <div class="theme-white content-full-container p-5 md:p-10 lg:p-20 col-start-1 col-end-13 grid-sub gap-4 md:gap-8 lg:gap-4">
+    <div class="col-start-1 col-end-13 lg:col-start-1 lg:col-end-6">
+      <h2 class="h2">Request a Quote</h2>
+    </div>
+    <div class="col-start-1 col-end-13 lg:col-start-7 lg:col-end-13">
+      <?php echo do_shortcode('[gravityform id="2" title="true"]');?>
+    </div>
+  </div>
 </section>
 
 <?php endif; ?>

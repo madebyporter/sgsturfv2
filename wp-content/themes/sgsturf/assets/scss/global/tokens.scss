@@ -22,7 +22,7 @@
   $font-vpmin: 0.7143;
   $font-vpmax: 2.2857;
 
-  $font-size-12: clamp(0.5rem, #{$font-vpmin}rem + #{$font-vpmax}vw, 1rem); // 0.75rem;
+  $font-size-12: clamp(0.3rem, #{$font-vpmin}rem + #{$font-vpmax}vw, 1rem); // 0.75rem;
   $font-size-14: clamp(0.5rem, #{$font-vpmin}rem + #{$font-vpmax}vw, 1.25rem); // 0.875rem;
   $font-size-16: clamp(0.625rem, #{$font-vpmin}rem + #{$font-vpmax}vw, 1.5rem); // 1rem;
   $font-size-18: clamp(0.75rem, #{$font-vpmin}rem + #{$font-vpmax}vw, 1.875rem); // 1.125rem;

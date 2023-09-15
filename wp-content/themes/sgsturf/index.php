@@ -91,7 +91,7 @@ get_header(); ?>
               ?>
               <div class="card card-product">
                 <div class="card-product-top">
-                  <h3 class="h3 mb-2">
+                  <h3 class="h5 mb-2">
                     <?php echo esc_html($product->get_name()); ?>
                   </h3>
                   <div class="pattern-tag flex gap-2 mb-4 md:mb-8">

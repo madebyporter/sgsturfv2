@@ -41,7 +41,12 @@
   }
 
   // Input Text Field
-  .gfield--type-text, .gfield--type-email, .gfield--type-select, .gfield--type-number, .gfield--type-textarea {
+  .gfield--type-text,
+  .gfield--type-email,
+  .gfield--type-phone,
+  .gfield--type-select,
+  .gfield--type-number,
+  .gfield--type-textarea {
     background: lighten($color-green-pale,2%);
     border-radius: $radius-secondary;
     padding: 0.625rem;
