@@ -157,7 +157,7 @@ get_header(); ?>
         <div class="pattern-tag flex gap-2 absolute bottom-5 right-5 md:bottom-10 md:right-10">
           <div class="tag">Landscape</div>
         </div>
-        <img src="<?php echo SGSTURF_IMAGES_DIR; ?>/fpo-home-application-landscape.jpg" alt="Landscape">
+        <img src="<?php echo SGSTURF_IMAGES_DIR; ?>/home-applications-landscape.jpg" alt="Landscape">
       </div>
     </div>
     <div class="content-full-col relative w-1/2 md:w-1/3">
@@ -173,7 +173,7 @@ get_header(); ?>
         <div class="tag">Pet</div>
       </div>
       <div class="content-image">
-        <img src="<?php echo SGSTURF_IMAGES_DIR; ?>/fpo-home-application-pet.jpg" alt="Pet">
+        <img src="<?php echo SGSTURF_IMAGES_DIR; ?>/home-applications-pet.jpg" alt="Pet">
       </div>
     </div>
     <div class="content-full-col relative w-1/2 md:w-1/3">
