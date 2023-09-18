@@ -20,7 +20,7 @@ if ( $group_product->is_type( 'grouped' ) ) :
       <img src="<?php echo esc_url($image_url); ?>" alt="Product" />
     </div>
   </div>
-  <div class="hero-content col-start-1 col-end-13 md:col-start-7 md:col-end-13 p-5 md:p-10 flex flex-col justify-between">
+  <div class="hero-content col-start-1 col-end-13 md:col-start-7 md:col-end-13 px-5 py-10 md:p-10 flex flex-col justify-between">
     <div class="product-overview grid-sub">
       <div class="product-meta col-start-1 col-end-13">
         <div class="content-heading-bordered mb-4">
@@ -58,7 +58,7 @@ if ( $group_product->is_type( 'grouped' ) ) :
 
 <section id="products" class="grid-main content-full">
   <div class="theme-black content-full-container col-start-1 col-end-13 flex flex-col gap-0">
-    <div class="content-full-row grid-sub p-5 md:p-10 xl:p-20">
+    <div class="content-full-row grid-sub px-5 py-10 md:p-10 xl:p-20">
       <div class="content-heading col-start-1 col-end-13 mb-4 md:col-start-1 md:col-end-6 md:mb-0">
         <h2 class="h2">Products</h2>
       </div>
@@ -217,7 +217,7 @@ if ( $group_product->is_type( 'grouped' ) ) :
 </section>
 
 <section id="requestquote" class="grid-main content-full">
-  <div class="theme-white content-full-container p-5 md:p-10 xl:p-20 col-start-1 col-end-13 grid-sub gap-4 md:gap-8 lg:gap-4">
+  <div class="theme-white content-full-container px-5 py-10 md:p-10 xl:p-20 col-start-1 col-end-13 grid-sub gap-4 md:gap-8 lg:gap-4">
     <div class="col-start-1 col-end-13 lg:col-start-1 lg:col-end-6">
       <h2 class="h2">Request a Quote</h2>
     </div>

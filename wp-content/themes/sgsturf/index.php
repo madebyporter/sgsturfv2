@@ -10,10 +10,10 @@ if (!defined('ABSPATH')) {
 get_header(); ?>
 
 <section class="grid-main hero hero-home md:min-h-[60vh]">
-  <div class="hero-content col-start-1 col-end-13 order-2 md:col-start-1 md:col-end-7 md:order-1 lg:col-start-1 lg:col-end-7 p-5 md:p-10 xl:p-20 grid-sub content-end">
+  <div class="hero-content col-start-1 col-end-13 order-2 md:col-start-1 md:col-end-7 md:order-1 lg:col-start-1 lg:col-end-7 px-5 py-10 md:p-10 xl:p-20 grid-sub content-end">
     <div class="content-heading-cta col-start-1 col-end-13">
       <h1 class="h1 mb-2 lg:mb-4">The Natural Look <br />&amp; feel of <br />Beautiful Grass</h1>
-      <p class="mb-4 lg:mb-8">Save water for your flowers and trees</p>
+      <p>Save water for your flowers and trees</p>
     </div>
   </div>
   <div class="hero-masonry flex gap-4 col-start-1 col-end-13 order-1 md:col-start-7 md:col-end-13 md:order-2 lg:col-start-7 lg:col-end-13">
@@ -30,12 +30,12 @@ get_header(); ?>
 </section>
 
 <section class="grid-main content-halves">
-  <div class="theme-orange content-halves-col col-start-1 col-end-13 md:col-start-1 md:col-end-7 p-5 md:p-10 xl:p-20 grid-sub">
+  <div class="theme-orange content-halves-col col-start-1 col-end-13 md:col-start-1 md:col-end-7 px-5 py-10 md:p-10 xl:p-20 grid-sub">
     <div class="content-heading col-start-1 col-end-12">
       <h2 class="h2">Choose from our Ready Inventory of High-Quality, Test-Proven Turf at Competitive Pricing.</h2>
     </div>
   </div>
-  <div class="theme-green content-halves-col col-start-1 col-end-13 md:col-start-7 md:col-end-13 p-5 md:p-10 xl:p-20 grid-sub">
+  <div class="theme-green content-halves-col col-start-1 col-end-13 md:col-start-7 md:col-end-13 px-5 py-10 md:p-10 xl:p-20 grid-sub">
     <div class="content-paragraph col-start-1 col-end-13">
       <p class="mb-8">
         We’re located in Southern California and Northern Texas but ship right to your door. Contactors and homeowners alike.
@@ -46,7 +46,7 @@ get_header(); ?>
 
 <section id="products" class="grid-main content-full">
   <div class="theme-black content-full-container col-start-1 col-end-13 flex flex-col gap-0">
-    <div class="content-full-row grid-sub p-5 md:p-10 xl:p-20 pb-0">
+    <div class="content-full-row grid-sub px-5 py-10 md:p-10 xl:p-20">
       <div class="content-heading col-start-1 col-end-13 mb-2 md:mb-0 md:col-start-1 md:col-end-6">
         <h2 class="h2">Featured Lines</h2>
       </div>
@@ -61,7 +61,7 @@ get_header(); ?>
         </div>
       </div>
     </div>
-    <div class="content-full-row grid-sub pb-10 xl:pb-20">
+    <div class="content-full-row grid-sub pb-5 md:pb-10 xl:pb-20">
       <div class="slider col-start-1 col-end-13">
         <div class="slider-container mx-5 md:mx-10 xl:mx-20">
           <div class="pattern-card flex gap-8 justify-start content-start">
@@ -144,7 +144,7 @@ get_header(); ?>
 
 <section class="grid-main content-full">
   <div class="theme-white content-full-container col-start-1 col-end-13 flex flex-wrap">
-    <div class="content-full-col p-5 md:p-10 xl:p-20 md:w-1/2">
+    <div class="content-full-col px-5 py-10 md:p-10 xl:p-20 md:w-1/2">
       <div class="content-heading">
         <h2 class="h2 mb-4">Applications</h2>
         <p>
@@ -188,7 +188,7 @@ get_header(); ?>
 </section>
 
 <section class="grid-main content-halves lg:min-h-[700px]">
-  <div class="theme-green content-halves-col col-start-1 col-end-13 md:col-start-1 md:col-end-7 p-5 md:p-10 xl:p-20 grid-sub content-end">
+  <div class="theme-green content-halves-col col-start-1 col-end-13 md:col-start-1 md:col-end-7 px-5 py-10 md:p-10 xl:p-20 grid-sub content-end">
     <div class="content-heading-cta col-start-1 col-end-13">
       <h2 class="h2 mb-4">New Customers</h2>
       <p class="mb-8">First time here? Request some sample turf to get a feel for our line.</p>
@@ -204,7 +204,7 @@ get_header(); ?>
       </a>
     </div>
   </div>
-  <div class="theme-orange content-halves-col col-start-1 col-end-13 md:col-start-7 md:col-end-13 p-5 md:p-10 xl:p-20 grid-sub content-end">
+  <div class="theme-orange content-halves-col col-start-1 col-end-13 md:col-start-7 md:col-end-13 px-5 py-10 md:p-10 xl:p-20 grid-sub content-end">
     <div class="content-heading-cta col-start-1 col-end-13">
       <h2 class="h2 mb-4">Existing Customers</h2>
       <p class="mb-8">Ready to purchase more turf for your next project? Let’s get you going.</p>

@@ -28,7 +28,7 @@ if (!empty($category_filters)) {
 <!--Archive Loop Start-->
 
 <section class="grid-main hero hero-sub md:min-h-[250px] lg:min-h-[300px]">
-	<div class="theme-white hero-content col-start-1 col-end-13 p-5 md:p-10 lg:px-20 lg:py-10 flex flex-col justify-end">
+	<div class="theme-white hero-content col-start-1 col-end-13 px-5 py-10 md:p-10 xl:px-20 xl:py-10 flex flex-col justify-end">
 		<div class="collection-overview grid-sub">
 			<div class="collection-breadcrumbs">
 				<?php
@@ -49,7 +49,7 @@ if (!empty($category_filters)) {
 </section>
 
 <section class="grid-main content-full">
-	<div class="theme-black content-full-container col-start-1 col-end-13 grid-sub flex flex-col md:gap-4 lg:gap-16 p-5 md:p-10 xl:p-20">
+	<div class="theme-black content-full-container col-start-1 col-end-13 grid-sub flex flex-col md:gap-4 lg:gap-16 px-5 py-10 md:p-10 xl:p-20">
 		<div class="col-start-1 col-end-13 lg:col-start-1 lg:col-end-4 mb-4 md:mb-0">
 			<form action="<?php echo esc_url(get_permalink(get_option('woocommerce_shop_page_id'))); ?>" method="get">
 				<label class="uppercase border-b border-[#666666] pb-1 w-full block mb-4">Filter by Category</label>
