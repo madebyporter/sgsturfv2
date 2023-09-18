@@ -44,7 +44,7 @@ if ( $group_product->is_type( 'grouped' ) ) :
       </div>
     </div>
     <div class="product-cta">
-      <a href="#requestquote" class="button button-primary">
+      <a href="#requestquote" class="button button-primary-b">
         <span class="button-label">Request a Quote</span>
         <span class="button-arrow">
           <svg width="20" height="16" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -75,7 +75,7 @@ if ( $group_product->is_type( 'grouped' ) ) :
     </div>
     <div class="content-full-row grid-sub pb-5 md:pb-10 lg:pb-20">
       <div class="slider col-start-1 col-end-13">
-        <div class="slider-container mx-5 md:mx-10 lg:mx-20 overflow-y-hidden">
+        <div class="slider-container mx-5 md:mx-10 xl:mx-20 overflow-y-hidden">
           <div class="pattern-card flex gap-4 md:gap-8 justify-start content-start">
             <!-- Start Simple Product Loop inside the Group Product Loop -->
             <?php

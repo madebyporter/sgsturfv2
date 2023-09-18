@@ -90,7 +90,7 @@ if (!empty($category_filters)) {
 							</div>
 							<a href="<?php echo esc_url(get_permalink($product->get_id())); ?>"
 								class="button button-secondary button-small">
-								<span class="button-label">View Series</span>
+								<span class="button-label">View Line</span>
 								<span class="button-arrow">
 									<svg width="20" height="16" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
 										<path

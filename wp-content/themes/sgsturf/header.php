@@ -9,7 +9,7 @@
 
 <body <?php body_class(); ?>>
 
-  <header id="header" class="header my-4">
+  <header id="header" class="header py-2">
     <div class="header-bar grid-main items-center">
       <div class="flex col-start-1 col-end-7 sm:col-start-1 sm:col-end-4 md:col-start-1 md:col-end-4 lg:col-start-1 lg:col-end-3">
         <?php include('components/logo-gray.php'); ?>
@@ -19,7 +19,7 @@
         <?php
           wp_nav_menu(array(
             'theme_location' => 'main', // Use 'main' for the "Main" menu location
-            'menu_class' => 'nav flex gap-6', // CSS class for the menu
+            'menu_class' => 'nav flex gap-2', // CSS class for the menu
           ));
         ?>
       </div>

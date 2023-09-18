@@ -14,18 +14,6 @@ get_header(); ?>
     <div class="content-heading-cta col-start-1 col-end-13">
       <h1 class="h1 mb-2 lg:mb-4">The Natural Look <br />&amp; feel of <br />Beautiful Grass</h1>
       <p class="mb-4 lg:mb-8">Save water for your flowers and trees</p>
-      <!-- <div class="pattern-button">
-        <a href="./shop" class="button button-primary">
-          <span class="button-label">Shop our Turf</span>
-          <span class="button-arrow">
-            <svg width="20" height="16" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path
-                d="M18.1978 8.94987L12.2806 15.029L11.3766 16L9.48636 14.058L10.4315 13.1293L14.0886 9.32981H2.17207H0.857143V6.62797H2.17207H14.0886L10.4315 2.87071L9.48636 1.89974L11.3766 0L12.2806 0.970976L18.1978 7.05013L19.1429 7.97889L18.1978 8.94987Z"
-                fill="#242423" />
-            </svg>
-          </span>
-        </a>
-      </div> -->
     </div>
   </div>
   <div class="hero-masonry flex gap-4 col-start-1 col-end-13 order-1 md:col-start-7 md:col-end-13 md:order-2 lg:col-start-7 lg:col-end-13">

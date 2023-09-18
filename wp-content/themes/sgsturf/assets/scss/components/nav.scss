@@ -1,4 +1,16 @@
 .nav {
+  .menu-item {
+    padding: 10px 20px;
+    &.current-menu-item {
+      background: darken($color-green-pale,3%);
+      border: 1px solid darken($color-green-pale,5%);
+      border-radius: $radius-primary;
+      a {
+        color: $color-black;
+      }
+    }
+  }
+   
   a {
     color: $color-gray-dark;
     font-size: $font-size-16;

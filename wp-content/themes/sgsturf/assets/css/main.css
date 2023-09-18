@@ -45,49 +45,49 @@ p {
   font-weight: 400;
   letter-spacing: -0.02rem;
   line-height: 1.3;
-  font-size: clamp(1rem, 0.6666666667rem + 0.8333333333vw, 2rem);
+  font-size: clamp(1.25rem, 1.0833333333rem + 0.4166666667vw, 1.75rem);
 }
 
 p.small, .content-paragraph-small p {
   font-weight: 400;
   letter-spacing: -0.005rem;
   line-height: 1.3;
-  font-size: clamp(0.625rem, 0.2916666667rem + 0.8333333333vw, 1.625rem);
+  font-size: clamp(0.875rem, 0.7083333333rem + 0.4166666667vw, 1.375rem);
 }
 
 .h1 {
   font-weight: 600;
   letter-spacing: -0.05rem;
   line-height: 1.2;
-  font-size: clamp(2.5rem, 2.1666666667rem + 0.8333333333vw, 3.5rem);
+  font-size: clamp(2.75rem, 2.5833333333rem + 0.4166666667vw, 3.25rem);
 }
 
 .h2 {
   font-weight: 600;
   letter-spacing: -0.05rem;
   line-height: 1.2;
-  font-size: clamp(1.375rem, 1.0416666667rem + 0.8333333333vw, 2.375rem);
+  font-size: clamp(1.625rem, 1.4583333333rem + 0.4166666667vw, 2.125rem);
 }
 
 .h3 {
   font-weight: 600;
   letter-spacing: -0.02rem;
   line-height: 1.2;
-  font-size: clamp(1rem, 0.6666666667rem + 0.8333333333vw, 2rem);
+  font-size: clamp(1.25rem, 1.0833333333rem + 0.4166666667vw, 1.75rem);
 }
 
 .h4 {
   font-weight: 600;
   letter-spacing: -0.02rem;
   line-height: 1.2;
-  font-size: clamp(0.625rem, 0.2916666667rem + 0.8333333333vw, 1.625rem);
+  font-size: clamp(0.875rem, 0.7083333333rem + 0.4166666667vw, 1.375rem);
 }
 
 .h5 {
   font-weight: 600;
   letter-spacing: -0.02rem;
   line-height: 1.2;
-  font-size: clamp(0.5rem, 0.1666666667rem + 0.8333333333vw, 1.5rem);
+  font-size: clamp(0.75rem, 0.5833333333rem + 0.4166666667vw, 1.25rem);
 }
 
 .theme-white, .card-product {
@@ -119,6 +119,14 @@ p.small, .content-paragraph-small p {
 }
 
 /** Header **/
+.header {
+  background: #EFF0ED;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+}
+
 .header-bar {
   background: #EFF0ED;
 }
@@ -156,7 +164,7 @@ p.small, .content-paragraph-small p {
 }
 
 /** Buttons **/
-.button, .gform_wrapper.sgsform_wrapper button.gform_save_link.button, .gform_wrapper.sgsform_wrapper input.gform_button {
+.button, .gform_wrapper.sgsform_wrapper #gform_submit_button_2, .gform_wrapper.sgsform_wrapper button.gform_save_link.button, .gform_wrapper.sgsform_wrapper input.gform_button {
   align-items: center;
   border-radius: 0.625rem;
   cursor: pointer;
@@ -166,7 +174,7 @@ p.small, .content-paragraph-small p {
   padding: 10px 20px;
 }
 @media only screen and (min-width: 1024px) {
-  .button, .gform_wrapper.sgsform_wrapper button.gform_save_link.button, .gform_wrapper.sgsform_wrapper input.gform_button {
+  .button, .gform_wrapper.sgsform_wrapper #gform_submit_button_2, .gform_wrapper.sgsform_wrapper button.gform_save_link.button, .gform_wrapper.sgsform_wrapper input.gform_button {
     gap: 20px;
   }
 }
@@ -175,7 +183,7 @@ p.small, .content-paragraph-small p {
   font-weight: 600;
   letter-spacing: -0.04rem;
   line-height: 1;
-  font-size: clamp(0.625rem, 0.2916666667rem + 0.8333333333vw, 1.625rem);
+  font-size: clamp(1.25rem, 1.0833333333rem + 0.4166666667vw, 1.75rem);
   white-space: nowrap;
 }
 
@@ -227,18 +235,18 @@ p.small, .content-paragraph-small p {
   fill: #242423;
 }
 
-.button-primary-b {
+.button-primary-b, .gform_wrapper.sgsform_wrapper #gform_submit_button_2 {
   background: #72845E;
   color: #FFF;
 }
-.button-primary-b:hover {
+.button-primary-b:hover, .gform_wrapper.sgsform_wrapper #gform_submit_button_2:hover {
   background: #657553;
   color: #FFF;
 }
-.button-primary-b:hover .button-arrow {
+.button-primary-b:hover .button-arrow, .gform_wrapper.sgsform_wrapper #gform_submit_button_2:hover .button-arrow {
   background: #FFF;
 }
-.button-primary-b:hover .button-arrow svg path {
+.button-primary-b:hover .button-arrow svg path, .gform_wrapper.sgsform_wrapper #gform_submit_button_2:hover .button-arrow svg path {
   fill: #242423;
 }
 
@@ -286,20 +294,20 @@ p.small, .content-paragraph-small p {
   fill: #FFF;
 }
 
-.button-text, .gform_wrapper.sgsform_wrapper button.gform_save_link.button {
+.button-text, .gform_wrapper.sgsform_wrapper button.gform_save_link.button, .gform_wrapper.sgsform_wrapper button.gform_save_link#gform_submit_button_2 {
   background: transparent;
   border: 0px;
   color: #242423;
   text-decoration: underline;
 }
-.button-text .button-arrow, .gform_wrapper.sgsform_wrapper button.gform_save_link.button .button-arrow {
+.button-text .button-arrow, .gform_wrapper.sgsform_wrapper button.gform_save_link.button .button-arrow, .gform_wrapper.sgsform_wrapper button.gform_save_link#gform_submit_button_2 .button-arrow {
   display: none;
 }
-.button-text:hover, .gform_wrapper.sgsform_wrapper button.gform_save_link.button:hover {
+.button-text:hover, .gform_wrapper.sgsform_wrapper button.gform_save_link.button:hover, .gform_wrapper.sgsform_wrapper button.gform_save_link#gform_submit_button_2:hover {
   background: transparent;
   color: #242423;
 }
-.button-text:hover .button-arrow, .gform_wrapper.sgsform_wrapper button.gform_save_link.button:hover .button-arrow {
+.button-text:hover .button-arrow, .gform_wrapper.sgsform_wrapper button.gform_save_link.button:hover .button-arrow, .gform_wrapper.sgsform_wrapper button.gform_save_link#gform_submit_button_2:hover .button-arrow {
   display: none;
 }
 
@@ -317,7 +325,7 @@ p.small, .content-paragraph-small p {
   height: 10px;
 }
 .button-small .button-label {
-  font-size: clamp(0.5rem, 0.1666666667rem + 0.8333333333vw, 1.5rem);
+  font-size: clamp(0.75rem, 0.5833333333rem + 0.4166666667vw, 1.25rem);
 }
 @media only screen and (min-width: 1280px) {
   .button-small .button-arrow {
@@ -330,9 +338,20 @@ p.small, .content-paragraph-small p {
   }
 }
 
+.nav .menu-item {
+  padding: 10px 20px;
+}
+.nav .menu-item.current-menu-item {
+  background: #e8e9e5;
+  border: 1px solid #e3e4df;
+  border-radius: 0.625rem;
+}
+.nav .menu-item.current-menu-item a {
+  color: #242423;
+}
 .nav a {
   color: #666666;
-  font-size: clamp(0.5rem, 0.1666666667rem + 0.8333333333vw, 1.5rem);
+  font-size: clamp(0.75rem, 0.5833333333rem + 0.4166666667vw, 1.25rem);
   font-weight: 600;
   letter-spacing: 0.02rem;
   text-transform: uppercase;
@@ -395,7 +414,7 @@ p.small, .content-paragraph-small p {
   min-height: 256px;
   position: relative;
 }
-.card-product-bottom:hover .button, .card-product-bottom:hover .gform_wrapper.sgsform_wrapper button.gform_save_link.button, .gform_wrapper.sgsform_wrapper .card-product-bottom:hover button.gform_save_link.button, .card-product-bottom:hover .gform_wrapper.sgsform_wrapper input.gform_button, .gform_wrapper.sgsform_wrapper .card-product-bottom:hover input.gform_button {
+.card-product-bottom:hover .button, .card-product-bottom:hover .gform_wrapper.sgsform_wrapper #gform_submit_button_2, .gform_wrapper.sgsform_wrapper .card-product-bottom:hover #gform_submit_button_2, .card-product-bottom:hover .gform_wrapper.sgsform_wrapper button.gform_save_link.button, .gform_wrapper.sgsform_wrapper .card-product-bottom:hover button.gform_save_link.button, .card-product-bottom:hover .gform_wrapper.sgsform_wrapper input.gform_button, .gform_wrapper.sgsform_wrapper .card-product-bottom:hover input.gform_button {
   background: #242423;
   color: #FFF;
 }
@@ -407,7 +426,7 @@ p.small, .content-paragraph-small p {
     transform: translateY(83%);
   }
 }
-.card-product-bottom.specs-active .button, .card-product-bottom.specs-active .gform_wrapper.sgsform_wrapper button.gform_save_link.button, .gform_wrapper.sgsform_wrapper .card-product-bottom.specs-active button.gform_save_link.button, .card-product-bottom.specs-active .gform_wrapper.sgsform_wrapper input.gform_button, .gform_wrapper.sgsform_wrapper .card-product-bottom.specs-active input.gform_button {
+.card-product-bottom.specs-active .button, .card-product-bottom.specs-active .gform_wrapper.sgsform_wrapper #gform_submit_button_2, .gform_wrapper.sgsform_wrapper .card-product-bottom.specs-active #gform_submit_button_2, .card-product-bottom.specs-active .gform_wrapper.sgsform_wrapper button.gform_save_link.button, .gform_wrapper.sgsform_wrapper .card-product-bottom.specs-active button.gform_save_link.button, .card-product-bottom.specs-active .gform_wrapper.sgsform_wrapper input.gform_button, .gform_wrapper.sgsform_wrapper .card-product-bottom.specs-active input.gform_button {
   background: #242423;
   color: #FFF;
 }
@@ -439,7 +458,7 @@ p.small, .content-paragraph-small p {
   border-bottom: 1px solid #D9D9D9;
   display: flex;
   justify-content: space-between;
-  font-size: clamp(0.375rem, 0.0416666667rem + 0.8333333333vw, 1.375rem);
+  font-size: clamp(0.625rem, 0.4583333333rem + 0.4166666667vw, 1.125rem);
   padding-bottom: 0.25rem;
 }
 .card-product-bottom-specs .spec-item:last-child {
@@ -650,7 +669,7 @@ p.small, .content-paragraph-small p {
   outline: 1px solid #dee0da;
   padding: 0.3125rem 0.125rem;
 }
-.gform_wrapper.sgsform_wrapper button.gform_save_link.button svg {
+.gform_wrapper.sgsform_wrapper button.gform_save_link.button svg, .gform_wrapper.sgsform_wrapper button.gform_save_link#gform_submit_button_2 svg {
   display: none !important;
 }
 .gform_wrapper.sgsform_wrapper div.gsection_description li {
@@ -664,7 +683,7 @@ p.small, .content-paragraph-small p {
   margin: 0;
   width: 100%;
 }
-.gform_wrapper.sgsform_wrapper .gform_footer button.gform_save_link.button {
+.gform_wrapper.sgsform_wrapper .gform_footer button.gform_save_link.button, .gform_wrapper.sgsform_wrapper .gform_footer button.gform_save_link#gform_submit_button_2 {
   margin: 0;
 }
 @media only screen and (min-width: 768px) {

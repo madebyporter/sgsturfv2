@@ -85,6 +85,10 @@
     @extend .button-text;
     svg {display: none !important}
   }
+  #gform_submit_button_2 {
+    @extend .button;
+    @extend .button-primary-b;
+  }
 
   // Description
   div.gsection_description li {

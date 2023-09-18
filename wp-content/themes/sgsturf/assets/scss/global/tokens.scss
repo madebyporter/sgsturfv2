@@ -26,7 +26,7 @@
 
     $rem: 16;
     $nrem: math.div($n, $rem);
-    $range: math.div(8, $rem);
+    $range: math.div(4, $rem);
     $min-font-size: $nrem - $range;
     $max-font-size: $nrem + $range;
 

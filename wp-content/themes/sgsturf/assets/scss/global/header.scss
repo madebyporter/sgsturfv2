@@ -1,5 +1,12 @@
 /** Header **/
-
+  
+  .header {
+    background: $color-green-pale;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+  }
   .header-bar {
     background: $color-green-pale;
   }
