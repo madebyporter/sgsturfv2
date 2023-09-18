@@ -9,12 +9,12 @@ if (!defined('ABSPATH')) {
 
 get_header(); ?>
 
-<section class="grid-main hero hero-home md:min-h-[50vh]">
-  <div class="hero-content col-start-1 col-end-13 order-2 md:col-start-1 md:col-end-7 md:order-1 lg:col-start-1 lg:col-end-7 p-5 md:p-10 lg:p-20 grid-sub content-end">
+<section class="grid-main hero hero-home md:min-h-[60vh]">
+  <div class="hero-content col-start-1 col-end-13 order-2 md:col-start-1 md:col-end-7 md:order-1 lg:col-start-1 lg:col-end-7 p-5 md:p-10 xl:p-20 grid-sub content-end">
     <div class="content-heading-cta col-start-1 col-end-13">
-      <h1 class="h1 mb-2 lg:mb-4">The natural look and feel of actual beautiful grass.</h1>
-      <p class="mb-4 lg:mb-8">Save water for your flowers and trees.</p>
-      <div class="pattern-button">
+      <h1 class="h1 mb-2 lg:mb-4">The Natural Look <br />&amp; feel of <br />Beautiful Grass</h1>
+      <p class="mb-4 lg:mb-8">Save water for your flowers and trees</p>
+      <!-- <div class="pattern-button">
         <a href="./shop" class="button button-primary">
           <span class="button-label">Shop our Turf</span>
           <span class="button-arrow">
@@ -25,29 +25,29 @@ get_header(); ?>
             </svg>
           </span>
         </a>
-      </div>
+      </div> -->
     </div>
   </div>
   <div class="hero-masonry flex gap-4 col-start-1 col-end-13 order-1 md:col-start-7 md:col-end-13 md:order-2 lg:col-start-7 lg:col-end-13">
-    <div class="hero-masonry-col flex flex-col gap-4 justify-between w-full xl:w-auto">
-      <img src="<?php echo SGSTURF_IMAGES_DIR; ?>/fpo-home-hero-2.jpg" alt="Turf" class="h-60 md:h-full lg:h-auto xl:block">
-      <img src="<?php echo SGSTURF_IMAGES_DIR; ?>/fpo-home-hero-3.jpg" alt="Turf" class="hidden xl:block">
+    <div class="hero-masonry-col hidden lg:flex grow flex-col gap-4 justify-between">
+      <img src="<?php echo SGSTURF_IMAGES_DIR; ?>/home-hero-photo-04.jpg" alt="Turf" class="hidden lg:block lg:grow">
+      <img src="<?php echo SGSTURF_IMAGES_DIR; ?>/home-hero-photo-02.jpg" alt="Turf" class="hidden lg:block h-[283px]">
     </div>
-    <div class="hero-masonry-col hidden xl:flex flex-col gap-4 justify-between">
-      <img src="<?php echo SGSTURF_IMAGES_DIR; ?>/fpo-home-hero-4.jpg" alt="Turf" class="hidden xl:block">
-      <img src="<?php echo SGSTURF_IMAGES_DIR; ?>/fpo-home-hero-5.jpg" alt="Turf" class="hidden xl:block">
-      <img src="<?php echo SGSTURF_IMAGES_DIR; ?>/fpo-home-hero-6.jpg" alt="Turf" class="hidden xl:block">
+    <div class="hero-masonry-col flex grow flex-col gap-4 justify-between w-full lg:w-auto">
+      <img src="<?php echo SGSTURF_IMAGES_DIR; ?>/home-hero-photo-03.jpg" alt="Turf" class="h-60 md:h-full lg:h-auto lg:grow xl:block object-right">
+      <img src="<?php echo SGSTURF_IMAGES_DIR; ?>/home-hero-photo-01.jpg" alt="Turf" class="hidden lg:block h-[339px]">
+      <img src="<?php echo SGSTURF_IMAGES_DIR; ?>/home-hero-photo-05.jpg" alt="Turf" class="hidden lg:block h-[112px]">
     </div>
   </div>
 </section>
 
 <section class="grid-main content-halves">
-  <div class="theme-orange content-halves-col col-start-1 col-end-13 md:col-start-1 md:col-end-7 p-5 md:p-10 lg:p-20 grid-sub">
+  <div class="theme-orange content-halves-col col-start-1 col-end-13 md:col-start-1 md:col-end-7 p-5 md:p-10 xl:p-20 grid-sub">
     <div class="content-heading col-start-1 col-end-12">
       <h2 class="h2">Choose from our Ready Inventory of High-Quality, Test-Proven Turf at Competitive Pricing.</h2>
     </div>
   </div>
-  <div class="theme-green content-halves-col col-start-1 col-end-13 md:col-start-7 md:col-end-13 p-5 md:p-10 lg:p-20 grid-sub">
+  <div class="theme-green content-halves-col col-start-1 col-end-13 md:col-start-7 md:col-end-13 p-5 md:p-10 xl:p-20 grid-sub">
     <div class="content-paragraph col-start-1 col-end-13">
       <p class="mb-8">
         We’re located in Southern California and Northern Texas but ship right to your door. Contactors and homeowners alike.
@@ -58,22 +58,24 @@ get_header(); ?>
 
 <section id="products" class="grid-main content-full">
   <div class="theme-black content-full-container col-start-1 col-end-13 flex flex-col gap-0">
-    <div class="content-full-row grid-sub p-5 md:p-10 lg:p-20 pb-0">
+    <div class="content-full-row grid-sub p-5 md:p-10 xl:p-20 pb-0">
       <div class="content-heading col-start-1 col-end-13 mb-2 md:mb-0 md:col-start-1 md:col-end-6">
-        <h2 class="h2">Featured Series &amp; Lines</h2>
+        <h2 class="h2">Featured Lines</h2>
       </div>
-      <div class="content-paragraph col-start-1 col-end-13 md:col-start-8 md:col-end-13">
-        <p class="mb-4">
-          Experience the Perfect Green:
-        </p>
-        <p>
-          Premium Synthetic Grass for Landscapes, Pets, Sports and Golf by SGSTurf.
-        </p>
+      <div class="col-start-1 col-end-13 md:col-start-7 md:col-end-13">
+        <div class="content-paragraph md:pl-10 xl:pl-20">
+          <p class="mb-4">
+            Experience the Perfect Green:
+          </p>
+          <p>
+            Premium Synthetic Grass for Landscapes, Pets, Sports and Golf by SGSTurf.
+          </p>
+        </div>
       </div>
     </div>
-    <div class="content-full-row grid-sub py-10 lg:py-20">
+    <div class="content-full-row grid-sub pb-10 xl:pb-20">
       <div class="slider col-start-1 col-end-13">
-        <div class="slider-container mx-5 md:mx-10 lg:mx-20">
+        <div class="slider-container mx-5 md:mx-10 xl:mx-20">
           <div class="pattern-card flex gap-8 justify-start content-start">
             <!-- Start grouped products loop -->
             <?php
@@ -82,6 +84,9 @@ get_header(); ?>
                 'status' => 'publish',
                 'limit' => 4,
                 'type' => 'grouped',
+                'tag' => 'featured', // Filter by the "featured" tag
+                'orderby' => 'title', // Sort by product title
+	              'order' => 'ASC',     // Sort in ascending order (A to Z)
               )
             );
 
@@ -91,7 +96,7 @@ get_header(); ?>
               ?>
               <div class="card card-product">
                 <div class="card-product-top">
-                  <h3 class="h5 mb-2">
+                  <h3 class="h3 mb-2">
                     <?php echo esc_html($product->get_name()); ?>
                   </h3>
                   <div class="pattern-tag flex gap-2 mb-4 md:mb-8">
@@ -103,7 +108,7 @@ get_header(); ?>
                   </div>
                   <a href="<?php echo esc_url(get_permalink($product->get_id())); ?>"
                     class="button button-secondary button-small">
-                    <span class="button-label">View Series</span>
+                    <span class="button-label">View Line</span>
                     <span class="button-arrow">
                       <svg width="20" height="16" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -151,7 +156,7 @@ get_header(); ?>
 
 <section class="grid-main content-full">
   <div class="theme-white content-full-container col-start-1 col-end-13 flex flex-wrap">
-    <div class="content-full-col p-5 md:p-10 lg:p-20 md:w-1/2">
+    <div class="content-full-col p-5 md:p-10 xl:p-20 md:w-1/2">
       <div class="content-heading">
         <h2 class="h2 mb-4">Applications</h2>
         <p>
@@ -195,11 +200,11 @@ get_header(); ?>
 </section>
 
 <section class="grid-main content-halves lg:min-h-[700px]">
-  <div class="theme-green content-halves-col col-start-1 col-end-13 md:col-start-1 md:col-end-7 p-5 md:p-10 lg:p-20 grid-sub content-end">
+  <div class="theme-green content-halves-col col-start-1 col-end-13 md:col-start-1 md:col-end-7 p-5 md:p-10 xl:p-20 grid-sub content-end">
     <div class="content-heading-cta col-start-1 col-end-13">
       <h2 class="h2 mb-4">New Customers</h2>
       <p class="mb-8">First time here? Request some sample turf to get a feel for our line.</p>
-      <a href="#" class="button button-tertiary">
+      <a href="./shop/" class="button button-tertiary">
         <span class="button-label">Shop All Turf</span>
         <span class="button-arrow">
           <svg width="20" height="16" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -211,11 +216,11 @@ get_header(); ?>
       </a>
     </div>
   </div>
-  <div class="theme-orange content-halves-col col-start-1 col-end-13 md:col-start-7 md:col-end-13 p-5 md:p-10 lg:p-20 grid-sub content-end">
+  <div class="theme-orange content-halves-col col-start-1 col-end-13 md:col-start-7 md:col-end-13 p-5 md:p-10 xl:p-20 grid-sub content-end">
     <div class="content-heading-cta col-start-1 col-end-13">
       <h2 class="h2 mb-4">Existing Customers</h2>
       <p class="mb-8">Ready to purchase more turf for your next project? Let’s get you going.</p>
-      <a href="#" class="button button-tertiary">
+      <a href="./place-order/" class="button button-tertiary">
         <span class="button-label">Place an Order</span>
         <span class="button-arrow">
           <svg width="20" height="16" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">

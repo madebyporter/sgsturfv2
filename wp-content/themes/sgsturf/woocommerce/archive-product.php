@@ -49,7 +49,7 @@ if (!empty($category_filters)) {
 </section>
 
 <section class="grid-main content-full">
-	<div class="theme-black content-full-container col-start-1 col-end-13 grid-sub flex flex-col md:gap-4 lg:gap-16 p-5 md:p-10 lg:p-20">
+	<div class="theme-black content-full-container col-start-1 col-end-13 grid-sub flex flex-col md:gap-4 lg:gap-16 p-5 md:p-10 xl:p-20">
 		<div class="col-start-1 col-end-13 lg:col-start-1 lg:col-end-4 mb-4 md:mb-0">
 			<form action="<?php echo esc_url(get_permalink(get_option('woocommerce_shop_page_id'))); ?>" method="get">
 				<label class="uppercase border-b border-[#666666] pb-1 w-full block mb-4">Filter by Category</label>
@@ -78,7 +78,7 @@ if (!empty($category_filters)) {
 					?>
 					<div class="card card-product flex-1 xl:flex-initial">
 						<div class="card-product-top">
-							<h3 class="h5 mb-2">
+							<h3 class="h3 mb-2">
 								<?php echo esc_html($product->get_name()); ?>
 							</h3>
 							<div class="pattern-tag flex gap-1 mb-4 md:mb-8">

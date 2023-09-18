@@ -18,7 +18,7 @@ get_header(); ?>
     </div>
   </section>
   <section class="grid-main content-full">
-    <div class="theme-white content-full-container p-5 md:p-10 lg:p-20 col-start-1 col-end-13 grid-sub gap-4 md:gap-8 lg:gap-4">
+    <div class="theme-white content-full-container p-5 md:p-10 xl:p-20 col-start-1 col-end-13 grid-sub gap-4 md:gap-8 lg:gap-4">
       <div class="col-start-1 col-end-13 lg:col-start-1 lg:col-end-5">
         <p class="small md:mb-5 lg:mb-10">Note: All orders for next day delivery will need to be received & confirmed before 10:00 am. Orders & delivery are placed in the order received.  All onsite deliveries are curb-side only and require offload assistance.</p>
         <p class="small md:m-0 lg:mb-10">SPECIFIED DELIVERY TIMES ARE NOT GUARANTEED</p>

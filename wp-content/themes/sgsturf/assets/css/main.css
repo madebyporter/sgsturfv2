@@ -45,49 +45,49 @@ p {
   font-weight: 400;
   letter-spacing: -0.02rem;
   line-height: 1.3;
-  font-size: clamp(0.625rem, 0.7143rem + 2.2857vw, 1.5rem);
+  font-size: clamp(1rem, 0.6666666667rem + 0.8333333333vw, 2rem);
 }
 
 p.small, .content-paragraph-small p {
   font-weight: 400;
-  letter-spacing: -0.02rem;
+  letter-spacing: -0.005rem;
   line-height: 1.3;
-  font-size: clamp(0.5rem, 0.7143rem + 2.2857vw, 1.25rem);
+  font-size: clamp(0.625rem, 0.2916666667rem + 0.8333333333vw, 1.625rem);
 }
 
 .h1 {
   font-weight: 600;
-  letter-spacing: -0.08rem;
+  letter-spacing: -0.05rem;
   line-height: 1.2;
-  font-size: clamp(1.875rem, 0.7143rem + 2.2857vw, 6rem);
+  font-size: clamp(2.5rem, 2.1666666667rem + 0.8333333333vw, 3.5rem);
 }
 
 .h2 {
   font-weight: 600;
-  letter-spacing: -0.08rem;
+  letter-spacing: -0.05rem;
   line-height: 1.2;
-  font-size: clamp(1.125rem, 0.7143rem + 2.2857vw, 3.75rem);
+  font-size: clamp(1.375rem, 1.0416666667rem + 0.8333333333vw, 2.375rem);
 }
 
 .h3 {
   font-weight: 600;
-  letter-spacing: -0.08rem;
+  letter-spacing: -0.02rem;
   line-height: 1.2;
-  font-size: clamp(1rem, 0.7143rem + 2.2857vw, 3rem);
+  font-size: clamp(1rem, 0.6666666667rem + 0.8333333333vw, 2rem);
 }
 
 .h4 {
   font-weight: 600;
-  letter-spacing: -0.08rem;
+  letter-spacing: -0.02rem;
   line-height: 1.2;
-  font-size: clamp(0.75rem, 0.7143rem + 2.2857vw, 1.875rem);
+  font-size: clamp(0.625rem, 0.2916666667rem + 0.8333333333vw, 1.625rem);
 }
 
 .h5 {
   font-weight: 600;
-  letter-spacing: -0.08rem;
+  letter-spacing: -0.02rem;
   line-height: 1.2;
-  font-size: clamp(0.625rem, 0.7143rem + 2.2857vw, 1.5rem);
+  font-size: clamp(0.5rem, 0.1666666667rem + 0.8333333333vw, 1.5rem);
 }
 
 .theme-white, .card-product {
@@ -175,7 +175,7 @@ p.small, .content-paragraph-small p {
   font-weight: 600;
   letter-spacing: -0.04rem;
   line-height: 1;
-  font-size: clamp(0.625rem, 0.7143rem + 2.2857vw, 1.5rem);
+  font-size: clamp(0.625rem, 0.2916666667rem + 0.8333333333vw, 1.625rem);
   white-space: nowrap;
 }
 
@@ -224,6 +224,21 @@ p.small, .content-paragraph-small p {
   background: #FFF;
 }
 .button-primary:hover .button-arrow svg path, .gform_wrapper.sgsform_wrapper input.gform_button:hover .button-arrow svg path {
+  fill: #242423;
+}
+
+.button-primary-b {
+  background: #72845E;
+  color: #FFF;
+}
+.button-primary-b:hover {
+  background: #657553;
+  color: #FFF;
+}
+.button-primary-b:hover .button-arrow {
+  background: #FFF;
+}
+.button-primary-b:hover .button-arrow svg path {
   fill: #242423;
 }
 
@@ -302,7 +317,7 @@ p.small, .content-paragraph-small p {
   height: 10px;
 }
 .button-small .button-label {
-  font-size: clamp(0.3rem, 0.7143rem + 2.2857vw, 1rem);
+  font-size: clamp(0.5rem, 0.1666666667rem + 0.8333333333vw, 1.5rem);
 }
 @media only screen and (min-width: 1280px) {
   .button-small .button-arrow {
@@ -317,7 +332,7 @@ p.small, .content-paragraph-small p {
 
 .nav a {
   color: #666666;
-  font-size: clamp(0.3rem, 0.7143rem + 2.2857vw, 1rem);
+  font-size: clamp(0.5rem, 0.1666666667rem + 0.8333333333vw, 1.5rem);
   font-weight: 600;
   letter-spacing: 0.02rem;
   text-transform: uppercase;
@@ -354,8 +369,14 @@ p.small, .content-paragraph-small p {
   }
 }
 .slider .card-product {
-  min-width: 296px;
+  min-width: 246px;
   width: auto;
+}
+@media only screen and (min-width: 768px) {
+  .slider .card-product {
+    min-width: 286px;
+    width: auto;
+  }
 }
 
 .card-product-top {
@@ -418,7 +439,7 @@ p.small, .content-paragraph-small p {
   border-bottom: 1px solid #D9D9D9;
   display: flex;
   justify-content: space-between;
-  font-size: clamp(0.3rem, 0.7143rem + 2.2857vw, 1rem);
+  font-size: clamp(0.375rem, 0.0416666667rem + 0.8333333333vw, 1.375rem);
   padding-bottom: 0.25rem;
 }
 .card-product-bottom-specs .spec-item:last-child {
@@ -468,6 +489,11 @@ p.small, .content-paragraph-small p {
   object-fit: cover;
 }
 
+@media only screen and (min-width: 1024px) {
+  .hero-product {
+    min-height: 700px;
+  }
+}
 .hero-product img {
   height: 100%;
   width: 100%;

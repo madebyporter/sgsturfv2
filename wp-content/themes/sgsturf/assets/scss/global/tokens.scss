@@ -1,5 +1,6 @@
 /** Tokens **/
-  
+  @use 'sass:math';
+
   /** Breakpoints **/
   $bp-sm: 640px;
   $bp-md: 768px;
@@ -19,22 +20,61 @@
 
   /** Fonts **/
   $font-primary: 'Inter', sans-serif;
-  $font-vpmin: 0.7143;
-  $font-vpmax: 2.2857;
 
-  $font-size-12: clamp(0.3rem, #{$font-vpmin}rem + #{$font-vpmax}vw, 1rem); // 0.75rem;
-  $font-size-14: clamp(0.5rem, #{$font-vpmin}rem + #{$font-vpmax}vw, 1.25rem); // 0.875rem;
-  $font-size-16: clamp(0.625rem, #{$font-vpmin}rem + #{$font-vpmax}vw, 1.5rem); // 1rem;
-  $font-size-18: clamp(0.75rem, #{$font-vpmin}rem + #{$font-vpmax}vw, 1.875rem); // 1.125rem;
-  $font-size-20: clamp(0.875rem, #{$font-vpmin}rem + #{$font-vpmax}vw, 2.25rem); // 1.25rem;
-  $font-size-24: clamp(1rem, #{$font-vpmin}rem + #{$font-vpmax}vw, 3rem); // 1.5rem;
-  $font-size-30: clamp(1.125rem, #{$font-vpmin}rem + #{$font-vpmax}vw, 3.75rem); // 1.875rem;
-  $font-size-36: clamp(1.5rem, #{$font-vpmin}rem + #{$font-vpmax}vw, 4.5rem); // 2.25rem;
-  $font-size-48: clamp(1.875rem, #{$font-vpmin}rem + #{$font-vpmax}vw, 6rem); // 3rem;
-  $font-size-60: clamp(2.25rem, #{$font-vpmin}rem + #{$font-vpmax}vw, 8rem); // 3.75rem;
-  $font-size-72: clamp(3rem, #{$font-vpmin}rem + #{$font-vpmax}vw, 11.71rem); // 4.5rem;
-  $font-size-96: clamp(3.75rem, #{$font-vpmin}rem + #{$font-vpmax}vw, 16rem); // 6rem;
-  $font-size-128: clamp(4.5rem, #{$font-vpmin}rem + #{$font-vpmax}vw, 24rem); // 8rem;
+  @function calculate-font-sizes($n) {
+    // Calculate min and max font sizes
+
+    $rem: 16;
+    $nrem: math.div($n, $rem);
+    $range: math.div(8, $rem);
+    $min-font-size: $nrem - $range;
+    $max-font-size: $nrem + $range;
+
+    // Calculate slope
+    $min-width: math.div(640,16);
+    $max-width: math.div(2560,16);
+
+    $slope: math.div($max-font-size - $min-font-size, $max-width - $min-width);
+
+    // Calculate y-axis intersection
+    $y-axis-intersection: math.div(-$min-width * $slope + $min-font-size, 1);
+
+    // Calculate preferred value
+    $preferred-value: #{$y-axis-intersection}rem + " + " + #{$slope * 100}vw;
+
+    // Create and return the clamp function with preferred value
+    $clamp-function: unquote("clamp(#{$min-font-size}rem, #{$preferred-value}, #{$max-font-size}rem)");
+
+    @return $clamp-function;
+  }
+
+  $font-size-12: calculate-font-sizes(12); // 0.75rem;
+  $font-size-14: calculate-font-sizes(14); // 0.875rem;
+  $font-size-16: calculate-font-sizes(16); // 1rem;
+  $font-size-18: calculate-font-sizes(18); // 1.125rem;
+  $font-size-20: calculate-font-sizes(20); // 1.25rem;
+  $font-size-24: calculate-font-sizes(24); // 1.5rem;
+  $font-size-30: calculate-font-sizes(30); // 1.875rem;
+  $font-size-36: calculate-font-sizes(36); // 2.25rem;
+  $font-size-48: calculate-font-sizes(48); // 3rem;
+  $font-size-60: calculate-font-sizes(60); // 3.75rem;
+  $font-size-72: calculate-font-sizes(72); // 4.5rem;
+  $font-size-96: calculate-font-sizes(96); // 6rem;
+  $font-size-128: calculate-font-sizes(128); // 8rem;
+
+  // $font-size-12: clamp(0.5rem, 0.3333rem + 0.4167vw, 1rem); // 0.75rem;
+  // $font-size-14: clamp(0.625rem, 0.4583rem + 0.4167vw, 1.125rem); // 0.875rem;
+  // $font-size-16: clamp(0.75rem, 0.5833rem + 0.4167vw, 1.25rem); // 1rem;
+  // $font-size-18: clamp(0.875rem, 0.6667rem + 0.5208vw, 1.5rem); // 1.125rem;
+  // $font-size-20: clamp(1rem, 0.7083rem + 0.7292vw, 1.875rem); // 1.25rem;
+  // $font-size-24: clamp(1.125rem, 0.75rem + 0.9375vw, 2.25rem); // 1.5rem;
+  // $font-size-30: clamp(1.25rem, 0.6667rem + 1.4583vw, 3rem); // 1.875rem;
+  // $font-size-36: clamp(1.5rem, 0.75rem + 1.875vw, 3.75rem); // 2.25rem;
+  // $font-size-48: clamp(2.0625rem, 1.4375rem + 1.5625vw, 3.9375rem); // 3rem;
+  // $font-size-60: clamp(2.25rem, 1rem + 3.125vw, 6rem); // 3.75rem;
+  // $font-size-72: clamp(3rem, 1.3333rem + 4.1667vw, 8rem);; // 4.5rem;
+  // $font-size-96: clamp(3.75rem, 1.5rem + 5.625vw, 10.5rem); // 6rem;
+  // $font-size-128: clamp(4.5rem, 1.5rem + 7.5vw, 13.5rem); // 8rem;
 
   /** Radius **/
   $radius-primary: 0.625rem;

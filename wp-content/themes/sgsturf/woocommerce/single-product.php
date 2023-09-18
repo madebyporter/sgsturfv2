@@ -58,12 +58,12 @@ if ( $group_product->is_type( 'grouped' ) ) :
 
 <section id="products" class="grid-main content-full">
   <div class="theme-black content-full-container col-start-1 col-end-13 flex flex-col gap-0">
-    <div class="content-full-row grid-sub p-5 md:p-10 lg:p-20">
+    <div class="content-full-row grid-sub p-5 md:p-10 xl:p-20">
       <div class="content-heading col-start-1 col-end-13 mb-4 md:col-start-1 md:col-end-6 md:mb-0">
         <h2 class="h2">Products</h2>
       </div>
       <div class="col-start-1 col-end-13 md:col-start-7 md:col-end-13">
-        <div class="content-paragraph md:pl-12">
+        <div class="content-paragraph md:pl-10 lg:pl-12">
           <p class="mb-4">
             Explore our <?php echo esc_html($group_product->get_name()); ?>:
           </p>
@@ -89,7 +89,7 @@ if ( $group_product->is_type( 'grouped' ) ) :
                 ?>
                 <div class="card card-product">
                   <div class="card-product-top">
-                    <h3 class="h5 mb-2"><?php echo esc_html($subproduct->get_name()); ?></h3>
+                    <h3 class="h3 mb-2"><?php echo esc_html($subproduct->get_name()); ?></h3>
                     <div class="pattern-tag flex gap-2">
                       <?php foreach ($subproduct_categories as $category_name) : ?>
                         <div class="tag"><?php echo esc_html($category_name); ?></div>
@@ -217,12 +217,12 @@ if ( $group_product->is_type( 'grouped' ) ) :
 </section>
 
 <section id="requestquote" class="grid-main content-full">
-  <div class="theme-white content-full-container p-5 md:p-10 lg:p-20 col-start-1 col-end-13 grid-sub gap-4 md:gap-8 lg:gap-4">
+  <div class="theme-white content-full-container p-5 md:p-10 xl:p-20 col-start-1 col-end-13 grid-sub gap-4 md:gap-8 lg:gap-4">
     <div class="col-start-1 col-end-13 lg:col-start-1 lg:col-end-6">
       <h2 class="h2">Request a Quote</h2>
     </div>
     <div class="col-start-1 col-end-13 lg:col-start-7 lg:col-end-13">
-      <?php echo do_shortcode('[gravityform id="2" title="true"]');?>
+      <?php echo do_shortcode('[gravityform id="2" title="true" ajax=“true”]');?>
     </div>
   </div>
 </section>

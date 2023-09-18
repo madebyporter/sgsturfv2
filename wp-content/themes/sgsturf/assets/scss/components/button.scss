@@ -15,7 +15,7 @@
     font-weight: 600;
     letter-spacing: -0.04rem;
     line-height: 1;
-    font-size: $font-size-16;
+    font-size: $font-size-18;
     white-space: nowrap;
   }
   .button-arrow {
@@ -52,6 +52,20 @@
     color: $color-white;
     &:hover {
       background: darken($color-orange,5%);
+      color: $color-white;
+      .button-arrow {
+        background: $color-white;
+        svg path {
+          fill: $color-black;
+        }
+      }
+    }
+  }
+  .button-primary-b {
+    background: $color-green;
+    color: $color-white;
+    &:hover {
+      background: darken($color-green,5%);
       color: $color-white;
       .button-arrow {
         background: $color-white;
@@ -134,7 +148,7 @@
       }
     }
     .button-label {
-      font-size: $font-size-12;
+      font-size: $font-size-16;
     }
     @media only screen and (min-width: $bp-xl) {
       .button-arrow {

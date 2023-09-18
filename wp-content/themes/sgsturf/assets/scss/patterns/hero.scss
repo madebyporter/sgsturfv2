@@ -9,6 +9,9 @@
   }
 }
 .hero-product {
+  @media only screen and (min-width: $bp-lg) {
+    min-height: 700px;
+  }
   img {
     height: 100%;
     width: 100%;
