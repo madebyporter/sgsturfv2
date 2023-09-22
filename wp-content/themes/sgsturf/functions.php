@@ -9,6 +9,12 @@
  * @since SGSTurf v2
  */
 
+/* Title */
+function theme_slug_setup() {
+   add_theme_support( 'title-tag' );
+}
+add_action( 'after_setup_theme', 'theme_slug_setup' );
+
 /* Stylesheets Directory */
 function enqueue_theme_styles() {
     wp_enqueue_style('main-style', get_template_directory_uri() . '/assets/css/main.css');

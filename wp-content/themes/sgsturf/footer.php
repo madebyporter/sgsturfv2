@@ -9,8 +9,9 @@
       <div class="nav-footer">
         <h4>Navigation</h4>
         <nav class="site-nav flex flex-col gap-4 md:gap-2 mt-4">
-          <a href="#">Our Turf</a>
-          <a href="#">Privacy Policy</a>
+          <a href="./shop">Our Turf</a>
+          <a href="./privacy-policy">Privacy Policy</a>
+          <a href="./refund_returns">Refunds &amp; Returns</a>
           <a href="#">Terms of Service</a>
         </nav>
       </div>
@@ -46,7 +47,7 @@
   </div>
   <div class="footer-row grid-main !px-0">
     <div class="col-start-1 col-end-13 md:col-start-4 md:col-end-12 footer-copyright">
-      <p class="mb-8">&copy; 2022 SGS TURF. ALL RIGHTS RESERVED. All website design, text, graphics, the selection and arrangement thereof, and all software are copyright by SGS TURF. Any use of materials on this website, including reproduction, modification, distribution or republication, without the prior written consent of SGS TURF, is strictly prohibited.</p>
+      <p class="mb-8 small">&copy; 2022 SGS TURF. ALL RIGHTS RESERVED. All website design, text, graphics, the selection and arrangement thereof, and all software are copyright by SGS TURF. Any use of materials on this website, including reproduction, modification, distribution or republication, without the prior written consent of SGS TURF, is strictly prohibited.</p>
       <p>SGS TURF is a Belle Luna™️ Company</p>
     </div>
   </div>

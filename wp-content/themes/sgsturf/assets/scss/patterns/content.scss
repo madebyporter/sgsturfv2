@@ -1,3 +1,23 @@
+/** Content CMS **/
+  .content-cms {
+    h1, h2, h3, h4, h5 {
+      margin-bottom: $spacing-x1;
+    }
+    h1 {@extend .h1;}
+    h2 {@extend .h2;}
+    h3 {@extend .h3;}
+    h4 {@extend .h4;}
+    h5 {@extend .h5;}
+    p {
+      @extend .p;
+      margin-bottom: $spacing-x1;
+      font-size: $font-size-18 !important;
+    }
+    p + h1, p + h2, p + h3, p + h4, p + h5 {
+      margin-top: $spacing-x4;
+    }
+  }
+
 /** Content-Halves **/
   .content-halves {
     gap: 0 !important;

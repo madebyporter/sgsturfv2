@@ -79,3 +79,11 @@
   /** Radius **/
   $radius-primary: 0.625rem;
   $radius-secondary: 0.3125rem;
+
+  /** Spacing **/
+  $spacing-x1: calc(10/16)+rem;
+  $spacing-x2: calc((10*2)/16)+rem;
+  $spacing-x3: calc((10*3)/16)+rem;
+  $spacing-x4: calc((10*4)/16)+rem;
+  $spacing-x5: calc((10*5)/16)+rem;
+  $spacing-x6: calc((10*6)/16)+rem;

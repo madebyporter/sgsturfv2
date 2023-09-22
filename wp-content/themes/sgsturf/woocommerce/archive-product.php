@@ -28,7 +28,7 @@ if (!empty($category_filters)) {
 <!--Archive Loop Start-->
 
 <section class="grid-main hero hero-sub md:min-h-[250px] lg:min-h-[300px]">
-	<div class="theme-white hero-content col-start-1 col-end-13 px-5 py-10 md:p-10 xl:px-20 xl:py-10 flex flex-col justify-end">
+	<div class="theme-white hero-content col-start-1 col-end-13 p-5 pt-10 md:p-10 xl:px-20 xl:py-10 flex flex-col justify-end">
 		<div class="collection-overview grid-sub">
 			<div class="collection-breadcrumbs">
 				<?php
