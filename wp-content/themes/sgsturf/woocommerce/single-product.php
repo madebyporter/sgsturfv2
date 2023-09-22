@@ -97,7 +97,7 @@ if ( $group_product->is_type( 'grouped' ) ) :
                     </div>
                   </div>
                   <div class="card-product-bottom">
-                    <div class="card-product-bottom-container card-product-bottom-specs px-5 pb-16 flex flex-col gap-1">
+                    <div class="card-product-bottom-container card-product-bottom-specs px-3 md:px-5 pb-16 flex flex-col gap-1">
                       <?php
                         // Get the ACF fields for the current simple product
                         $field1 = get_field('specs_pile_height', $subproduct_id);
@@ -174,9 +174,15 @@ if ( $group_product->is_type( 'grouped' ) ) :
             const cardWidth = document.querySelector('.card-product').offsetWidth;
             const gap = parseFloat(getComputedStyle(document.querySelector('.pattern-card')).gap);
             const cardCount = document.querySelectorAll('.card-product').length;
-            const totalWidth = (cardWidth * cardCount) + (gap * (cardCount - 1));
 
-            document.querySelector('.slider-container').style.width = totalWidth + 'px';
+            // Check if cardCount is greater than 4
+            if (cardCount > 4) {
+              const totalWidth = (cardWidth * cardCount) + (gap * (cardCount - 1));
+              document.querySelector('.slider-container').style.width = totalWidth + 'px';
+            } else {
+              // If cardCount is not greater than 4, remove the width property
+              document.querySelector('.slider-container').style.width = '';
+            }
           }
 
           // Initial call to update slider width

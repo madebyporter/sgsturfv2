@@ -372,22 +372,17 @@ h5, .h5, .content-cms h5 {
 }
 @media only screen and (min-width: 768px) {
   .card-product {
-    min-width: 296px;
-    width: auto;
-  }
-}
-@media only screen and (min-width: 1024px) {
-  .card-product {
-    min-width: 296px;
+    min-width: 250px;
     width: auto;
   }
 }
 @media only screen and (min-width: 1536px) {
   .card-product {
-    min-width: 396px;
+    min-width: 350px;
     width: auto;
   }
 }
+
 .slider .card-product {
   min-width: 246px;
   width: auto;
@@ -489,6 +484,10 @@ h5, .h5, .content-cms h5 {
 }
 .slider .pattern-card {
   width: 100%;
+}
+.slider .card {
+  width: 100%;
+  max-width: 23%;
 }
 
 .slider::-webkit-scrollbar {

@@ -3,19 +3,39 @@ defined('ABSPATH') || exit;
 
 get_header('shop');
 
-// Get all product categories
-$product_categories = get_terms('product_cat');
+// Exclude specific category slugs from the filter options
+$excluded_category_slugs = array('uncategorized', 'collection');
+
+// Get term IDs for the excluded categories
+$excluded_category_ids = array();
+foreach ($excluded_category_slugs as $slug) {
+    $term = get_term_by('slug', $slug, 'product_cat');
+    if ($term) {
+        $excluded_category_ids[] = $term->term_id;
+    }
+}
+
+// Get all product categories excluding the excluded ones
+$product_categories = get_terms(
+    array(
+        'taxonomy' => 'product_cat',
+        'exclude' => $excluded_category_ids,
+    )
+);
 
 // Get selected category filters (if any)
 $category_filters = isset($_GET['category']) ? (array) $_GET['category'] : array();
+
 
 // Set up the query arguments
 $query_args = array(
 	'status' => 'publish',
 	'limit' => -1,
 	'type' => 'grouped',
-	'orderby' => 'title', // Sort by product title
-	'order' => 'ASC',     // Sort in ascending order (A to Z)
+	'orderby' => 'title',
+	// Sort by product title
+	'order' => 'ASC',
+	// Sort in ascending order (A to Z)
 );
 
 // Apply category filter if selected
@@ -28,7 +48,8 @@ if (!empty($category_filters)) {
 <!--Archive Loop Start-->
 
 <section class="grid-main hero hero-sub md:min-h-[250px] lg:min-h-[300px]">
-	<div class="theme-white hero-content col-start-1 col-end-13 p-5 pt-10 md:p-10 xl:px-20 xl:py-10 flex flex-col justify-end">
+	<div
+		class="theme-white hero-content col-start-1 col-end-13 p-5 pt-10 md:p-10 xl:px-20 xl:py-10 flex flex-col justify-end">
 		<div class="collection-overview grid-sub">
 			<div class="collection-breadcrumbs">
 				<?php
@@ -49,25 +70,32 @@ if (!empty($category_filters)) {
 </section>
 
 <section class="grid-main content-full">
-	<div class="theme-black content-full-container col-start-1 col-end-13 grid-sub flex flex-col md:gap-4 lg:gap-16 px-5 py-10 md:p-10 xl:p-20">
+	<div
+		class="theme-black content-full-container col-start-1 col-end-13 grid-sub flex flex-col md:gap-4 lg:gap-16 px-5 py-10 md:p-10 xl:p-20">
 		<div class="col-start-1 col-end-13 lg:col-start-1 lg:col-end-4 mb-4 md:mb-0">
 			<form action="<?php echo esc_url(get_permalink(get_option('woocommerce_shop_page_id'))); ?>" method="get">
 				<label class="uppercase border-b border-[#666666] pb-1 w-full block mb-4">Filter by Category</label>
-				<fieldset class="group-checkbox flex flex-col gap-2 md:justify-stretch md:items-center md:flex-wrap md:flex-row md:mb-4 md:gap-4 lg:flex-col lg:items-start lg:justify-start lg:items-stretch lg:gap-2 lg:my-4">
-					<?php foreach ($product_categories as $category): ?>
-						<label class="px-2.5 py-2 flex gap-2 items-center flex-1">
-							<input type="checkbox" name="category[]" value="<?php echo esc_attr($category->slug); ?>" <?php if (in_array($category->slug, $category_filters))
-									echo 'checked'; ?>>
-							<span class="checkmark"></span>
-							<?php echo esc_html($category->name); ?>
-						</label>
-					<?php endforeach; ?>
+				<fieldset
+					class="group-checkbox flex flex-col gap-2 md:justify-stretch md:items-center md:flex-wrap md:flex-row md:mb-4 md:gap-4 lg:flex-col lg:items-start lg:justify-start lg:items-stretch lg:gap-2 lg:my-4">
+					<?php foreach ($product_categories as $category) {
+						if (!in_array($category->slug, $excluded_category_slugs)) { ?>
+							<label class="px-2.5 py-2 flex gap-2 items-center flex-1">
+								<input type="checkbox" name="category[]" value="<?php echo esc_attr($category->slug); ?>" <?php if (in_array($category->slug, $category_filters))
+										 echo 'checked'; ?>>
+								<span class="checkmark"></span>
+								<?php echo esc_html($category->name); ?>
+							</label>
+						<?php }
+					} ?>
 					<button type="submit" class="button button-tertiary mt-4 md:mt-0 lg:mt-4">Apply Filter</button>
 				</fieldset>
 			</form>
 		</div>
+
+
+
 		<div class="col-start-1 col-end-13 lg:col-start-4 lg:col-end-13">
-			<div class="pattern-card flex gap-4 md:justify-start md:items-stretch lg:justify-start flex-wrap">
+			<div class="pattern-card grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
 				<!-- Start grouped products loop -->
 				<?php
 				$grouped_products = wc_get_products($query_args);
@@ -76,7 +104,7 @@ if (!empty($category_filters)) {
 					$category_list = wc_get_product_category_list($product->get_id(), ', ');
 					$categories = explode(', ', $category_list);
 					?>
-					<div class="card card-product flex-1 xl:flex-initial">
+					<div class="card card-product">
 						<div class="card-product-top">
 							<h3 class="h3 mb-2">
 								<?php echo esc_html($product->get_name()); ?>

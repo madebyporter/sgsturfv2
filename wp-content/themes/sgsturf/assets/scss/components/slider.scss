@@ -5,6 +5,10 @@
   .pattern-card {
     width: 100%;
   }
+  .card {
+    width: 100%;
+    max-width: 23%;
+  }
 }
 .slider::-webkit-scrollbar {
   display: none;

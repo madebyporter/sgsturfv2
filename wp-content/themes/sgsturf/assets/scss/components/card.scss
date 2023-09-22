@@ -11,22 +11,12 @@
   min-width: 100%;
   width: auto;
   @media only screen and (min-width: $bp-md) {
-    min-width: 296px;
-    width: auto;
-  }
-  @media only screen and (min-width: $bp-lg) {
-    min-width: 296px;
+    min-width: 250px;
     width: auto;
   }
   @media only screen and (min-width: $bp-2xl) {
-    min-width: 396px;
+    min-width: 350px;
     width: auto;
-  }
-
-  &:hover {
-    .card-product-bottom-image {
-      // height: 105%;
-    }
   }
 }
 .slider .card-product {
