@@ -8,24 +8,24 @@
   min-width: 286px;
   width: 100%;
 }
-.card-product {
-  @extend .theme-white;
-  border-radius: $radius-primary;
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-  overflow: hidden;
-  // min-width: 100%;
-  width: auto;
-  @media only screen and (min-width: $bp-md) {
-    min-width: 250px;
-    width: auto;
-  }
-  @media only screen and (min-width: $bp-2xl) {
-    min-width: 350px;
-    width: auto;
-  }
-}
+// .card-product {
+//   @extend .theme-white;
+//   border-radius: $radius-primary;
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: start;
+//   overflow: hidden;
+//   // min-width: 100%;
+//   width: auto;
+//   @media only screen and (min-width: $bp-md) {
+//     min-width: 250px;
+//     width: auto;
+//   }
+//   @media only screen and (min-width: $bp-2xl) {
+//     min-width: 350px;
+//     width: auto;
+//   }
+// }
 .card-location {
   @extend .theme-white;
   border-radius: $radius-primary;
@@ -45,14 +45,14 @@
     width: auto;
   }
 }
-.slider .card-product {
-  min-width: 246px;
-  width: auto;
-  @media only screen and (min-width: $bp-md) {
-    min-width: 286px;
-    width: auto;
-  }
-}
+// .slider .card-product {
+//   min-width: 246px;
+//   width: auto;
+//   @media only screen and (min-width: $bp-md) {
+//     min-width: 286px;
+//     width: auto;
+//   }
+// }
 .card-product-top {
   padding: 20px 10px;
   @media only screen and (min-width: $bp-md) {

@@ -70,7 +70,7 @@ get_header(); ?>
   <div
     class="theme-orange content-halves-col col-start-1 col-end-13 md:col-start-1 md:col-end-7 px-5 py-10 md:p-10 xl:p-20 grid-sub">
     <div class="content-heading col-start-1 col-end-12">
-      <h2 class="h2">
+      <h2 class="text-xl lg:text-3xl font-bold">
         <?php echo $home_value_prop_left_content ?>
       </h2>
     </div>
@@ -78,7 +78,7 @@ get_header(); ?>
   <div
     class="theme-green content-halves-col col-start-1 col-end-13 md:col-start-7 md:col-end-13 px-5 py-10 md:p-10 xl:p-20 grid-sub">
     <div class="content-paragraph col-start-1 col-end-13">
-      <p class="mb-8">
+      <p class="text-xl lg:text-3xl font-bold">
         <?php echo $home_value_prop_right_content ?>
       </p>
     </div>
@@ -125,20 +125,21 @@ get_header(); ?>
                 $child_product = wc_get_product($child_id);
                 $child_categories = wp_get_post_terms($child_id, 'product_cat', array('fields' => 'names'));
                 ?>
-                <div class="card card-product">
-                  <div class="card-product-top">
-                    <h3 class="h3 mb-2">
+                <div
+                  class="card-product bg-white rounded-lg flex flex-col justify-start overflow-hidden grow min-w-[246px]">
+                  <div class="px-5 py-10 lg:px-5 lg:py-10">
+                    <h3 class="h3 mb-2 text-black">
                       <?php echo esc_html($child_product->get_name()); ?>
                     </h3>
                     <div class="pattern-tag flex gap-2 mb-4 md:mb-8">
                       <?php foreach ($child_categories as $child_category): ?>
-                        <div class="tag">
+                        <div class="tag text-black">
                           <?php echo esc_html(wp_strip_all_tags($child_category)); ?>
                         </div>
                       <?php endforeach; ?>
                     </div>
                     <a href="<?php echo esc_url(get_permalink($child_id)); ?>" class="button button-secondary button-small">
-                      <span class="button-label">View Line</span>
+                      <span class="button-label">View Series</span>
                       <span class="button-arrow">
                         <svg width="20" height="16" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <path
@@ -148,13 +149,14 @@ get_header(); ?>
                       </span>
                     </a>
                   </div>
-                  <div class="card-product-bottom">
-                    <div class="card-product-bottom-container card-product-bottom-image">
+                  <div class="bg-white rounded-lg h-full min-h-[256px] relative overflow-hidden">
+                    <div class="top-0 bottom-0 overflow-hidden absolute transition-all w-full translate-y-0">
                       <?php
                       $image_id = $child_product->get_image_id();
                       $image_url = $image_id ? wp_get_attachment_image_src($image_id, 'full')[0] : SGSTURF_IMAGES_DIR . '/ui-state-zero-simpleproduct.jpg';
                       ?>
-                      <img src="<?php echo esc_url($image_url); ?>" alt="Product" />
+                      <img src="<?php echo esc_url($image_url); ?>" alt="Product"
+                        class="h-full w-full object-cover object-center" />
                     </div>
                   </div>
                 </div>

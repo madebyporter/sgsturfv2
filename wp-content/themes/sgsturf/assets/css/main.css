@@ -96,10 +96,10 @@ h5, .h5, .content-cms h5 {
   font-size: clamp(0.75rem, 0.5833333333rem + 0.4166666667vw, 1.25rem);
 }
 
-.theme-white, .card-location, .card-product {
+.theme-white, .card-location {
   background: #FFF;
 }
-.theme-white > *, .card-location > *, .card-product > * {
+.theme-white > *, .card-location > * {
   color: #242423;
 }
 
@@ -381,27 +381,6 @@ h5, .h5, .content-cms h5 {
   width: 100%;
 }
 
-.card-product {
-  border-radius: 0.625rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-  overflow: hidden;
-  width: auto;
-}
-@media only screen and (min-width: 768px) {
-  .card-product {
-    min-width: 250px;
-    width: auto;
-  }
-}
-@media only screen and (min-width: 1536px) {
-  .card-product {
-    min-width: 350px;
-    width: auto;
-  }
-}
-
 .card-location {
   border-radius: 0.625rem;
   display: flex;
@@ -419,17 +398,6 @@ h5, .h5, .content-cms h5 {
 @media only screen and (min-width: 1536px) {
   .card-location {
     min-width: 350px;
-    width: auto;
-  }
-}
-
-.slider .card-product {
-  min-width: 246px;
-  width: auto;
-}
-@media only screen and (min-width: 768px) {
-  .slider .card-product {
-    min-width: 286px;
     width: auto;
   }
 }
@@ -521,9 +489,6 @@ h5, .h5, .content-cms h5 {
   overflow-x: scroll;
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
-}
-.slider .pattern-card {
-  width: 100%;
 }
 .slider .card {
   flex-grow: 1;
