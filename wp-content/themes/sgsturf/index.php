@@ -245,58 +245,40 @@ get_header(); ?>
   </div>
 </section>
 
-<section class="grid-main content-full">
-  <?php
-  // Debug: Check if 'home' field group is returning anything
-  $home_applications_h2 = get_field('applications_h2');
-  $home_applications_p = get_field('applications_p');
-  $home_applications_landscape_image = get_field('applications_landscape_image');
-  $home_applications_golf_image = get_field('applications_golf_image');
-  $home_applications_pet_image = get_field('applications_pet_image');
-  $home_applications_sports_image = get_field('applications_sports_image');
-  ?>
-  <div class="theme-white content-full-container col-start-1 col-end-13 flex flex-wrap">
-    <div class="content-full-col px-5 py-10 md:p-10 xl:p-20 md:w-1/2">
-      <div class="content-heading">
-        <h2 class="h2 mb-4">
-          <?php echo $home_applications_h2 ?>
-        </h2>
-        <p>
+<section class="grid-main hero hero-home md:min-h-[60vh]">
+  <div
+    class="hero-content col-start-1 col-end-13 order-2 md:col-start-1 md:col-end-7 md:order-1 lg:col-start-1 lg:col-end-7 px-5 py-10 md:p-10 xl:p-20 grid-sub content-center">
+    <div class="content-heading-cta col-start-1 col-end-13 flex flex-col gap-5">
+      <?php
+      // Debug: Check if 'home' field group is returning anything
+      $home_applications_h2 = get_field('applications_h2');
+      $home_applications_p = get_field('applications_p');
+      ?>
+      <h2 class="text-3xl lg:text-5xl font-bold">
+        <?php echo $home_applications_h2 ?>
+        </h1>
+        <p class="text-2xl">
           <?php echo $home_applications_p ?>
         </p>
-      </div>
     </div>
-    <div class="content-full-col relative w-1/2">
-      <div class="content-image">
-        <div class="pattern-tag flex gap-2 absolute bottom-5 right-5 md:bottom-10 md:right-10">
-          <div class="tag">Landscape</div>
-        </div>
-        <img src="<?php echo $home_applications_landscape_image ?>" alt="Landscape">
-      </div>
+  </div>
+  <div
+    class="hero-masonry flex gap-4 col-start-1 col-end-13 order-1 md:col-start-7 md:col-end-13 md:order-2 lg:col-start-7 lg:col-end-13">
+    <?php
+    // Debug: Check if 'home' field group is returning anything
+    $home_applications_landscape_image = get_field('applications_landscape_image');
+    $home_applications_golf_image = get_field('applications_golf_image');
+    $home_applications_pet_image = get_field('applications_pet_image');
+    $home_applications_sports_image = get_field('applications_sports_image');
+    ?>
+    <div class="hero-masonry-col hidden lg:flex grow flex-col gap-4 justify-between">
+      <img src="<?php echo $home_applications_landscape_image ?>" alt="Landscape" class="hidden lg:block lg:grow">
+      <img src="<?php echo $home_applications_golf_image ?>" alt="Golf" class="hidden lg:block h-[283px]">
     </div>
-    <div class="content-full-col relative w-1/2 md:w-1/3">
-      <div class="pattern-tag flex gap-2 absolute bottom-5 right-5 md:bottom-10 md:right-10">
-        <div class="tag">Golf</div>
-      </div>
-      <div class="content-image">
-        <img src="<?php echo $home_applications_golf_image ?>" alt="Golf">
-      </div>
-    </div>
-    <div class="content-full-col relative w-1/2 md:w-1/3">
-      <div class="pattern-tag flex gap-2 absolute bottom-5 right-5 md:bottom-10 md:right-10">
-        <div class="tag">Pet</div>
-      </div>
-      <div class="content-image">
-        <img src="<?php echo $home_applications_pet_image ?>" alt="Pet">
-      </div>
-    </div>
-    <div class="content-full-col relative w-1/2 md:w-1/3">
-      <div class="pattern-tag flex gap-2 absolute bottom-5 right-5 md:bottom-10 md:right-10">
-        <div class="tag">Sports</div>
-      </div>
-      <div class="content-image">
-        <img src="<?php echo $home_applications_sports_image ?>" alt="Sports">
-      </div>
+    <div class="hero-masonry-col flex grow flex-col gap-4 justify-between w-full lg:w-auto">
+      <img src="<?php echo $$home_applications_pet_image = get_field('applications_pet_image');
+      ?>" alt="Pet" class="h-60 md:h-full lg:h-auto lg:grow xl:block object-right">
+      <img src="<?php echo $home_applications_sports_image ?>" alt="Sports" class="hidden lg:block h-[339px]">
     </div>
   </div>
 </section>
