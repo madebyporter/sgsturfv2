@@ -1,6 +1,6 @@
 </main>
 
-<footer id="footer" class="footer theme-black mt-4 p-5 md:p-10 lg:px-28 lg:!py-12">
+<footer id="footer" class="footer theme-black mt-4 p-5 md:p-10 xl:px-24 xl:!py-12">
   <div class="footer-row grid-main !px-0">
     <div class="col-start-1 col-end-13 md:col-start-1 md:col-end-4">
       <?php include('components/logo-orange.php'); ?>
@@ -20,9 +20,12 @@
       <div class="nav-footer">
         <h4>Social Media</h4>
         <nav class="site-nav flex gap-4 flex-col md:gap-2 mt-4">
-          <a href="#" class="flex gap-2 content-center"><img src="<?php echo SGSTURF_IMAGES_DIR; ?>/icons/social-facebook.svg" alt="Turf">Facebook</a>
-          <a href="#" class="flex gap-2 content-center"><img src="<?php echo SGSTURF_IMAGES_DIR; ?>/icons/social-instagram.svg" alt="Turf">Instagram</a>
-          <a href="#" class="flex gap-2 content-center"><img src="<?php echo SGSTURF_IMAGES_DIR; ?>/icons/social-youtube.svg" alt="Turf">Youtube</a>
+          <a href="#" class="flex gap-2 content-center"><img
+              src="<?php echo SGSTURF_IMAGES_DIR; ?>/icons/social-facebook.svg" alt="Turf">Facebook</a>
+          <a href="#" class="flex gap-2 content-center"><img
+              src="<?php echo SGSTURF_IMAGES_DIR; ?>/icons/social-instagram.svg" alt="Turf">Instagram</a>
+          <a href="#" class="flex gap-2 content-center"><img
+              src="<?php echo SGSTURF_IMAGES_DIR; ?>/icons/social-youtube.svg" alt="Turf">Youtube</a>
         </nav>
       </div>
     </div>
@@ -47,12 +50,27 @@
   </div>
   <div class="footer-row grid-main !px-0">
     <div class="col-start-1 col-end-13 md:col-start-4 md:col-end-12 footer-copyright">
-      <p class="mb-8 small">&copy; 2022 SGS TURF. ALL RIGHTS RESERVED. All website design, text, graphics, the selection and arrangement thereof, and all software are copyright by SGS TURF. Any use of materials on this website, including reproduction, modification, distribution or republication, without the prior written consent of SGS TURF, is strictly prohibited.</p>
+      <p class="mb-8 small">&copy;<span id="copyright"></span> SGSTURF. ALL RIGHTS RESERVED. All website design, text,
+        graphics, the
+        selection and arrangement thereof, and all software are copyright by SGS TURF. Any use of materials on this
+        website, including reproduction, modification, distribution or republication, without the prior written consent
+        of SGS TURF, is strictly prohibited.</p>
       <p>SGS TURF is a Belle Luna™️ Company</p>
     </div>
   </div>
 </footer>
 
 <?php wp_footer(); ?>
+<script>
+  // Get the current year
+  const currentYear = new Date().getFullYear();
+
+  // Construct the copyright string
+  const copyrightString = `2015 - ${currentYear}`;
+
+  // Insert the copyright string into an element with id 'copyright'
+  document.getElementById('copyright').textContent = copyrightString;
+</script>
 </body>
+
 </html>

@@ -37,6 +37,11 @@ body {
 }
 
 /** Base **/
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 body {
   background: #EFF0ED;
   font-family: "Inter", sans-serif;
@@ -91,10 +96,10 @@ h5, .h5, .content-cms h5 {
   font-size: clamp(0.75rem, 0.5833333333rem + 0.4166666667vw, 1.25rem);
 }
 
-.theme-white, .card-product {
+.theme-white, .card-location, .card-product {
   background: #FFF;
 }
-.theme-white > *, .card-product > * {
+.theme-white > *, .card-location > *, .card-product > * {
   color: #242423;
 }
 
@@ -117,6 +122,13 @@ h5, .h5, .content-cms h5 {
 }
 .theme-green > * {
   color: #FFF;
+}
+
+.theme-pale-green {
+  background: #e8e9e5;
+}
+.theme-pale-green > * {
+  color: #242423;
 }
 
 /** Header **/
@@ -149,7 +161,7 @@ h5, .h5, .content-cms h5 {
 
 .header .logo {
   overflow: hidden;
-  width: 74px;
+  width: 78px;
 }
 .header .logo img {
   min-width: 160px;
@@ -361,13 +373,20 @@ h5, .h5, .content-cms h5 {
   color: #242423;
 }
 
+.card-blank {
+  background: #2c2c2b;
+  border-radius: 0.625rem;
+  min-height: 420px;
+  min-width: 286px;
+  width: 100%;
+}
+
 .card-product {
   border-radius: 0.625rem;
   display: flex;
   flex-direction: column;
   justify-content: start;
   overflow: hidden;
-  min-width: 100%;
   width: auto;
 }
 @media only screen and (min-width: 768px) {
@@ -378,6 +397,27 @@ h5, .h5, .content-cms h5 {
 }
 @media only screen and (min-width: 1536px) {
   .card-product {
+    min-width: 350px;
+    width: auto;
+  }
+}
+
+.card-location {
+  border-radius: 0.625rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  overflow: hidden;
+  width: auto;
+}
+@media only screen and (min-width: 768px) {
+  .card-location {
+    min-width: 250px;
+    width: auto;
+  }
+}
+@media only screen and (min-width: 1536px) {
+  .card-location {
     min-width: 350px;
     width: auto;
   }
@@ -486,8 +526,7 @@ h5, .h5, .content-cms h5 {
   width: 100%;
 }
 .slider .card {
-  width: 100%;
-  max-width: 23%;
+  flex-grow: 1;
 }
 
 .slider::-webkit-scrollbar {

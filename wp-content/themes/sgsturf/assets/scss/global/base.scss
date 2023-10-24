@@ -1,4 +1,9 @@
 /** Base **/
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
   body {
     background: $color-green-pale;
     font-family: $font-primary;
@@ -70,5 +75,11 @@
     background: $color-green;
     & > * {
       color: $color-white;
+    }
+  }
+  .theme-pale-green {
+    background: darken($color-green-pale, 3%);
+    & > * {
+      color: $color-black;
     }
   }
