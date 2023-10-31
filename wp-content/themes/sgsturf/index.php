@@ -247,7 +247,7 @@ get_header(); ?>
 
 <section class="grid-main hero hero-home md:min-h-[60vh]">
   <div
-    class="hero-content col-start-1 col-end-13 order-2 md:col-start-1 md:col-end-7 md:order-1 lg:col-start-1 lg:col-end-7 px-5 py-10 md:p-10 xl:p-20 grid-sub content-center">
+    class="hero-content col-start-1 col-end-13 md:col-start-1 md:col-end-7 lg:col-start-1 lg:col-end-7 px-5 py-10 md:p-10 xl:p-20 grid-sub content-center">
     <div class="content-heading-cta col-start-1 col-end-13 flex flex-col gap-5">
       <?php
       // Debug: Check if 'home' field group is returning anything
@@ -262,8 +262,7 @@ get_header(); ?>
         </p>
     </div>
   </div>
-  <div
-    class="hero-masonry flex gap-4 col-start-1 col-end-13 order-1 md:col-start-7 md:col-end-13 md:order-2 lg:col-start-7 lg:col-end-13">
+  <div class="hero-masonry flex gap-4 col-start-1 col-end-13 md:col-start-7 md:col-end-13 lg:col-start-7 lg:col-end-13">
     <?php
     // Debug: Check if 'home' field group is returning anything
     $home_applications_landscape_image = get_field('applications_landscape_image');

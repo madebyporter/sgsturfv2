@@ -86,14 +86,15 @@ if ($group_product->is_type('grouped')):
 
                 if ($subproduct_categories && !is_wp_error($subproduct_categories)) {
                   ?>
-                  <div class="card card-product">
-                    <div class="card-product-top">
-                      <h3 class="h3 mb-2">
+                  <div
+                    class="card-product bg-white rounded-lg flex flex-col justify-start overflow-hidden grow min-w-[260px]">
+                    <div class="px-5 py-10 lg:px-5 lg:py-10">
+                      <h3 class="h3 mb-2 text-black truncate">
                         <?php echo esc_html($subproduct->get_name()); ?>
                       </h3>
                       <div class="pattern-tag flex gap-2">
                         <?php foreach ($subproduct_categories as $category_name): ?>
-                          <div class="tag">
+                          <div class="tag text-black">
                             <?php echo esc_html($category_name); ?>
                           </div>
                         <?php endforeach; ?>
@@ -111,21 +112,37 @@ if ($group_product->is_type('grouped')):
                         $checkbox_field = get_field('specs_blade_colors', $subproduct_id);
 
                         // Display the ACF fields as needed
-                        echo '<div class="spec-item"><div>Pile Height:</div><div class="spec-item-value">' . esc_html($field1) . '</div></div>';
-                        echo '<div class="spec-item"><div>Total Weight:</div><div class="spec-item-value">' . esc_html($field2) . '</div></div>';
-                        echo '<div class="spec-item"><div>Blade:</div><div class="spec-item-value">' . esc_html($field3) . '</div></div>';
-                        echo '<div class="spec-item"><div>Turf Gauge:</div><div class="spec-item-value">' . esc_html($field4) . '</div></div>';
+                        echo '
+                        <div class="spec-item text-black">
+                          <div>Pile Height:</div>
+                          <div class="spec-item-value">' . esc_html($field1) . '</div>
+                        </div>';
+                        echo '
+                        <div class="spec-item text-black">
+                          <div>Total Weight:</div>
+                          <div class="spec-item-value">' . esc_html($field2) . '</div>
+                        </div>';
+                        echo '
+                        <div class="spec-item text-black">
+                          <div>Blade:</div>
+                          <div class="spec-item-value">' . esc_html($field3) . '</div>
+                        </div>';
+                        echo '
+                        <div class="spec-item text-black">
+                          <div>Turf Gauge:</div>
+                          <div class="spec-item-value">' . esc_html($field4) . '</div>
+                        </div>';
 
                         // Check if any options are selected in the checkbox field
                         if (!empty($checkbox_field)) {
-                          echo '<div class="spec-item"><div>Blade Colors:</div>';
+                          echo '<div class="spec-item text-black"><div>Blade Colors:</div>';
                           echo '<ul class="spec-item-colors">';
                           foreach ($checkbox_field as $option) {
                             echo '<li class="spec-item-value">' . esc_html($option) . '</li>';
                           }
                           echo '</ul></div>';
                         } else {
-                          echo '<div class="spec-item"><div>Blade Colors:</div></div>';
+                          echo '<div class="spec-item text-black"><div>Blade Colors:</div></div>';
                         }
                         ?>
                       </div>
@@ -144,27 +161,6 @@ if ($group_product->is_type('grouped')):
                       </div>
                     </div>
 
-                    <script>
-                      document.addEventListener('DOMContentLoaded', function () {
-                        const productCards = document.querySelectorAll('.card-product-bottom');
-
-                        productCards.forEach(function (productCard) {
-                          const specsButton = productCard.querySelector('.button');
-
-                          specsButton.addEventListener('click', function () {
-                            productCard.classList.toggle('specs-active');
-                            const buttonText = specsButton.querySelector('.button-label');
-
-                            if (productCard.classList.contains('specs-active')) {
-                              buttonText.textContent = 'Hide Specs';
-                            } else {
-                              buttonText.textContent = 'View Specs';
-                            }
-                          });
-                        });
-                      });
-                    </script>
-
                   </div>
                   <?php
                 }
@@ -177,6 +173,26 @@ if ($group_product->is_type('grouped')):
               ?>
             </div>
           </div>
+          <script>
+            document.addEventListener('DOMContentLoaded', function () {
+              const productCards = document.querySelectorAll('.card-product-bottom');
+
+              productCards.forEach(function (productCard) {
+                const specsButton = productCard.querySelector('.button');
+
+                specsButton.addEventListener('click', function () {
+                  productCard.classList.toggle('specs-active');
+                  const buttonText = specsButton.querySelector('.button-label');
+
+                  if (productCard.classList.contains('specs-active')) {
+                    buttonText.textContent = 'Hide Specs';
+                  } else {
+                    buttonText.textContent = 'View Specs';
+                  }
+                });
+              });
+            });
+          </script>
           <script>
             // Function to calculate and update slider width
             function updateSliderWidth() {
@@ -198,7 +214,7 @@ if ($group_product->is_type('grouped')):
             updateSliderWidth();
 
             // Event listener for window resize
-            window.addEventListener('resize', updateSliderWidth);
+            // window.addEventListener('resize', updateSliderWidth);
           </script>
         </div>
       </div>

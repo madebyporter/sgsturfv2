@@ -9,18 +9,18 @@ $excluded_category_slugs = array('uncategorized', 'collection');
 // Get term IDs for the excluded categories
 $excluded_category_ids = array();
 foreach ($excluded_category_slugs as $slug) {
-    $term = get_term_by('slug', $slug, 'product_cat');
-    if ($term) {
-        $excluded_category_ids[] = $term->term_id;
-    }
+	$term = get_term_by('slug', $slug, 'product_cat');
+	if ($term) {
+		$excluded_category_ids[] = $term->term_id;
+	}
 }
 
 // Get all product categories excluding the excluded ones
 $product_categories = get_terms(
-    array(
-        'taxonomy' => 'product_cat',
-        'exclude' => $excluded_category_ids,
-    )
+	array(
+		'taxonomy' => 'product_cat',
+		'exclude' => $excluded_category_ids,
+	)
 );
 
 // Get selected category filters (if any)
@@ -104,14 +104,14 @@ if (!empty($category_filters)) {
 					$category_list = wc_get_product_category_list($product->get_id(), ', ');
 					$categories = explode(', ', $category_list);
 					?>
-					<div class="card card-product">
-						<div class="card-product-top">
-							<h3 class="h3 mb-2">
+					<div class="card-product bg-white rounded-lg flex flex-col justify-start overflow-hidden grow min-w-[246px]">
+						<div class="px-5 py-10 lg:px-5 lg:py-10">
+							<h3 class="h3 mb-2 text-black">
 								<?php echo esc_html($product->get_name()); ?>
 							</h3>
-							<div class="pattern-tag flex gap-1 mb-4 md:mb-8">
+							<div class="pattern-tag flex gap-1 mb-4 lg:mb-8">
 								<?php foreach ($categories as $category_name): ?>
-									<div class="tag">
+									<div class="tag text-black">
 										<?php echo esc_html(wp_strip_all_tags($category_name)); ?>
 									</div>
 								<?php endforeach; ?>

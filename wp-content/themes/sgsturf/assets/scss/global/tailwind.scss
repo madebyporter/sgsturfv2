@@ -25,3 +25,30 @@ body {
 .grid-sub {
   @apply grid grid-cols-12;
 }
+
+.nav > .menu-item {
+  @apply relative;
+}
+.nav > .menu-item > a {
+  @apply lg:rounded-full hover:lg:bg-white lg:mb-2.5;
+}
+.nav > .menu-item:hover > a {
+  @apply bg-white;
+}
+.menu-item .sub-menu {
+  @apply hidden lg:absolute lg:left-[50%] lg:translate-x-[-50%] lg:top-[calc(100%-1px)] lg:bg-white lg:shadow-2xl lg:rounded-lg lg:p-2.5 lg:min-w-[220px] lg:flex-col lg:gap-2;
+}
+.menu-item .sub-menu > .menu-item {
+  @apply lg:bg-[#F9FAF7] lg:hover:bg-[#EFF0ED] lg:rounded-md lg:p-0 lg:overflow-hidden;
+}
+.submenu-default .sub-menu .menu-item a {
+  @apply text-black normal-case tracking-tight flex flex-row items-center gap-2.5 lg:px-2.5 lg:py-2.5 before:flex before:justify-center before:items-center before:rounded-full before:antialiased before:relative before:w-[32px] before:h-[32px] before:content-["\f015"] before:text-[#72845E] before:bg-[#EFF0ED];
+}
+.submenu-cards .sub-menu .menu-item a {
+  @apply text-black normal-case tracking-tight leading-tight flex flex-col items-start gap-2.5 lg:px-2.5 lg:py-2.5 order-1 lg:pb-[calc(0.625rem+83px)] relative before:flex before:justify-center before:items-center before:absolute before:left-0 before:right-0 before:bottom-0 before:w-full before:h-[83px] before:content-[""] before:bg-[#EFF0ED] before:order-2;
+}
+.submenu-default .sub-menu .submenu-pet a { @apply before:content-["\f1b0"] }
+.submenu-default .sub-menu .submenu-golf a { @apply before:content-["\f450"] }
+.submenu-default .sub-menu .submenu-sportscomm a { @apply before:content-["\f1e3"] }
+.submenu-cards .sub-menu .submenu-socal a { @apply before:bg-[url('../images/nav-submenu-img-socal.jpg')] before:bg-no-repeat before:bg-contain}
+.submenu-cards .sub-menu .submenu-dallas a { @apply before:bg-[url('../images/nav-submenu-img-dallas.jpg')] before:bg-no-repeat before:bg-contain}

@@ -1,6 +1,5 @@
 .nav {
   .menu-item {
-    padding: 10px 20px;
     &.current-menu-item {
       background: darken($color-green-pale,3%);
       border: 1px solid darken($color-green-pale,5%);
@@ -13,12 +12,18 @@
    
   a {
     color: $color-gray-dark;
+    display: block;
     font-size: $font-size-16;
     font-weight: 600;
     letter-spacing: 0.02rem;
     text-transform: uppercase;
+    padding: 10px 20px;
     &:hover {
       color: $color-black;
     }
   }
+}
+
+.submenu-default .menu-item a:before {
+  font: var(--fa-font-sharp-light);
 }

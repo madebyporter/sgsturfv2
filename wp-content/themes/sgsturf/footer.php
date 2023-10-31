@@ -71,6 +71,16 @@
   // Insert the copyright string into an element with id 'copyright'
   document.getElementById('copyright').textContent = copyrightString;
 </script>
+<script>
+  window.addEventListener("scroll", function () {
+    let header = document.getElementById("header");
+    if (window.pageYOffset > 10) {
+      header.classList.add("scrolled");
+    } else {
+      header.classList.remove("scrolled");
+    }
+  });
+</script>
 </body>
 
 </html>

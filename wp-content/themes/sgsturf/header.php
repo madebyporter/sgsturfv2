@@ -15,7 +15,8 @@
         class="flex col-start-1 col-end-7 sm:col-start-1 sm:col-end-4 md:col-start-1 md:col-end-4 lg:col-start-1 lg:col-end-3">
         <?php include('components/logo-orange-full.php'); ?>
       </div>
-      <div class="hidden lg:flex lg:justify-center md:col-start-4 md:col-end-10 lg:col-start-3 lg:col-end-11">
+      <div
+        class="hidden md:h-[41px] lg:flex lg:justify-center md:col-start-4 md:col-end-10 lg:col-start-3 lg:col-end-11">
         <!-- Header Menu -->
         <?php
         wp_nav_menu(
