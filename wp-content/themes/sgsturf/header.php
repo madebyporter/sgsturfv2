@@ -12,7 +12,7 @@
   <header id="header" class="header py-2">
     <div class="header-bar grid-main items-center">
       <div
-        class="flex col-start-1 col-end-7 sm:col-start-1 sm:col-end-4 md:col-start-1 md:col-end-4 lg:col-start-1 lg:col-end-3">
+        class="flex col-start-1 col-end-4 sm:col-start-1 sm:col-end-3 md:col-start-1 md:col-end-3 lg:col-start-1 lg:col-end-3">
         <?php include('components/logo-orange-full.php'); ?>
       </div>
       <div
@@ -31,7 +31,7 @@
       </div>
       <div
         class="flex gap-2 justify-end col-start-7 col-end-13 sm:col-start-10 sm:col-end-13 lg:col-start-11 lg:col-end-13">
-        <a href="./shop/" class="button button-primary-b button-small">
+        <a href="./shop/" class="button button-primary-b button-small hidden lg:flex">
           <span class="button-label"><span class="hidden md:inline-block">View</span> Turf</span>
           <span class="button-arrow">
             <svg width="20" height="16" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">

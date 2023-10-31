@@ -88,8 +88,8 @@ get_header(); ?>
         );
 
         foreach ($images as $image) {
-          echo '<li class="w-[56px] h-[56px] rounded-lg overflow-hidden">';
-          echo '<img src="' . SGSTURF_IMAGES_DIR . '/' . $image['path'] . '" alt="' . $image['alt'] . '" class="w-full h-full">';
+          echo '<li class="w-[56px] h-[56px] shadow-sm rounded-lg">';
+          echo '<img src="' . SGSTURF_IMAGES_DIR . '/' . $image['path'] . '" alt="' . $image['alt'] . '" class="w-full h-full rounded-lg">';
           echo '</li>';
         }
         ?>

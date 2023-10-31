@@ -145,23 +145,6 @@ h5, .h5, .content-cms h5 {
   color: #666666;
 }
 
-.header .logo {
-  overflow: hidden;
-  width: 78px;
-}
-.header .logo img {
-  min-width: 160px;
-}
-@media only screen and (min-width: 768px) {
-  .header .logo {
-    overflow: hidden;
-    width: 100%;
-  }
-  .header .logo img {
-    min-width: 160px;
-  }
-}
-
 /** Buttons **/
 .button, .gform_wrapper.sgsform_wrapper #gform_submit_button_2, .gform_wrapper.sgsform_wrapper button.gform_save_link.button, .gform_wrapper.sgsform_wrapper input.gform_button {
   align-items: center;
