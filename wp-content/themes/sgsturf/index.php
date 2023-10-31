@@ -69,10 +69,31 @@ get_header(); ?>
   ?>
   <div
     class="theme-orange content-halves-col col-start-1 col-end-13 md:col-start-1 md:col-end-7 px-5 py-10 md:p-10 xl:p-20 grid-sub">
-    <div class="content-heading col-start-1 col-end-12">
+    <div class="content-heading col-start-1 col-end-12 flex flex-col gap-5">
       <h2 class="text-xl lg:text-3xl font-bold">
         <?php echo $home_value_prop_left_content ?>
       </h2>
+      <ul class="flex flex-row flex-wrap list-none gap-2.5">
+        <?php
+        $images = array(
+          array('path' => 'badge-rohs.svg', 'alt' => 'ROHS'),
+          array('path' => 'badge-metalfree.svg', 'alt' => 'Metal Free'),
+          array('path' => 'badge-uvtested.svg', 'alt' => 'UV Tested'),
+          array('path' => 'badge-softtouch.svg', 'alt' => 'Soft Touch'),
+          array('path' => 'badge-cooltouch.svg', 'alt' => 'Cool Touch'),
+          array('path' => 'badge-madeinusa.svg', 'alt' => 'Made in USA'),
+          array('path' => 'badge-alphapet.svg', 'alt' => 'Alpha Pet'),
+          array('path' => 'badge-ipema.svg', 'alt' => 'IPEMA'),
+          array('path' => 'badge-extremewear.svg', 'alt' => 'Extreme Wear')
+        );
+
+        foreach ($images as $image) {
+          echo '<li class="w-[56px] h-[56px] rounded-lg overflow-hidden">';
+          echo '<img src="' . SGSTURF_IMAGES_DIR . '/' . $image['path'] . '" alt="' . $image['alt'] . '" class="w-full h-full">';
+          echo '</li>';
+        }
+        ?>
+      </ul>
     </div>
   </div>
   <div
