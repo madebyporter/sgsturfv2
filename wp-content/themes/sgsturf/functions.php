@@ -102,7 +102,7 @@ class My_Custom_Walker extends Walker_Nav_Menu
         $indent = str_repeat("\t", $depth);
         $classes = array(
             'sub-menu',
-            'group-hover:flex',
+            'lg:group-hover:flex',
         );
         $class_names = join(' ', apply_filters('nav_menu_submenu_css_class', $classes, $args, $depth));
         $class_names = $class_names ? ' class="' . esc_attr($class_names) . '"' : '';

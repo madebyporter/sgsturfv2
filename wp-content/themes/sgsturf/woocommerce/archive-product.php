@@ -33,9 +33,15 @@ $query_args = array(
 	'limit' => -1,
 	'type' => 'grouped',
 	'orderby' => 'title',
-	// Sort by product title
 	'order' => 'ASC',
-	// Sort in ascending order (A to Z)
+	'tax_query' => array(
+		array(
+			'taxonomy' => 'product_cat',
+			'field' => 'slug',
+			'terms' => 'collection',
+			'operator' => 'NOT IN'
+		),
+	),
 );
 
 // Apply category filter if selected
@@ -71,7 +77,7 @@ if (!empty($category_filters)) {
 
 <section class="grid-main content-full">
 	<div
-		class="theme-black content-full-container col-start-1 col-end-13 grid-sub flex flex-col md:gap-4 lg:gap-16 px-5 py-10 md:p-10 xl:p-20">
+		class="theme-black content-full-container col-start-1 col-end-13 grid-sub flex flex-col md:gap-4 lg:gap-16 px-5 py-10 pb-5 md:p-10 xl:p-20">
 		<div class="col-start-1 col-end-13 lg:col-start-1 lg:col-end-4 mb-4 md:mb-0">
 			<form action="<?php echo esc_url(get_permalink(get_option('woocommerce_shop_page_id'))); ?>" method="get">
 				<label class="uppercase border-b border-[#666666] pb-1 w-full block mb-4">Filter by Category</label>
@@ -103,6 +109,11 @@ if (!empty($category_filters)) {
 				foreach ($grouped_products as $product):
 					$category_list = wc_get_product_category_list($product->get_id(), ', ');
 					$categories = explode(', ', $category_list);
+
+					// Skip products with the "collection" category
+					if (in_array('Collection', $categories, true)) {
+						continue;
+					}
 					?>
 					<div class="card-product bg-white rounded-lg flex flex-col justify-start overflow-hidden grow min-w-[246px]">
 						<div class="px-5 py-10 lg:px-5 lg:py-10">
@@ -128,13 +139,14 @@ if (!empty($category_filters)) {
 								</span>
 							</a>
 						</div>
-						<div class="card-product-bottom">
-							<div class="card-product-bottom-container card-product-bottom-image">
+						<div class="bg-white rounded-lg h-full min-h-[256px] relative">
+							<div class="rounded-lg bg-white translate-y-0 top-0 bottom-0 overflow-hidden absolute transition w-full">
 								<?php
 								$image_id = $product->get_image_id();
 								$image_url = $image_id ? wp_get_attachment_image_src($image_id, 'full')[0] : get_template_directory_uri() . '/assets/images/ui-state-zero-simpleproduct.jpg';
 								?>
-								<img src="<?php echo esc_url($image_url); ?>" alt="Product" />
+								<img src="<?php echo esc_url($image_url); ?>" alt="Product"
+									class="bottom-0 absolute !h-full w-full object-cover object-center" />
 							</div>
 						</div>
 					</div>

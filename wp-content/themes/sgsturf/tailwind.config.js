@@ -20,6 +20,16 @@ module.exports = {
       // => @media (min-width: 1536px) { ... }
     },
     extend: {
+      colors: {
+        'white': '#FFF',
+        'gray-light': '#D9D9D9',
+        'gray': '#A3A3A1',
+        'gray-dark': '#666666',
+        'black': '#242423',
+        'green-pale': '#EFF0ED',
+        'orange': '#FC9827',
+        'green': '#72845E',
+      },
       gridTemplateColumns: {
         // Simple 16 column grid
         '12': 'repeat(12, minmax(0, 1fr))'

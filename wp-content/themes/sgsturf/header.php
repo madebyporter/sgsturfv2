@@ -15,8 +15,7 @@
         class="flex col-start-1 col-end-4 sm:col-start-1 sm:col-end-3 md:col-start-1 md:col-end-3 lg:col-start-1 lg:col-end-3">
         <?php include('components/logo-orange-full.php'); ?>
       </div>
-      <div
-        class="hidden md:h-[41px] lg:flex lg:justify-center md:col-start-4 md:col-end-10 lg:col-start-3 lg:col-end-11">
+      <div class="flex md:h-[41px] lg:flex lg:justify-center md:col-start-4 md:col-end-10 lg:col-start-3 lg:col-end-11">
         <!-- Header Menu -->
         <?php
         wp_nav_menu(
@@ -25,13 +24,18 @@
             // Use 'main' for the "Main" menu location
             'menu_class' => 'nav flex gap-2',
             // CSS class for the menu
+            'container_class' => '
+              menu-main-container 
+              hidden bg-green-pale z-50 fixed left-0 top-[62px] w-screen h-screen 
+              lg:block lg:relative lg:z-0 lg:left-auto lg:top-auto lg:w-auto lg:h-auto
+            '
           )
         );
         ?>
       </div>
       <div
         class="flex gap-2 justify-end col-start-7 col-end-13 sm:col-start-10 sm:col-end-13 lg:col-start-11 lg:col-end-13">
-        <a href="./shop/" class="button button-primary-b button-small hidden lg:flex">
+        <a href="./shop/" class="button button-primary-b button-small lg:flex">
           <span class="button-label"><span class="hidden md:inline-block">View</span> Turf</span>
           <span class="button-arrow">
             <svg width="20" height="16" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
