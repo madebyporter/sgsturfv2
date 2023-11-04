@@ -59,94 +59,53 @@ get_header(); ?>
     </div>
     <div class="content-full-row grid-sub pb-5 md:pb-10 xl:pb-20">
       <div class="slider col-start-1 col-end-13">
-        <div class="slider-container ml-5 md:mx-10 xl:mx-20">
-          <div class="pattern-card flex gap-5 justify-start content-start">
-            <!-- Start displaying a specific grouped product -->
-            <?php
-            $specific_grouped_product_id = $locations_featured_lines_lines; // Replace with the ID of your grouped product
-            $grouped_product = wc_get_product($specific_grouped_product_id);
+        <div class="slider-container mx-5 md:mx-10 xl:mx-20">
 
-            $subproduct_count = 0; // Initialize counter for child products
-            
-            // Check if the product is a grouped product
-            if ($grouped_product && $grouped_product->is_type('grouped')):
-              $children_ids = $grouped_product->get_children();
+          <!-- Start displaying a specific grouped product -->
+          <?php
+          $specific_grouped_product_id = $locations_featured_lines_lines; // Replace with the ID of your grouped product
+          $grouped_product = wc_get_product($specific_grouped_product_id);
 
-              if (!empty($children_ids)):
-                $subproduct_count = count($children_ids); // Count the number of child products
-            
-                // Loop through the sub-products (children) of the grouped product
-                foreach ($children_ids as $child_id):
-                  $child_product = wc_get_product($child_id);
-                  $child_categories = wp_get_post_terms($child_id, 'product_cat', array('fields' => 'names'));
-                  ?>
-                  <div
-                    class="card-product bg-white rounded-lg flex flex-col justify-start overflow-hidden grow min-w-[246px]">
-                    <div class="px-5 py-10 lg:px-5 lg:py-10">
-                      <h3 class="h3 mb-2 text-black">
-                        <?php echo esc_html($child_product->get_name()); ?>
-                      </h3>
-                      <div class="pattern-tag flex gap-2 mb-4 md:mb-8">
-                        <?php foreach ($child_categories as $child_category): ?>
-                          <div class="tag text-black">
-                            <?php echo esc_html(wp_strip_all_tags($child_category)); ?>
-                          </div>
-                        <?php endforeach; ?>
-                      </div>
-                      <a href="<?php echo esc_url(get_permalink($child_id)); ?>" class="button button-secondary button-small">
-                        <span class="button-label">View Product</span>
-                        <span class="button-arrow">
-                          <svg width="20" height="16" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                              d="M18.1978 8.94987L12.2806 15.029L11.3766 16L9.48636 14.058L10.4315 13.1293L14.0886 9.32981H2.17207H0.857143V6.62797H2.17207H14.0886L10.4315 2.87071L9.48636 1.89974L11.3766 0L12.2806 0.970976L18.1978 7.05013L19.1429 7.97889L18.1978 8.94987Z"
-                              fill="#242423" />
-                          </svg>
-                        </span>
-                      </a>
-                    </div>
-                    <div class="bg-white rounded-lg h-full min-h-[256px] relative overflow-hidden">
-                      <div class="top-0 bottom-0 overflow-hidden absolute transition-all w-full translate-y-0">
-                        <?php
-                        $image_id = $child_product->get_image_id();
-                        $image_url = $image_id ? wp_get_attachment_image_src($image_id, 'full')[0] : SGSTURF_IMAGES_DIR . '/ui-state-zero-simpleproduct.jpg';
-                        ?>
-                        <img src="<?php echo esc_url($image_url); ?>" alt="Product"
-                          class="h-full w-full object-cover object-center" />
-                      </div>
-                    </div>
-                  </div>
-                <?php endforeach;
-              endif;
-            endif;
+          $subproduct_count = 0; // Initialize counter for child products
+          
+          // Check if the product is a grouped product
+          if ($grouped_product->is_type('grouped')):
+            $children_ids = $grouped_product->get_children();
 
-            // Define the number of blank cards to show when there are fewer than 2 products
-            $blank_card_count = max(0, 2 - $subproduct_count);
-
-            // Show blank cards for the remaining slots if needed
-            for ($i = 0; $i < $blank_card_count; $i++) {
-              echo '<div class="card card-blank w-full min-h-[420px] rounded-lg"></div>';
-            }
+            $subproduct_count = count($children_ids);
+            $slider_noslide_class = $subproduct_count < 5 ? 'no-slide' : '';
             ?>
-            <!-- End displaying a specific grouped product -->
-          </div>
+            <!-- Start Card Pattern -->
+            <div
+              class="<?php echo $slider_noslide_class; ?> pattern-card group before:hidden after:hidden flex flex-nowrap relative gap-5 justify-between content-start w-fit lg:w-full pr-5 md:pr-10 xl:pr-20 lg:[&.no-slide]:pr-0">
+
+              <?php
+              // Loop through the sub-products (children) of the grouped product
+              foreach ($children_ids as $child_id):
+                $child_product = wc_get_product($child_id);
+                $child_categories = wp_get_post_terms($child_id, 'product_cat', array('fields' => 'names'));
+
+                // Prepare arguments for the card component
+                $card_args = array(
+                  'product_name' => $child_product->get_name(),
+                  'product_category' => $child_categories,
+                  'product_link' => get_permalink($child_id),
+                  'product_photo' => $child_product->get_image_id() ? wp_get_attachment_image_src($child_product->get_image_id(), 'full')[0] : SGSTURF_IMAGES_DIR . '/ui-state-zero-simpleproduct.jpg',
+                  'is_series' => true,
+                );
+
+                // Render the card component
+                card($card_args);
+
+              endforeach; ?>
+            </div>
+
+            <?php
+          endif;
+          ?>
+          <!-- End displaying a specific grouped product -->
+
         </div>
-        <script>
-          // Function to calculate and update slider width
-          function updateSliderWidth() {
-            const cardWidth = document.querySelector('.card-product').offsetWidth;
-            const gap = parseFloat(getComputedStyle(document.querySelector('.pattern-card')).gap);
-            const cardCount = document.querySelectorAll('.card-product').length;
-            const totalWidth = (cardWidth * cardCount) + (gap * (cardCount));
-
-            document.querySelector('.slider-container').style.width = totalWidth + 'px';
-          }
-
-          // Initial call to update slider width
-          updateSliderWidth();
-
-          // Event listener for window resize
-          window.addEventListener('resize', updateSliderWidth);
-        </script>
       </div>
     </div>
   </div>
