@@ -67,108 +67,59 @@ if ($group_product->is_type('grouped')):
           </div>
         </div>
       </div>
-      <div class="content-full-row grid-sub pb-5 md:pb-10 lg:pb-20">
+      <div class="grid-sub pb-5 md:pb-10 lg:pb-20">
         <div class="slider col-start-1 col-end-13">
-          <div class="slider-container ml-5 md:mx-10 xl:mx-20 overflow-y-hidden">
-            <div class="pattern-card flex gap-5 justify-start content-start">
-              <!-- Start Simple Product Loop inside the Group Product Loop -->
-              <?php
-              $subproducts = $group_product->get_children();
+          <div class="slider-container mx-5 md:mx-10 xl:mx-20">
+            <!-- Start Simple Product Loop inside the Group Product Loop -->
+            <?php
+            $subproducts = $group_product->get_children();
+            if (is_array($subproducts)) {
               $subproduct_count = count($subproducts);
-
-              // Define the number of blank cards to show when there are fewer than four products
+              $slider_noslide_class = $subproduct_count < 5 ? 'no-slide' : '';
               $blank_card_count = max(0, 4 - $subproduct_count);
+            } else {
+              $slider_noslide_class = '';
+            }
 
+            ?>
+
+            <div
+              class="<?php echo $slider_noslide_class; ?> pattern-card group before:hidden after:hidden flex flex-nowrap relative gap-5 justify-between content-start w-fit lg:[&.no-slide]:w-full pr-5 md:pr-10 xl:pr-20 lg:[&.no-slide]:pr-0">
+
+              <?php
               foreach ($subproducts as $subproduct_id) {
                 $subproduct = wc_get_product($subproduct_id);
-                $subproduct_image = wp_get_attachment_image_src(get_post_thumbnail_id($subproduct_id), 'thumbnail');
+                $subproduct_image = wp_get_attachment_image_src(get_post_thumbnail_id($subproduct_id), 'full');
                 $subproduct_categories = wp_get_post_terms($subproduct_id, 'product_cat', array('fields' => 'names'));
 
-                if ($subproduct_categories && !is_wp_error($subproduct_categories)) {
-                  ?>
-                  <div
-                    class="card-product bg-white rounded-lg flex flex-col justify-start overflow-hidden grow min-w-[260px]">
-                    <div class="px-5 py-10 lg:px-5 lg:py-10">
-                      <h3 class="h3 mb-2 text-black truncate">
-                        <?php echo esc_html($subproduct->get_name()); ?>
-                      </h3>
-                      <div class="pattern-tag flex gap-2">
-                        <?php foreach ($subproduct_categories as $category_name): ?>
-                          <div class="tag text-black">
-                            <?php echo esc_html($category_name); ?>
-                          </div>
-                        <?php endforeach; ?>
-                      </div>
-                    </div>
-                    <div class="card-product-bottom">
-                      <div
-                        class="card-product-bottom-container card-product-bottom-specs px-3 md:px-5 pb-16 flex flex-col gap-1">
-                        <?php
-                        // Get the ACF fields for the current simple product
-                        $field1 = get_field('specs_pile_height', $subproduct_id);
-                        $field2 = get_field('specs_total_weight', $subproduct_id);
-                        $field3 = get_field('specs_blade', $subproduct_id);
-                        $field4 = get_field('specs_turf_gauge', $subproduct_id);
-                        $checkbox_field = get_field('specs_blade_colors', $subproduct_id);
+                if ($subproduct) {
 
-                        // Display the ACF fields as needed
-                        echo '
-                        <div class="spec-item text-black">
-                          <div>Pile Height:</div>
-                          <div class="spec-item-value">' . esc_html($field1) . '</div>
-                        </div>';
-                        echo '
-                        <div class="spec-item text-black">
-                          <div>Total Weight:</div>
-                          <div class="spec-item-value">' . esc_html($field2) . '</div>
-                        </div>';
-                        echo '
-                        <div class="spec-item text-black">
-                          <div>Blade:</div>
-                          <div class="spec-item-value">' . esc_html($field3) . '</div>
-                        </div>';
-                        echo '
-                        <div class="spec-item text-black">
-                          <div>Turf Gauge:</div>
-                          <div class="spec-item-value">' . esc_html($field4) . '</div>
-                        </div>';
+                  // Prepare arguments for the card component
+                  $card_args = array(
+                    'product_name' => $subproduct->get_name(),
+                    'product_category' => $subproduct_categories,
+                    'product_specs' => array(
+                      'Pile Height' => get_field('specs_pile_height', $subproduct_id) ? get_field('specs_pile_height', $subproduct_id) : 'n/a',
+                      'Total Weight' => get_field('specs_total_weight', $subproduct_id) ? get_field('specs_total_weight', $subproduct_id) : 'n/a',
+                      'Blade' => get_field('specs_blade', $subproduct_id) ? get_field('specs_blade', $subproduct_id) : 'n/a',
+                      'Turf Gauge' => get_field('specs_turf_gauge', $subproduct_id) ? get_field('specs_turf_gauge', $subproduct_id) : 'n/a',
+                      'Blade_Colors' => get_field('specs_blade_colors', $subproduct_id) ? get_field('specs_blade_colors', $subproduct_id) : 'n/a',
+                    ),
+                    'product_photo' => $subproduct_image ? $subproduct_image[0] : SGSTURF_IMAGES_DIR . '/ui-state-zero-simpleproduct.jpg',
+                    'product_link' => get_permalink($subproduct_id),
+                  );
 
-                        // Check if any options are selected in the checkbox field
-                        if (!empty($checkbox_field)) {
-                          echo '<div class="spec-item text-black"><div>Blade Colors:</div>';
-                          echo '<ul class="spec-item-colors">';
-                          foreach ($checkbox_field as $option) {
-                            echo '<li class="spec-item-value">' . esc_html($option) . '</li>';
-                          }
-                          echo '</ul></div>';
-                        } else {
-                          echo '<div class="spec-item text-black"><div>Blade Colors:</div></div>';
-                        }
-                        ?>
-                      </div>
-                      <div class="card-product-bottom-container card-product-bottom-image">
-                        <?php
-                        $thumbnail_id = get_post_thumbnail_id($subproduct_id);
-                        $image_url = $thumbnail_id ? wp_get_attachment_image_src($thumbnail_id, 'full')[0] : SGSTURF_IMAGES_DIR . '/ui-state-zero-simpleproduct.jpg';
-                        ?>
-                        <img src="<?php echo esc_url($image_url); ?>" alt="Product" />
-                      </div>
 
-                      <div class="card-product-bottom-button absolute bottom-2 left-2 right-2 z-50">
-                        <button class="button button-secondary button-small w-full">
-                          <span class="button-label">View Specs</span>
-                        </button>
-                      </div>
-                    </div>
-
-                  </div>
-                  <?php
+                  // Render the card component
+                  card($card_args);
+                } else {
+                  error_log("Failed to get product for ID $subproduct_id");
                 }
               }
 
               // Show blank cards for the remaining slots if needed
               for ($i = 0; $i < $blank_card_count; $i++) {
-                echo '<div class="card card-blank hidden sm:flex"></div>';
+                echo '<div class="hidden sm:flex rounded-lg bg-graphite w-[256px] lg:group-[.no-slide]:w-full"></div>';
               }
               ?>
             </div>
@@ -192,29 +143,6 @@ if ($group_product->is_type('grouped')):
                 });
               });
             });
-          </script>
-          <script>
-            // Function to calculate and update slider width
-            function updateSliderWidth() {
-              const cardWidth = document.querySelector('.card-product').offsetWidth;
-              const gap = parseFloat(getComputedStyle(document.querySelector('.pattern-card')).gap);
-              const cardCount = document.querySelectorAll('.card-product').length;
-
-              // Check if cardCount is greater than 4
-              if (cardCount > 4) {
-                const totalWidth = (cardWidth * cardCount) + (gap * (cardCount));
-                document.querySelector('.slider-container').style.width = totalWidth + 'px';
-              } else {
-                // If cardCount is not greater than 4, remove the width property
-                document.querySelector('.slider-container').style.width = '';
-              }
-            }
-
-            // Initial call to update slider width
-            updateSliderWidth();
-
-            // Event listener for window resize
-            // window.addEventListener('resize', updateSliderWidth);
           </script>
         </div>
       </div>

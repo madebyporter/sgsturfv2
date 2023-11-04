@@ -9,33 +9,47 @@
 
 <body <?php body_class(); ?>>
 
-  <header id="header" class="header py-2">
-    <div class="header-bar grid-main items-center">
+  <header id="header"
+    class="header sticky mx-auto top-0 w-full z-[100] bg-green-pale rounded-lg overflow-hidden lg:overflow-visible min-h-[51px]">
+    <div class="header-bar rounded-lg py-2 grid-main items-center bg-green-pale relative z-50 min-h-[51px]">
+      <!-- Header Logo -->
       <div
         class="flex col-start-1 col-end-4 sm:col-start-1 sm:col-end-3 md:col-start-1 md:col-end-3 lg:col-start-1 lg:col-end-3">
         <?php include('components/logo-orange-full.php'); ?>
       </div>
-      <div class="flex md:h-[41px] lg:flex lg:justify-center md:col-start-4 md:col-end-10 lg:col-start-3 lg:col-end-11">
-        <!-- Header Menu -->
+
+      <!-- Header Menu -->
+      <div
+        class="flex justify-center col-start-5 col-end-9 md:h-[41px] md:col-start-4 md:col-end-10 lg:col-start-3 lg:col-end-11">
+
+        <!-- Start Mobile Menu Trigger -->
+        <div class="mobile-menu-trigger cursor-pointer flex items-center lg:hidden">
+          <i class="fa-sharp fa-regular fa-grid fa-xl"></i>
+        </div>
+        <!-- End Mobile Menu Trigger -->
+
+        <!-- Start Desktop Menu -->
         <?php
         wp_nav_menu(
           array(
             'theme_location' => 'main',
             // Use 'main' for the "Main" menu location
-            'menu_class' => 'nav flex gap-2',
+            'menu_class' => 'nav flex content-center gap-2',
             // CSS class for the menu
             'container_class' => '
               menu-main-container 
               hidden bg-green-pale z-50 fixed left-0 top-[62px] w-screen h-screen 
-              lg:block lg:relative lg:z-0 lg:left-auto lg:top-auto lg:w-auto lg:h-auto
+              lg:flex lg:flex-row lg:items-start lg:relative lg:z-0 lg:left-auto lg:top-auto lg:w-auto lg:h-auto
             '
           )
         );
         ?>
+        <!-- End Desktop Menu -->
       </div>
+      <!-- Header Buttons -->
       <div
-        class="flex gap-2 justify-end col-start-7 col-end-13 sm:col-start-10 sm:col-end-13 lg:col-start-11 lg:col-end-13">
-        <a href="./shop/" class="button button-primary-b button-small lg:flex">
+        class="flex gap-2 justify-end col-start-9 col-end-13 sm:col-start-10 sm:col-end-13 lg:col-start-11 lg:col-end-13">
+        <a href="./shop/" class="button button-primary-b button-small hidden sm:flex">
           <span class="button-label"><span class="hidden md:inline-block">View</span> Turf</span>
           <span class="button-arrow">
             <svg width="20" height="16" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -57,6 +71,20 @@
         </a>
       </div>
     </div>
+    <!-- Start Mobile Menu -->
+    <div class="mobile-menu relative p-4 block lg:hidden z-0 overflow-hidden transition-all duration-500 ease-in-out">
+      <?php
+      wp_nav_menu(
+        array(
+          'theme_location' => 'main',
+          // Use 'main' for the "Main" menu location
+          'menu_class' => 'nav grid grid-cols-1 sm:grid-cols-1 gap-4 w-full',
+          // CSS class for the menu
+          'container_class' => 'w-full'
+        )
+      );
+      ?>
+    </div>
   </header>
 
-  <main id="content" class="site-content">
+  <main id="content" class="site-content transition-opacity">

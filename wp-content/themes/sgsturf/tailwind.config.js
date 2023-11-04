@@ -1,7 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 
 module.exports = {
-  content: ["./**/*.php"],
+  content: [
+    "./**/*.php",
+    "./**/*.js",
+  ],
   theme: {
     screens: {
       'sm': '640px',
@@ -26,6 +29,7 @@ module.exports = {
         'gray': '#A3A3A1',
         'gray-dark': '#666666',
         'black': '#242423',
+        'graphite': '#292928',
         'green-pale': '#EFF0ED',
         'orange': '#FC9827',
         'green': '#72845E',

@@ -4,7 +4,7 @@
 .card-blank {
   background: lighten($color-black,3%);
   border-radius: $radius-primary;
-  min-height: 420px;
+  height: 100%;
   min-width: 286px;
   width: 100%;
 }

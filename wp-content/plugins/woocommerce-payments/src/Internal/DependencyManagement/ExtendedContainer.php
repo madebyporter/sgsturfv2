@@ -9,6 +9,7 @@ namespace WCPay\Internal\DependencyManagement;
 
 use WCPay\Vendor\League\Container\Container;
 use WCPay\Vendor\League\Container\Definition\Definition;
+use WCPay\Vendor\League\Container\Exception\ContainerException;
 
 /**
  * Extends the League container to allow WCPay customizations.
@@ -84,19 +85,5 @@ class ExtendedContainer extends Container {
 		}
 
 		return parent::get( $id );
-	}
-
-	/**
-	 * Checks whether a definition is available.
-	 *
-	 * @param string $id ID/name of the class.
-	 * @return bool
-	 */
-	public function has( $id ): bool {
-		if ( isset( $this->replacements[ $id ] ) ) {
-			return true;
-		}
-
-		return parent::has( $id );
 	}
 }

@@ -26,29 +26,52 @@ body {
   @apply grid grid-cols-12;
 }
 
-.nav > .menu-item {
+.header-bar .nav > .menu-item {
   @apply relative;
 }
-.nav > .menu-item > a {
-  @apply lg:rounded-full hover:lg:bg-white lg:mb-2.5;
+.mobile-menu .nav > .menu-item {
+  @apply grid grid-rows-1;
 }
-.nav > .menu-item:hover > a {
+.header-bar .nav > .menu-item > a {
+  @apply rounded-full mb-2.5 px-5 py-2.5 block uppercase text-sm tracking-wide font-bold text-stone-800;
+}
+.mobile-menu .nav > .menu-item > a {
+  @apply px-0 py-2.5 mb-4 block uppercase text-sm tracking-wide font-bold text-stone-800 border-b border-stone-300;
+}
+.header-bar .nav > .menu-item:hover > a {
   @apply bg-white;
 }
-.menu-item .sub-menu {
+.header-bar .menu-item .sub-menu {
   @apply hidden lg:absolute lg:left-[50%] lg:translate-x-[-50%] lg:top-[calc(100%-1px)] lg:bg-white lg:shadow-2xl lg:rounded-lg lg:p-2.5 lg:min-w-[220px] lg:flex-col lg:gap-2;
 }
-.menu-item .sub-menu > .menu-item {
-  @apply lg:bg-[#F9FAF7] lg:hover:bg-[#EFF0ED] lg:rounded-md lg:p-0 lg:overflow-hidden;
+.mobile-menu .menu-item .sub-menu {
+  @apply grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4;
 }
-.submenu-default .sub-menu .menu-item a {
-  @apply text-black normal-case tracking-tight flex flex-row items-center gap-2.5 lg:px-2.5 lg:py-2.5 before:flex before:justify-center before:items-center before:rounded-full before:antialiased before:relative before:w-[32px] before:h-[32px] before:content-["\f015"] before:text-[#72845E] before:bg-[#EFF0ED];
+.header-bar .menu-item .sub-menu > .menu-item {
+  @apply bg-[#F9FAF7] hover:bg-[#EFF0ED] rounded-md p-0 overflow-hidden;
 }
-.submenu-cards .sub-menu .menu-item a {
-  @apply text-black normal-case tracking-tight leading-tight flex flex-col items-start gap-2.5 lg:px-2.5 lg:py-2.5 order-1 lg:pb-[calc(0.625rem+83px)] relative before:flex before:justify-center before:items-center before:absolute before:left-0 before:right-0 before:bottom-0 before:w-full before:h-[83px] before:content-[""] before:bg-[#EFF0ED] before:order-2;
+.mobile-menu .menu-item .sub-menu > .menu-item {
+  @apply bg-[#F9FAF7] rounded-md p-0 overflow-hidden min-w-[25%];
 }
+.header-bar .submenu-default .sub-menu .menu-item a {
+  @apply text-black normal-case tracking-tight font-bold text-base flex flex-row items-center gap-2.5 lg:px-2.5 lg:py-2.5 before:flex before:justify-center before:items-center before:rounded-full before:antialiased before:relative before:w-[32px] before:h-[32px] before:text-[#72845E] before:bg-[#EFF0ED];
+}
+.mobile-menu .submenu-default .sub-menu .menu-item a {
+  @apply text-black normal-case tracking-tight flex flex-col font-bold text-sm items-center gap-2.5 px-2.5 py-2.5 before:flex before:justify-center before:items-center before:rounded-full before:antialiased before:relative before:w-[32px] before:h-[32px] before:text-[#72845E] before:bg-[#EFF0ED];
+}
+.header-bar .submenu-cards .sub-menu .menu-item a {
+  @apply text-black normal-case tracking-tight leading-tight font-bold text-base flex flex-col items-start gap-2.5 lg:px-2.5 lg:py-2.5 order-1 lg:pb-[calc(0.625rem+83px)] relative before:flex before:justify-center before:items-center before:absolute before:left-0 before:right-0 before:bottom-0 before:w-full before:h-[83px] before:content-[""] before:bg-[#EFF0ED] before:order-2 before:bg-no-repeat before:bg-contain;
+}
+.mobile-menu .submenu-cards .sub-menu .menu-item {
+  @apply md:col-span-2;
+}
+.mobile-menu .submenu-cards .sub-menu .menu-item a {
+  @apply text-black normal-case tracking-tight leading-tight text-sm font-bold flex flex-col items-start order-1 p-2.5 md:p-5 pb-[calc(0.625rem+83px)] md:pb-[calc(1.25rem+173px)] relative before:flex before:justify-center before:items-center before:absolute before:left-0 before:right-0 before:bottom-0 before:w-full before:h-[83px] md:before:h-[173px] before:content-[""] before:bg-[#EFF0ED] before:order-2 before:bg-no-repeat before:bg-cover;
+}
+.submenu-default .menu-item a:before {font: var(--fa-font-sharp-light)}
+.submenu-default .sub-menu .submenu-landscape a { @apply before:content-["\f015"] }
 .submenu-default .sub-menu .submenu-pet a { @apply before:content-["\f1b0"] }
 .submenu-default .sub-menu .submenu-golf a { @apply before:content-["\f450"] }
 .submenu-default .sub-menu .submenu-sportscomm a { @apply before:content-["\f1e3"] }
-.submenu-cards .sub-menu .submenu-socal a { @apply before:bg-[url('../images/nav-submenu-img-socal.jpg')] before:bg-no-repeat before:bg-contain}
-.submenu-cards .sub-menu .submenu-dallas a { @apply before:bg-[url('../images/nav-submenu-img-dallas.jpg')] before:bg-no-repeat before:bg-contain}
+.submenu-cards .sub-menu .submenu-socal a { @apply before:bg-[url('../images/nav-submenu-img-socal.jpg')] }
+.submenu-cards .sub-menu .submenu-dallas a { @apply before:bg-[url('../images/nav-submenu-img-dallas.jpg')]}

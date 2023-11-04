@@ -22,6 +22,8 @@ class WooPay_Utilities {
 	const AVAILABLE_COUNTRIES_OPTION_NAME = 'woocommerce_woocommerce_payments_woopay_available_countries';
 	const AVAILABLE_COUNTRIES_DEFAULT     = '["US"]';
 
+	const DEFAULT_WOOPAY_URL = 'https://pay.woo.com';
+
 	/**
 	 * Check various conditions to determine if we should enable woopay.
 	 *
@@ -77,6 +79,14 @@ class WooPay_Utilities {
 		return WC_Payments_Features::is_woopay_express_checkout_enabled() && $this->is_country_available( WC_Payments::get_gateway() ); // Feature flag.
 	}
 
+	/**
+	 * Check conditions to determine if woopay first party auth is enabled.
+	 *
+	 * @return bool
+	 */
+	public function is_woopay_first_party_auth_enabled() {
+		return WC_Payments_Features::is_woopay_first_party_auth_enabled() && $this->is_country_available( WC_Payments::get_gateway() ); // Feature flag.
+	}
 	/**
 	 * Generates a hash based on the store's blog token, merchant ID, and the time step window.
 	 *
@@ -221,7 +231,7 @@ class WooPay_Utilities {
 	 * @return string the WooPay url.
 	 */
 	public static function get_woopay_url() {
-		return defined( 'PLATFORM_CHECKOUT_HOST' ) ? PLATFORM_CHECKOUT_HOST : 'https://pay.woo.com';
+		return defined( 'PLATFORM_CHECKOUT_HOST' ) ? PLATFORM_CHECKOUT_HOST : self::DEFAULT_WOOPAY_URL;
 	}
 
 	/**

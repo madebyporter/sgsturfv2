@@ -101,7 +101,8 @@ if (!empty($category_filters)) {
 
 
 		<div class="col-start-1 col-end-13 lg:col-start-4 lg:col-end-13">
-			<div class="pattern-card grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
+			<div class="group before:hidden after:hidden grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
+
 				<!-- Start grouped products loop -->
 				<?php
 				$grouped_products = wc_get_products($query_args);
@@ -114,44 +115,22 @@ if (!empty($category_filters)) {
 					if (in_array('Collection', $categories, true)) {
 						continue;
 					}
-					?>
-					<div class="card-product bg-white rounded-lg flex flex-col justify-start overflow-hidden grow min-w-[246px]">
-						<div class="px-5 py-10 lg:px-5 lg:py-10">
-							<h3 class="h3 mb-2 text-black">
-								<?php echo esc_html($product->get_name()); ?>
-							</h3>
-							<div class="pattern-tag flex gap-1 mb-4 lg:mb-8">
-								<?php foreach ($categories as $category_name): ?>
-									<div class="tag text-black">
-										<?php echo esc_html(wp_strip_all_tags($category_name)); ?>
-									</div>
-								<?php endforeach; ?>
-							</div>
-							<a href="<?php echo esc_url(get_permalink($product->get_id())); ?>"
-								class="button button-secondary button-small">
-								<span class="button-label">View Line</span>
-								<span class="button-arrow">
-									<svg width="20" height="16" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-										<path
-											d="M18.1978 8.94987L12.2806 15.029L11.3766 16L9.48636 14.058L10.4315 13.1293L14.0886 9.32981H2.17207H0.857143V6.62797H2.17207H14.0886L10.4315 2.87071L9.48636 1.89974L11.3766 0L12.2806 0.970976L18.1978 7.05013L19.1429 7.97889L18.1978 8.94987Z"
-											fill="#242423" />
-									</svg>
-								</span>
-							</a>
-						</div>
-						<div class="bg-white rounded-lg h-full min-h-[256px] relative">
-							<div class="rounded-lg bg-white translate-y-0 top-0 bottom-0 overflow-hidden absolute transition w-full">
-								<?php
-								$image_id = $product->get_image_id();
-								$image_url = $image_id ? wp_get_attachment_image_src($image_id, 'full')[0] : get_template_directory_uri() . '/assets/images/ui-state-zero-simpleproduct.jpg';
-								?>
-								<img src="<?php echo esc_url($image_url); ?>" alt="Product"
-									class="bottom-0 absolute !h-full w-full object-cover object-center" />
-							</div>
-						</div>
-					</div>
-				<?php endforeach; ?>
+
+					// Prepare arguments for the card component
+					$card_args = array(
+						'product_name' => $product->get_name(),
+						'product_category' => $categories,
+						'product_link' => get_permalink($product->get_id()),
+						'product_photo' => $product->get_image_id() ? wp_get_attachment_image_src($product->get_image_id(), 'full')[0] : SGSTURF_IMAGES_DIR . '/ui-state-zero-simpleproduct.jpg',
+						'is_series' => true,
+					);
+
+					// Render the card component
+					card($card_args);
+
+				endforeach; ?>
 				<!-- End grouped products loop -->
+
 			</div>
 		</div>
 	</div>

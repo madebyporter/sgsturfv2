@@ -15,6 +15,7 @@ use WC_Payments;
 use WC_Payments_Account;
 use WC_Payments_Customer_Service;
 use WC_Payments_Features;
+use WC_Payments_Fraud_Service;
 use WC_Payments_Utils;
 use WCPay\Fraud_Prevention\Fraud_Prevention_Service;
 use WCPay\WooPay\WooPay_Utilities;
@@ -53,25 +54,34 @@ class WC_Payments_Checkout {
 	 */
 	protected $customer_service;
 
+	/**
+	 * WC_Payments_Fraud_Service instance to get information about fraud services.
+	 *
+	 * @var WC_Payments_Fraud_Service
+	 */
+	protected $fraud_service;
 
 	/**
 	 * Construct.
 	 *
 	 * @param WC_Payment_Gateway_WCPay     $gateway                WC Payment Gateway.
-	 * @param WooPay_Utilities             $woopay_util WooPay Utilities.
+	 * @param WooPay_Utilities             $woopay_util            WooPay Utilities.
 	 * @param WC_Payments_Account          $account                WC Payments Account.
 	 * @param WC_Payments_Customer_Service $customer_service       WC Payments Customer Service.
+	 * @param WC_Payments_Fraud_Service    $fraud_service          Fraud service instance.
 	 */
 	public function __construct(
 		WC_Payment_Gateway_WCPay $gateway,
 		WooPay_Utilities $woopay_util,
 		WC_Payments_Account $account,
-		WC_Payments_Customer_Service $customer_service
+		WC_Payments_Customer_Service $customer_service,
+		WC_Payments_Fraud_Service $fraud_service
 	) {
 		$this->gateway          = $gateway;
 		$this->woopay_util      = $woopay_util;
 		$this->account          = $account;
 		$this->customer_service = $customer_service;
+		$this->fraud_service    = $fraud_service;
 	}
 
 	/**
@@ -137,7 +147,7 @@ class WC_Payments_Checkout {
 			WC_Payments::get_gateway()->tokenization_script();
 			$script_handle = 'WCPAY_CHECKOUT';
 			$js_object     = 'wcpayConfig';
-			if ( WC_Payments_Features::is_upe_split_enabled() || WC_Payments_Features::is_upe_deferred_intent_enabled() ) {
+			if ( WC_Payments_Features::is_upe_deferred_intent_enabled() ) {
 				$script_handle = 'wcpay-upe-checkout';
 				$js_object     = 'wcpay_upe_config';
 			} elseif ( WC_Payments_Features::is_upe_legacy_enabled() ) {
@@ -161,6 +171,9 @@ class WC_Payments_Checkout {
 		// Needed to init the hooks.
 		WC_Checkout::instance();
 
+		// The registered card gateway is more reliable than $this->gateway, but if it isn't available for any reason, fall back to the gateway provided to this checkout class.
+		$gateway = WC_Payments::get_registered_card_gateway() ?? $this->gateway;
+
 		$js_config = [
 			'publishableKey'                 => $this->account->get_publishable_key( WC_Payments::mode()->is_test() ),
 			'testMode'                       => WC_Payments::mode()->is_test(),
@@ -174,9 +187,9 @@ class WC_Payments_Checkout {
 			'initWooPayNonce'                => wp_create_nonce( 'wcpay_init_woopay_nonce' ),
 			'saveUPEAppearanceNonce'         => wp_create_nonce( 'wcpay_save_upe_appearance_nonce' ),
 			'genericErrorMessage'            => __( 'There was a problem processing the payment. Please check your email inbox and refresh the page to try again.', 'woocommerce-payments' ),
-			'fraudServices'                  => $this->account->get_fraud_services_config(),
+			'fraudServices'                  => $this->fraud_service->get_fraud_services_config(),
 			'features'                       => $this->gateway->supports,
-			'forceNetworkSavedCards'         => WC_Payments::is_network_saved_cards_enabled() || WC_Payments::get_registered_card_gateway()->should_use_stripe_platform_on_checkout_page(),
+			'forceNetworkSavedCards'         => WC_Payments::is_network_saved_cards_enabled() || $gateway->should_use_stripe_platform_on_checkout_page(),
 			'locale'                         => WC_Payments_Utils::convert_to_stripe_locale( get_locale() ),
 			'isPreview'                      => is_preview(),
 			'isUPEEnabled'                   => WC_Payments_Features::is_upe_enabled(),
@@ -185,12 +198,14 @@ class WC_Payments_Checkout {
 			'isSavedCardsEnabled'            => $this->gateway->is_saved_cards_enabled(),
 			'isWooPayEnabled'                => $this->woopay_util->should_enable_woopay( $this->gateway ) && $this->woopay_util->should_enable_woopay_on_cart_or_checkout(),
 			'isWoopayExpressCheckoutEnabled' => $this->woopay_util->is_woopay_express_checkout_enabled(),
+			'isWoopayFirstPartyAuthEnabled'  => $this->woopay_util->is_woopay_first_party_auth_enabled(),
 			'isClientEncryptionEnabled'      => WC_Payments_Features::is_client_secret_encryption_enabled(),
 			'woopayHost'                     => WooPay_Utilities::get_woopay_url(),
 			'platformTrackerNonce'           => wp_create_nonce( 'platform_tracks_nonce' ),
 			'accountIdForIntentConfirmation' => apply_filters( 'wc_payments_account_id_for_intent_confirmation', '' ),
 			'wcpayVersionNumber'             => WCPAY_VERSION_NUMBER,
 			'woopaySignatureNonce'           => wp_create_nonce( 'woopay_signature_nonce' ),
+			'woopaySessionNonce'             => wp_create_nonce( 'woopay_session_nonce' ),
 			'woopayMerchantId'               => Jetpack_Options::get_option( 'id' ),
 			'icon'                           => $this->gateway->get_icon_url(),
 			'tracksUserIdentity'             => WC_Payments::woopay_tracker()->tracks_get_identity( get_current_user_id() ),
@@ -242,7 +257,7 @@ class WC_Payments_Checkout {
 						__( '<strong>Test mode:</strong> use the test VISA card 4242424242424242 with any expiry date and CVC, or any test card numbers listed <a>here</a>.', 'woocommerce-payments' ),
 						[
 							'strong' => '<strong>',
-							'a'      => '<a href="https://woocommerce.com/document/woocommerce-payments/testing-and-troubleshooting/testing/#test-cards" target="_blank">',
+							'a'      => '<a href="https://woocommerce.com/document/woopayments/testing-and-troubleshooting/testing/#test-cards" target="_blank">',
 						]
 					);
 					?>

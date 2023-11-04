@@ -9,6 +9,13 @@
  * @since SGSTurf v2
  */
 
+@ini_set('upload_max_size', '130M');
+@ini_set('post_max_size', '200M');
+@ini_set('max_execution_time', '300');
+
+/** Component Imports */
+include get_template_directory() . '/components/card.php';
+
 /* Title */
 function theme_slug_setup()
 {
@@ -41,6 +48,17 @@ function register_main_menu()
     register_nav_menu('main', 'Main Menu');
 }
 add_action('after_setup_theme', 'register_main_menu');
+
+// Add Body Class
+function add_custom_body_class($classes)
+{
+    // Add 'bg-green-pale' to the $classes array
+    $classes[] = 'bg-green-pale transition-colors';
+    // Return the array
+    return $classes;
+}
+add_filter('body_class', 'add_custom_body_class');
+
 
 // Declare WooCommerce Support
 function mytheme_add_woocommerce_support()
@@ -137,3 +155,10 @@ add_action('wp_nav_menu_args', function ($args) {
     $args['walker'] = new My_Custom_Walker();
     return $args;
 });
+
+// Mobile Menu
+function theme_enqueue_scripts()
+{
+    wp_enqueue_script('mobile-menu', get_template_directory_uri() . '/assets/js/mobile-menu.js', array(), null, true);
+}
+add_action('wp_enqueue_scripts', 'theme_enqueue_scripts');
