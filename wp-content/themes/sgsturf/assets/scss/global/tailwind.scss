@@ -8,24 +8,16 @@ body {
   @apply antialiased;
 }
 
+/** Grid **/
 .grid-main {
-  @apply grid px-4 py-2 gap-x-4 gap-y-4 grid-cols-12;
+  @apply grid px-4 py-2 gap-x-4 gap-y-4 grid-cols-12 md:px-8 md:py-4 md:gap-y-8 xl:gap-y-4;
 }
-@media only screen and (min-width: $bp-md) {
-  .grid-main {
-    @apply grid px-8 py-4 gap-x-4 gap-y-8 grid-cols-12;
-  }
-}
-@media only screen and (min-width: $bp-xl) {
-  .grid-main {
-    @apply grid px-8 py-4 gap-4 grid-cols-12;
-  }
-}
-
 .grid-sub {
   @apply grid grid-cols-12;
 }
 
+
+/** Navigation **/
 .header-bar .nav > .menu-item {
   @apply relative;
 }
@@ -75,3 +67,26 @@ body {
 .submenu-default .sub-menu .submenu-sportscomm a { @apply before:content-["\f1e3"] }
 .submenu-cards .sub-menu .submenu-socal a { @apply before:bg-[url('../images/nav-submenu-img-socal.jpg')] }
 .submenu-cards .sub-menu .submenu-dallas a { @apply before:bg-[url('../images/nav-submenu-img-dallas.jpg')]}
+
+
+/** Product Share **/
+div.essb_links {@apply my-0} /** Share Container **/
+div.essb_links a.essb-s-bgh-network {@apply hover:!bg-transparent} /** Trigger Container **/
+div.essb_links span.essb_icon_share-alt {@apply text-black hover:text-black} /** Trigger Icon **/
+div.essb_morepopup_shadow {@apply bg-[rgba(239,240,237,0.95)]} /** Shade **/
+div.essb_morepopup {@apply shadow-none bg-green-pale border border-stone-300 rounded-xl} /** Modal **/
+div.essb_morepopup div.essb_morepopup_header {@apply p-5 flex flex-row justify-between items-center leading-none shadow-none border-b border-neutral-200 uppercase text-sm tracking-wide font-bold text-stone-800} /** Header Container **/
+div.essb_morepopup div.essb_morepopup_header a.essb_morepopup_close {@apply relative right-auto} /** Header Close **/
+div.essb_morepopup.essb_morepopup_modern div.essb_morepopup_content {@apply p-5 flex flex-col gap-5} /** Content Container **/
+div.essb_morepopup.essb_morepopup_modern div.essb-morepopup-modern-message {@apply flex flex-col gap-2} /** Content Text **/
+div.essb_morepopup div.essb-morepopup-modern-title {@apply font-bold}
+div.essb_morepopup.essb_morepopup_modern div.essb-morepopup-modern-link {@apply text-sm} /** Content Link **/
+div.essb_links .essb_vertical_name li a span.essb_network_name {@apply hidden} /** Network Text **/
+div.essb_links ul.essb_links_list {@apply flex flex-row gap-2} /** Nextwork List **/
+div.essb_links li.essb_item {@apply w-auto grow} /** Nextwork List Item **/
+div.essb_links li a.essb-s-bg-network {@apply m-0 py-2 w-full shadow-none flex items-center justify-center !bg-gray} /** Nextwork Link **/
+div.essb_links li a.essb-s-bg-twitter {@apply !bg-black} /** Twitter Link **/
+div.essb_links li a.essb-s-bg-facebook {@apply !bg-[#3a579a]} /** Facebook Link **/
+div.essb_links li a.essb-s-bg-network span.essb_icon:before {@apply !text-[16px]} /** Network Icon **/
+div.essb_morepopup a.essb-copy-link {@apply !bg-transparent !text-black}
+div.essb-copylink-window div.essb_morepopup_header span {@apply before:content-['Copy_Page_Address:_']}

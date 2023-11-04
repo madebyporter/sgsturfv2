@@ -22,7 +22,7 @@ function card($args)
     class="<?php echo $args['is_series'] ? 'card-series' : 'card-product'; ?> bg-white rounded-lg flex flex-col justify-start overflow-hidden group-[.grid]:w-full w-[256px] lg:group-[.no-slide]:w-full group/specsButton">
 
     <!-- Card: Top -->
-    <div class="flex flex-col items-start gap-5 p-5 pt-7">
+    <div class="relative flex flex-col items-start gap-5 p-5 pt-7">
       <div class="flex flex-row justify-between w-full">
         <div class="flex flex-col gap-2">
 
@@ -41,7 +41,7 @@ function card($args)
           </div>
         </div>
         <!-- Share -->
-        <div class="text-black flex flex-col justify-start">
+        <div class="text-black flex flex-col justify-start absolute top-2 right-2">
           <?php
           if ($args['is_series']) {
             $shortcode = '[easy-social-share buttons="share,facebook,twitter,mail,copy" size="xs" align="center" template="16" native="no" sharebtn_func="3" url="' . esc_url($args['product_link']) . '"][/easy-social-share]';

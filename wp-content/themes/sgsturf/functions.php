@@ -14,7 +14,7 @@
 @ini_set('max_execution_time', '300');
 
 /** Component Imports */
-include get_template_directory() . '/components/card.php';
+include get_template_directory() . '/components/card-product.php';
 
 /* Title */
 function theme_slug_setup()
