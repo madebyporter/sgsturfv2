@@ -10,17 +10,17 @@
 <body <?php body_class(); ?>>
 
   <header id="header"
-    class="header sticky mx-auto top-0 w-full z-[100] bg-green-pale rounded-lg overflow-hidden lg:overflow-visible min-h-[51px]">
+    class="header sticky mx-auto top-0 w-full z-[100] bg-green-pale rounded-lg overflow-hidden lg:overflow-visible min-h-[51px] translate-y-0 transition-all linear duration-200 delay-0 shadow-none [&.scrolled]:translate-y-2 [&.scrolled]:shadow-xl [&.scrolled]:transition-all [&.scrolled]:w-[94vw] [&.scrolled]:my-auto">
     <div class="header-bar rounded-lg py-2 grid-main items-center bg-green-pale relative z-50 min-h-[51px]">
       <!-- Header Logo -->
       <div
-        class="flex col-start-1 col-end-4 sm:col-start-1 sm:col-end-3 md:col-start-1 md:col-end-3 lg:col-start-1 lg:col-end-3">
+        class="flex col-start-1 col-end-4 sm:col-start-1 sm:col-end-3 md:col-start-1 md:col-end-3 lg:col-start-1 lg:col-end-4">
         <?php include('components/logo-orange-full.php'); ?>
       </div>
 
       <!-- Header Menu -->
       <div
-        class="flex justify-center col-start-5 col-end-9 md:h-[41px] md:col-start-4 md:col-end-10 lg:col-start-3 lg:col-end-11">
+        class="flex justify-center col-start-5 col-end-9 md:h-[41px] md:col-start-4 md:col-end-10 lg:col-start-4 lg:col-end-10">
 
         <!-- Start Mobile Menu Trigger -->
         <div class="mobile-menu-trigger cursor-pointer flex items-center lg:hidden">
@@ -72,7 +72,8 @@
       </div>
     </div>
     <!-- Start Mobile Menu -->
-    <div class="mobile-menu relative p-4 block lg:hidden z-0 overflow-hidden transition-all duration-500 ease-in-out">
+    <div
+      class="mobile-menu relative p-4 block lg:hidden z-0 overflow-hidden transition-all duration-500 ease-in-out mt-[-479px] md:mt-[-494px]">
       <?php
       wp_nav_menu(
         array(

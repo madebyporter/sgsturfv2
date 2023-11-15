@@ -6,6 +6,9 @@ module.exports = {
     "./**/*.js",
   ],
   theme: {
+    fontFamily: {
+      'sans': ['Inter', 'Helvetica', 'ui-sans-serif', 'system-ui'],
+    },
     screens: {
       'sm': '640px',
       // => @media (min-width: 640px) { ... }
@@ -41,5 +44,7 @@ module.exports = {
     },
   },
   variants: {},
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/typography'),
+  ],
 };

@@ -92,6 +92,13 @@ if ($group_product->is_type('grouped')):
                 $subproduct_image = wp_get_attachment_image_src(get_post_thumbnail_id($subproduct_id), 'full');
                 $subproduct_categories = wp_get_post_terms($subproduct_id, 'product_cat', array('fields' => 'names'));
 
+                $base_url = home_url(); // Gets the base URL of the site
+                $request_uri = $_SERVER['REQUEST_URI']; // The URI to access this page
+                // Remove the first directory from the request URI
+                $request_uri = preg_replace('#/[^/]+#', '', $request_uri, 1);
+                // Combine the base URL with the adjusted request URI
+                $full_url = $base_url . $request_uri;
+
                 if ($subproduct) {
 
                   // Prepare arguments for the card component
@@ -106,7 +113,7 @@ if ($group_product->is_type('grouped')):
                       'Blade_Colors' => get_field('specs_blade_colors', $subproduct_id) ? get_field('specs_blade_colors', $subproduct_id) : 'n/a',
                     ),
                     'product_photo' => $subproduct_image ? $subproduct_image[0] : SGSTURF_IMAGES_DIR . '/ui-state-zero-simpleproduct.jpg',
-                    'product_link' => get_permalink($subproduct_id),
+                    'product_link' => $full_url,
                   );
 
 
@@ -187,6 +194,32 @@ if ($group_product->is_type('grouped')):
     </div>
   </section>
 
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const productCards = document.querySelectorAll('.card-product');
+
+      productCards.forEach(function (productCard) {
+        const specsButton = productCard.querySelector('.spec-trigger');
+
+        specsButton.addEventListener('click', function () {
+          event.stopPropagation();
+
+          const productPhoto = productCard.querySelector('.product-photo');
+          const productSpecs = productCard.querySelector('.product-specs');
+          const cardBottom = productCard.querySelector('.card-bottom');
+          const buttonText = specsButton.querySelector('.spec-label');
+
+          if (cardBottom.classList.contains('specs-active')) {
+            buttonText.textContent = 'View Specs';
+            cardBottom.classList.remove('specs-active');
+          } else {
+            buttonText.textContent = 'Hide Specs';
+            cardBottom.classList.add('specs-active');
+          }
+        });
+      });
+    });
+  </script>
 <?php endif; ?>
 
 <?php get_footer('Product'); ?>

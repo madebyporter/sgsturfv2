@@ -8,9 +8,7 @@ function card($args)
     'product_photo' => '',
     'product_specs' => array(),
     'view_label' => 'View Specs',
-    // Default label
     'is_series' => false,
-    // Determine if it's a series card
   );
 
   $args = wp_parse_args($args, $defaults);
@@ -43,10 +41,8 @@ function card($args)
         <!-- Share -->
         <div class="text-black flex flex-col justify-start absolute top-2 right-2">
           <?php
-          if ($args['is_series']) {
-            $shortcode = '[easy-social-share buttons="share,facebook,twitter,mail,copy" size="xs" align="center" template="16" native="no" sharebtn_func="3" url="' . esc_url($args['product_link']) . '"][/easy-social-share]';
+            $shortcode = '[easy-social-share buttons="share,facebook,twitter,mail,copy" size="xs" align="center" template="16" native="no" sharebtn_func="3" url="' . esc_url($args['product_link']) . '" title="' . esc_attr($args['product_name']) . '"][/easy-social-share]';
             echo do_shortcode($shortcode);
-          }
           ?>
         </div>
       </div>
@@ -114,30 +110,6 @@ function card($args)
           </button>
         </div>
       <?php endif; ?>
-
-      <script>
-        document.addEventListener('DOMContentLoaded', function () {
-          const productCards = document.querySelectorAll('.card-product');
-
-          productCards.forEach(function (productCard) {
-            const specsButton = productCard.querySelector('.spec-trigger');
-
-            specsButton.addEventListener('click', function () {
-              const productPhoto = productCard.querySelector('.product-photo');
-              const productSpecs = productCard.querySelector('.product-specs');
-              const cardBottom = productCard.querySelector('.card-bottom');
-              cardBottom.classList.toggle('specs-active');
-              const buttonText = specsButton.querySelector('.spec-label');
-
-              if (cardBottom.classList.contains('specs-active')) {
-                buttonText.textContent = 'Hide Specs';
-              } else {
-                buttonText.textContent = 'View Specs';
-              }
-            });
-          });
-        });
-      </script>
 
     </div>
   </div>

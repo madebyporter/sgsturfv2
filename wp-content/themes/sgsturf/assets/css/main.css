@@ -105,18 +105,6 @@ h5, .h5, .content-cms h5 {
 }
 
 /** Header **/
-.header {
-  z-index: 100;
-  transform: translateY(0);
-  transition: all 100ms linear;
-}
-.header.scrolled {
-  box-shadow: 0 4px 2px rgba(0, 0, 0, 0.07);
-  transform: translateY(0.5rem);
-  margin: 0 auto;
-  width: 96%;
-  transition: all 100ms linear;
-}
 .header.menu-open {
   transform: translateY(0.5rem);
   margin: 0 auto;
@@ -125,14 +113,6 @@ h5, .h5, .content-cms h5 {
 }
 .header.menu-slide-open .mobile-menu {
   margin-top: 0;
-}
-
-.header-bar {
-  background: #EFF0ED;
-}
-
-.mobile-menu {
-  margin-top: -479px;
 }
 
 .footer a {

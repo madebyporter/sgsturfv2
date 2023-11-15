@@ -8,67 +8,74 @@
     <div class="col-start-1 col-end-13 md:col-start-4 md:col-end-8 xl:col-start-4 xl:col-end-6">
       <div class="nav-footer">
         <h4>Navigation</h4>
-        <nav class="site-nav flex flex-col gap-4 md:gap-2 mt-4">
-          <a href="./shop">Our Turf</a>
-          <a href="./privacy-policy">Privacy Policy</a>
-          <a href="./refund_returns">Refunds &amp; Returns</a>
-          <a href="#">Terms of Service</a>
-        </nav>
+        <?php
+        wp_nav_menu(
+          array(
+            'theme_location' => 'footer-menu',
+            'menu_id' => 'footer-menu',
+            'menu_class' => 'site-nav flex flex-col gap-4 md:gap-2 mt-4',
+            'container_class' => ''
+          )
+        );
+        ?>
       </div>
     </div>
     <div class="col-start-1 col-end-13 md:col-start-8 md:col-end-13 xl:col-start-6 xl:col-end-8">
       <div class="nav-footer">
         <h4>Social Media</h4>
-        <nav class="site-nav flex gap-4 flex-col md:gap-2 mt-4">
-          <a href="#" class="flex gap-2 content-center"><img
-              src="<?php echo SGSTURF_IMAGES_DIR; ?>/icons/social-facebook.svg" alt="Turf">Facebook</a>
-          <a href="#" class="flex gap-2 content-center"><img
-              src="<?php echo SGSTURF_IMAGES_DIR; ?>/icons/social-instagram.svg" alt="Turf">Instagram</a>
-          <a href="#" class="flex gap-2 content-center"><img
-              src="<?php echo SGSTURF_IMAGES_DIR; ?>/icons/social-youtube.svg" alt="Turf">Youtube</a>
-        </nav>
+        <?php
+        wp_nav_menu(
+          array(
+            'theme_location' => 'social-media-menu',
+            'menu_class' => 'site-nav flex gap-4 flex-col md:gap-2 mt-4',
+            'items_wrap' => '<ul id="%1$s" class="%2$s">%3$s</ul>',
+            'container' => false,
+          )
+        );
+        ?>
       </div>
     </div>
     <div class="col-start-1 col-end-13 md:col-start-4 md:col-end-8 xl:col-start-8 xl:col-end-10">
-      <h4>Contact Us</h4>
-      <div class="footer-content flex flex-col gap-2 mt-4">
-        <a href="#">info@sgsturf.com</a>
-        <p>Mon to Fri<br />7:00am to 4:00pm</p>
-      </div>
+
+      <?php if (is_active_sidebar('footer_contact_us')): ?>
+        <div id="footer-contact-us" class="widget-area">
+          <?php dynamic_sidebar('footer_contact_us'); ?>
+        </div>
+      <?php endif; ?>
+
     </div>
     <div class="col-start-1 col-end-13 md:col-start-8 md:col-end-13 xl:col-start-10 xl:col-end-13">
-      <h4>California</h4>
-      <div class="footer-content flex flex-col gap-2 my-4 md:mb-8">
-        <p>690 Ridgeway St.<br />Pomona, CA 91768<br />Phone: (909) 629-8400</p>
+
+      <div class="flex flex-col gap-5">
+        <?php if (is_active_sidebar('footer_location_1')): ?>
+          <div id="footer-location-1" class="widget-area">
+            <?php dynamic_sidebar('footer_location_1'); ?>
+          </div>
+        <?php endif; ?>
+
+        <?php if (is_active_sidebar('footer_location_2')): ?>
+          <div id="footer-location-2" class="widget-area">
+            <?php dynamic_sidebar('footer_location_2'); ?>
+          </div>
+        <?php endif; ?>
       </div>
 
-      <h4>Texas</h4>
-      <div class="footer-content flex flex-col gap-2 my-4">
-        <p>2001 E Randol Mill Rd Ste 107<br />Arlington TX, 76011<br />Phone: (817) 583-6880</p>
-      </div>
     </div>
   </div>
   <div class="footer-row grid-main !px-0">
-    <div class="col-start-1 col-end-13 md:col-start-4 md:col-end-12 footer-copyright">
-      <p class="mb-8 small">&copy;<span id="copyright"></span> SGSTURF. ALL RIGHTS RESERVED. All website design, text,
-        graphics, the
-        selection and arrangement thereof, and all software are copyright by SGS TURF. Any use of materials on this
-        website, including reproduction, modification, distribution or republication, without the prior written consent
-        of SGS TURF, is strictly prohibited.</p>
-      <p>SGS TURF is a Belle Luna™️ Company</p>
+    <div class="col-start-1 col-end-13 md:col-start-4 md:col-end-12 footer-copyright flex flex-col gap-2">
+      <p>&copy;<span id="copyright"></span> SGSTURF. ALL RIGHTS RESERVED.</p>
+      <p>All website design, text, graphics, the selection and arrangement thereof, and all software are copyright by
+        SGS TURF. Any use of materials on this website, including reproduction, modification, distribution or
+        republication, without the prior written consent of SGS TURF, is strictly prohibited.</p>
     </div>
   </div>
 </footer>
 
 <?php wp_footer(); ?>
 <script>
-  // Get the current year
   const currentYear = new Date().getFullYear();
-
-  // Construct the copyright string
   const copyrightString = `2015 - ${currentYear}`;
-
-  // Insert the copyright string into an element with id 'copyright'
   document.getElementById('copyright').textContent = copyrightString;
 </script>
 <script>
