@@ -4,7 +4,7 @@ defined('ABSPATH') || exit;
 get_header('shop');
 
 // Exclude specific category slugs from the filter options
-$excluded_category_slugs = array('uncategorized', 'collection');
+$excluded_category_slugs = array('uncategorized', 'collection', 'infills');
 
 // Get term IDs for the excluded categories
 $excluded_category_ids = array();
@@ -37,8 +37,8 @@ $query_args = array(
 	'tax_query' => array(
 		array(
 			'taxonomy' => 'product_cat',
-			'field' => 'slug',
-			'terms' => 'collection',
+			'field' => 'term_id',
+			'terms' => $excluded_category_ids,
 			'operator' => 'NOT IN'
 		),
 	),

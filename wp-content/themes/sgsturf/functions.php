@@ -234,3 +234,87 @@ function my_widgets_init()
   );
 }
 add_action('widgets_init', 'my_widgets_init');
+
+//** Order Form Dynamic Products */
+// Function to fetch and sort products
+function get_products_with_exclusion($exclude_category_slug = '') {
+    $args = array(
+        'status' => 'publish',
+        'type'   => 'simple',
+        'limit'  => -1, // Fetch all products
+    );
+
+    $products = wc_get_products($args);
+
+    // Manually exclude products from a specific category if provided
+    if (!empty($exclude_category_slug)) {
+        $products = array_filter($products, function($product) use ($exclude_category_slug) {
+            $product_categories = $product->get_category_ids();
+            $excluded_category = get_term_by('slug', $exclude_category_slug, 'product_cat');
+            return !in_array($excluded_category->term_id, $product_categories);
+        });
+    }
+
+    usort($products, function($a, $b) {
+        return strcmp($a->get_name(), $b->get_name());
+    });
+
+    $choices = array();
+    foreach ($products as $product) {
+        $choices[] = array('text' => $product->get_name(), 'value' => $product->get_id());
+    }
+
+    return $choices;
+}
+
+function get_products_by_category($category_slug) {
+    $args = array(
+        'status' => 'publish',
+        'type'   => 'simple',
+        'limit'  => -1, // Fetch all products
+        'category' => array($category_slug), // Filter by category
+    );
+
+    $products = wc_get_products($args);
+
+    usort($products, function($a, $b) {
+        return strcmp($a->get_name(), $b->get_name());
+    });
+
+    $choices = array();
+    foreach ($products as $product) {
+        $choices[] = array('text' => $product->get_name(), 'value' => $product->get_id());
+    }
+
+    return $choices;
+}
+
+// Modify the populate_products_dropdown function
+add_filter('gform_pre_render', 'populate_products_dropdown');
+add_filter('gform_pre_validation', 'populate_products_dropdown');
+add_filter('gform_pre_submission_filter', 'populate_products_dropdown');
+add_filter('gform_admin_pre_render', 'populate_products_dropdown');
+function populate_products_dropdown($form) {
+
+    // Only populate for your specific form ID
+    if ($form['id'] != 1) { // Replace 1 with your form ID
+        return $form;
+    }
+
+    // Fetch choices for all simple products excluding infill and for infill category products
+    $simple_choices = get_products_with_exclusion('infills'); // Fetch all simple products excluding infill
+    $infill_choices = get_products_by_category('infills'); // Fetch only infill category products
+
+    foreach ($form['fields'] as &$field) {
+        // Populate fields for simple products
+        if (in_array($field->id, array(6, 8, 10))) {
+            $field->choices = $simple_choices;
+        }
+        // Populate fields for infill products
+        elseif (in_array($field->id, array(16, 19, 21))) {
+            $field->choices = $infill_choices;
+        }
+    }
+
+    return $form;
+}

@@ -87,47 +87,83 @@ if ($group_product->is_type('grouped')):
               class="<?php echo $slider_noslide_class; ?> pattern-card group before:hidden after:hidden flex flex-nowrap relative gap-5 justify-between content-start w-fit lg:[&.no-slide]:w-full pr-5 md:pr-10 xl:pr-20 lg:[&.no-slide]:pr-0">
 
               <?php
-              foreach ($subproducts as $subproduct_id) {
-                $subproduct = wc_get_product($subproduct_id);
-                $subproduct_image = wp_get_attachment_image_src(get_post_thumbnail_id($subproduct_id), 'full');
-                $subproduct_categories = wp_get_post_terms($subproduct_id, 'product_cat', array('fields' => 'names'));
+              $subproducts = $group_product->get_children();
 
-                $base_url = home_url(); // Gets the base URL of the site
-                $request_uri = $_SERVER['REQUEST_URI']; // The URI to access this page
-                // Remove the first directory from the request URI
-                $request_uri = preg_replace('#/[^/]+#', '', $request_uri, 1);
-                // Combine the base URL with the adjusted request URI
-                $full_url = $base_url . $request_uri;
+                // Get the subproducts as WC_Product objects
+                $subproduct_objects = array_map(function($id) {
+                    return wc_get_product($id);
+                }, $subproducts);
 
-                if ($subproduct) {
+                // Sort the subproducts by name
+                usort($subproduct_objects, function($a, $b) {
+                    // Remove numbers from the product names
+                    $name_a = preg_replace('!\d+!', '', $a->get_name());
+                    $name_b = preg_replace('!\d+!', '', $b->get_name());
 
-                  // Prepare arguments for the card component
-                  $card_args = array(
-                    'product_name' => $subproduct->get_name(),
-                    'product_category' => $subproduct_categories,
-                    'product_specs' => array(
-                      'Pile Height' => get_field('specs_pile_height', $subproduct_id) ? get_field('specs_pile_height', $subproduct_id) : 'n/a',
-                      'Total Weight' => get_field('specs_total_weight', $subproduct_id) ? get_field('specs_total_weight', $subproduct_id) : 'n/a',
-                      'Blade' => get_field('specs_blade', $subproduct_id) ? get_field('specs_blade', $subproduct_id) : 'n/a',
-                      'Turf Gauge' => get_field('specs_turf_gauge', $subproduct_id) ? get_field('specs_turf_gauge', $subproduct_id) : 'n/a',
-                      'Blade_Colors' => get_field('specs_blade_colors', $subproduct_id) ? get_field('specs_blade_colors', $subproduct_id) : 'n/a',
-                    ),
-                    'product_photo' => $subproduct_image ? $subproduct_image[0] : SGSTURF_IMAGES_DIR . '/ui-state-zero-simpleproduct.jpg',
-                    'product_link' => $full_url,
-                  );
+                    // Compare the names without numbers
+                    $name_compare = strcasecmp($name_a, $name_b);
+                    if ($name_compare == 0) {
+                        // If the names are equal, extract numbers from the product names
+                        preg_match_all('!\d+!', $a->get_name(), $numbers_a);
+                        preg_match_all('!\d+!', $b->get_name(), $numbers_b);
+
+                        // Compare the first number in the product names as integers
+                        $number_a = (int)$numbers_a[0][0];
+                        $number_b = (int)$numbers_b[0][0];
+                        if ($number_a < $number_b) {
+                            return -1;
+                        } elseif ($number_a > $number_b) {
+                            return 1;
+                        } else {
+                            return 0;
+                        }
+                    } else {
+                        return $name_compare;
+                    }
+                });
+
+                foreach ($subproduct_objects as $subproduct) {
+                  $subproduct_id = $subproduct->get_id();
+                  $subproduct = wc_get_product($subproduct_id);
+                  $subproduct_image = wp_get_attachment_image_src(get_post_thumbnail_id($subproduct_id), 'full');
+                  $subproduct_categories = wp_get_post_terms($subproduct_id, 'product_cat', array('fields' => 'names'));
+
+                  $base_url = home_url(); // Gets the base URL of the site
+                  $request_uri = $_SERVER['REQUEST_URI']; // The URI to access this page
+                  // Remove the first directory from the request URI
+                  $request_uri = preg_replace('#/[^/]+#', '', $request_uri, 1);
+                  // Combine the base URL with the adjusted request URI
+                  $full_url = $base_url . $request_uri;
+
+                  if ($subproduct) {
+
+                    // Prepare arguments for the card component
+                    $card_args = array(
+                      'product_name' => $subproduct->get_name(),
+                      'product_category' => $subproduct_categories,
+                      'product_specs' => array(
+                        'Pile Height' => get_field('specs_pile_height', $subproduct_id) ? get_field('specs_pile_height', $subproduct_id) : 'n/a',
+                        'Total Weight' => get_field('specs_total_weight', $subproduct_id) ? get_field('specs_total_weight', $subproduct_id) : 'n/a',
+                        'Blade' => get_field('specs_blade', $subproduct_id) ? get_field('specs_blade', $subproduct_id) : 'n/a',
+                        'Turf Gauge' => get_field('specs_turf_gauge', $subproduct_id) ? get_field('specs_turf_gauge', $subproduct_id) : 'n/a',
+                        'Blade_Colors' => get_field('specs_blade_colors', $subproduct_id) ? get_field('specs_blade_colors', $subproduct_id) : 'n/a',
+                      ),
+                      'product_photo' => $subproduct_image ? $subproduct_image[0] : SGSTURF_IMAGES_DIR . '/ui-state-zero-simpleproduct.jpg',
+                      'product_link' => $full_url,
+                    );
 
 
-                  // Render the card component
-                  card($card_args);
-                } else {
-                  error_log("Failed to get product for ID $subproduct_id");
+                    // Render the card component
+                    card($card_args);
+                  } else {
+                    error_log("Failed to get product for ID $subproduct_id");
+                  }
                 }
-              }
 
-              // Show blank cards for the remaining slots if needed
-              for ($i = 0; $i < $blank_card_count; $i++) {
-                echo '<div class="hidden sm:flex rounded-lg bg-graphite w-[256px] lg:group-[.no-slide]:w-full"></div>';
-              }
+                // Show blank cards for the remaining slots if needed
+                for ($i = 0; $i < $blank_card_count; $i++) {
+                  echo '<div class="hidden sm:flex rounded-lg bg-graphite w-[256px] lg:group-[.no-slide]:w-full"></div>';
+                }
               ?>
             </div>
           </div>
