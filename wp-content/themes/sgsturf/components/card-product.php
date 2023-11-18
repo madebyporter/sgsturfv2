@@ -41,7 +41,7 @@ function card($args)
         <!-- Share -->
         <div class="text-black flex flex-col justify-start absolute top-2 right-2">
           <?php
-            $shortcode = '[easy-social-share buttons="share,facebook,twitter,mail,copy" size="xs" align="center" template="16" native="no" sharebtn_func="3" url="' . esc_url($args['product_link']) . '" title="' . esc_attr($args['product_name']) . '"][/easy-social-share]';
+            $shortcode = '[easy-social-share buttons="share,facebook,twitter,mail,copy" size="xs" align="center" template="16" native="no" sharebtn_func="3" url="' . esc_url($args['product_link']) . '" title="' . esc_attr($args['product_name']) . '" target="_blank"][/easy-social-share]';
             echo do_shortcode($shortcode);
           ?>
         </div>
