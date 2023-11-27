@@ -5,9 +5,33 @@
   <meta charset="<?php bloginfo('charset'); ?>">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <?php wp_head(); ?>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EXVPRLE7TQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-EXVPRLE7TQ');
+  </script>
+
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-KHNCT6Z');</script>
+  <!-- End Google Tag Manager -->
+
 </head>
 
 <body <?php body_class(); ?>>
+
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KHNCT6Z"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
 
   <header id="header"
     class="header sticky mx-auto top-0 w-full z-[100] bg-green-pale rounded-lg overflow-hidden lg:overflow-visible min-h-[51px] translate-y-0 transition-all linear duration-200 delay-0 shadow-none [&.scrolled]:translate-y-2 [&.scrolled]:shadow-xl [&.scrolled]:transition-all [&.scrolled]:w-[94vw] [&.scrolled]:my-auto">
