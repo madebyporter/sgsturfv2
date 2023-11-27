@@ -154,20 +154,23 @@ get_header(); ?>
               // Loop through the sub-products (children) of the grouped product
               foreach ($children_ids as $child_id):
                 $child_product = wc_get_product($child_id);
-                $child_categories = wp_get_post_terms($child_id, 'product_cat', array('fields' => 'names'));
 
-                // Prepare arguments for the card component
-                $card_args = array(
-                  'product_name' => $child_product->get_name(),
-                  'product_category' => $child_categories,
-                  'product_link' => get_permalink($child_id),
-                  'product_photo' => $child_product->get_image_id() ? wp_get_attachment_image_src($child_product->get_image_id(), 'full')[0] : SGSTURF_IMAGES_DIR . '/ui-state-zero-simpleproduct.jpg',
-                  'is_series' => true,
-                );
+                if ($child_product->get_status() === 'publish') {
+                  $child_categories = wp_get_post_terms($child_id, 'product_cat', array('fields' => 'names'));
 
-                // Render the card component
-                card($card_args);
+                  // Prepare arguments for the card component
+                  $card_args = array(
+                    'product_name' => $child_product->get_name(),
+                    'product_category' => $child_categories,
+                    'product_link' => get_permalink($child_id),
+                    'product_photo' => $child_product->get_image_id() ? wp_get_attachment_image_src($child_product->get_image_id(), 'full')[0] : SGSTURF_IMAGES_DIR . '/ui-state-zero-simpleproduct.jpg',
+                    'is_series' => true,
+                  );
 
+                  // Render the card component
+                  card($card_args);
+                }
+                
               endforeach; ?>
             </div>
 

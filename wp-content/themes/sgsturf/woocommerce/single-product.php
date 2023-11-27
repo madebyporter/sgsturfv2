@@ -135,8 +135,7 @@ if ($group_product->is_type('grouped')):
                   // Combine the base URL with the adjusted request URI
                   $full_url = $base_url . $request_uri;
 
-                  if ($subproduct) {
-
+                  if ($subproduct->get_status() === 'publish') {
                     // Prepare arguments for the card component
                     $card_args = array(
                       'product_name' => $subproduct->get_name(),
