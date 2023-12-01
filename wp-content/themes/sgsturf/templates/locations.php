@@ -164,13 +164,26 @@ get_header(); ?>
 </section>
 
 <section id="requestquote" class="grid-main content-full">
+  <?php
+  $locations_leadgen_form = get_field('leadgen_form');
+  ?>
   <div
     class="theme-white content-full-container px-5 py-10 md:p-10 xl:p-20 col-start-1 col-end-13 grid-sub gap-4 md:gap-8 lg:gap-4">
     <div class="col-start-1 col-end-13 lg:col-start-1 lg:col-end-6">
       <h2 class="h2">Request a Quote</h2>
     </div>
     <div class="col-start-1 col-end-13 lg:col-start-7 lg:col-end-13">
-      <?php echo do_shortcode('[gravityform id="2" title="true" ajax=“true”]'); ?>
+      <?php
+      // Check if the ACF field is set and not empty
+      if (!empty($locations_leadgen_form)) {
+          // Use the form ID from ACF in the shortcode
+          echo do_shortcode('[gravityform id="' . esc_attr($locations_leadgen_form) . '" title="true" ajax="true"]');
+      } else {
+          // Fallback in case ACF field is empty
+          // You can remove this part or modify it according to your needs
+          echo 'Form ID not set in ACF';
+      }
+      ?>
     </div>
   </div>
 </section>

@@ -7,13 +7,13 @@
   <?php wp_head(); ?>
 
   <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EXVPRLE7TQ"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-X8FCZECQWP"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
-    gtag('config', 'G-EXVPRLE7TQ');
+    gtag('config', 'G-X8FCZECQWP');
   </script>
 
   <!-- Google Tag Manager -->
