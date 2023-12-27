@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
     body.classList.add('bg-black');
     siteContent.classList.add('opacity-10');
     setTimeout(() => {   
-      triggerIcon.classList.replace('fa-grid', 'fa-xmark');
+      triggerIcon.classList.replace('fa-bars', 'fa-xmark');
       header.classList.add('menu-slide-open');
     }, 300); 
   }
@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
     setTimeout(() => {  
       header.classList.remove('menu-open');
       body.classList.remove('overflow-hidden');
-      triggerIcon.classList.replace('fa-xmark', 'fa-grid');
+      triggerIcon.classList.replace('fa-xmark', 'fa-bars');
       siteContent.classList.remove('opacity-10');
       body.classList.add('bg-green-pale');
       body.classList.remove('bg-black');

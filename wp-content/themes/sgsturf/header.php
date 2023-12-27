@@ -33,13 +33,12 @@
   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
 
-  <header id="header"
-    class="header sticky mx-auto top-0 w-full z-[100] bg-green-pale rounded-lg overflow-hidden lg:overflow-visible min-h-[51px] translate-y-0 transition-all linear duration-200 delay-0 shadow-none [&.scrolled]:translate-y-2 [&.scrolled]:shadow-xl [&.scrolled]:transition-all [&.scrolled]:w-[94vw] [&.scrolled]:my-auto">
+  <header id="header" class="header sticky mx-auto top-0 w-full z-[100] bg-green-pale rounded-lg overflow-hidden lg:overflow-visible min-h-[51px] translate-y-0 transition-all linear duration-200 delay-0 shadow-none [&.scrolled]:translate-y-2 [&.scrolled]:shadow-xl [&.scrolled]:transition-all [&.scrolled]:w-[94vw] [&.scrolled]:my-auto">
     <div class="header-bar rounded-lg py-2 grid-main items-center bg-green-pale relative z-50 min-h-[51px]">
       <!-- Header Logo -->
       <div
         class="flex col-start-1 col-end-4 sm:col-start-1 sm:col-end-3 md:col-start-1 md:col-end-3 lg:col-start-1 lg:col-end-4">
-        <?php include('components/logo-orange-full.php'); ?>
+        <?php include('components/logo-orange-vertical.php'); ?>
       </div>
 
       <!-- Header Menu -->
@@ -48,7 +47,7 @@
 
         <!-- Start Mobile Menu Trigger -->
         <div class="mobile-menu-trigger cursor-pointer flex items-center lg:hidden">
-          <i class="fa-sharp fa-regular fa-grid fa-xl"></i>
+          <i class="fa-sharp fa-regular fa-bars fa-xl"></i>
         </div>
         <!-- End Mobile Menu Trigger -->
 
