@@ -941,7 +941,7 @@ function essb_get_share_address($network, $share = array(), $salt = '', $amp_end
 			break;
 
 		case 'gmail' :
-			$url = sprintf ( 'https://mail.google.com/mail/u/0/?view=cm&fs=1&su=%2$s&body=%1$s&ui=2&tf=1', $share ['url'], essb_core_helper_textencode($share ['title']) );
+		    $url = sprintf ( 'https://mail.google.com/mail/u/0/?view=cm&fs=1&su=%2$s&body=%1$s&ui=2&tf=1', essb_core_helper_textencode($share ['description']) . ' ' . $share ['url'], essb_core_helper_textencode($share ['title']) );
 			break;
 
 		case 'aol' :

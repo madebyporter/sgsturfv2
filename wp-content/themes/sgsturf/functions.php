@@ -237,7 +237,8 @@ add_action('widgets_init', 'my_widgets_init');
 
 //** Order Form Dynamic Products */
 // Function to fetch and sort products
-function get_products_with_exclusion($exclude_category_slug = '') {
+// Function to fetch and sort products with multiple exclusions
+function get_products_with_exclusion($exclude_category_slugs = array()) {
     $args = array(
         'status' => 'publish',
         'type'   => 'simple',
@@ -246,12 +247,17 @@ function get_products_with_exclusion($exclude_category_slug = '') {
 
     $products = wc_get_products($args);
 
-    // Manually exclude products from a specific category if provided
-    if (!empty($exclude_category_slug)) {
-        $products = array_filter($products, function($product) use ($exclude_category_slug) {
+    // Manually exclude products from specific categories if provided
+    if (!empty($exclude_category_slugs)) {
+        $products = array_filter($products, function($product) use ($exclude_category_slugs) {
             $product_categories = $product->get_category_ids();
-            $excluded_category = get_term_by('slug', $exclude_category_slug, 'product_cat');
-            return !in_array($excluded_category->term_id, $product_categories);
+            foreach ($exclude_category_slugs as $slug) {
+                $excluded_category = get_term_by('slug', $slug, 'product_cat');
+                if (in_array($excluded_category->term_id, $product_categories)) {
+                    return false;
+                }
+            }
+            return true;
         });
     }
 
@@ -261,8 +267,11 @@ function get_products_with_exclusion($exclude_category_slug = '') {
 
     $choices = array();
     foreach ($products as $product) {
-        $choices[] = array('text' => $product->get_name(), 'value' => $product->get_id());
-    }
+    $choices[] = array(
+        'text'  => $product->get_name(), // Product Name
+        'value' => $product->get_name()  // Using Product Name as the value as well
+    );
+}
 
     return $choices;
 }
@@ -283,8 +292,11 @@ function get_products_by_category($category_slug) {
 
     $choices = array();
     foreach ($products as $product) {
-        $choices[] = array('text' => $product->get_name(), 'value' => $product->get_id());
-    }
+    $choices[] = array(
+        'text'  => $product->get_name(), // Product Name
+        'value' => $product->get_name()  // Using Product Name as the value as well
+    );
+}
 
     return $choices;
 }
@@ -295,26 +307,27 @@ add_filter('gform_pre_validation', 'populate_products_dropdown');
 add_filter('gform_pre_submission_filter', 'populate_products_dropdown');
 add_filter('gform_admin_pre_render', 'populate_products_dropdown');
 function populate_products_dropdown($form) {
-
     // Only populate for your specific form ID
-    if ($form['id'] != 1) { // Replace 1 with your form ID
+    if ($form['id'] != 1) {
         return $form;
     }
 
-    // Fetch choices for all simple products excluding infill and for infill category products
-    $simple_choices = get_products_with_exclusion('infills'); // Fetch all simple products excluding infill
-    $infill_choices = get_products_by_category('infills'); // Fetch only infill category products
+    // Fetch choices for all simple products excluding infill and accessories
+    $simple_choices = get_products_with_exclusion(['infills', 'accessories']);
+    $infill_choices = get_products_by_category('infills');
+    // Fetch only accessories category products
+    $accessory_choices = get_products_by_category('accessories');
 
     foreach ($form['fields'] as &$field) {
-        // Populate fields for simple products
-        if (in_array($field->id, array(6, 8, 10))) {
+        if ($field->inputName == 'product_names') { 
             $field->choices = $simple_choices;
-        }
-        // Populate fields for infill products
-        elseif (in_array($field->id, array(16, 19, 21))) {
+        } elseif ($field->inputName == 'infill_names') { 
             $field->choices = $infill_choices;
+        } elseif ($field->inputName == 'accessory_names') { // Check for fields with parameter name 'accessory_names'
+            $field->choices = $accessory_choices;
         }
     }
 
     return $form;
 }
+

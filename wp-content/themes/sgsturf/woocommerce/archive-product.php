@@ -4,7 +4,7 @@ defined('ABSPATH') || exit;
 get_header('shop');
 
 // Exclude specific category slugs from the filter options
-$excluded_category_slugs = array('uncategorized', 'collection', 'infills');
+$excluded_category_slugs = array('uncategorized', 'collection', 'infills', 'accessories');
 
 // Get term IDs for the excluded categories
 $excluded_category_ids = array();
@@ -57,11 +57,6 @@ if (!empty($category_filters)) {
 	<div
 		class="theme-white hero-content col-start-1 col-end-13 p-5 pt-10 md:p-10 xl:px-20 xl:py-10 flex flex-col justify-end">
 		<div class="collection-overview grid-sub">
-			<div class="collection-breadcrumbs">
-				<?php
-				do_action('woocommerce_before_main_content');
-				?>
-			</div>
 			<div class="collection-meta col-start-1 col-end-13">
 				<div class="content-heading">
 					<?php if (apply_filters('woocommerce_show_page_title', true)): ?>

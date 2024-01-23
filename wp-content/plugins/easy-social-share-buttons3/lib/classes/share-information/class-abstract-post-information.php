@@ -267,6 +267,10 @@ abstract class ESSB_Post_Information {
         
         if (essb_option_bool_value('customshare')) {
             $custom_global_share_title = essb_option_value('customshare_text');
+            
+            if ($custom_global_share_title != '') {
+                $title = $custom_global_share_title;
+            }
         }
         
         $post_essb_post_share_text = get_post_meta($post_id, 'essb_post_share_text', true);

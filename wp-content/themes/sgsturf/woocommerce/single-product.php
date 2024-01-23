@@ -221,10 +221,10 @@ if ($group_product->is_type('grouped')):
     <div
       class="theme-white content-full-container px-5 py-10 md:p-10 xl:p-20 col-start-1 col-end-13 grid-sub gap-4 md:gap-8 lg:gap-4">
       <div class="col-start-1 col-end-13 lg:col-start-1 lg:col-end-6">
-        <h2 class="h2">Request a Quote</h2>
+        <h2 class="h2">Get in contact with us about <?php echo esc_html($group_product->get_name()); ?></h2>
       </div>
       <div class="col-start-1 col-end-13 lg:col-start-7 lg:col-end-13">
-        <?php echo do_shortcode('[gravityform id="2" title="true" ajax=“true”]'); ?>
+        <?php echo do_shortcode('[gravityform id="5" title="true" ajax=“true”]'); ?>
       </div>
     </div>
   </section>

@@ -15,9 +15,8 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "postcss-import": "^15.1.0",
     "sass": "^1.65.1",
-    "tailwindcss": "^3.3.3",
-    "postcss-import": "^15.1.0"
-  },
-  "dependencies": {}
+    "tailwindcss": "^3.4.1"
+  }
 }
