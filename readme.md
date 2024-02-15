@@ -21,6 +21,8 @@ Follow these steps to install WordPress:
 7. Run 'npm run start' to make any edits that's involved with Tailwind
 8. Go to https://tailwindcss.com/ to learn more about tailwind's system
 9. More CSS styles are set within wp-content/sgsturf/assets/scss/, specifically tailwind.scss, where .grid-main is located
+10. Push to the remote git repo from the root folder, to include all the files
+11. You can grab the wp-config.php file for your local from the production folder
 
 ## Troubleshooting
 
