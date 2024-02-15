@@ -9,9 +9,8 @@ if (!defined('ABSPATH')) {
 
 get_header(); ?>
 
-<section class="grid-main hero hero-home md:min-h-[60vh]">
-  <div
-    class="hero-content col-start-1 col-end-13 order-2 md:col-start-1 md:col-end-7 md:order-1 lg:col-start-1 lg:col-end-7 px-5 py-10 md:p-10 xl:p-20 grid-sub content-center">
+<section class="grid-main hero hero-home md:min-h-[60vh] grid-rows-1">
+  <div class="hero-content row-start-1 col-start-1 col-end-13 order-2 md:col-start-1 md:col-span-6 px-5 py-10 md:p-10 xl:p-20 grid-sub content-center">
     <div class="content-heading-cta col-start-1 col-end-13 flex flex-col gap-5">
       <?php
       // Debug: Check if 'home' field group is returning anything
@@ -38,9 +37,7 @@ get_header(); ?>
       </div>
     </div>
   </div>
-  <div
-    class="hero-masonry flex gap-4 col-start-1 col-end-13 order-1 md:col-start-7 md:col-end-13 md:order-2 lg:col-start-7 lg:col-end-13">
-    <?php
+  <?php
     // Debug: Check if 'home' field group is returning anything
     $home_hero_image_1 = get_field('hero_image_1');
     $home_hero_image_2 = get_field('hero_image_2');
@@ -48,28 +45,24 @@ get_header(); ?>
     $home_hero_image_4 = get_field('hero_image_4');
     $home_hero_image_5 = get_field('hero_image_5');
     ?>
-    <div class="hero-masonry-col hidden lg:flex grow flex-col gap-4 justify-between">
-      <img src="<?php echo $home_hero_image_1 ?>" alt="Turf" class="hidden lg:block lg:grow">
-      <img src="<?php echo $home_hero_image_2 ?>" alt="Turf" class="hidden lg:block h-[283px]">
+  <div class="hero-masonry gap-4 hidden md:hidden row-start-1 lg:flex lg:col-start-7 lg:col-span-3">
+    <div class="hero-masonry-col lg:flex flex-col gap-4 justify-between w-full">
+      <img src="<?php echo $home_hero_image_1 ?>" alt="Turf" class="hidden lg:block w-full h-full grow">
+      <img src="<?php echo $home_hero_image_2 ?>" alt="Turf" class="hidden lg:block h-[283px] w-full">
     </div>
-    <div class="hero-masonry-col flex grow flex-col gap-4 justify-between w-full lg:w-auto">
-      <img src="<?php echo $home_hero_image_3 ?>" alt="Turf"
-        class="h-60 md:h-full lg:h-auto lg:grow xl:block object-right">
-      <img src="<?php echo $home_hero_image_4 ?>" alt="Turf" class="hidden lg:block h-[339px]">
-      <img src="<?php echo $home_hero_image_5 ?>" alt="Turf" class="hidden lg:block h-[112px]">
+  </div>
+  <div class="hero-masonry flex gap-4 row-start-1 col-start-1 col-end-13 order-1 md:col-start-7 md:col-end-13 md:order-2 lg:col-start-10 lg:col-end-13">
+    <div class="hero-masonry-col flex grow flex-col gap-4 justify-between w-full">
+      <img src="<?php echo $home_hero_image_3 ?>" alt="Turf" class="h-60 md:h-full lg:h-auto xl:block object-right w-full">
+      <img src="<?php echo $home_hero_image_4 ?>" alt="Turf" class="hidden lg:block h-[339px] w-full">
+      <img src="<?php echo $home_hero_image_5 ?>" alt="Turf" class="hidden lg:block h-[112px] w-full">
     </div>
   </div>
 </section>
 
 <section class="grid-main">
   <div class="col-start-1 col-span-full grid grid-cols-subgrid gap-x-4 gap-y-0 bg-[#E9EBE8] rounded-lg lg:items-center relative overflow-hidden">
-    <div class="
-      col-start-1 col-span-12 lg:col-start-1 lg:col-span-7 z-10
-      px-5 py-0 pt-[28rem] 
-      sm:pt-[34rem] 
-      md:p-10 md:pt-[34rem] md:pb-0 
-      lg:p-10 lg:pt-40
-      xl:p-20 xl:pt-40">
+    <div class="col-start-1 col-span-12 lg:col-start-1 lg:col-span-7 z-10 p-5 md:p-10 xl:p-20">
       <h2 class="text-xl lg:text-3xl font-bold">
         With over Two Million Square Feet<br />
         of Turf in Stock, we Promptly Ship<br />
@@ -77,7 +70,7 @@ get_header(); ?>
         Contractors and Homeowners alike.
       </h2>
     </div>
-    <div class="
+    <!-- <div class="
       absolute z-0 
       w-[600px] h-[600px] top-[-10%] left-[50%] translate-x-[-50%] 
       sm:w-[800px] sm:h-[800px] sm:top-[-20%]
@@ -86,8 +79,8 @@ get_header(); ?>
       xl:w-[1000px] xl:h-[1000px] xl:top-[-45%] xl:left-[45%]">
       <script type="module" src="https://unpkg.com/@splinetool/viewer@1.0.18/build/spline-viewer.js"></script>
       <spline-viewer class="w-full h-full" loading-anim-type="spinner-small-light" url="https://prod.spline.design/BaBpvMZp1txHU3FU/scene.splinecode"></spline-viewer>
-    </div>
-    <div class="col-start-1 col-span-12 px-5 py-10 md:p-10 xl:p-20 xl:pt-0 z-10">
+    </div> -->
+    <div class="col-start-1 col-span-12 z-10 p-5 pt-0 md:p-10 md:pt-0 xl:p-20 xl:pt-0">
       <div class="card-pattern grid grid-cols-1 sm:grid-cols-2 gap-8 justify-start content-start">
       <!-- Start Markets Repeater -->
       <?php

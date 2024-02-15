@@ -1283,6 +1283,10 @@ video {
   grid-column-end: 9;
 }
 
+.row-start-1 {
+  grid-row-start: 1;
+}
+
 .float-start {
   float: inline-start;
 }
@@ -1591,6 +1595,10 @@ video {
 
 .min-w-\[60px\] {
   min-width: 60px;
+}
+
+.min-w-\[230px\] {
+  min-width: 230px;
 }
 
 .flex-1 {
@@ -1959,6 +1967,10 @@ video {
 
 .grid-cols-subgrid {
   grid-template-columns: subgrid;
+}
+
+.grid-rows-1 {
+  grid-template-rows: repeat(1, minmax(0, 1fr));
 }
 
 .flex-row {
@@ -4279,6 +4291,10 @@ div.essb-copylink-window div.essb_morepopup_header span::before {
     grid-column-start: 8;
   }
 
+  .md\:col-start-10 {
+    grid-column-start: 10;
+  }
+
   .md\:col-end-10 {
     grid-column-end: 10;
   }
@@ -4309,6 +4325,10 @@ div.essb-copylink-window div.essb_morepopup_header span::before {
 
   .md\:col-end-8 {
     grid-column-end: 8;
+  }
+
+  .md\:col-end-9 {
+    grid-column-end: 9;
   }
 
   .md\:m-0 {
@@ -4342,6 +4362,14 @@ div.essb-copylink-window div.essb_morepopup_header span::before {
 
   .md\:inline-block {
     display: inline-block;
+  }
+
+  .md\:flex {
+    display: flex;
+  }
+
+  .md\:hidden {
+    display: none;
   }
 
   .md\:h-\[41px\] {
@@ -4399,6 +4427,10 @@ div.essb-copylink-window div.essb_morepopup_header span::before {
 
   .md\:p-10 {
     padding: 2.5rem;
+  }
+
+  .md\:p-20 {
+    padding: 5rem;
   }
 
   .md\:px-10 {
@@ -4478,6 +4510,18 @@ div.essb-copylink-window div.essb_morepopup_header span::before {
     grid-column: span 7 / span 7;
   }
 
+  .lg\:col-span-3 {
+    grid-column: span 3 / span 3;
+  }
+
+  .lg\:col-span-1 {
+    grid-column: span 1 / span 1;
+  }
+
+  .lg\:col-span-12 {
+    grid-column: span 12 / span 12;
+  }
+
   .lg\:col-start-1 {
     grid-column-start: 1;
   }
@@ -4496,6 +4540,14 @@ div.essb-copylink-window div.essb_morepopup_header span::before {
 
   .lg\:col-start-7 {
     grid-column-start: 7;
+  }
+
+  .lg\:col-start-10 {
+    grid-column-start: 10;
+  }
+
+  .lg\:col-start-8 {
+    grid-column-start: 8;
   }
 
   .lg\:col-end-10 {
@@ -4637,6 +4689,10 @@ div.essb-copylink-window div.essb_morepopup_header span::before {
 
   .lg\:p-10 {
     padding: 2.5rem;
+  }
+
+  .lg\:p-20 {
+    padding: 5rem;
   }
 
   .lg\:px-20 {
