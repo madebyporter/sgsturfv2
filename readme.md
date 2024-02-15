@@ -14,6 +14,13 @@ Follow these steps to install WordPress:
 
 1. Start your local development environment (MAMP or XAMPP).
 2. Clone this git repo
+3. Install Node.js via terminal
+4. Install NPM via terminal
+5. Go into folder via terminal 'cd /wp-content/themes/sgsturf'
+6. In terminal, run 'npm install', which should install the latest packages into the sgsturf theme folder, such as tailwind, scss, etc
+7. Run 'npm run start' to make any edits that's involved with Tailwind
+8. Go to https://tailwindcss.com/ to learn more about tailwind's system
+9. More CSS styles are set within wp-content/sgsturf/assets/scss/, specifically tailwind.scss, where .grid-main is located
 
 ## Troubleshooting
 
