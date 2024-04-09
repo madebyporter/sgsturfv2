@@ -41,33 +41,35 @@ ESSBOptionsStructureHelper::panel_start('style', 'buttons', esc_html__('Enable c
 
 $customizer_is_active = essb_options_bool_value('customizer_is_active');
 if ($customizer_is_active) {
-	ESSBOptionsStructureHelper::panel_start('style', 'buttons', esc_html__('Total Counter', 'essb'), '', 'fa21 ti-ruler-pencil', array("mode" => "toggle"));
-	ESSBOptionsStructureHelper::field_section_start_full_panels('style', 'buttons');
-	ESSBOptionsStructureHelper::field_color_panel('style', 'buttons', 'customizer_totalbgcolor', esc_html__('Background color', 'essb'), '');
-	ESSBOptionsStructureHelper::field_switch_panel('style', 'buttons', 'customizer_totalnobgcolor', esc_html__('Remove background color', 'essb'), '', '', esc_html__('Yes', 'essb'), esc_html__('No', 'essb'));
-	ESSBOptionsStructureHelper::field_color_panel('style', 'buttons', 'customizer_totalcolor', esc_html__('Text color', 'essb'), '');
-	ESSBOptionsStructureHelper::field_section_end_full_panels('style', 'buttons');
-	ESSBOptionsStructureHelper::field_section_start_full_panels('style', 'buttons');
-	ESSBOptionsStructureHelper::field_textbox_panel('style', 'buttons', 'customizer_totalfontsize', esc_html__('Total counter big style font-size', 'essb'), esc_html__('Enter value in px (ex: 21px) to change the total counter font-size', 'essb'));
-	ESSBOptionsStructureHelper::field_textbox_panel('style', 'buttons', 'customizer_totalfontsize_after', esc_html__('Total counter big style shares text font-size', 'essb'), esc_html__('Enter value in px (ex: 10px) to change the total counter shares text font-size', 'essb'));
-	ESSBOptionsStructureHelper::field_textbox_panel('style', 'buttons', 'customizer_totalfontsize_beforeafter', esc_html__('Total counter before/after share buttons text font-size', 'essb'), esc_html__('Enter value in px (ex: 14px) to change the total counter text font-size', 'essb'));
-	ESSBOptionsStructureHelper::field_section_end_full_panels('style', 'buttons');
+    ESSBOptionsStructureHelper::panel_start('style', 'buttons', esc_html__('Total Counter', 'essb'), '', 'fa21 ti-ruler-pencil', array("mode" => "toggle", 'state' => 'closed', 'css_class' => 'essb-auto-open'));
+	ESSBOptionsStructureHelper::field_color('style', 'buttons', 'customizer_totalbgcolor', esc_html__('Background color', 'essb'), '');
+	ESSBOptionsStructureHelper::field_switch('style', 'buttons', 'customizer_totalnobgcolor', esc_html__('Remove background color', 'essb'), '', '', esc_html__('Yes', 'essb'), esc_html__('No', 'essb'));
+	ESSBOptionsStructureHelper::field_color('style', 'buttons', 'customizer_totalcolor', esc_html__('Text color', 'essb'), '');
+	ESSBOptionsStructureHelper::field_textbox('style', 'buttons', 'customizer_totalfontsize', esc_html__('Total counter big style font-size', 'essb'), esc_html__('Enter value in px (ex: 21px) to change the total counter font-size', 'essb'));
+	ESSBOptionsStructureHelper::field_textbox('style', 'buttons', 'customizer_totalfontsize_after', esc_html__('Total counter big style shares text font-size', 'essb'), esc_html__('Enter value in px (ex: 10px) to change the total counter shares text font-size', 'essb'));
+	ESSBOptionsStructureHelper::field_textbox('style', 'buttons', 'customizer_totalfontsize_beforeafter', esc_html__('Total counter before/after share buttons text font-size', 'essb'), esc_html__('Enter value in px (ex: 14px) to change the total counter text font-size', 'essb'));
 	ESSBOptionsStructureHelper::panel_end('style', 'buttons');
 
-	ESSBOptionsStructureHelper::panel_start('style', 'buttons', esc_html__('Background Colors, Icon Size, Network Name Size for All Networks', 'essb'), '', 'fa21 ti-ruler-pencil', array("mode" => "toggle"));
-	ESSBOptionsStructureHelper::field_section_start_full_panels('style', 'buttons');
-	ESSBOptionsStructureHelper::field_color_panel('style', 'buttons', 'customizer_bgcolor', esc_html__('Background color', 'essb'), '');
-	ESSBOptionsStructureHelper::field_color_panel('style', 'buttons', 'customizer_textcolor', esc_html__('Text color', 'essb'), '');
-	ESSBOptionsStructureHelper::field_color_panel('style', 'buttons', 'customizer_hovercolor', esc_html__('Hover background color', 'essb'), '');
-	ESSBOptionsStructureHelper::field_color_panel('style', 'buttons', 'customizer_hovertextcolor', esc_html__('Hover text color', 'essb'), '');
-	ESSBOptionsStructureHelper::field_switch_panel('style', 'buttons', 'customizer_remove_bg_hover_effects', esc_html__('Remove effects applied from theme on hover', 'essb'), esc_html__('Activate this option to remove the default theme hover effects (like darken or lighten color).', 'essb'), '', esc_html__('Yes', 'essb'), esc_html__('No', 'essb'));
-	ESSBOptionsStructureHelper::field_section_end_full_panels('style', 'buttons');
-	ESSBOptionsStructureHelper::field_section_start_full_panels('style', 'buttons');
-	ESSBOptionsStructureHelper::field_textbox_panel('style', 'buttons', 'customizer_iconsize', esc_html__('Icon size', 'essb'), esc_html__('Provide custom icon size value. Default value for almost all templates is 18. Please enter value without any symbols before/after it - example: 22', 'essb'));
-	ESSBOptionsStructureHelper::field_textbox_panel('style', 'buttons', 'customizer_namesize', esc_html__('Network name font size', 'essb'), esc_html__('Enter value in px (ex: 10px) to change the network name text font-size', 'essb'));
-	ESSBOptionsStructureHelper::field_switch_panel('style', 'buttons', 'customizer_namebold', esc_html__('Make network name bold', 'essb'), esc_html__('Activate this option to apply bold style over network name', 'essb'), '', esc_html__('Yes', 'essb'), esc_html__('No', 'essb'));
-	ESSBOptionsStructureHelper::field_switch_panel('style', 'buttons', 'customizer_nameupper', esc_html__('Make network name upper case', 'essb'), esc_html__('Activate this option to apply automatic transform to upper case over network name', 'essb'), '', esc_html__('Yes', 'essb'), esc_html__('No', 'essb'));
-	ESSBOptionsStructureHelper::field_section_end_full_panels('style', 'buttons');
+	ESSBOptionsStructureHelper::panel_start('style', 'buttons', esc_html__('Background Colors, Icon Size, Network Name Size for All Networks', 'essb'), '', 'fa21 ti-ruler-pencil', array("mode" => "toggle", 'state' => 'closed', 'css_class' => 'essb-auto-open'));
+	
+	ESSBOptionsStructureHelper::field_heading('style', 'buttons', 'heading7', esc_html__('Colors', 'essb'), '', 'pb0', '<i class="ti-ruler-pencil"></i>');
+	ESSBOptionsStructureHelper::holder_start('style', 'buttons', 'essb-related-heading7 mb40', '');	
+	ESSBOptionsStructureHelper::field_color('style', 'buttons', 'customizer_bgcolor', esc_html__('Background color', 'essb'), '');
+	ESSBOptionsStructureHelper::field_color('style', 'buttons', 'customizer_textcolor', esc_html__('Text color', 'essb'), '');
+	ESSBOptionsStructureHelper::field_color('style', 'buttons', 'customizer_hovercolor', esc_html__('Hover background color', 'essb'), '');
+	ESSBOptionsStructureHelper::field_color('style', 'buttons', 'customizer_hovertextcolor', esc_html__('Hover text color', 'essb'), '');
+	ESSBOptionsStructureHelper::field_switch('style', 'buttons', 'customizer_remove_bg_hover_effects', esc_html__('Remove effects applied from theme on hover', 'essb'), esc_html__('Activate this option to remove the default theme hover effects (like darken or lighten color).', 'essb'), '', esc_html__('Yes', 'essb'), esc_html__('No', 'essb'));
+	ESSBOptionsStructureHelper::holder_end('style', 'buttons');
+	
+	ESSBOptionsStructureHelper::field_heading('style', 'buttons', 'heading7', esc_html__('Sizes', 'essb'), '', 'pb0', '<i class="ti-ruler-pencil"></i>');
+	ESSBOptionsStructureHelper::holder_start('style', 'buttons', 'essb-related-heading7 mb40', '');
+	
+	ESSBOptionsStructureHelper::field_textbox('style', 'buttons', 'customizer_iconsize', esc_html__('Icon size', 'essb'), esc_html__('Provide custom icon size value. Default value for almost all templates is 18. Please enter value without any symbols before/after it - example: 22', 'essb'));
+	ESSBOptionsStructureHelper::field_textbox('style', 'buttons', 'customizer_icon_block_size', esc_html__('Size of the icon block', 'essb'), esc_html__('Numeric value (example: 40). Set the width and height of the icon block element, overwriting the default.', 'essb'));
+	ESSBOptionsStructureHelper::field_textbox('style', 'buttons', 'customizer_namesize', esc_html__('Network name font size', 'essb'), esc_html__('Enter value in px (ex: 10px) to change the network name text font-size', 'essb'));
+	ESSBOptionsStructureHelper::field_switch('style', 'buttons', 'customizer_namebold', esc_html__('Make network name bold', 'essb'), esc_html__('Activate this option to apply bold style over network name', 'essb'), '', esc_html__('Yes', 'essb'), esc_html__('No', 'essb'));
+	ESSBOptionsStructureHelper::field_switch('style', 'buttons', 'customizer_nameupper', esc_html__('Make network name upper case', 'essb'), esc_html__('Activate this option to apply automatic transform to upper case over network name', 'essb'), '', esc_html__('Yes', 'essb'), esc_html__('No', 'essb'));
+	ESSBOptionsStructureHelper::holder_end('style', 'buttons');
 	ESSBOptionsStructureHelper::panel_end('style', 'buttons');
 
 	ESSBOptionsStructureHelper::panel_start('style', 'buttons', esc_html__('Colors and Icon change for every network', 'essb'), '', 'fa21 fa fa-cogs', array("mode" => "switch", 'switch_id' => 'customizer_network_is_active', 'switch_on' => esc_html__('Yes', 'essb'), 'switch_off' => esc_html__('No', 'essb'), 'switch_submit' => 'true'));
@@ -132,23 +134,24 @@ if (!essb_option_bool_value('deactivate_ctt')) {
 function essb3_prepare_color_customization_by_network($tab_id, $menu_id) {
 	global $essb_networks;
 
+	$list = essb_available_social_networks();
+	
 	$checkbox_list_networks = array();
-	foreach ($essb_networks as $key => $object) {
+	foreach ($list as $key => $object) {
 		$checkbox_list_networks[$key] = $object['name'];
 	}
 
 	foreach ($checkbox_list_networks as $key => $text) {
-		ESSBOptionsStructureHelper::panel_start($tab_id, $menu_id, $text, esc_html__('Configure additional options for this network', 'essb'), 'fa21 essb_icon_'.$key, array("mode" => "toggle", 'state' => 'closed'));
-		ESSBOptionsStructureHelper::field_section_start_full_panels($tab_id, $menu_id);
-		ESSBOptionsStructureHelper::field_color_panel($tab_id, $menu_id, 'customizer_'.$key.'_bgcolor', esc_html__('Background color', 'essb'), '');
-		ESSBOptionsStructureHelper::field_color_panel($tab_id, $menu_id, 'customizer_'.$key.'_textcolor', esc_html__('Text color', 'essb'), '');
-		ESSBOptionsStructureHelper::field_color_panel($tab_id, $menu_id, 'customizer_'.$key.'_hovercolor', esc_html__('Hover background color', 'essb'), '');
-		ESSBOptionsStructureHelper::field_color_panel($tab_id, $menu_id, 'customizer_'.$key.'_hovertextcolor', esc_html__('Hover text color', 'essb'), '');
-		ESSBOptionsStructureHelper::field_section_end_full_panels($tab_id, $menu_id);
-		ESSBOptionsStructureHelper::field_file($tab_id, $menu_id, 'customizer_'.$key.'_icon', esc_html__('Icon', 'essb'), '');
-		ESSBOptionsStructureHelper::field_textbox($tab_id, $menu_id, 'customizer_'.$key.'_iconbgsize', esc_html__('Background size for regular icon', 'essb'), esc_html__('Provide custom background size if needed (for retina templates default used is 21px 21px)', 'essb'));
-		ESSBOptionsStructureHelper::field_file($tab_id, $menu_id, 'customizer_'.$key.'_hovericon', esc_html__('Hover icon', 'essb'), '');
-		ESSBOptionsStructureHelper::field_textbox($tab_id, $menu_id, 'customizer_'.$key.'_hovericonbgsize', esc_html__('Hover background size for regular icon', 'essb'), esc_html__('Provide custom background size if needed (for retina templates default used is 21px 21px)', 'essb'));
+	    $button = '<br/><span class="ao-new-subscribe-design essb-settings-upload-svg-icon" data-for="essb_options_customizer_'.$key.'_svgicon" data-picker="ao-svg-file-'.$key.'"><span class="essb_icon fa fa-upload"></span><span>Upload</span></span>';
+	    $button .= '<input type="file" name="ao-svg-file-'.$key.'" id="ao-svg-file-'.$key.'" class="ao-hidden" accept=".svg"/>';
+	    
+	    
+		ESSBOptionsStructureHelper::panel_start($tab_id, $menu_id, $text, '', 'fa21 essb_icon_'.$key, array("mode" => "toggle", 'state' => 'closed'));
+		ESSBOptionsStructureHelper::field_color($tab_id, $menu_id, 'customizer_'.$key.'_bgcolor', esc_html__('Background color', 'essb'), '');
+		ESSBOptionsStructureHelper::field_color($tab_id, $menu_id, 'customizer_'.$key.'_textcolor', esc_html__('Text color', 'essb'), '');
+		ESSBOptionsStructureHelper::field_color($tab_id, $menu_id, 'customizer_'.$key.'_hovercolor', esc_html__('Hover background color', 'essb'), '');
+		ESSBOptionsStructureHelper::field_color($tab_id, $menu_id, 'customizer_'.$key.'_hovertextcolor', esc_html__('Hover text color', 'essb'), '');
+		//ESSBOptionsStructureHelper::field_textarea($tab_id, $menu_id, 'customizer_'.$key.'_svgicon', esc_html__('SVG icon', 'essb') . $button, esc_html__('Provide your own custom SVG icon for this social network. Recommended is to be a single color SVG icon with a fill style.', 'essb'));
 		ESSBOptionsStructureHelper::panel_end($tab_id, $menu_id);
 	}
 }

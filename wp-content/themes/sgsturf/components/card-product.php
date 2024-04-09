@@ -2,6 +2,7 @@
 function card($args)
 {
   $defaults = array(
+    'product_id' => 0,
     'product_name' => '',
     'product_category' => array(),
     'product_link' => '',
@@ -51,7 +52,17 @@ function card($args)
       <?php if ($args['is_series'] && $args['product_link']): ?>
         <a href="<?php echo esc_url($args['product_link']); ?>"
           class="group/button flex flex-wrap gap-4 items-center content-between justify-between w-auto p-2 rounded-md cursor-pointer bg-transparent hover:bg-black border border-black text-black hover:text-white before:hidden after:hidden">
-          <span class="text-base font-bold tracking-tight leading-none whitespace-nowrap">View Series</span>
+          <?php
+            // Get the current post object
+            global $post;
+
+            // Check if the post title contains the word 'accessories'
+            if ( strpos( strtolower( $post->post_title ), 'accessories' ) !== false ) {
+                echo '<span class="text-base font-bold tracking-tight leading-none whitespace-nowrap">View Product</span>';
+            } else {
+                echo '<span class="text-base font-bold tracking-tight leading-none whitespace-nowrap">View Series</span>';
+            }
+          ?>
           <span class="flex items-center bg-black justify-center rounded-full w-5 h-5 group-hover/button:bg-white">
             <svg class="w-2.5	h-2.5" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path
@@ -68,26 +79,50 @@ function card($args)
       <!-- Start Card Specs -->
       <?php if (!empty($args['product_specs'])): ?>
         <div class="group product-specs rounded-lg px-3 md:px-5 pb-16 flex flex-col gap-2">
-          <?php foreach ($args['product_specs'] as $spec_key => $spec_value): ?>
-            <div class="border-t border-stone-500 flex justify-between text-sm text-black pt-1">
-              <div>
-                <?php echo esc_html(ucwords(str_replace('_', ' ', $spec_key))); ?>:
-              </div>
-              <div class="font-bold">
-                <?php
-                if (is_array($spec_value) && $spec_key === 'Blade_Colors') {
-                  echo '<ul>';
-                  foreach ($spec_value as $color) {
-                    echo '<li class="text-right">' . esc_html($color) . '</li>';
+          <?php 
+          // Assuming $is_accessory is a boolean indicating if the current product is an accessory
+          $is_accessory = has_term('accessories', 'product_cat', $args['product_id']);
+
+          if (!$is_accessory): // If the product is not an accessory, display all specs
+            foreach ($args['product_specs'] as $spec_key => $spec_value): ?>
+              <div class="border-t border-stone-500 flex justify-between text-sm text-black pt-1">
+                <div>
+                  <?php echo esc_html(ucwords(str_replace('_', ' ', $spec_key))); ?>:
+                </div>
+                <div class="font-bold">
+                  <?php
+                  if (is_array($spec_value) && $spec_key === 'Blade_Colors') {
+                    echo '<ul>';
+                    foreach ($spec_value as $color) {
+                      echo '<li class="text-right">' . esc_html($color) . '</li>';
+                    }
+                    echo '</ul>';
+                  } else {
+                    echo esc_html($spec_value);
                   }
-                  echo '</ul>';
-                } else {
-                  echo esc_html($spec_value);
-                }
+                  ?>
+                </div>
+              </div>
+            <?php endforeach;
+          elseif ($is_accessory): // If the product is an accessory, display only 'Spec Detail'
+            ?>
+            <div class="border-t border-stone-500 flex flex-col justify-start text-sm text-black pt-1">
+              <div>
+                Spec Detail:
+              </div>
+              <div class="font-normal">
+                <?php 
+                  // Access the 'Spec Detail' value directly
+                  if (isset($args['product_specs']['Spec Detail'])) {
+                    $spec_detail = $args['product_specs']['Spec Detail']; 
+                    echo esc_html($spec_detail);
+                  } else {
+                    echo "No Specs Available";
+                  }
                 ?>
               </div>
             </div>
-          <?php endforeach; ?>
+          <?php endif; ?>
         </div>
       <?php endif; ?>
 

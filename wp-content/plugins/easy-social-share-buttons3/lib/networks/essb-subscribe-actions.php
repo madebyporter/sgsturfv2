@@ -236,6 +236,15 @@ class ESSBNetworks_SubscribeActions {
 			    
 			    $output = self::subscribe_acelle($subscribe_acelle_url, $subscribe_acelle_api, $subscribe_acelle_listid, $user_email, $user_name);
 			    break;
+			    
+			case 'mailwizz':
+			    $subscribe_mailwizz_url = essb_option_value('subscribe_mailwizz_url');
+			    $subscribe_mailwizz_api = essb_option_value('subscribe_mailwizz_api');
+			    $subscribe_mailwizz_listid = essb_option_value('subscribe_mailwizz_listid');
+			    
+			    $output = self::subscribe_mailwizz($subscribe_mailwizz_url, $subscribe_mailwizz_api, $subscribe_mailwizz_listid, $user_email, $user_name);
+			    break;
+			    
 			default:
 				$output['code'] = '99';
 				$output['message'] = esc_html__('Service is not supported', 'essb');
@@ -257,6 +266,108 @@ class ESSBNetworks_SubscribeActions {
 		}
 
 		return $output;
+	}
+	
+	public static function subscribe_mailwizz($api_url, $api_token, $api_list, $email, $name = '') {
+	    $debug_mode = isset($_REQUEST['debug']) ? $_REQUEST['debug'] : '';
+	    $response = array();
+	    
+	    try {
+	        
+	        if (!empty($api_url) && !empty($api_token) && !empty($api_list)) {
+	            $headers = array(
+	                'X-API-KEY: '.$api_token
+	            );
+	            
+	            
+	            $url_validate = $api_url .  '/lists/'.$api_list.'/subscribers/search-by-email?EMAIL='.urlencode($email);	            
+	            
+	            
+	            $curl = curl_init($url_validate);
+	            curl_setopt ( $curl, CURLOPT_HTTPHEADER, $headers );
+	            curl_setopt($curl, CURLOPT_USERAGENT, 'MailWizzApi Client version 2.0');	            
+	            curl_setopt($curl, CURLOPT_TIMEOUT, 120);
+	            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+	            curl_setopt($curl, CURLOPT_FORBID_REUSE, true);
+	            curl_setopt($curl, CURLOPT_FRESH_CONNECT, true);
+	            curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
+	            curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+	            $response_api = curl_exec($curl);
+	            curl_close($curl);
+	            
+	            $result = json_decode($response_api, true);
+	            
+	            if ($debug_mode == 'true') {
+	                print_r($result);
+	            }
+	            
+	            if ($result['status'] != 'success') {
+	                // Add user to the list
+	                $url_add_to_list = $api_url . '/lists/'.$api_list.'/subscribers';
+	                $data_add_to_list = array(
+	                    'EMAIL' => $email,
+	                    'details' => array('ip_address' => $_SERVER['REMOTE_ADDR'])	                    
+	                );
+	                
+	                if (!empty($name)) {
+	                    $fname = $name;
+	                    $lname = '';
+	                    if ($space_pos = strpos($name, ' ')) {
+	                        $fname = substr($name, 0, $space_pos);
+	                        $lname = substr($name, $space_pos);
+	                    }
+	                    
+	                    $data_add_to_list['FNAME'] = $fname;
+	                    $data_add_to_list['LNAME'] = $lname;
+	                }
+	                
+	                $request = http_build_query($data_add_to_list);
+	                
+	                $curl = curl_init($url_add_to_list);
+	                curl_setopt($curl, CURLOPT_HTTPHEADER, $headers );
+	                curl_setopt($curl, CURLOPT_POST, true);
+	                curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($data_add_to_list, '', '&'));
+	                curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'POST');
+	                curl_setopt($curl, CURLOPT_USERAGENT, 'MailWizzApi Client version 2.0');
+	                curl_setopt($curl, CURLOPT_TIMEOUT, 120);
+	                curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+	                curl_setopt($curl, CURLOPT_FORBID_REUSE, true);
+	                curl_setopt($curl, CURLOPT_FRESH_CONNECT, true);
+	                curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
+	                curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+	                $response_api = curl_exec($curl);
+	                curl_close($curl);
+	                
+	                if ($debug_mode == 'true') {
+	                    print_r($response_api);
+	                }
+	                
+	                $response ['code'] = '1';
+	                $response ['message'] = 'Thank you';
+	            }
+	            else {
+	                $response ['code'] = '1';
+	                $response ['message'] = 'Thank you';
+	            }
+	        }
+	        else {
+	            // not configured
+	            $response ['code'] = "99";
+	            $response ['message'] = esc_html__( 'Missing connection', 'essb' );
+	        }
+	        
+	    } catch (Exception $e) {
+	        
+	        if ($debug_mode == 'true') {
+	            print_r($e);
+	        }
+	        $result = false;
+	        
+	        $response ['code'] = "99";
+	        $response ['message'] = esc_html__( 'Missing connection', 'essb' );
+	    }
+	    
+	    return $response;
 	}
 	
 	public static function subscribe_acelle($api_url, $api_token, $api_list, $email, $name = '') {

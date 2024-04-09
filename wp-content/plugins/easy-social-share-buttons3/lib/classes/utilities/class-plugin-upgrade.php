@@ -33,6 +33,10 @@ class ESSB_Plugin_Upgrade_Version {
             self::v795_upgrade();
         }
         
+        if ( version_compare( self::$version, '9.4', '<' ) ) {
+            self::v94_upgrade();
+        }
+        
         
         if ( version_compare( self::$version, ESSB3_VERSION, '<>' ) ) {
             self::$upgraded = true;
@@ -85,6 +89,28 @@ class ESSB_Plugin_Upgrade_Version {
             if (isset($exist_settings['shorturl_activate']) && $exist_settings['shorturl_activate'] == 'true') {
                 $exist_settings['legacy_shorturl_cache'] = 'true';
             }
+            
+            /**
+             * Save options if modified
+             */
+            if ($options_modified) {
+                update_option(ESSB3_OPTIONS_NAME, $exist_settings);
+            }
+        }
+        
+        self::$upgraded = true;
+    }
+ 
+    private static function v94_upgrade() {
+        $exist_settings = get_option(ESSB3_OPTIONS_NAME);
+        
+        if (!empty($exist_settings)) {
+            $options_modified = true;
+            
+            $exist_settings['share_twitter_icon_type'] = 'x';
+            $exist_settings['follow_twitter_icon_type'] = 'x';
+            $exist_settings['profiles_twitter_icon_type'] = 'x';
+                        
             
             /**
              * Save options if modified

@@ -36,16 +36,25 @@ class JobRestore extends AbstractJob
     /** @var array The array of tasks to execute for this job. Populated at init(). */
     protected $tasks = [];
 
+    /**
+     * @return string
+     */
     public static function getJobName(): string
     {
         return 'backup_restore';
     }
 
+    /**
+     * @return array
+     */
     protected function getJobTasks(): array
     {
         return $this->tasks;
     }
 
+    /**
+     * @return void
+     */
     public function onWpShutdown()
     {
         if ($this->jobDataDto->isFinished()) {
@@ -55,6 +64,9 @@ class JobRestore extends AbstractJob
         parent::onWpShutdown();
     }
 
+    /**
+     * @return TaskResponseDto
+     */
     protected function execute(): TaskResponseDto
     {
         //$this->startBenchmark();
@@ -73,6 +85,7 @@ class JobRestore extends AbstractJob
 
     /**
      * @throws \Exception
+     * @return void
      */
     protected function init()
     {
@@ -147,14 +160,6 @@ class JobRestore extends AbstractJob
     }
 
     /**
-     * @return void
-     */
-    protected function addMultisiteTasks()
-    {
-        // no-op
-    }
-
-    /**
      * @param BackupMetadata $backupMetadata
      * @return bool
      */
@@ -202,31 +207,12 @@ class JobRestore extends AbstractJob
     /**
      * @return void
      */
-    private function addDatabaseTasks()
+    protected function addDatabaseTasks()
     {
-        $metadata = $this->jobDataDto->getBackupMetadata();
-        if ($metadata->getIsMultipartBackup()) {
-            foreach ($metadata->getMultipartMetadata()->getDatabaseParts() as $ignored) {
-                $this->tasks[] = RestoreDatabaseTask::class;
-            }
-        } else {
-            $this->tasks[] = RestoreDatabaseTask::class;
-        }
-
-        $this->addMultisiteTasks();
-        $this->addNetworkSiteTasks();
-
+        $this->tasks[] = RestoreDatabaseTask::class;
         $this->tasks[] = UpdateBackupsScheduleTask::class;
         $this->tasks[] = RenameDatabaseTask::class;
         $this->tasks[] = CleanupTmpTablesTask::class;
-    }
-
-    /**
-     * @return void
-     */
-    protected function addNetworkSiteTasks()
-    {
-        // no-op
     }
 
     /**

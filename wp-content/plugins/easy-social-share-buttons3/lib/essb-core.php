@@ -190,6 +190,13 @@ class ESSBCore {
 		}
 		
 		/**
+		 * @since 9.4 - loading icon font separately
+		 */
+		if (essb_option_bool_value('legacy_icon_font')) {
+		    essb_resource_builder()->add_static_resource(ESSB3_PLUGIN_URL.'/assets/css/essb-legacy-icon-font'.$use_minifed_css.'.css', 'easy-social-share-buttons-font', 'css');
+		}
+		
+		/**
 		 * @since 8.3 - development filter for loading stylesheet
 		 */
 		if (has_filter('essb_get_the_share_stylesheet_file')) {

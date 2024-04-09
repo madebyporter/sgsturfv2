@@ -823,6 +823,16 @@ class ESSBAdminControler {
 		wp_register_style ( 'essb-admin3-style', $template_file, array (), ESSB3_VERSION );
 		wp_enqueue_style ( 'essb-admin3-style' );
 		
+		if (class_exists('ESSB_Register_Custom_Networks')) {
+		    wp_add_inline_style('essb-admin3-style', ESSB_Factory_Loader::get('register-custom-networks')->get_button_styles() . ESSB_Factory_Loader::get('register-custom-networks')->get_admin_styles());
+		}
+		
+		/**
+		 * @since 9.4 Loading legacy styles in the admin
+		 */
+		wp_register_style ( 'essb-admin3-style-legacy-font', ESSB3_PLUGIN_URL.'/assets/css/essb-legacy-icon-font.min.css', array (), ESSB3_VERSION );
+		wp_enqueue_style ( 'essb-admin3-style-legacy-font' );
+		
 		/**
 		 * @since 8.4 - the new Click to Tweet styles
 		 */

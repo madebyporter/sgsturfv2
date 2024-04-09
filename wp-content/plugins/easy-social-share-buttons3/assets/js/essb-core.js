@@ -217,9 +217,7 @@ jQuery(document).ready(function($){
 
 		if (typeof(essb_settings) != "undefined") {
 			if (essb_settings.essb3_stats) {
-				if (typeof(essb_handle_stats) != "undefined")
-					essb_handle_stats(service, instance_post_id, instance);
-
+				essb.handleInternalStats(service, instance_post_id, instance);
 			}
 
 			if (essb_settings.essb3_ga)
@@ -264,9 +262,7 @@ jQuery(document).ready(function($){
 
 		if (typeof(essb_settings) != "undefined") {
 			if (essb_settings.essb3_stats) {
-				if (typeof(essb_log_stats_only) != "undefined")
-					essb_log_stats_only(service, essb_settings["post_id"] || '', custom_position);
-
+				essb.handleLogInternalStats(service, essb_settings["post_id"] || '', custom_position);
 			}
 
 			if (essb_settings.essb3_ga)
@@ -837,6 +833,57 @@ jQuery(document).ready(function($){
 		if (!$(element).length) canRun = false;
 
 		return canRun;
+	};
+	
+	essb.handleInternalStats = function(service, postID, instance) {
+		let element = document.querySelector('.essb_' + instance);
+		if (element) {
+			let instance_postion = element.getAttribute('data-essb-position') || '',
+				instance_template = element.getAttribute('data-essb-template') || '',
+				instance_button = element.getAttribute('data-essb-button-style') || '',
+				instance_counters = element.classList.contains('essb_counters'),
+				instance_nostats = element.classList.contains('essb_nostats');
+			
+			if (instance_nostats) return;
+			
+			essb.logInternalStats(service, postID, instance_postion, instance_template, instance_button, instance_counters);
+		}
+	}
+	
+	essb.handleLogInternalStats = function(service, postId, position) {
+		essb.logInternalStats(service, postId, position, position, position, false);
+	}
+	
+	essb.logInternalStats = function(service, postId, position, template, senderButton, usingCounters) {
+		let instanceIsMobile = false;
+		
+		if( (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i).test(navigator.userAgent) )
+			instanceIsMobile = true;
+		
+		if (typeof(essb_settings) != "undefined") {
+			fetch(essb_settings.ajax_url, {
+				method: 'POST',
+			    headers: {
+			    	'Content-Type': 'application/x-www-form-urlencoded',                 
+			        'Accept': '*/*' 
+			    },            
+			    body: new URLSearchParams({
+			    	'action': 'essb_stat_log',
+			    	'post_id': postId,
+			    	'service': service,
+			    	'template': template,
+			    	'mobile': instanceIsMobile,
+			    	'position': position,
+			    	'button': senderButton,
+			    	'counter': usingCounters,
+			    	'nonce': essb_settings.essb3_nonce
+			    })
+			}).then(response => response.text())
+		    .then(data => console.log(data));
+		}
+		else {
+			console.log('[error] essb.logInternalStats: Missing configuration data')
+		}
 	};
 
 	window.essb = essb;

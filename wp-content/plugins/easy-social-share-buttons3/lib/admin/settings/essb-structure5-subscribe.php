@@ -68,7 +68,8 @@ $optin_connectors = array("mailchimp" => "MailChimp",
 		"madmimi" => "Mad Mimi",
 		"conversio" => "Conversio",
         'fluentcrm' => 'FluentCRM',
-        'acelle' => 'Acelle - Email Marketing'
+        'acelle' => 'Acelle - Email Marketing',
+        'mailwizz' => 'MailWizz'
 );
 
 if (has_filter('essb_external_subscribe_connectors')) {
@@ -410,6 +411,13 @@ ESSBOptionsStructureHelper::field_textbox_stretched('subscribe', 'optin-1', 'sub
 ESSBOptionsStructureHelper::panel_end('subscribe', 'optin-1');
 ESSBOptionsStructureHelper::holder_end('subscribe', 'optin-1');
 
+ESSBOptionsStructureHelper::holder_start('subscribe', 'optin-1', 'essb-subscribe-connector', 'essb-subscribe-connector-mailwizz');
+ESSBOptionsStructureHelper::panel_start('subscribe', 'optin-1', esc_html__('MailWizz', 'essb'), '', 'fa21 fa fa-cogs', array("mode" => "toggle"));
+ESSBOptionsStructureHelper::field_textbox_stretched('subscribe', 'optin-1', 'subscribe_mailwizz_url', esc_html__('MailWizz API URL', 'essb'), '');
+ESSBOptionsStructureHelper::field_textbox_stretched('subscribe', 'optin-1', 'subscribe_mailwizz_api', esc_html__('Public API key', 'essb'), '');
+ESSBOptionsStructureHelper::field_textbox_stretched('subscribe', 'optin-1', 'subscribe_mailwizz_listid', esc_html__('List ID', 'essb'), '');
+ESSBOptionsStructureHelper::panel_end('subscribe', 'optin-1');
+ESSBOptionsStructureHelper::holder_end('subscribe', 'optin-1');
 
 $custom_connectors = array();
 $custom_connectors_options = array();

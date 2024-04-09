@@ -35,6 +35,55 @@ get_header(); ?>
   </div>
 </section>
 
+<section id="markets" class="grid-main content-full">
+  <?php
+  $locations_markets_title = get_field('our_locations_title');
+  ?>
+  <div class="theme-pale-green content-full-container px-5 py-10 md:p-10 xl:p-20 col-start-1 col-end-13">
+    <div class="content-full-row grid-sub mb-10">
+      <div class="content-heading col-start-1 col-end-13 mb-2 md:mb-0 md:col-start-1 md:col-end-6">
+
+        <h2 class="h2">
+          <?php echo $locations_markets_title ?>
+        </h2>
+      </div>
+    </div>
+    <div class="card-pattern grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-start content-start">
+      <!-- Start Markets Repeater -->
+      <?php
+      if (have_rows('our_locations')):
+        while (have_rows('our_locations')):
+          the_row();
+
+          if (have_rows('markets')):
+            while (have_rows('markets')):
+              the_row();
+              $market_name = get_sub_field('market_name');
+              $market_image = get_sub_field('market_image');
+              ?>
+              <div class="card bg-white rounded-lg flex flex-col justify-start overflow-hidden w-full">
+                <div class="card-top px-2.5 py-5 lg:px-5 lg:py-10">
+                  <h3 class="h3 text-center">
+                    <?php echo $market_name; ?>
+                  </h3>
+                </div>
+                <div class="card-bottom bg-white rounded-lg h-full min-h-[256px] relative overflow-hidden">
+                  <img src="<?php echo esc_url($market_image); ?>" alt="<?php echo esc_attr($market_name); ?>"
+                    class="absolute bottom-0 h-full w-full object-cover object-center" />
+                </div>
+              </div>
+              <?php
+            endwhile;
+          endif;
+
+        endwhile;
+      endif;
+      ?>
+      <!-- End Markets Repeater -->
+    </div>
+  </div>
+</section>
+
 <section id="products" class="grid-main content-full">
   <?php
   // Debug: Check if 'locations' field group is returning anything
@@ -110,55 +159,6 @@ get_header(); ?>
 
         </div>
       </div>
-    </div>
-  </div>
-</section>
-
-<section id="markets" class="grid-main content-full">
-  <?php
-  $locations_markets_title = get_field('our_locations_title');
-  ?>
-  <div class="theme-pale-green content-full-container px-5 py-10 md:p-10 xl:p-20 col-start-1 col-end-13">
-    <div class="content-full-row grid-sub mb-10">
-      <div class="content-heading col-start-1 col-end-13 mb-2 md:mb-0 md:col-start-1 md:col-end-6">
-
-        <h2 class="h2">
-          <?php echo $locations_markets_title ?>
-        </h2>
-      </div>
-    </div>
-    <div class="card-pattern grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-start content-start">
-      <!-- Start Markets Repeater -->
-      <?php
-      if (have_rows('our_locations')):
-        while (have_rows('our_locations')):
-          the_row();
-
-          if (have_rows('markets')):
-            while (have_rows('markets')):
-              the_row();
-              $market_name = get_sub_field('market_name');
-              $market_image = get_sub_field('market_image');
-              ?>
-              <div class="card bg-white rounded-lg flex flex-col justify-start overflow-hidden w-full">
-                <div class="card-top px-2.5 py-5 lg:px-5 lg:py-10">
-                  <h3 class="h3 text-center">
-                    <?php echo $market_name; ?>
-                  </h3>
-                </div>
-                <div class="card-bottom bg-white rounded-lg h-full min-h-[256px] relative overflow-hidden">
-                  <img src="<?php echo esc_url($market_image); ?>" alt="<?php echo esc_attr($market_name); ?>"
-                    class="absolute bottom-0 h-full w-full object-cover object-center" />
-                </div>
-              </div>
-              <?php
-            endwhile;
-          endif;
-
-        endwhile;
-      endif;
-      ?>
-      <!-- End Markets Repeater -->
     </div>
   </div>
 </section>

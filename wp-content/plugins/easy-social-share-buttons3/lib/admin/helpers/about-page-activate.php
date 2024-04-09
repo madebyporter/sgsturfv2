@@ -178,6 +178,8 @@ $show_development_message = !$is_activated && !$is_theme_integrated && ESSBActiv
 	var essb_api_url = "<?php echo esc_url(ESSBActivationManager::getApiUrl('api')); ?>";
 	var essb_ajax_url = "<?php echo esc_url(admin_url ('admin-ajax.php')); ?>";
 
+	var essb_api_security_token = "<?php echo wp_create_nonce('essb_activate_nonce_token'); ?>";
+
 	var essb_used_purchasecode = "<?php echo esc_url(ESSBActivationManager::getPurchaseCode()); ?>";
 	var essb_used_activationcode = "<?php echo esc_url(ESSBActivationManager::getActivationCode()); ?>";
 	
@@ -301,7 +303,7 @@ $show_development_message = !$is_activated && !$is_theme_integrated && ESSBActiv
 		                	$.ajax({
 		    		            type: "POST",
 		    		            url: essb_ajax_url,
-		    		            data: { 'action': 'essb_process_activation', 'purchase_code': purchase_code, 'activation_code': activation_code, 'activation_state': 'activate'},
+		    		            data: { 'action': 'essb_process_activation', 'purchase_code': purchase_code, 'activation_code': activation_code, 'activation_state': 'activate', 'activate_nonce': essb_api_security_token},
 		    		            success: function (data) {
 			    		            console.log(data);
 
@@ -380,7 +382,7 @@ $show_development_message = !$is_activated && !$is_theme_integrated && ESSBActiv
 		                	$.ajax({
 		    		            type: "POST",
 		    		            url: essb_ajax_url,
-		    		            data: { 'action': 'essb_process_activation', 'activation_state': 'deactivate'},
+		    		            data: { 'action': 'essb_process_activation', 'activation_state': 'deactivate' , 'activate_nonce': essb_api_security_token},
 		    		            success: function (data) {
 		    		            	window.location.reload();
 		    		            }

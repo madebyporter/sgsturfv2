@@ -39,6 +39,24 @@ class ESSBStyleLibraryManager {
 	 */
 	public function request_parser() {
 
+	    /**
+	     * @since 9.5 - Apply control to reading data for the users with access
+	     */
+	    $essb_settings_access = essb_option_value('essb_access');
+	    if ($essb_settings_access == '') {
+	        $essb_settings_access = 'manage_options';
+	    }
+	    
+	    if (!current_user_can($essb_settings_access)) {
+	        wp_die();
+	        exit;
+	    }
+	    
+	    if (! isset( $_REQUEST['essb_token'] ) || !wp_verify_nonce( $_REQUEST['essb_token'], 'essb_setup' )) {
+	        print 'Sorry, your nonce did not verify.';
+	        exit;
+	    }
+	    
 		$cmd = isset($_REQUEST['cmd']) ? $_REQUEST['cmd'] : '';
 
 		if ($cmd == 'get') {

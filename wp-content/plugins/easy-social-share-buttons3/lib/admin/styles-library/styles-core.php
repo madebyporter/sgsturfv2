@@ -334,7 +334,7 @@ wp_add_inline_script('essb-admin5', essb_stylemanager_generate_scripts());
 				<?php
 				$position = 'managestyle';
 
-				$code = '<div class="essb-component-buttons-livepreview" data-settings="essb_'.$position.'_global_preview">';
+				$code = '<div class="essb-component-buttons-livepreview'.(essb_using_svg_icons_sharing() ? ' essb-component-buttons-livepreview-svg': '').'" data-settings="essb_'.$position.'_global_preview">';
 				$code .= '</div>';
 
 				$code .= "<script type=\"text/javascript\">
@@ -522,7 +522,7 @@ wp_add_inline_script('essb-admin5', essb_stylemanager_generate_scripts());
 				<?php
 				$position = 'managepreview';
 
-				$code = '<div class="essb-component-buttons-livepreview essb-style-livepreview" data-settings="essb_'.$position.'_global_preview">';
+				$code = '<div class="essb-component-buttons-livepreview essb-style-livepreview'.(essb_using_svg_icons_sharing() ? ' essb-component-buttons-livepreview-svg': '').'" data-settings="essb_'.$position.'_global_preview">';
 				$code .= '</div>';
 
 				$code .= "<script type=\"text/javascript\">

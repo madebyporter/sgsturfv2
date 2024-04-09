@@ -41,7 +41,7 @@ class Yoast_Woocommerce_Import_Export {
 	 *
 	 * @param array $columns The column names.
 	 *
-	 * @return array $columns The updated column names with the custom potential names.
+	 * @return array The updated column names with the custom potential names.
 	 */
 	public function add_column_to_mapping_screen( $columns ) {
 		$columns['GTIN8'] = 'gtin8';
@@ -90,7 +90,7 @@ class Yoast_Woocommerce_Import_Export {
 	 * @param WC_Product $product Product being imported or updated.
 	 * @param array      $data    CSV data read for the product.
 	 *
-	 * @return WC_Product $object
+	 * @return WC_Product
 	 */
 	public function process_import( $product, $data ) {
 		$global_identifier_values = $this->get_global_identifier_values( $product );
@@ -111,10 +111,10 @@ class Yoast_Woocommerce_Import_Export {
 	 *
 	 * @param array $columns The column names.
 	 *
-	 * @return array $columns The updated column names.
+	 * @return array The updated column names.
 	 */
 	public function add_columns( $columns ) {
-		// column slug => column name.
+		// Column slug => Column name.
 		$columns['gtin8']  = 'GTIN8';
 		$columns['gtin12'] = 'GTIN12 / UPC';
 		$columns['gtin13'] = 'GTIN13 / EAN';
@@ -128,10 +128,10 @@ class Yoast_Woocommerce_Import_Export {
 	/**
 	 * Provide the data to be exported for one item in a column of the wpseo global identifier values.
 	 *
-	 * @param mixed      $value   (default: '').
+	 * @param mixed      $value   Default: ''.
 	 * @param WC_Product $product The product object.
 	 *
-	 * @return mixed $value Should be in a format that can be output into a text file (string, numeric, etc).
+	 * @return mixed Should be in a format that can be output into a text file (string, numeric, etc).
 	 */
 	public function add_export_data_global_identifier_values( $value, $product ) {
 		$current_hook = current_filter();
@@ -151,7 +151,7 @@ class Yoast_Woocommerce_Import_Export {
 	 *
 	 * @param WC_Product $product The product.
 	 *
-	 * @return array $global_identifier_values The global identifier values.
+	 * @return array The global identifier values.
 	 */
 	private function get_global_identifier_values( $product ) {
 		$meta_name = $this->get_global_identifier_meta_name( $product->get_type() );

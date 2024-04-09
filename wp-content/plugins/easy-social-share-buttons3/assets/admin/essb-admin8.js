@@ -1,6 +1,10 @@
 jQuery(document).ready(function( $ ){
 	"use strict";
 	
+	if ($('.essb-inner-navigation').length) {
+		$('body').addClass('essb-page-background');
+	}
+	
 	function essbGetParameterByName(name, url = window.location.href) {
 	    name = name.replace(/[\[\]]/g, '\\$&');
 	    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
@@ -123,6 +127,35 @@ jQuery(document).ready(function( $ ){
 			$('.features-container .navigation [data-tab="display"]').trigger('click');
 		});
 		//essbAdvancedOptions.show('features', true, 'Manage Plugin Features', false, {});
+	});
+	
+	$('.essb-settings-upload-svg-icon').on('click', function(e) {
+		e.preventDefault();
+		
+		var filePicker = $(this).data('picker') || '',
+			contentFor = $(this).data('for') || '';		
+	
+		if (document.querySelector('#' + filePicker)) {
+			
+			document.querySelector('#' + filePicker).addEventListener('change', function (e) {
+				var sender = e.target,
+					contentFor = sender.getAttribute('data-for') || '',
+					reader = new FileReader(),
+					file = sender.files[0];
+				
+				reader.onload = function (e) {
+	                if (contentFor != '' && document.querySelector('#' + contentFor))
+	                	document.querySelector('#' + contentFor).value = reader.result;
+	            }
+	
+	            reader.readAsText(file);
+	            sender.value = '';				
+	
+	        });
+			
+			document.querySelector('#' + filePicker).setAttribute('data-for', contentFor);
+			document.querySelector('#' + filePicker).click();
+		}
 	});
 	
 	/**

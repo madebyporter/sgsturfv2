@@ -70,9 +70,9 @@ class Yoast_WooCommerce_TranslationsPress implements Integration_Interface {
 	 * @return void
 	 */
 	public function register_hooks() {
-		\add_action( 'init', [ $this, 'register_clean_translations_cache' ], \PHP_INT_MAX );
-		\add_filter( 'translations_api', [ $this, 'translations_api' ], 10, 3 );
-		\add_filter( 'site_transient_update_plugins', [ $this, 'site_transient_update_plugins' ] );
+		add_action( 'init', [ $this, 'register_clean_translations_cache' ], PHP_INT_MAX );
+		add_filter( 'translations_api', [ $this, 'translations_api' ], 10, 3 );
+		add_filter( 'site_transient_update_plugins', [ $this, 'site_transient_update_plugins' ] );
 	}
 
 	/**
@@ -101,7 +101,7 @@ class Yoast_WooCommerce_TranslationsPress implements Integration_Interface {
 	 * @return object The filtered transient value.
 	 */
 	public function site_transient_update_plugins( $value ) {
-		if ( ! $value ) {
+		if ( ! is_object( $value ) ) {
 			$value = new stdClass();
 		}
 
@@ -109,8 +109,8 @@ class Yoast_WooCommerce_TranslationsPress implements Integration_Interface {
 			$value->translations = [];
 		}
 
-		if ( \is_array( $this->cached_translations ) ) {
-			$value->translations = \array_merge( $value->translations, $this->cached_translations );
+		if ( is_array( $this->cached_translations ) ) {
+			$value->translations = array_merge( $value->translations, $this->cached_translations );
 			return $value;
 		}
 
@@ -122,10 +122,10 @@ class Yoast_WooCommerce_TranslationsPress implements Integration_Interface {
 		}
 
 		// The following call is the reason we need to cache the results of this method.
-		$installed_translations = \wp_get_installed_translations( 'plugins' );
-		$available_languages    = \get_available_languages();
+		$installed_translations = wp_get_installed_translations( 'plugins' );
+		$available_languages    = get_available_languages();
 		foreach ( $translations[ $this->slug ]['translations'] as $translation ) {
-			if ( ! \in_array( $translation['language'], $available_languages, true ) ) {
+			if ( ! in_array( $translation['language'], $available_languages, true ) ) {
 				continue;
 			}
 
@@ -154,8 +154,8 @@ class Yoast_WooCommerce_TranslationsPress implements Integration_Interface {
 	 * @return void
 	 */
 	public function register_clean_translations_cache() {
-		\add_action( 'set_site_transient_update_plugins', [ $this, 'clean_translations_cache' ] );
-		\add_action( 'delete_site_transient_update_plugins', [ $this, 'clean_translations_cache' ] );
+		add_action( 'set_site_transient_update_plugins', [ $this, 'clean_translations_cache' ] );
+		add_action( 'delete_site_transient_update_plugins', [ $this, 'clean_translations_cache' ] );
 	}
 
 	/**
@@ -164,19 +164,19 @@ class Yoast_WooCommerce_TranslationsPress implements Integration_Interface {
 	 * @return void
 	 */
 	public function clean_translations_cache() {
-		$translations = \get_site_transient( $this->transient_key );
-		if ( ! \is_array( $translations ) ) {
+		$translations = get_site_transient( $this->transient_key );
+		if ( ! is_array( $translations ) ) {
 			return;
 		}
 
-		$cache_lifespan   = \DAY_IN_SECONDS;
+		$cache_lifespan   = DAY_IN_SECONDS;
 		$time_not_changed = isset( $translations['_last_checked'] ) && ( $this->date_helper->current_time() - $translations['_last_checked'] ) > $cache_lifespan;
 
 		if ( ! $time_not_changed ) {
 			return;
 		}
 
-		\delete_site_transient( $this->transient_key );
+		delete_site_transient( $this->transient_key );
 	}
 
 	/**
@@ -185,24 +185,24 @@ class Yoast_WooCommerce_TranslationsPress implements Integration_Interface {
 	 * @return array The translation data.
 	 */
 	public function get_translations() {
-		$translations = \get_site_transient( $this->transient_key );
-		if ( $translations !== false && \is_array( $translations ) ) {
+		$translations = get_site_transient( $this->transient_key );
+		if ( $translations !== false && is_array( $translations ) ) {
 			return $translations;
 		}
 
 		$translations = [];
 
-		$result = \json_decode( \wp_remote_retrieve_body( \wp_remote_get( $this->api_url ) ), true );
+		$result = json_decode( wp_remote_retrieve_body( wp_remote_get( $this->api_url ) ), true );
 
 		// Nothing found.
-		if ( ! \is_array( $result ) ) {
+		if ( ! is_array( $result ) ) {
 			$result = [];
 		}
 
 		$translations[ $this->slug ]   = $result;
 		$translations['_last_checked'] = $this->date_helper->current_time();
 
-		\set_site_transient( $this->transient_key, $translations );
+		set_site_transient( $this->transient_key, $translations );
 
 		return $translations;
 	}

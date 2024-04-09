@@ -135,7 +135,7 @@ class Assets
         }
 
         // Load js file on page plugins.php for pro version
-        if (WPStaging::isPro()) {
+        if (WPStaging::isPro() && is_admin()) {
             $asset = 'js/dist/pro/wpstg-admin-all-pages.min.js';
             if ($this->isDebugOrDevMode()) {
                 $asset = 'js/dist/pro/wpstg-admin-all-pages.js';
@@ -280,46 +280,47 @@ class Assets
             'nonce'                  => wp_create_nonce(Nonce::WPSTG_NONCE),
             'assetsUrl'              => $this->getAssetsUrl(),
             'ajaxUrl'                => admin_url('admin-ajax.php'),
-            'wpstgIcon'              => $this->getAssetsUrl('img/wpstaging-icon.png'),
+            'wpstgIcon'              => $this->getAssetsUrl('img/wpstg-loader.gif'),
             'maxUploadChunkSize'     => $this->getMaxUploadChunkSize(),
             'backupDBExtension'      => DatabaseBackupTask::PART_IDENTIFIER . '.' . DatabaseBackupTask::FILE_FORMAT,
             'analyticsConsentAllow'  => esc_url($this->analyticsConsent->getConsentLink(true)),
             'analyticsConsentDeny'   => esc_url($this->analyticsConsent->getConsentLink(false)),
+            'isPro'                  => WPStaging::isPro(),
             // TODO: handle i18n translations through Class/Service Provider?
             'i18n'                   => [
-                'dbConnectionSuccess' => esc_html__('Database Connection - Success', 'wp-staging'),
-                'dbConnectionFailed'  => esc_html__('Database Connection - Failed', 'wp-staging'),
-                'somethingWentWrong'  => esc_html__('Something went wrong.', 'wp-staging'),
-                'noRestoreFileFound'  => esc_html__('No backup file found.', 'wp-staging'),
-                'selectFileToRestore' => esc_html__('Select backup file to restore.', 'wp-staging'),
-                'cloneResetComplete'  => esc_html__('Reset Complete!', 'wp-staging'),
-                'cloneUpdateComplete' => esc_html__('Update Complete!', 'wp-staging'),
-                'success'             => esc_html__('Success', 'wp-staging'),
-                'resetClone'          => esc_html__('Reset Staging Site', 'wp-staging'),
-                'showLogs'            => esc_html__('Show Logs', 'wp-staging'),
-                'hideLogs'            => esc_html__('Hide Logs', 'wp-staging'),
-                'noTableSelected'     => esc_html__('No table selected', 'wp-staging'),
-                'tablesSelected'      => esc_html__('{d} tables(s) selected', 'wp-staging'),
-                'noFileSelected'      => esc_html__('No file selected', 'wp-staging'),
-                'filesSelected'       => esc_html__('{t} theme(s), {p} plugin(s) selected', 'wp-staging'),
-                'wpstg_cloning'        => [
-                    'title'  => esc_html__('Staging Site Created Successfully!', 'wp-staging'),
+                'dbConnectionSuccess'   => esc_html__('Database connection successful', 'wp-staging'),
+                'dbConnectionFailed'    => esc_html__('Database connection failed', 'wp-staging'),
+                'somethingWentWrong'    => esc_html__('Something went wrong.', 'wp-staging'),
+                'noRestoreFileFound'    => esc_html__('No backup file found.', 'wp-staging'),
+                'selectFileToRestore'   => esc_html__('Select backup file to restore.', 'wp-staging'),
+                'cloneResetComplete'    => esc_html__('Reset Complete!', 'wp-staging'),
+                'cloneUpdateComplete'   => esc_html__('Update Complete!', 'wp-staging'),
+                'success'               => esc_html__('Success', 'wp-staging'),
+                'resetClone'            => esc_html__('Reset Staging Site', 'wp-staging'),
+                'showLogs'              => esc_html__('Show Logs', 'wp-staging'),
+                'hideLogs'              => esc_html__('Hide Logs', 'wp-staging'),
+                'noTableSelected'       => esc_html__('No table selected', 'wp-staging'),
+                'tablesSelected'        => esc_html__('{d} tables(s) selected', 'wp-staging'),
+                'noFileSelected'        => esc_html__('No file selected', 'wp-staging'),
+                'filesSelected'         => esc_html__('{t} theme(s), {p} plugin(s) selected', 'wp-staging'),
+                'wpstg_cloning'         => [
+                    'title' => esc_html__('Staging Site Created Successfully!', 'wp-staging'),
                     'body'  => esc_html__('You can access it from here:', 'wp-staging'),
                 ],
-                'wpstg_update'         => [
-                    'title'  => esc_html__('Staging Site Updated Successfully!', 'wp-staging'),
+                'wpstg_update'          => [
+                    'title' => esc_html__('Staging Site Updated Successfully!', 'wp-staging'),
                     'body'  => esc_html__('You can access it from here:', 'wp-staging'),
                 ],
                 'wpstg_push_processing' => [
-                    'title'  => esc_html__('Staging Site Pushed Successfully!', 'wp-staging'),
-                    'body'  => esc_html__('Clear the site cache if changes are not visible.', 'wp-staging'),
+                    'title' => esc_html__('Staging Site Pushed Successfully!', 'wp-staging'),
+                    'body'  => esc_html__('Now delete the theme and the website cache if the website does not look as expected! ', 'wp-staging'),
                 ],
-                'wpstg_reset'          => [
-                    'title'  => esc_html__('Staging Site Reset Successfully!', 'wp-staging'),
+                'wpstg_reset'           => [
+                    'title' => esc_html__('Staging Site Reset Successfully!', 'wp-staging'),
                     'body'  => esc_html__('You can access it from here:', 'wp-staging'),
                 ],
                 'wpstg_delete_clone'    => [
-                    'title'  => esc_html__('Staging Site Deleted Successfully!', 'wp-staging'),
+                    'title' => esc_html__('Staging Site Deleted Successfully!', 'wp-staging'),
                 ],
             ],
         ];
@@ -381,6 +382,8 @@ class Assets
         if (defined('WPSTGPRO_VERSION')) {
             $availablePages = [
                 "toplevel_page_wpstg_clone",
+                "toplevel_page_wpstg_backup",
+                "wp-staging-pro_page_wpstg_clone",
                 "wp-staging-pro_page_wpstg_backup",
                 "wp-staging-pro_page_wpstg-settings",
                 "wp-staging-pro_page_wpstg-tools",
@@ -389,6 +392,8 @@ class Assets
         } else {
             $availablePages = [
                 "toplevel_page_wpstg_clone",
+                "toplevel_page_wpstg_backup",
+                "wp-staging_page_wpstg_clone",
                 "wp-staging_page_wpstg_backup",
                 "wp-staging_page_wpstg-settings",
                 "wp-staging_page_wpstg-tools",

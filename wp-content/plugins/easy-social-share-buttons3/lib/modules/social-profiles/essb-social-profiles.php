@@ -145,6 +145,8 @@ class ESSBSocialProfiles {
 		if ($profiles_post_content != '') {
 			$profiles_post_content = stripslashes($profiles_post_content);
 			$profiles_post_content = do_shortcode($profiles_post_content);
+			
+			$profiles_post_content = wpautop($profiles_post_content);			
 		}
 		
 		if ($profiles_post_align == '') {
@@ -163,6 +165,8 @@ class ESSBSocialProfiles {
 		$profiles_post_size = essb_option_value('profiles_post_size');
 		$profiles_post_show_text = essb_option_bool_value('profiles_post_show_text');
 		$profiles_post_show_number = essb_option_bool_value('profiles_post_show_number');
+		
+		$profiles_post_buttons_align = essb_option_value('profiles_post_buttons_align');
 		
 		$profile_networks = ESSBSocialProfilesHelper::get_active_networks();
 		
@@ -189,7 +193,7 @@ class ESSBSocialProfiles {
 		}
 		
 		$options = array(
-		        'align' => $profiles_post_align,
+		    'align' => $profiles_post_buttons_align,
 				'size' => $profiles_post_size,
 				'template' => $profiles_post_template,
 				'animation' => $profiles_post_animation,

@@ -299,6 +299,12 @@ class ESSBAfterCloseShare3 {
 	public function generateFollowButton($social_code, $network_key, $icon_key) {
 		$output = '';
 		
+		// Twitter X integration
+		if ($icon_key == 'twitter' && essb_option_value('share_twitter_icon_type') == 'x') {
+		    $icon_key = 'twitter_x';
+		    $network_key .= ' essbasc-fans-twitter-x';
+		}
+		
 		$output .= '<div class="essbasc-fans-single essbasc-fans-'.esc_attr($network_key).'">
 				<div class="essbasc-fans-icon">
 					'.essb_svg_replace_font_icon($icon_key).'

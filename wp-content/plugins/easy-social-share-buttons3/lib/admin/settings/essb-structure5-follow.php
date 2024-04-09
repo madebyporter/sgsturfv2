@@ -515,15 +515,25 @@ if (!essb_option_bool_value('deactivate_module_profiles')) {
 		ESSBOptionsStructureHelper::panel_start('profiles', 'profiles-4', esc_html__('Enable display below post content', 'essb'), '', 'fa21 fa fa-cogs', array("mode" => "switch", 'switch_id' => 'profiles_post_display', 'switch_on' => esc_html__('Yes', 'essb'), 'switch_off' => esc_html__('No', 'essb')));
 
 		ESSBOptionsStructureHelper::hint('profiles', 'profiles-4', '', esc_html__('The option will add automatically the profile bar you configure below the content of Posts only. You are able to add the bar manually anywhere inside code using the shortcode [profile-bar]. The shortcode will work no matter if the automatic showing bar is active or not (but you need at least to activate for the basic settings configured).', 'essb'), 'fa21 ti-ruler-pencil', 'glowhint');		
-		
 		$listOfOptions = array("left" => esc_html__("Left", "essb"), "right" => esc_html__("Right", "essb"), "center" => esc_html__("Center", "essb"));
-		ESSBOptionsStructureHelper::field_select('profiles', 'profiles-4', 'profiles_post_align', esc_html__('Align content and profile buttons', 'essb'), esc_html__('Choose how the profile buttons and custom content (if used) will be aligned.', 'essb'), $listOfOptions);
+		ESSBOptionsStructureHelper::field_select('profiles', 'profiles-4', 'profiles_post_align', esc_html__('Align content', 'essb'), esc_html__('Choose how the profile buttons and custom content (if used) will be aligned.', 'essb'), $listOfOptions);
 		$listOfOptions = array("above" => esc_html__("Above Profile Buttons", "essb"), "left" => esc_html__("Along With Profile Buttons (on the same line)", "essb"));
 		ESSBOptionsStructureHelper::field_select('profiles', 'profiles-4', 'profiles_post_content_pos', esc_html__('Custom content position', 'essb'), esc_html__('Choose where the custom content will appear.', 'essb'), $listOfOptions);
 		ESSBOptionsStructureHelper::field_wpeditor('profiles', 'profiles-4', 'profiles_post_content', esc_html__('Custom content', 'essb'), esc_html__('Set custom content appearing above profile buttons. If you does not wish such content simply leave it blank', 'essb'), 'htmlmixed');
 		
-		$listOfOptions = array("" => esc_html__("Default", "essb"), "full" => esc_html__("Fluid Full Width", "essb"));
+		$listOfOptions = array(
+		    '' => 'Default',
+		    'full' => 'Fluid',
+		    '1' => '1 column',
+		    '2' => '2 columns',
+		    '3' => '3 columns',
+		    '4' => '4 columns',
+		    '5' => '5 columns',
+		    '6' => '6 columns'
+		);
 		ESSBOptionsStructureHelper::field_select('profiles', 'profiles-4', 'profiles_post_width', esc_html__('Profile buttons width', 'essb'), esc_html__('The fluid full width is not recommended if you are using a large amount of share buttons. There may not be enough space to show all buttons at same time.', 'essb'), $listOfOptions);
+		$listOfOptions = array("left" => esc_html__("Left", "essb"), "right" => esc_html__("Right", "essb"), "center" => esc_html__("Center", "essb"));
+		ESSBOptionsStructureHelper::field_select('profiles', 'profiles-4', 'profiles_post_buttons_align', esc_html__('Align profile buttons', 'essb'), esc_html__('Choose how the profile buttons and custom content (if used) will be aligned.', 'essb'), $listOfOptions);
 		ESSBOptionsStructureHelper::field_switch('profiles', 'profiles-4', 'profiles_post_show_text', esc_html__('Show CTA texts', 'essb'), esc_html__('Set to Yes to make the buttons has icon and text filled inside settings', 'essb'), '', esc_html__('Yes', 'essb'), esc_html__('No', 'essb'));
 		ESSBOptionsStructureHelper::field_switch('profiles', 'profiles-4', 'profiles_post_show_number', esc_html__('Show numbers', 'essb'), '', '', esc_html__('Yes', 'essb'), esc_html__('No', 'essb'));
 		ESSBOptionsStructureHelper::field_switch('profiles', 'profiles-4', 'profiles_post_nospace', esc_html__('Remove spacing between buttons', 'essb'), esc_html__('Activate this option to remove default space between share buttons.', 'essb'), '', esc_html__('Yes', 'essb'), esc_html__('No', 'essb'));
@@ -531,6 +541,9 @@ if (!essb_option_bool_value('deactivate_module_profiles')) {
 		ESSBOptionsStructureHelper::field_select('profiles', 'profiles-4', 'profiles_post_animation', esc_html__('Choose animation that you will use for sidebar', 'essb'), esc_html__('Animation assigned here will be used for sidebar and also for default template for widget and shortcodes if you use such. Each widget or shortcode includes options to personalize it.', 'essb'), ESSBSocialProfilesHelper::available_animations());
 		$listOfOptions = array("" => esc_html__("Default", "essb"), "small" => esc_html__("Small", "essb"), "medium" => esc_html__("Medium", "essb"), "large" => esc_html__("Large", "essb"), "xlarge" => esc_html__("Extra Large", "essb"));
 		ESSBOptionsStructureHelper::field_select('profiles', 'profiles-4', 'profiles_post_size', esc_html__('Profile buttons size', 'essb'), '', $listOfOptions);
+		
+		ESSBOptionsStructureHelper::field_component('profiles', 'profiles-4', 'essb_profiles_content_bar_hint', 'false');		
+		
 		ESSBOptionsStructureHelper::panel_end('profiles', 'profiles-4');
 		
 		if (!essb_option_bool_value('deactivate_custombuttons')) {
@@ -686,7 +699,7 @@ function essb_create_customfollowbuttons($options = array()) {
     }
     echo '<a href="#" class="ao-new-subscribe-design ao-deleteall-followcustom-button" data-title="'.esc_html__('Delete All', 'essb').'"><span class="essb_icon fa fa-close"></span><span>'.esc_html__('Remove All', 'essb').'</span></a>';
     
-    echo '<a href="https://socialsharingplugin.com/library/" target="_blank" class="ao-new-subscribe-design ao-hub-followcustom-button" data-title="'.esc_html__('Go to HUB', 'essb').'"><span class="essb_icon fa fa-database"></span><span>'.esc_html__('Get more networks', 'essb').'</span></a>';
+    echo '<a href="https://socialsharingplugin.com/library/?mode=profile" target="_blank" class="ao-new-subscribe-design ao-hub-followcustom-button" data-title="'.esc_html__('Go to HUB', 'essb').'"><span class="essb_icon fa fa-database"></span><span>'.esc_html__('Get more networks', 'essb').'</span></a>';
     
     echo '</div>';
     
@@ -757,4 +770,17 @@ function essb_profiles_shortcode_generator() {
         esc_html__('Generate social profiles shortcode which you can use to add profile links anywhere on the website. Each shortcode can have a separate list of social networks (and profiles).', 'essb'),
         'easy-profiles-shortcode', 'ao-shortcode', esc_html__('Generate', 'essb'), 'fa fa-code', 'no', '500', '', 'ti-share', esc_html__('[easy-profiles] Code Generation', 'essb'), true);
         
+}
+
+function essb_profiles_content_bar_hint() {
+    echo '<div class="essb-options-hint essb-options-hint-glowhint">';
+    echo '<div class="essb-options-hint-desc">';
+    echo '<p>You can use the following custom CSS selectors to do additional style changes. We recommend adding the code in Style Settings -> Additional CSS, but you can also do that in your favorite plugin.</p>';
+    echo '<ul>';
+    echo '<li><code>.essb-profiles-post</code> - this is the main class of the element</li>
+<li><code>.essb-profiles-post .user-content</code> - this is the class of the element where user content is shown</li>
+<li><code>.essb-profiles-post .user-buttons</code> - this is the class of the element where buttons are shown</li>';
+    echo '</ul>';
+    echo '</div>';
+    echo '</div>';
 }

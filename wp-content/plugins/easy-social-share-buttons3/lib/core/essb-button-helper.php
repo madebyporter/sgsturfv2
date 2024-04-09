@@ -393,7 +393,7 @@ function essb_draw_share_buttons($share = array(), $style = array(), $networks =
 			/**
 			 * Development integration for the SVG icons
 			 */
-			if (defined('ESSB_SVG_SHARE_ICONS')) {
+			if (essb_using_svg_icons_sharing()) {
 			    if (!class_exists('ESSB_SVG_Icons')) {
 			        include_once (ESSB3_CLASS_PATH . 'assets/class-svg-icons.php');
 			    }
@@ -406,6 +406,10 @@ function essb_draw_share_buttons($share = array(), $style = array(), $networks =
 			    }
 			    else {
                     $custom_svg_icon = ESSB_SVG_Icons::get_icon($single);
+			    }
+			    
+			    if ($single == 'sidebar-close') {
+			        $custom_svg_icon .= ESSB_SVG_Icons::get_icon('sidebar-open');
 			    }
 			    
 			    // @param $additional_icon defines the additional icon class
@@ -557,7 +561,7 @@ function essb_draw_share_buttons($share = array(), $style = array(), $networks =
 		    $additional_icon_class = ' ' . $additional_icon_class;
 		}
 		
-		if (defined('ESSB_SVG_SHARE_ICONS')) {
+		if (essb_using_svg_icons_sharing()) {
 		    if (!class_exists('ESSB_SVG_Icons')) {
 		        include_once (ESSB3_CLASS_PATH . 'assets/class-svg-icons.php');
 		    }

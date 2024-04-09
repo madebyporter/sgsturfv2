@@ -148,73 +148,126 @@ class ESSB_Register_Custom_Networks {
 		return $networks;
 	}
 	
+	public function get_admin_styles() {
+	    $css_code = '';
+	    
+	    foreach ($this->buttons as $id => $data) {
+	        $bgcolor = isset($data['bgcolor']) ? $data['bgcolor'] : '';
+	        $iconcolor = isset($data['iconcolor']) ? $data['iconcolor'] : '';
+	        $textcolor = isset($data['textcolor']) ? $data['textcolor'] : '';
+	        
+	        $network_color = isset($data['network_color']) ? $data['network_color'] : '';
+	        
+	        $bgcolor_hover = isset($data['bgcolor_hover']) ? $data['bgcolor_hover'] : '';
+	        $iconcolor_hover = isset($data['iconcolor_hover']) ? $data['iconcolor_hover'] : '';
+	        $textcolor_hover = isset($data['textcolor_hover']) ? $data['textcolor_hover'] : '';
+	        
+	        $padding_left = isset($data['padding_left']) ? $data['padding_left'] : '';
+	        $padding_top = isset($data['padding_top']) ? $data['padding_top'] : '';
+	        
+	        $icon = isset($data['icon']) ? $data['icon'] : '';
+	        
+	        
+	        
+	        if (!empty($network_color)) {
+	            $css_code .= '.essb_links .essb_link_'.esc_attr($id).' { --essb-network: '.esc_attr($network_color).'}';
+	        }
+	        
+	        if ($bgcolor != '' || $textcolor != '' || $network_color != '') {
+	            $css_code .= '.essb-network-color-'.esc_attr($id).' { ';
+	            if ($bgcolor != '') {
+	                $css_code .= 'background-color:'.esc_attr($bgcolor).'!important;';
+	            }
+	            else if ($network_color != '') {
+	                $css_code .= 'background-color:'.esc_attr($network_color).'!important;';
+	            }
+	            if ($textcolor != '') {
+	                $css_code .= 'color:'.esc_attr($textcolor).'!important;';
+	            }
+	            else {
+	                $css_code .= 'color:#fff !important;';
+	            }
+	            $css_code .= '}';
+	        }	        
+	    }
+	    
+	    
+	    return $css_code;
+	}
+	
+	public function get_button_styles() {
+	    $css_code = '';
+	    
+	    foreach ($this->buttons as $id => $data) {
+	        $bgcolor = isset($data['bgcolor']) ? $data['bgcolor'] : '';
+	        $iconcolor = isset($data['iconcolor']) ? $data['iconcolor'] : '';
+	        $textcolor = isset($data['textcolor']) ? $data['textcolor'] : '';
+	        
+	        $network_color = isset($data['network_color']) ? $data['network_color'] : '';
+	        
+	        $bgcolor_hover = isset($data['bgcolor_hover']) ? $data['bgcolor_hover'] : '';
+	        $iconcolor_hover = isset($data['iconcolor_hover']) ? $data['iconcolor_hover'] : '';
+	        $textcolor_hover = isset($data['textcolor_hover']) ? $data['textcolor_hover'] : '';
+	        
+	        $padding_left = isset($data['padding_left']) ? $data['padding_left'] : '';
+	        $padding_top = isset($data['padding_top']) ? $data['padding_top'] : '';
+	        
+	        $icon = isset($data['icon']) ? $data['icon'] : '';
+	        
+	        if (!empty($network_color)) {
+	            $css_code .= '.essb_links .essb_link_'.esc_attr($id).' { --essb-network: '.esc_attr($network_color).'}';
+	        }
+	        
+	        if ($bgcolor != '' || $textcolor != '') {
+	            $css_code .= '.essb_links .essb_link_'.esc_attr($id).' a { ';
+	            if ($bgcolor != '') {
+	                $css_code .= 'background-color:'.esc_attr($bgcolor).'!important;';
+	            }
+	            if ($textcolor != '') {
+	                $css_code .= 'color:'.esc_attr($textcolor).'!important;';
+	            }
+	            $css_code .= '}';
+	        }
+	        
+	        if ($bgcolor_hover != '' || $textcolor_hover != '') {
+	            $css_code .= '.essb_links .essb_link_'.esc_attr($id).' a:hover { ';
+	            if ($bgcolor != '') {
+	                $css_code .= 'background-color:'.esc_attr($bgcolor_hover).'!important;';
+	            }
+	            if ($textcolor != '') {
+	                $css_code .= 'color:'.esc_attr($textcolor_hover).'!important;';
+	            }
+	            $css_code .= '}';
+	        }
+	        
+	        if ($icon != '') {
+	            if (!empty($padding_left) && intval($padding_left) > 0) {
+	                $css_code .= '.essb_links .essb_link_'.esc_attr($id).' a svg { padding-left: '.esc_attr($padding_left).'px; } ';
+	            }
+	            if (!empty($padding_top) && intval($padding_top) > 0) {
+	                $css_code .= '.essb_links .essb_link_'.esc_attr($id).' a svg { padding-top: '.esc_attr($padding_top).'px; } ';
+	            }
+	            
+	            if ($iconcolor != '') {
+	                $css_code .= '.essb_links .essb_link_'.esc_attr($id).' a svg, .essb_links .essb_link_'.esc_attr($id).' a svg path { fill: '.esc_attr($iconcolor).'!important; } ';
+	            }
+	            
+	            if ($iconcolor_hover != '') {
+	                $css_code .= '.essb_links .essb_link_'.esc_attr($id).' a:hover svg, .essb_links .essb_link_'.esc_attr($id).' a:hover svg path { fill: '.esc_attr($iconcolor_hover).'!important; } ';
+	            }
+	        }
+	    }
+	    
+	    
+	    return $css_code;
+	}
+	
 	/**
 	 * Generate the custom styles for the buttons that user register
 	 */
 	public function prepare_button_styles() {
-		$css_code = '';
 		
-		foreach ($this->buttons as $id => $data) {
-			$bgcolor = isset($data['bgcolor']) ? $data['bgcolor'] : '';
-			$iconcolor = isset($data['iconcolor']) ? $data['iconcolor'] : '';
-			$textcolor = isset($data['textcolor']) ? $data['textcolor'] : '';
-			
-			$network_color = isset($data['network_color']) ? $data['network_color'] : '';
-
-			$bgcolor_hover = isset($data['bgcolor_hover']) ? $data['bgcolor_hover'] : '';
-			$iconcolor_hover = isset($data['iconcolor_hover']) ? $data['iconcolor_hover'] : '';
-			$textcolor_hover = isset($data['textcolor_hover']) ? $data['textcolor_hover'] : '';
-			
-			$padding_left = isset($data['padding_left']) ? $data['padding_left'] : '';
-			$padding_top = isset($data['padding_top']) ? $data['padding_top'] : '';
-							
-			$icon = isset($data['icon']) ? $data['icon'] : '';
-			
-			if (!empty($network_color)) {
-			    $css_code .= '.essb_links .essb_link_'.esc_attr($id).' { --essb-network: '.esc_attr($network_color).'}';
-			}
-			
-			if ($bgcolor != '' || $textcolor != '') {
-				$css_code .= '.essb_links .essb_link_'.esc_attr($id).' a { ';
-				if ($bgcolor != '') {
-					$css_code .= 'background-color:'.esc_attr($bgcolor).'!important;';
-				}
-				if ($textcolor != '') {
-					$css_code .= 'color:'.esc_attr($textcolor).'!important;';
-				}
-				$css_code .= '}';
-			}
-			
-			if ($bgcolor_hover != '' || $textcolor_hover != '') {
-				$css_code .= '.essb_links .essb_link_'.esc_attr($id).' a:hover { ';
-				if ($bgcolor != '') {
-					$css_code .= 'background-color:'.esc_attr($bgcolor_hover).'!important;';
-				}
-				if ($textcolor != '') {
-					$css_code .= 'color:'.esc_attr($textcolor_hover).'!important;';
-				}
-				$css_code .= '}';
-			}
-			
-			if ($icon != '') {
-			    if (!empty($padding_left) && intval($padding_left) > 0) {
-			        $css_code .= '.essb_links .essb_link_'.esc_attr($id).' a svg { padding-left: '.esc_attr($padding_left).'px; } ';
-			    }
-			    if (!empty($padding_top) && intval($padding_top) > 0) {
-			        $css_code .= '.essb_links .essb_link_'.esc_attr($id).' a svg { padding-top: '.esc_attr($padding_top).'px; } ';
-			    }
-			    
-				if ($iconcolor != '') {
-					$css_code .= '.essb_links .essb_link_'.esc_attr($id).' a svg, .essb_links .essb_link_'.esc_attr($id).' a svg path { fill: '.esc_attr($iconcolor).'!important; } ';
-				}
-				
-				if ($iconcolor_hover != '') {
-					$css_code .= '.essb_links .essb_link_'.esc_attr($id).' a:hover svg, .essb_links .essb_link_'.esc_attr($id).' a:hover svg path { fill: '.esc_attr($iconcolor_hover).'!important; } ';
-				}
-			}
-		}
-		
-		essb_resource_builder()->add_css($css_code, 'essb-custom-userbuttons');
+		essb_resource_builder()->add_css($this->get_button_styles(), 'essb-custom-userbuttons');
 	}
 }
 

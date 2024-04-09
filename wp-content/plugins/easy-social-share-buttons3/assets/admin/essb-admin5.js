@@ -909,8 +909,8 @@ jQuery(document).ready(function($){
 				name = networkDetails['label'] || networkDetails['name'] || '',
 				isActive = activeNetworks[network] ? true: false;
 
-			output.push('<div class="essb-admin-networkselect essb-admin-network-' + network+' essb-network-color-' + network + ' '+(isActive ? 'active' : '')+'" data-filter-value="'+name+'" data-network="'+network+'">');
-			output.push('<span class="essb_icon essb_icon_' + network+'"></span>');
+			output.push('<div class="essb-admin-networkselect essb-admin-network-' + network+' essb-network-color-' + network + ' '+(isActive ? 'active' : '') + (essbAdminSettings.svg_icons ? ' essb_svg_icons_picker': '') +'" data-filter-value="'+name+'" data-network="'+network+'">');
+			output.push('<span class="essb_icon essb_icon_' + network+'">'+(essbAdminSettings.svg_icons ? essbAdminSettings.svg[network] || '': '' )+'</span>');
 			output.push('<span class="essb-network-name">' + name + '</span>');
 			output.push('<span class="essb-active"><i class="fa fa-check"></i></span>')
 			output.push('</div>');

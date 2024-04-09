@@ -69,10 +69,10 @@
         ?>
         <!-- End Desktop Menu -->
       </div>
-      <!-- Header Buttons -->
+      <!-- Header Buttons ./shop changed -->
       <div
         class="flex gap-2 justify-end col-start-9 col-end-13 sm:col-start-10 sm:col-end-13 lg:col-start-11 lg:col-end-13">
-        <a href="./shop/" class="button button-primary-b button-small hidden sm:flex">
+        <a href="https://sgsturf.com/shop/" class="button button-primary-b button-small hidden sm:flex">
           <span class="button-label"><span class="hidden md:inline-block">View</span> Turf</span>
           <span class="button-arrow">
             <svg width="20" height="16" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">

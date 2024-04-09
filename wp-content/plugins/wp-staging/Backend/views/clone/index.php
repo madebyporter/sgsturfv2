@@ -7,8 +7,11 @@
  */
 
 use WPStaging\Core\WPStaging;
+use WPStaging\Framework\Notices\BackupPluginsNotice;
 use WPStaging\Framework\Notices\Notices;
 use WPStaging\Framework\Notices\OutdatedWpStagingNotice;
+
+$backupNotice = WPStaging::make(BackupPluginsNotice::class);
 
 ?>
 
@@ -40,6 +43,7 @@ use WPStaging\Framework\Notices\OutdatedWpStagingNotice;
                     <a class="wpstg-button <?php echo esc_attr($classBackupPageActive); ?>" data-target="#wpstg--tab--backup" id="wpstg--tab--toggle--backup">
                         <?php esc_html_e('Backup & Migration', 'wp-staging') ?>
                     </a>
+                    <?php $backupNotice->maybeShowBackupNotice(); ?>
                 </li>
                 <li>
                     <a href="<?php echo esc_url(get_admin_url()) . 'admin.php?page=wpstg-settings'; ?>" class="wpstg-button" data-target="" id="wpstg--tab--toggle--settigs">
@@ -111,6 +115,10 @@ use WPStaging\Framework\Notices\OutdatedWpStagingNotice;
             <div class="wpstg-loading-bar"></div>
         </div>
         <div class="wpstg--tab--contents">
+            <?php
+                $numberOfLoadingBars = 8;
+                include(WPSTG_PLUGIN_DIR . 'Backend/views/_main/loading-placeholder.php');
+            ?>
             <div id="wpstg--tab--staging" class="wpstg--tab--content <?php echo esc_attr($classStagingPageActive); ?>">
                 <?php
                 if (!$this->siteInfo->isCloneable()) {

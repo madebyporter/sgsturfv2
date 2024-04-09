@@ -9,6 +9,7 @@ namespace WPStaging\Backup\Service;
 use Exception;
 use LogicException;
 use RuntimeException;
+use WPStaging\Backup\BackupFileIndex;
 use WPStaging\Backup\Dto\Job\JobBackupDataDto;
 use WPStaging\Backup\Dto\JobDataDto;
 use WPStaging\Backup\Dto\Service\CompressorDto;
@@ -72,9 +73,21 @@ class Compressor
     /** @var int */
     protected $bytesWrittenInThisRequest = 0;
 
+
+    /** @var BackupFileIndex */
+    private $backupFileIndex;
+
     // TODO telescoped
-    public function __construct(BufferedCache $cacheIndex, BufferedCache $tempBackup, PathIdentifier $pathIdentifier, JobDataDto $jobDataDto, CompressorDto $compressorDto, PhpAdapter $phpAdapter, MultipartSplitInterface $multipartSplit)
-    {
+    public function __construct(
+        BufferedCache $cacheIndex,
+        BufferedCache $tempBackup,
+        PathIdentifier $pathIdentifier,
+        JobDataDto $jobDataDto,
+        CompressorDto $compressorDto,
+        PhpAdapter $phpAdapter,
+        MultipartSplitInterface $multipartSplit,
+        BackupFileIndex $backupFileIndex
+    ) {
         $this->jobDataDto      = $jobDataDto;
         $this->compressorDto   = $compressorDto;
         $this->tempBackupIndex = $cacheIndex;
@@ -82,6 +95,7 @@ class Compressor
         $this->pathIdentifier  = $pathIdentifier;
         $this->phpAdapter      = $phpAdapter;
         $this->multipartSplit  = $multipartSplit;
+        $this->backupFileIndex = $backupFileIndex;
 
         $this->setCategory('');
     }
@@ -101,8 +115,8 @@ class Compressor
     }
 
     /**
-     * @param $category
-     * @param $isCreateBinaryHeader
+     * @param string $category
+     * @param bool $isCreateBinaryHeader
      */
     public function setCategory($category = '', $isCreateBinaryHeader = false)
     {
@@ -173,6 +187,7 @@ class Compressor
 
     /**
      * @param string $fullFilePath
+     * @param string $indexPath
      *
      * `true` -> finished
      * `false` -> not finished
@@ -183,7 +198,7 @@ class Compressor
      *
      * @return bool|null
      */
-    public function appendFileToBackup($fullFilePath)
+    public function appendFileToBackup(string $fullFilePath, string $indexPath = '')
     {
         // We can use evil '@' as we don't check is_file || file_exists to speed things up.
         // Since in this case speed > anything else
@@ -194,19 +209,26 @@ class Compressor
             return null;
         }
 
+        if (empty($indexPath)) {
+            $indexPath = $fullFilePath;
+        }
+
         $fileStats = fstat($resource);
         $this->initiateDtoByFilePath($fullFilePath, $fileStats);
+        $this->compressorDto->setIndexPath($indexPath);
         $writtenBytesBefore = $this->compressorDto->getWrittenBytesTotal();
         $writtenBytesTotal  = $this->appendToCompressedFile($resource, $fullFilePath);
-        $bytesAddedForIndex = $this->addIndex($writtenBytesTotal);
-        $retries            = 0;
-        while ($bytesAddedForIndex === 0 && $retries < 3) {
-            $delayInMs = $this->getDelayForRetry($retries);
-            // sleep in ms
-            usleep($delayInMs);
+
+        $retries   = 0;
+
+        do {
+            if ($retries > 0) {
+                usleep($this->getDelayForRetry($retries));
+            }
+
             $bytesAddedForIndex = $this->addIndex($writtenBytesTotal);
             $retries++;
-        }
+        } while ($bytesAddedForIndex === 0 && $retries < 3);
 
         $this->compressorDto->setWrittenBytesTotal($writtenBytesTotal);
 
@@ -429,17 +451,6 @@ class Compressor
         return $delay * 1000;
     }
 
-    /**
-     * Convert PIPE character (|) to {WPSTG_PIPE}
-     * Convert COLON character (:) to {WPSTG_COLON}
-     * @param string $filePath
-     * @return string
-     */
-    protected function filterPathForFileIndex(string $filePath): string
-    {
-        return str_replace(['|', ':'], ['{WPSTG_PIPE}', '{WPSTG_COLON}'], $filePath);
-    }
-
     /** @var string $renameFileTo */
     private function renameBackup($renameFileTo = '')
     {
@@ -466,7 +477,7 @@ class Compressor
      * @throws LogicException
      * @throws RuntimeException
      */
-    private function addIndex($writtenBytesTotal)
+    private function addIndex(int $writtenBytesTotal)
     {
         clearstatcache();
         if (file_exists($this->tempBackup->getFilePath())) {
@@ -479,10 +490,10 @@ class Compressor
             return $this->updateIndexInformationForAlreadyAddedIndex($writtenBytesTotal);
         }
 
-        $identifiablePath = $this->pathIdentifier->transformPathToIdentifiable($this->compressorDto->getFilePath());
-        $identifiablePath = $this->filterPathForFileIndex($identifiablePath);
-        $info             = $identifiablePath . '|' . $start . ':' . $writtenBytesTotal;
-        $bytesWritten     = $this->tempBackupIndex->append($info);
+        $identifiablePath = $this->pathIdentifier->transformPathToIdentifiable($this->compressorDto->getIndexPath());
+        $backupFileIndex  = $this->backupFileIndex->createIndex($identifiablePath, $start, $writtenBytesTotal, false);
+        $bytesWritten     = $this->tempBackupIndex->append($backupFileIndex->getIndex());
+
         $this->compressorDto->setIndexPositionCreated(true);
 
         $this->addIndexPartSize($identifiablePath, $writtenBytesTotal);
@@ -520,9 +531,7 @@ class Compressor
             throw new RuntimeException('Failed to read backup metadata file index information. Error: The last line is no array.');
         }
 
-        $lastLine = array_filter($lastLine, function ($item) {
-            return !empty($item) && strpos($item, ':') !== false && strpos($item, '|') !== false;
-        });
+        $lastLine = array_filter($lastLine, [$this->backupFileIndex, 'isIndexLine']);
 
         if (count($lastLine) !== 1) {
             debug_log('Failed to read backup metadata file index information. Error: The last line is not an array or element with countable interface. Last line: ' . print_r($lastLine, 1));
@@ -531,18 +540,15 @@ class Compressor
 
         $lastLine = array_shift($lastLine);
 
-        list($relativePath, $indexPosition) = explode('|', trim($lastLine));
+        $backupFileIndex = $this->backupFileIndex->readIndex($lastLine);
+        $writtenPreviously = $backupFileIndex->bytesEnd;
 
-        // ['9378469', '4491']
-        list($offsetStart, $writtenPreviously) = explode(':', trim($indexPosition));
-
-        // @todo Should we use mb_strlen($_writtenBytes, '8bit') instead of strlen?
         $this->tempBackupIndex->deleteBottomBytes(strlen($lastLine));
 
-        $identifiablePath = $this->pathIdentifier->transformPathToIdentifiable($this->compressorDto->getFilePath());
-        $identifiablePath = $this->filterPathForFileIndex($identifiablePath);
-        $info             = $identifiablePath . '|' . $offsetStart . ':' . $writtenBytesTotal;
-        $bytesWritten     = $this->tempBackupIndex->append($info);
+        $identifiablePath = $this->pathIdentifier->transformPathToIdentifiable($this->compressorDto->getIndexPath());
+        $backupFileIndex  = $this->backupFileIndex->createIndex($identifiablePath, $backupFileIndex->bytesStart, $writtenBytesTotal, false);
+        $bytesWritten     = $this->tempBackupIndex->append($backupFileIndex->getIndex());
+
         $this->compressorDto->setIndexPositionCreated(true, $this->category, $this->categoryIndex);
 
         // We only need to increment newly added bytes
@@ -555,7 +561,7 @@ class Compressor
      * @param $resource
      * @param $filePath
      *
-     * @return int
+     * @return int Bytes written
      * @throws DiskNotWritableException
      * @throws RuntimeException
      */
@@ -622,5 +628,21 @@ class Compressor
 
         $collectPartsize[$partName] += $newBytesWritten;
         $jobDataDto->setCategorySizes($collectPartsize);
+    }
+
+    /**
+     * @return BufferedCache
+     */
+    public function getTempBackupIndex(): BufferedCache
+    {
+        return $this->tempBackupIndex;
+    }
+
+    /**
+     * @return BufferedCache
+     */
+    public function getTempBackup(): BufferedCache
+    {
+        return $this->tempBackup;
     }
 }

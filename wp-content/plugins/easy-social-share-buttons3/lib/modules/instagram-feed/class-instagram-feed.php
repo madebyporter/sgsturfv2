@@ -62,7 +62,7 @@ class ESSBInstagramFeed {
 	
 	public function __construct() {
 		
-		$this->optimized = true;		
+		$this->optimized = false;		
 		
 		// @since 7.0.1 
 		// Deactivate feed shortcode if Smashing Baloon Instagram Feed is working
@@ -334,6 +334,10 @@ class ESSBInstagramFeed {
         $data = $this->scrape_instagram($username_tag);		
         
         $account_data = self::get_username_data($username_tag); 
+        
+        if ($type == 'carousel' || $type == 'carousel-1' || $type == 'carousel-2') {
+            $masonry = false;
+        }
 		
 		// Image loading action
 		$instagram_open_as = essb_sanitize_option_value('instagram_open_as');

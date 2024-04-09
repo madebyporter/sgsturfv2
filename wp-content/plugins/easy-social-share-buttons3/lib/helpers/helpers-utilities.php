@@ -187,3 +187,18 @@ function essb_maybe_define_constant( $name, $value ) {
 function essb_constant_is_true($name) {
     return defined($name);
 }
+
+
+/**
+ * Check all constants or options related to the icon SVG usage and determine the state - enabled or disabled
+ * 
+ * @return boolean
+ */
+function essb_using_svg_icons_sharing() {
+    $r = true;
+    
+    if (!defined('ESSB_SVG_SHARE_ICONS') || !ESSB_SVG_SHARE_ICONS) { $r = false; }
+    if (essb_option_bool_value('legacy_icon_font')) { $r = false; }
+    
+    return $r;
+}

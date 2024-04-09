@@ -232,6 +232,39 @@ function my_widgets_init()
       'after_title' => '</h4>',
     )
   );
+
+  register_sidebar(
+    array(
+      'name' => 'Footer Location 3',
+      'id' => 'footer_location_3',
+      'before_widget' => '<div>',
+      'after_widget' => '</div>',
+      'before_title' => '<h4 class="widget-titl mb-4">',
+      'after_title' => '</h4>',
+    )
+  );
+
+  register_sidebar(
+    array(
+      'name' => 'Footer Location 4',
+      'id' => 'footer_location_4',
+      'before_widget' => '<div>',
+      'after_widget' => '</div>',
+      'before_title' => '<h4 class="widget-titl mb-4">',
+      'after_title' => '</h4>',
+    )
+  );
+
+  register_sidebar(
+    array(
+      'name' => 'Footer Location 5',
+      'id' => 'footer_location_5',
+      'before_widget' => '<div>',
+      'after_widget' => '</div>',
+      'before_title' => '<h4 class="widget-titl mb-4">',
+      'after_title' => '</h4>',
+    )
+  );
 }
 add_action('widgets_init', 'my_widgets_init');
 
@@ -330,4 +363,3 @@ function populate_products_dropdown($form) {
 
     return $form;
 }
-

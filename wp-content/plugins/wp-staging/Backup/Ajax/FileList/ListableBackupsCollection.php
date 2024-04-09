@@ -103,7 +103,7 @@ class ListableBackupsCollection
                 $listableBackup->subsiteType                      = $listableBackup->type === 'single' ? '' : ($backupMetadata->getSubdomainInstall() ? 'Subdomains' : 'Subdirectories');
                 $listableBackup->automatedBackup                  = $backupMetadata->getIsAutomatedBackup();
                 $listableBackup->backupName                       = $backupMetadata->getName();
-                $listableBackup->dateCreatedTimestamp             = $backupMetadata->getDateCreated();
+                $listableBackup->dateCreatedTimestamp             = intval($backupMetadata->getDateCreated());
                 $listableBackup->dateCreatedFormatted             = $this->dateTimeAdapter->transformToWpFormat((new \DateTime())->setTimestamp($backupMetadata->getDateCreated()));
                 $listableBackup->dateUploadedTimestamp            = $file->getCTime();
                 $listableBackup->dateUploadedFormatted            = $this->dateTimeAdapter->transformToWpFormat((new \DateTime())->setTimestamp($file->getCTime()));
@@ -132,6 +132,7 @@ class ListableBackupsCollection
                 $listableBackup->existingBackupParts              = $listableBackup->isMultipartBackup ? $backupMetadata->getMultipartMetadata()->getBackupParts() : [];
                 $listableBackup->errorMessage                     = $this->backupValidator->getErrorMessage();
                 $listableBackup->indexPartSize                    = $backupMetadata->getIndexPartSize();
+                $listableBackup->isZlibCompressed                 = $backupMetadata->getIsZlibCompressed();
             } elseif ($file->getExtension() === 'sql') {
                 $listableBackup                      = new ListableBackup();
                 $listableBackup->isLegacy            = true;

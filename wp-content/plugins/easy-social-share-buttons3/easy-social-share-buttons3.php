@@ -4,7 +4,7 @@
 * Plugin Name: Easy Social Share Buttons for WordPress
 * Description: The first true all in one social media plugin for WordPress, including social share buttons, social followers counter, social profile links, click to tweet, Pinnable images, after share events, subscribe forms, Instagram feed, social proof notifications and much more.
 * Plugin URI: https://codecanyon.net/item/easy-social-share-buttons-for-wordpress/6394476?ref=appscreo
-* Version: 9.3
+* Version: 9.5
 * Author: CreoApps
 * Author URI: https://codecanyon.net/user/appscreo/portfolio?ref=appscreo
 * Text Domain: essb
@@ -21,7 +21,7 @@ if (defined('ESSB3_VERSION')) {
     return;
 }
 
-define ( 'ESSB3_VERSION', '9.3' );
+define ( 'ESSB3_VERSION', '9.5' );
 define ( 'ESSB3_PLUGIN_ROOT', dirname ( __FILE__ ) . '/' );
 define ( 'ESSB3_PLUGIN_URL', plugins_url () . '/' . basename ( dirname ( __FILE__ ) ) );
 define ( 'ESSB3_PLUGIN_BASE_NAME', plugin_basename ( __FILE__ ) );
@@ -38,6 +38,7 @@ define ( 'ESSB3_DEMO_MODE', true);
 define ( 'ESSB3_ADDONS_ACTIVE', true);
 define ( 'ESSB3_ACTIVATION', true);
 define ( 'ESSB3_SETTING5', true);
+define ( 'ESSB_SVG_SHARE_ICONS', true);
 
 define ( 'ESSB3_LIB_PATH', ESSB3_PLUGIN_ROOT . 'lib/');
 define ( 'ESSB3_HELPERS_PATH', ESSB3_LIB_PATH . 'helpers/');
@@ -198,8 +199,7 @@ class ESSB_Manager {
 
 		// Share Analytics
 		if (ESSB_Runtime_Cache::running('stats-running')) {
-		    ESSB_Factory_Loader::activate_instance('internal-stats', 'ESSBSocialShareAnalytics');
-		    $this->resourceBuilder()->add_js(ESSB_Factory_Loader::get('internal-stats')->generate_tracker_code(), true, 'essb-stats-tracker');
+		    ESSB_Factory_Loader::activate_instance('internal-stats', 'ESSBSocialShareAnalytics');		    
 		}
 
 		// After Share Actions
@@ -264,12 +264,6 @@ class ESSB_Manager {
 				}
 			}
 		}
-
-		// @since 4.2 Live Customizer Initialization
-		if (essb_live_customizer_can_run()) {
-            include_once (ESSB3_PLUGIN_ROOT . 'lib/modules/live-customizer/essb-live-customizer.php');
-            ESSB_Factory_Loader::activate('essb_live_customizer', 'ESSBLiveCustomizer');
-        }
 
 		if (is_admin()) {
 			$this->asAdmin();

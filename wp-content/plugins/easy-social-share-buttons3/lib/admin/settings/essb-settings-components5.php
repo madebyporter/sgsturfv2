@@ -23,7 +23,9 @@ function essb_component_network_selection($position = '', $options_group = 'essb
 		$active_networks = array();
 	}
 	
-	echo '<ul class="essb-component-networkselect essb-sortable essb-componentkey-'.esc_attr($salt).' essb-component-networkselect-'.esc_attr($position).'" id="essb-componentkey-'.esc_attr($salt).'" data-position="'.esc_attr($position).'" data-group="'.esc_attr($options_group).'">';
+	$svg_support = essb_using_svg_icons_sharing();
+	
+	echo '<ul class="essb-component-networkselect essb-sortable essb-componentkey-'.esc_attr($salt).' essb-component-networkselect-'.esc_attr($position).($svg_support ? ' essb-component-networkselect-svg': '').'" id="essb-componentkey-'.esc_attr($salt).'" data-position="'.esc_attr($position).'" data-group="'.esc_attr($options_group).'">';
 	
 	foreach ($active_networks as $network) {
 	
@@ -43,11 +45,32 @@ function essb_component_network_selection($position = '', $options_group = 'essb
 			$user_network_name = essb_option_value($position.'_'.$network.'_name');
 		}
 		
+		$custom_svg_icon = '';
+		
+		if ($svg_support) {
+		    if (!class_exists('ESSB_SVG_Icons')) {
+		        include_once (ESSB3_CLASS_PATH . 'assets/class-svg-icons.php');
+		    }
+		    
+		    $custom_svg_icon = ESSB_SVG_Icons::get_icon($network);
+		}
+		
 		if ($external_bridge) {
 			$user_network_name = ESSBOptionsFramework::external_options_value($options_group, $position.'_'.$network.'_name');
 		}
+		
+		$additional_network_class = $network;
+		
+		if ($network == 'twitter' && essb_option_value('share_twitter_icon_type') == 'x') {
+		    $additional_network_class = 'twitter_x';
+		    if (!class_exists('ESSB_SVG_Icons')) {
+		        include_once (ESSB3_CLASS_PATH . 'assets/class-svg-icons.php');
+		    }
+		    
+		    $custom_svg_icon = ESSB_SVG_Icons::get_icon('twitter_x');
+		}
 	
-		echo '<li class="essb-admin-networkselect-single essb-network-color-'.esc_attr($network).'" data-network="'.esc_attr($network).'" data-key="'.esc_attr($salt).'">';
+		echo '<li class="essb-admin-networkselect-single essb-network-color-'.esc_attr($additional_network_class).'" data-network="'.esc_attr($network).'" data-key="'.esc_attr($salt).'">';
 		if ($position != '') {
 			echo '<input type="hidden" name="'.esc_attr($options_group).'['.esc_attr($position).'_networks][]" value="'.esc_attr($network).'"/>';
 		}
@@ -55,7 +78,7 @@ function essb_component_network_selection($position = '', $options_group = 'essb
 			echo '<input type="hidden" name="'.esc_attr($options_group).'[networks][]" value="'.esc_attr($network).'"/>';
 		}
 		echo '<span class="essb-icon-remove fa fa-times" onclick="essbSettingsHelper.removeNetwork(this); return false;"></span>';
-		echo '<span class="essb_icon essb_icon_'.esc_attr($network).'"></span>';
+		echo '<span class="essb_icon essb_icon_'.esc_attr($network).($svg_support ? ' essb_svg_icon_'.esc_attr($network) : '').'">'.$custom_svg_icon.'</span>';
 		echo '<span class="essb-sns-name">'.esc_html($current_network_name).'</span>';
 		echo '<span class="essb-single-network-name">';
 

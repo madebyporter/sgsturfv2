@@ -1138,7 +1138,7 @@ function essb5_live_preview() {
 		}
 	}
 	
-	$code = '<div class="essb-component-buttons-livepreview" data-settings="essb_global_preview">';
+	$code = '<div class="essb-component-buttons-livepreview'.(essb_using_svg_icons_sharing() ? ' essb-component-buttons-livepreview-svg': '').'" data-settings="essb_global_preview">';
 	$code .= '</div>';
 	
 	$code .= "<script type=\"text/javascript\">
@@ -1497,7 +1497,7 @@ function essb_create_custombuttons($options = array()) {
 	}
 	echo '<a href="#" class="ao-new-subscribe-design ao-deleteall-sharecustom-button" data-title="'.esc_html__('Delete All', 'essb').'"><span class="essb_icon fa fa-close"></span><span>'.esc_html__('Remove All', 'essb').'</span></a>';
 	
-	echo '<a href="https://socialsharingplugin.com/library/" target="_blank" class="ao-new-subscribe-design ao-hub-followcustom-button" data-title="'.esc_html__('Go to HUB', 'essb').'"><span class="essb_icon fa fa-database"></span><span>'.esc_html__('Get more networks', 'essb').'</span></a>';
+	echo '<a href="https://socialsharingplugin.com/library/?mode=share" target="_blank" class="ao-new-subscribe-design ao-hub-followcustom-button" data-title="'.esc_html__('Go to HUB', 'essb').'"><span class="essb_icon fa fa-database"></span><span>'.esc_html__('Get more networks', 'essb').'</span></a>';
 	
 	echo '</div>';
 	

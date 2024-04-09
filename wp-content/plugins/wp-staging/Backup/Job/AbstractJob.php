@@ -133,7 +133,8 @@ abstract class AbstractJob implements ShutdownableInterface
         $this->persist();
     }
 
-    /** @return string
+    /**
+     * @return string
      * @throws WPStagingException
      */
     public static function getJobName()
@@ -323,6 +324,7 @@ abstract class AbstractJob implements ShutdownableInterface
             $this->cleanup();
             $this->init();
             $this->jobDataDto->setCurrentTaskIndex(0);
+            $this->jobDataDto->setCurrentTaskData([]);
             $this->addTasks($this->getJobTasks());
         } else {
             $this->checkLastTaskHealth();
@@ -342,6 +344,10 @@ abstract class AbstractJob implements ShutdownableInterface
         $this->jobDataDto->setInit(false);
 
         $this->currentTaskName = $this->jobDataDto->getCurrentTask();
+
+        if (empty($this->currentTaskName)) {
+            throw new \RuntimeException('Internal error: Next task of queue job is null or invalid.');
+        }
 
         /** @var AbstractTask currentTask */
         $this->currentTask = WPStaging::getInstance()->get($this->currentTaskName);
@@ -371,15 +377,18 @@ abstract class AbstractJob implements ShutdownableInterface
         return $this->currentTask;
     }
 
-    /** @param string|false $memoryExhaustErrorTmpFile */
-    public function setMemoryExhaustErrorTmpFile($memoryExhaustErrorTmpFile)
+    /**
+     * @param string $memoryExhaustErrorTmpFile
+     * @return void
+     */
+    public function setMemoryExhaustErrorTmpFile(string $memoryExhaustErrorTmpFile)
     {
         $this->memoryExhaustErrorTmpFile = $memoryExhaustErrorTmpFile;
     }
 
     protected function removeMemoryExhaustErrorTmpFile()
     {
-        if ($this->memoryExhaustErrorTmpFile === false) {
+        if ($this->memoryExhaustErrorTmpFile === '') {
             return;
         }
 

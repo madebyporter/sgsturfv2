@@ -271,7 +271,8 @@
  * Column Layout
  */
 
-.essb-fc-grid.essb-fc-columns-flex .essb-fc-block {
+.essb-fc-grid.essb-fc-columns-flex .essb-fc-block,
+.essb-fc-grid.essb-fc-columns-full .essb-fc-block {
 	flex: 1;
 }
 
@@ -1216,6 +1217,14 @@
 .essb-profiles-content-left { display: flex; align-items: center; }
 .essb-profiles-content-left .user-content { width: 40%; margin-right: 1%; }
 .essb-profiles-content-left .user-buttons { width: 59%; }
+
+.essb-profiles-post .user-content p:last-of-type {
+	margin-bottom: 0;
+}
+
+.essb-profiles-post .user-content {
+	margin-bottom: 20px;
+}
 
 /**
  * Mobile

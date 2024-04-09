@@ -9,35 +9,71 @@ use WPStaging\Framework\Facades\Hooks;
 
 class TablesRenamer
 {
+    /** @var string */
+    const OPTION_ACTIVE_PLUGINS = 'active_plugins';
+
+    /** @var string */
+    const OPTION_ACTIVE_SITEWIDE_PLUGINS = 'active_sitewide_plugins';
+
+    /** @var string */
+    const PLUGIN_BASE_SLUG = 'wp-staging';
+
     /** @var TableService */
     private $tableService;
 
-    // eg: ['wp123456_options']
-    /** @var array */
+    /**
+     * eg: ['wpstgtmp_options']
+     * @var array [
+     *  'tables' => string[],
+     *  'views' => string[],
+     *  'custom' => string[]
+     * ]
+     */
     protected $tablesBeingRenamed = [];
 
-    // eg: ['options']
-    /** @var array */
+    /**
+     * eg: ['options']
+     * @var array [
+     *  'tables' => string[],
+     *  'views' => string[],
+     *  'custom' => string[]
+     * ]
+     */
     protected $tablesBeingRenamedUnprefixed = [];
 
-    // eg: ['wp_options']
-    /** @var array */
+    /**
+     * eg: ['wp_options']
+     * @var array [
+     *  'tables' => string[],
+     *  'views' => string[],
+     *  'custom' => string[]
+     * ]
+     */
     protected $existingTables = [];
 
-    // eg: ['options']
-    /** @var array */
+    /**
+     * eg: ['options']
+     * @var array [
+     *  'tables' => string[],
+     *  'views' => string[],
+     *  'custom' => string[]
+     * ]
+     */
     protected $existingTablesUnprefixed = [];
 
-    /** @var array */
+    /** @var string[] */
+    protected $customTablesBeingRenamed = [];
+
+    /** @var string[] */
     protected $shortNamedTablesToRename = [];
 
-    /** @var array */
+    /** @var string[] */
     protected $shortNamedTablesToDrop = [];
 
-    /** @var array */
+    /** @var string[] */
     protected $excludedTables = [];
 
-    /** @var array */
+    /** @var string[] */
     protected $tablesToBeDropped = [];
 
     /** @var int Total tables to be renamed */
@@ -59,10 +95,16 @@ class TablesRenamer
     protected $tmpPrefix;
 
     /** @var string */
+    protected $customTableTmpPrefix;
+
+    /** @var string */
     protected $dropPrefix;
 
     /** @var bool */
     protected $renameViews;
+
+    /** @var bool */
+    protected $renameCustomTables;
 
     /** @var bool */
     protected $logEachRename = false;
@@ -81,6 +123,12 @@ class TablesRenamer
 
     /** @var int */
     protected $nonConflictingTablesRenamed = 0;
+
+    /** @var int */
+    protected $customTablesRenamed = 0;
+
+    /** @var bool */
+    protected $isNonConflictingTablesRenamingTaskExecuted = false;
 
     public function __construct(TableService $tableService, PhpAdapter $phpAdapter)
     {
@@ -109,6 +157,16 @@ class TablesRenamer
     }
 
     /**
+     * @param string $cusomTableTmpPrefix
+     * @return TablesRenamer
+     */
+    public function setCustomTableTmpPrefix(string $customTableTmpPrefix): TablesRenamer
+    {
+        $this->customTableTmpPrefix = $customTableTmpPrefix;
+        return $this;
+    }
+
+    /**
      * @param string $dropPrefix
      * @return TablesRenamer
      */
@@ -125,6 +183,16 @@ class TablesRenamer
     public function setRenameViews(bool $renameViews): TablesRenamer
     {
         $this->renameViews = $renameViews;
+        return $this;
+    }
+
+    /**
+     * @param bool $renameCustomTables
+     * @return TablesRenamer
+     */
+    public function setRenameCustomTables(bool $renameCustomTables): TablesRenamer
+    {
+        $this->renameCustomTables = $renameCustomTables;
         return $this;
     }
 
@@ -229,6 +297,22 @@ class TablesRenamer
     }
 
     /**
+     * @return int
+     */
+    public function getCustomTablesRenamed(): int
+    {
+        return $this->customTablesRenamed;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getIsNonConflictingTablesRenamingTaskExecuted(): bool
+    {
+        return $this->isNonConflictingTablesRenamingTaskExecuted;
+    }
+
+    /**
      * @return RenameDatabaseTaskDto
      */
     public function setupRenamer(): RenameDatabaseTaskDto
@@ -240,6 +324,11 @@ class TablesRenamer
             $taskDto->viewsBeingRenamed = $this->tableService->findViewsNamesStartWith($this->tmpPrefix) ?: [];
         }
 
+        $taskDto->customTablesBeingRenamed = [];
+        if ($this->renameCustomTables) {
+            $taskDto->customTablesBeingRenamed = $this->tableService->findTableNamesStartWith($this->customTableTmpPrefix) ?: [];
+        }
+
         $taskDto->existingTables = $this->tableService->findTableNamesStartWith($this->productionTablePrefix) ?: [];
         $taskDto->existingViews  = [];
         if ($this->renameViews) {
@@ -248,6 +337,7 @@ class TablesRenamer
 
         $taskDto->conflictingTablesRenamed    = 0;
         $taskDto->nonConflictingTablesRenamed = 0;
+        $taskDto->customTablesRenamed         = 0;
         $this->setTaskDto($taskDto);
 
         return $taskDto;
@@ -262,6 +352,7 @@ class TablesRenamer
         $this->tablesBeingRenamed           = [];
         $this->tablesBeingRenamed['tables'] = $taskDto->tablesBeingRenamed ?: [];
         $this->tablesBeingRenamed['views']  = $taskDto->viewsBeingRenamed ?: [];
+        $this->tablesBeingRenamed['custom'] = $taskDto->customTablesBeingRenamed ?: [];
         $this->tablesBeingRenamed['all']    = array_merge($this->tablesBeingRenamed['tables'], $this->tablesBeingRenamed['views']);
 
         $this->existingTables           = [];
@@ -269,7 +360,7 @@ class TablesRenamer
         $this->existingTables['views']  = $taskDto->existingViews ?: [];
         $this->existingTables['all']    = array_merge($this->existingTables['tables'], $this->existingTables['views']);
 
-        $this->totalTables = count($this->tablesBeingRenamed['tables']);
+        $this->totalTables = count($this->tablesBeingRenamed['tables']) + count($this->tablesBeingRenamed['custom']);
         $tmpDatabasePrefix = $this->tmpPrefix;
 
         foreach ($this->tablesBeingRenamed as $viewsOrTables => $tableName) {
@@ -289,6 +380,7 @@ class TablesRenamer
 
         $this->conflictingTablesRenamed    = (int)$taskDto->conflictingTablesRenamed;
         $this->nonConflictingTablesRenamed = (int)$taskDto->nonConflictingTablesRenamed;
+        $this->customTablesRenamed         = (int)$taskDto->customTablesRenamed;
     }
 
     /**
@@ -297,7 +389,7 @@ class TablesRenamer
      *
      * @return string
      */
-    public function getFullNameTableFromShortName($table, $prefix)
+    public function getFullNameTableFromShortName(string $table, string $prefix): string
     {
         $shortTables = [];
         if ($prefix === $this->tmpPrefix) {
@@ -318,7 +410,7 @@ class TablesRenamer
      * @param string $prefix
      * @return false|string
      */
-    public function getTableShortName($table, $prefix)
+    public function getTableShortName(string $table, string $prefix)
     {
         $shortTables = [];
         if ($prefix === $this->tmpPrefix) {
@@ -334,7 +426,7 @@ class TablesRenamer
      * Return true if all conflicting tables renamed, false otherwise
      * @return bool
      */
-    public function renameConflictingTables()
+    public function renameConflictingTables(): bool
     {
         $conflictingTablesWithoutPrefix = array_values($this->getTablesThatExistInBothExistingAndTempUnprefixed());
         // Early bail: if no tables to rename
@@ -393,7 +485,7 @@ class TablesRenamer
      * Return true if all non-conflicting tables renamed, false otherwise
      * @return bool
      */
-    public function renameNonConflictingTables()
+    public function renameNonConflictingTables(): bool
     {
         $nonConflictingTables = array_values($this->getTablesThatExistInTempButNotInSite());
         // Early bail: if no tables to rename
@@ -416,6 +508,7 @@ class TablesRenamer
             }
 
             $this->renameTable($nonConflictingTable, $this->nonConflictingTablesRenamed);
+            $this->isNonConflictingTablesRenamingTaskExecuted = true;
 
             if ($this->isThresholdReached()) {
                 $this->tableService->getDatabase()->exec('COMMIT;');
@@ -431,7 +524,7 @@ class TablesRenamer
     /**
      * @return bool
      */
-    public function cleanTemporaryBackupTables()
+    public function cleanTemporaryBackupTables(): bool
     {
         // Early bail if tables cleaned already
         if ($this->nonConflictingTablesRenamed !== 0 || $this->conflictingTablesRenamed !== 0) {
@@ -486,20 +579,68 @@ class TablesRenamer
     }
 
     /**
+     * @return bool
+     * @throws \RuntimeException
+     */
+    public function renameCustomTables(): bool
+    {
+        $customTablesToRename = $this->tablesBeingRenamed['custom'];
+        // Early bail: if no tables to rename
+        if (empty($customTablesToRename)) {
+            return true;
+        }
+
+        foreach ($customTablesToRename as $tmpCustomTable) {
+            $customTable = substr($tmpCustomTable, strlen($this->customTableTmpPrefix));
+
+            $result = true;
+            if ($this->tableExists($customTable)) {
+                $result = $this->renameQuery($customTable, $this->dropPrefix . $customTable);
+            }
+
+            if ($result === false) {
+                throw new \RuntimeException("Unable to rename custom table {$customTable} to {$this->dropPrefix}{$customTable}.");
+            }
+
+            $result = $this->renameQuery($tmpCustomTable, $customTable);
+            if ($result === false) {
+                throw new \RuntimeException("Unable to rename custom table {$tmpCustomTable} to {$customTable}.");
+            }
+
+            $this->customTablesRenamed++;
+            if ($this->isThresholdReached()) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
      * Get active plugins from tmp options table
      * Update tmp options table with active plugins from production options table to reduce fatal error during renaming process
      * @return string
      */
-    public function getActivePluginsToPreserve()
+    public function getActivePluginsToPreserve(): string
     {
         $tmpOptionsTable = $this->tmpPrefix . 'options';
         if (!$this->tableExists($tmpOptionsTable)) {
             return '';
         }
 
-        $activePluginsToPreserve = $this->getOptionValue($tmpOptionsTable, 'active_plugins');
-        $currentActivePlugins = $this->getOptionValue($this->productionTablePrefix . 'options', 'active_plugins');
-        $this->updateOptionValue($tmpOptionsTable, 'active_plugins', $currentActivePlugins);
+        $productionOptionsTable  = $this->productionTablePrefix . 'options';
+        $activePluginsToPreserve = $this->getOptionValue($tmpOptionsTable, self::OPTION_ACTIVE_PLUGINS);
+        $currentActivePlugins    = $this->getOptionValue($productionOptionsTable, self::OPTION_ACTIVE_PLUGINS);
+
+        // keep only active plugins that are wp staging plugins
+        $currentActivePlugins = maybe_unserialize($currentActivePlugins);
+        $currentActivePlugins = array_filter($currentActivePlugins, function ($pluginSlug) {
+            return strpos($pluginSlug, self::PLUGIN_BASE_SLUG) === 0;
+        });
+
+        $currentActivePlugins = serialize($currentActivePlugins);
+        $this->updateOptionValue($tmpOptionsTable, self::OPTION_ACTIVE_PLUGINS, $currentActivePlugins);
+        $this->updateOptionValue($productionOptionsTable, self::OPTION_ACTIVE_PLUGINS, $currentActivePlugins);
 
         return $activePluginsToPreserve;
     }
@@ -509,36 +650,48 @@ class TablesRenamer
      * Update tmp sitemeta table with active plugins from production options table to reduce fatal error during renaming process
      * @return string
      */
-    public function getActiveSitewidePluginsToPreserve()
+    public function getActiveSitewidePluginsToPreserve(): string
     {
         $tmpSiteMetaTable = $this->tmpPrefix . 'sitemeta';
         if (!$this->tableExists($tmpSiteMetaTable)) {
             return '';
         }
 
-        $option = 'active_sitewide_plugins';
-        $activePluginsToPreserve = $this->getNetworkOptionValue($tmpSiteMetaTable, $option);
-        $currentActivePlugins = $this->getNetworkOptionValue($this->productionTablePrefix . 'sitemeta', $option);
-        $this->updateNetworkOptionValue($tmpSiteMetaTable, $option, $currentActivePlugins);
+        $productionSiteMetaTable = $this->productionTablePrefix . 'sitemeta';
+        $activePluginsToPreserve = $this->getNetworkOptionValue($tmpSiteMetaTable, self::OPTION_ACTIVE_SITEWIDE_PLUGINS);
+        $currentActivePlugins    = $this->getNetworkOptionValue($productionSiteMetaTable, self::OPTION_ACTIVE_SITEWIDE_PLUGINS);
+
+        // keep only active plugins that are wp staging plugins
+        $currentActivePlugins = maybe_unserialize($currentActivePlugins);
+        $currentActivePlugins = array_filter($currentActivePlugins, function ($pluginSlug) {
+            return strpos($pluginSlug, self::PLUGIN_BASE_SLUG) === 0;
+        });
+
+        $currentActivePlugins = serialize($currentActivePlugins);
+        $this->updateNetworkOptionValue($tmpSiteMetaTable, self::OPTION_ACTIVE_SITEWIDE_PLUGINS, $currentActivePlugins);
+        $this->updateNetworkOptionValue($productionSiteMetaTable, self::OPTION_ACTIVE_SITEWIDE_PLUGINS, $currentActivePlugins);
 
         return $activePluginsToPreserve;
     }
 
     /**
      * @param string $activePlugins
+     * @param string $activeWpstgPlugin
+     * @param bool   $isNetworkActivatedPlugin
      * @return bool
      */
-    public function restorePreservedActivePlugins($activePlugins, $activeWpstgPlugin, $isNetworkActivatedPlugin)
+    public function restorePreservedActivePlugins(string $activePlugins, string $activeWpstgPlugin, bool $isNetworkActivatedPlugin): bool
     {
+        $productionOptionsTable = $this->productionTablePrefix . 'options';
         if ($isNetworkActivatedPlugin) {
-            return $this->updateOptionValue($this->productionTablePrefix . 'options', 'active_plugins', $activePlugins);
+            return $this->updateOptionValue($productionOptionsTable, self::OPTION_ACTIVE_PLUGINS, $activePlugins);
         }
 
         $activePlugins = maybe_unserialize($activePlugins);
         $activePlugins = array_filter($activePlugins, function ($pluginSlug) {
 
             // Disable all wp staging plugins, we will reactive current active wp staging plugin later
-            if (strpos($pluginSlug, 'wp-staging') !== false) {
+            if (strpos($pluginSlug, self::PLUGIN_BASE_SLUG) !== false) {
                 return false;
             }
 
@@ -551,22 +704,22 @@ class TablesRenamer
 
         $activePlugins = serialize($activePlugins);
 
-        return $this->updateOptionValue($this->productionTablePrefix . 'options', 'active_plugins', $activePlugins);
+        return $this->updateOptionValue($productionOptionsTable, self::OPTION_ACTIVE_PLUGINS, $activePlugins);
     }
 
     /**
      * @param string $activeSitewidePlugins
      * @param string $activeWpstgPlugin
-     * @param int    $time timestamp when the plugin was activated
+     * @param int|null $time timestamp when the plugin was activated
      * @return bool
      */
-    public function restorePreservedActiveSitewidePlugins($activeSitewidePlugins, $activeWpstgPlugin, $time = null)
+    public function restorePreservedActiveSitewidePlugins(string $activeSitewidePlugins, string $activeWpstgPlugin, $time = null): bool
     {
         $activeSitewidePlugins = maybe_unserialize($activeSitewidePlugins);
         $activeSitewidePlugins = array_filter($activeSitewidePlugins, function ($pluginSlug) {
 
             // Disable all wp staging plugins, we will reactive current active wp staging plugin later
-            if (strpos($pluginSlug, 'wp-staging') !== false) {
+            if (strpos($pluginSlug, self::PLUGIN_BASE_SLUG) !== false) {
                 return false;
             }
 
@@ -577,14 +730,14 @@ class TablesRenamer
             $activeSitewidePlugins[$activeWpstgPlugin] = empty($time) ? time() : $time;
         }
 
-        return $this->updateNetworkOptionValue($this->productionTablePrefix . 'sitemeta', 'active_sitewide_plugins', serialize($activeSitewidePlugins));
+        return $this->updateNetworkOptionValue($this->productionTablePrefix . 'sitemeta', self::OPTION_ACTIVE_SITEWIDE_PLUGINS, serialize($activeSitewidePlugins));
     }
 
     /**
      * @param string $tableName
      * @return bool
      */
-    protected function isExcludedTable($tableName)
+    protected function isExcludedTable(string $tableName): bool
     {
         return in_array($tableName, $this->excludedTables);
     }
@@ -592,7 +745,7 @@ class TablesRenamer
     /**
      * @return array
      */
-    protected function getTablesThatExistInBothExistingAndTempUnprefixed()
+    protected function getTablesThatExistInBothExistingAndTempUnprefixed(): array
     {
         return array_intersect($this->tablesBeingRenamedUnprefixed['all'], $this->existingTablesUnprefixed['all']);
     }
@@ -600,7 +753,7 @@ class TablesRenamer
     /**
      * @return array
      */
-    protected function getTablesThatExistInSiteButNotInTemp()
+    protected function getTablesThatExistInSiteButNotInTemp(): array
     {
         return array_diff($this->existingTablesUnprefixed['all'], $this->tablesBeingRenamedUnprefixed['all']);
     }
@@ -608,7 +761,7 @@ class TablesRenamer
     /**
      * @return array
      */
-    protected function getTablesThatExistInTempButNotInSite()
+    protected function getTablesThatExistInTempButNotInSite(): array
     {
         return array_diff($this->tablesBeingRenamedUnprefixed['all'], $this->existingTablesUnprefixed['all']);
     }
@@ -658,7 +811,7 @@ class TablesRenamer
      * @param string $tableName
      * @return bool
      */
-    protected function tableExists($tableName)
+    protected function tableExists(string $tableName): bool
     {
         $database  = $this->tableService->getDatabase()->getWpdba()->getClient();
         $tableName = $database->esc_like($tableName);
@@ -673,7 +826,7 @@ class TablesRenamer
      * @param string $optionName
      * @return string
      */
-    protected function getOptionValue($tableName, $optionName)
+    protected function getOptionValue(string $tableName, string $optionName): string
     {
         $database   = $this->tableService->getDatabase()->getWpdba()->getClient();
         $optionName = $database->esc_like($optionName);
@@ -692,7 +845,7 @@ class TablesRenamer
      * @param string $optionValue
      * @return bool
      */
-    protected function updateOptionValue($tableName, $optionName, $optionValue)
+    protected function updateOptionValue(string $tableName, string $optionName, string $optionValue): bool
     {
         $database   = $this->tableService->getDatabase()->getWpdba()->getClient();
         $optionName = $database->esc_like($optionName);
@@ -706,7 +859,7 @@ class TablesRenamer
      * @param string $optionName
      * @return string
      */
-    protected function getNetworkOptionValue($tableName, $optionName)
+    protected function getNetworkOptionValue(string $tableName, string $optionName): string
     {
         $database   = $this->tableService->getDatabase()->getWpdba()->getClient();
         $optionName = $database->esc_like($optionName);
@@ -725,7 +878,7 @@ class TablesRenamer
      * @param string $optionValue
      * @return bool
      */
-    protected function updateNetworkOptionValue($tableName, $optionName, $optionValue)
+    protected function updateNetworkOptionValue(string $tableName, string $optionName, string $optionValue): bool
     {
         $database   = $this->tableService->getDatabase()->getWpdba()->getClient();
         $optionName = $database->esc_like($optionName);
@@ -754,5 +907,33 @@ class TablesRenamer
     private function customThreshold(bool $isThreshold): bool
     {
         return Hooks::applyFilters('wpstg.tests.tablesRenamingThreshold', $isThreshold);
+    }
+
+    /**
+     * @param string $tableToRename
+     * @param string $tableAfterRenamed
+     * @return bool
+     */
+    private function renameQuery(string $tableToRename, string $tableAfterRenamed): bool
+    {
+        $database = $this->tableService->getDatabase();
+        $result   = $database->exec(sprintf(
+            "RENAME TABLE `%s` TO `%s`;",
+            $tableToRename,
+            $tableAfterRenamed
+        ));
+
+        if ($result !== false) {
+            return true;
+        }
+
+        if ($this->logEachRename && $this->logger instanceof Logger) {
+            /** @var \wpdb */
+            $wpdb  = $database->getWpdba()->getClient();
+            $error = $wpdb->last_error;
+            $this->logger->warning("DB Rename: Unable to rename table {$tableToRename} to {$tableAfterRenamed}. Error: " . $error);
+        }
+
+        return false;
     }
 }

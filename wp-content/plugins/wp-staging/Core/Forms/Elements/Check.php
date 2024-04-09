@@ -3,6 +3,7 @@
 namespace WPStaging\Core\Forms\Elements;
 
 use WPStaging\Core\Forms\ElementsWithOptions;
+use WPStaging\Framework\Facades\UI\Checkbox;
 
 /**
  * Class Check
@@ -14,16 +15,13 @@ class Check extends ElementsWithOptions
     /**
      * @return string
      */
-    protected function prepareOutput()
+    protected function prepareOutput(): string
     {
         $output = '';
 
         foreach ($this->options as $id => $value) {
-            $checked = ($this->isChecked($id)) ? " checked=''" : '';
-
             $attributeId = $this->getId() . '_' . $this->getId($id);
-
-            $output .= "<input type='checkbox' class='wpstg-checkbox' name='{$this->getId()}' id='{$attributeId}' value='{$id}' {$checked}/>";
+            $output .= Checkbox::render($attributeId, $this->getId(), $id, $this->isChecked($id), [], [], true);
 
             if ($value) {
                 $output .= "<label for='{$attributeId}'>{$value}</label>";
@@ -34,16 +32,17 @@ class Check extends ElementsWithOptions
     }
 
     /**
+     * Tested against both types(int and string) due to string as parameter type https://github.com/wp-staging/wp-staging-pro/pull/3190
      * @param string $value
      * @return bool
      */
-    private function isChecked($value)
+    private function isChecked(string $value): bool
     {
         if (
             $this->default &&
             (
                 (is_string($this->default) && $this->default === $value) ||
-                (is_int($value) && $value == (int) $this->default) ||
+                (is_int($this->default) && $this->default === (int)$value) ||
                 (is_array($this->default) && in_array($value, $this->default))
             )
         ) {

@@ -5,8 +5,10 @@
  * @package WPSEO/WooCommerce
  */
 
+use Automattic\WooCommerce\Utilities\FeaturesUtil;
 use Yoast\WP\SEO\Context\Meta_Tags_Context;
 use Yoast\WP\SEO\Helpers\Request_Helper;
+use Yoast\WP\SEO\Presenters\Abstract_Indexable_Presenter;
 
 /**
  * Class Yoast_WooCommerce_SEO
@@ -18,7 +20,7 @@ class Yoast_WooCommerce_SEO {
 	 *
 	 * @var string
 	 */
-	const VERSION = WPSEO_WOO_VERSION;
+	public const VERSION = WPSEO_WOO_VERSION;
 
 	/**
 	 * The product global identifiers.
@@ -116,10 +118,30 @@ class Yoast_WooCommerce_SEO {
 		add_action( 'before_woocommerce_init', [ $this, 'declare_custom_order_tables_compatibility' ] );
 
 		add_action( 'admin_init', [ $this, 'initialize_import_export' ] );
+
+		add_filter( 'wpseo_defaults', [ $this, 'filter_wpseo_defaults' ], 10, 2 );
+	}
+
+	/**
+	 * Sets the default page type for products to ItemPage.
+	 *
+	 * @param array<string, string|int|bool|array<string, string|array<string, string>>|array<string>|null> $defaults    The default values.
+	 * @param string                                                                                        $option_name The option name.
+	 *
+	 * @return array<string, string|int|bool|array<string, string|array<string, string>>|array<string>|null> The filtered defaults.
+	 */
+	public function filter_wpseo_defaults( $defaults, $option_name ) {
+		if ( $option_name === 'wpseo_titles' ) {
+			$defaults['schema-page-type-product'] = 'ItemPage';
+		}
+
+		return $defaults;
 	}
 
 	/**
 	 * Initializes the schema functionality.
+	 *
+	 * @return void
 	 */
 	public function initialize_schema() {
 		if ( WPSEO_WooCommerce_Schema::should_output_yoast_schema() ) {
@@ -129,6 +151,8 @@ class Yoast_WooCommerce_SEO {
 
 	/**
 	 * Initializes the schema functionality.
+	 *
+	 * @return void
 	 */
 	public function initialize_opengraph() {
 		new WPSEO_WooCommerce_OpenGraph();
@@ -136,6 +160,8 @@ class Yoast_WooCommerce_SEO {
 
 	/**
 	 * Initializes the twitter functionality.
+	 *
+	 * @return void
 	 */
 	public function initialize_twitter() {
 		$twitter = new WPSEO_WooCommerce_Twitter();
@@ -144,6 +170,8 @@ class Yoast_WooCommerce_SEO {
 
 	/**
 	 * Initializes the slack functionality.
+	 *
+	 * @return void
 	 */
 	public function initialize_slack() {
 		$slack = new WPSEO_WooCommerce_Slack();
@@ -152,6 +180,8 @@ class Yoast_WooCommerce_SEO {
 
 	/**
 	 * Initializes the TranslationsPress functionality.
+	 *
+	 * @return void
 	 */
 	public function initialize_translationspress() {
 		$translationspress = new Yoast_WooCommerce_TranslationsPress( YoastSEO()->helpers->date );
@@ -160,6 +190,8 @@ class Yoast_WooCommerce_SEO {
 
 	/**
 	 * Initializes the import_export functionality.
+	 *
+	 * @return void
 	 */
 	public function initialize_import_export() {
 		$import_export = new Yoast_Woocommerce_Import_Export();
@@ -168,6 +200,8 @@ class Yoast_WooCommerce_SEO {
 
 	/**
 	 * Method that is executed when the plugin is activated.
+	 *
+	 * @return void
 	 */
 	public static function install() {
 		// Enable tracking.
@@ -179,10 +213,10 @@ class Yoast_WooCommerce_SEO {
 	/**
 	 * Adds the WooCommerce OpenGraph presenter.
 	 *
-	 * @param \Yoast\WP\SEO\Presenters\Abstract_Indexable_Presenter[] $presenters The presenter instances.
-	 * @param \Yoast\WP\SEO\Context\Meta_Tags_Context                 $context    The meta tags context.
+	 * @param Abstract_Indexable_Presenter[] $presenters The presenter instances.
+	 * @param Meta_Tags_Context              $context    The meta tags context.
 	 *
-	 * @return \Yoast\WP\SEO\Presenters\Abstract_Indexable_Presenter[] The extended presenters.
+	 * @return Abstract_Indexable_Presenter[] The extended presenters.
 	 */
 	public function add_frontend_presenter( $presenters, $context ) {
 		if ( ! is_array( $presenters ) ) {
@@ -458,6 +492,8 @@ class Yoast_WooCommerce_SEO {
 	 * Loads CSS in Woocommerce SEO settings page.
 	 *
 	 * @since 1.0
+	 *
+	 * @return void
 	 */
 	public function config_page_styles() {
 		global $pagenow;
@@ -482,6 +518,8 @@ class Yoast_WooCommerce_SEO {
 	 * Builds the admin page.
 	 *
 	 * @since 1.0
+	 *
+	 * @return void
 	 */
 	public function admin_panel() {
 		Yoast_Form::get_instance()->admin_header( true, 'wpseo_woo' );
@@ -558,6 +596,8 @@ class Yoast_WooCommerce_SEO {
 	 * Adds a bit of JS that moves the meta box for WP SEO below the WooCommerce box.
 	 *
 	 * @since 1.0
+	 *
+	 * @return void
 	 */
 	public function footer_js() {
 		if ( WPSEO_Options::get( 'woo_metabox_top' ) !== true ) {
@@ -680,6 +720,8 @@ class Yoast_WooCommerce_SEO {
 	 * Output WordPress SEO crafted breadcrumbs, instead of WooCommerce ones.
 	 *
 	 * @since 1.0
+	 *
+	 * @return void
 	 */
 	public function woo_wpseo_breadcrumbs() {
 		yoast_breadcrumb( '<nav class="woocommerce-breadcrumb">', '</nav>' );
@@ -726,7 +768,7 @@ class Yoast_WooCommerce_SEO {
 	 *
 	 * @since 4.3
 	 *
-	 * @param \Yoast\WP\SEO\Context\Meta_Tags_Context|null $context The meta tags context.
+	 * @param Meta_Tags_Context|null $context The meta tags context.
 	 *
 	 * @return WC_Product|null
 	 */
@@ -742,13 +784,13 @@ class Yoast_WooCommerce_SEO {
 		$request_helper = new Request_Helper();
 
 		if ( ! $request_helper->is_rest_request() ) {
-			if ( \is_null( $context ) ) {
+			if ( is_null( $context ) ) {
 				$context = YoastSEO()->meta->for_current_page()->context;
 			}
 
 			if ( is_a( $context, Meta_Tags_Context::class ) ) {
 				if ( $context->indexable->object_sub_type === 'product' ) {
-					$the_post = \get_post( $context->indexable->object_id );
+					$the_post = get_post( $context->indexable->object_id );
 					return wc_get_product( $the_post );
 				}
 			}
@@ -895,7 +937,7 @@ class Yoast_WooCommerce_SEO {
 	 * @param string $link      The archive link.
 	 * @param string $post_type The post type to check against.
 	 *
-	 * @return bool
+	 * @return string|false
 	 */
 	public function xml_post_type_archive_link( $link, $post_type ) {
 
@@ -960,6 +1002,8 @@ class Yoast_WooCommerce_SEO {
 
 	/**
 	 * Enqueues the pluginscripts.
+	 *
+	 * @return void
 	 */
 	public function enqueue_scripts() {
 		// Only do this on product pages.
@@ -982,6 +1026,8 @@ class Yoast_WooCommerce_SEO {
 
 	/**
 	 * Registers variable replacements for WooCommerce products.
+	 *
+	 * @return void
 	 */
 	public function register_replacements() {
 		wpseo_register_var_replacement(
@@ -1228,7 +1274,7 @@ class Yoast_WooCommerce_SEO {
 		 * On product overview pages in REST requests, do not cache the global identifiers.
 		 * Otherwise each product would get the same ids.
 		 */
-		if ( ! \is_singular() && $request_helper->is_rest_request() ) {
+		if ( ! is_singular() && $request_helper->is_rest_request() ) {
 			$this->get_product_global_identifiers();
 		}
 
@@ -1237,7 +1283,7 @@ class Yoast_WooCommerce_SEO {
 			$this->get_product_global_identifiers();
 		}
 
-		return isset( $this->global_identifiers[ $type ] ) ? $this->global_identifiers[ $type ] : '';
+		return ( $this->global_identifiers[ $type ] ?? '' );
 	}
 
 	/**
@@ -1297,7 +1343,7 @@ class Yoast_WooCommerce_SEO {
 	/**
 	 * Localizes scripts for the WooCommerce Replacevars plugin.
 	 *
-	 * @return array The localized values.
+	 * @return array<string, mixed> The localized values.
 	 */
 	protected function localize_woo_replacevars_script() {
 		return [
@@ -1312,7 +1358,7 @@ class Yoast_WooCommerce_SEO {
 	/**
 	 * Localizes scripts for the wooplugin.
 	 *
-	 * @return array
+	 * @return array<string, mixed>
 	 */
 	private function localize_woo_script() {
 		$asset_manager = new WPSEO_Admin_Asset_Manager();
@@ -1356,20 +1402,20 @@ class Yoast_WooCommerce_SEO {
 	 * Not supported versions will focus on the slug input field after pressing the
 	 * edit button, because of the way the edit buttons have been implemented.
 	 *
-	 * @return bool|int
+	 * @return bool
 	 */
 	private function should_show_edit_buttons() {
 		if ( ! defined( 'WPSEO_VERSION' ) ) {
 			return false;
 		}
 
-		return \version_compare( WPSEO_VERSION, '20.8-RC0', '>=' );
+		return version_compare( WPSEO_VERSION, '20.8-RC0', '>=' );
 	}
 
 	/**
 	 * Get the translation strings for the analysis.
 	 *
-	 * @return array[] The translation strings for the analysis.
+	 * @return array<string, array<string, array<string, array<string, array<string>>>>> The translation strings for the analysis.
 	 */
 	private function get_analysis_translations() {
 		return [
@@ -1567,7 +1613,7 @@ class Yoast_WooCommerce_SEO {
 					return;
 				}
 			}
-			remove_action( 'woocommerce_before_main_content', 'woocommerce_breadcrumb', 20, 0 );
+			remove_action( 'woocommerce_before_main_content', 'woocommerce_breadcrumb', 20 );
 			add_action( 'woocommerce_before_main_content', [ $this, 'show_yoast_breadcrumbs' ], 20, 0 );
 		}
 
@@ -1576,10 +1622,12 @@ class Yoast_WooCommerce_SEO {
 
 	/**
 	 * Declares compatibility with the WooCommerce HPOS feature.
+	 *
+	 * @return void
 	 */
 	public function declare_custom_order_tables_compatibility() {
 		if ( class_exists( '\Automattic\WooCommerce\Utilities\FeaturesUtil' ) ) {
-			\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', WPSEO_WOO_PLUGIN_FILE, true );
+			FeaturesUtil::declare_compatibility( 'custom_order_tables', WPSEO_WOO_PLUGIN_FILE, true );
 		}
 	}
 
@@ -1594,7 +1642,7 @@ class Yoast_WooCommerce_SEO {
 		 *
 		 * @since 12.5.0
 		 *
-		 * @api bool unsigned Defaults to true.
+		 * @param bool $output_price Defaults to true.
 		 */
 		$show_price = apply_filters( 'Yoast\WP\Woocommerce\og_price', true );
 

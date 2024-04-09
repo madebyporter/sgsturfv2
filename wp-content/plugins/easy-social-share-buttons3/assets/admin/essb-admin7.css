@@ -1,5 +1,5 @@
 
-.essb-control { font-family: 'Roboto',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+.essb-control { font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
 font-size: 13px; display: flex; background: #fff; }
 .essb-control-navigation { 
 	background: #000638;
@@ -181,7 +181,7 @@ font-size: 13px; display: flex; background: #fff; }
 	line-height: 48px;
 	vertical-align: middle;
 	font-size: 13px;
-	font-family: Roboto, -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+	font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
 	color: #6b7a92;
 	position: relative;	
 	box-shadow: 0 0 20px 0 rgba(0,0,0,0.1);
@@ -276,7 +276,7 @@ font-size: 13px; display: flex; background: #fff; }
 }
 
 .essb-control-content .essb-control-inner .essb-inner-menu {
-	font-family: Roboto,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+	font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
 }
 
 .essb-control-content .essb-control-inner .essb-inner-menu h3 {
@@ -354,7 +354,7 @@ font-size: 13px; display: flex; background: #fff; }
 }
 
 .essb-control-content .essb-control-inner .essb-control-inner-content {
-	font-family: 'Open Sans',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+	font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
 	padding: 0;
 }
 
@@ -794,7 +794,7 @@ font-size: 13px; display: flex; background: #fff; }
 .essb-options-hint-glowstyles .essb-options-hint-withicon .content-part .essb-options-hint-desc { display: none; }
 .essb-options-hint-glowstyles .essb-options-hint-withicon .content-part .essb-options-hint-title { 
 	margin-bottom: 0;
-	font-family: 'Open Sans',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+	font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
     font-size: 14px;
     font-weight: 700;
     letter-spacing: -0.4px;
@@ -834,7 +834,7 @@ font-size: 13px; display: flex; background: #fff; }
 }
 
 .essb-extension-list .list .addon-card {
-	font-family: 'Open Sans',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+	font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
 }
 
 .essb-extension-list .list .addon-card-installed { opacity: 1; }

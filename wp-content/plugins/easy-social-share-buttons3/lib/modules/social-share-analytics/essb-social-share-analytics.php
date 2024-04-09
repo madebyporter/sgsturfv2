@@ -17,6 +17,12 @@ class ESSBSocialShareAnalytics {
 	function __construct() {
 		add_action ( 'wp_ajax_nopriv_essb_stat_log', array ($this, 'log_click' ) );
 		add_action ( 'wp_ajax_essb_stat_log', array ($this, 'log_click' ) );		
+		
+		add_filter( 'essb_extend_ajax_options', function($settings) {
+		    $settings['internal_stats'] = true;
+		    
+		    return $settings;
+		});
 	}
 	
 	public function log_click() {
@@ -42,69 +48,7 @@ class ESSBSocialShareAnalytics {
 		die ( json_encode ( array ("success" => 'Log handled' ) ) );
 		
 	}
-	
-	public function generate_tracker_code() {
-		$script = '
-var essb_handle_stats = function(oService, oPostID, oInstance) {
-	var element = jQuery(\'.essb_\'+oInstance);
-	var instance_postion = jQuery(element).attr("data-essb-position") || "";
-	var instance_template = jQuery(element).attr("data-essb-template") || "";
-	var instance_button = jQuery(element).attr("data-essb-button-style") || "";
-	
-	var instance_counters = jQuery(element).hasClass("essb_counters") ? true : false;
-	var instance_nostats = jQuery(element).hasClass("essb_nostats") ? true : false;
-	
-	if (instance_nostats) { return; }
-	
-	var instance_mobile = false;
-
-	if( (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i).test(navigator.userAgent) ) {
-		instance_mobile = true;
-	}
-		if (typeof(essb_settings) != "undefined") {
-			jQuery.post(essb_settings.ajax_url, {
-				\'action\': \'essb_stat_log\',
-				\'post_id\': oPostID,
-				\'service\': oService,
-				\'template\': instance_template,
-				\'mobile\': instance_mobile,
-				\'position\': instance_postion,
-				\'button\': instance_button,
-				\'counter\': instance_counters,
-				\'nonce\': essb_settings.essb3_nonce
-			}, function (data) { if (data) {
-				
-			}},\'json\');
-		}
-	};	
-	
-var essb_log_stats_only = function(service, postId, position) {
-	var instance_mobile = false;
-
-	if( (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i).test(navigator.userAgent) ) {
-		instance_mobile = true;
-	}
-	if (typeof(essb_settings) != "undefined") {
-		jQuery.post(essb_settings.ajax_url, {
-			\'action\': \'essb_stat_log\',
-			\'post_id\': postId,
-			\'service\': service,
-			\'template\': position,
-			\'mobile\': instance_mobile,
-			\'position\': position,
-			\'button\': position,
-			\'counter\': false,
-			\'nonce\': essb_settings.essb3_nonce
-		}, function (data) { if (data) {
-				
-		}},\'json\');
-	}
-};		
-		';
 		
-		return $script;
-	}
-	
 }
 
 ?>

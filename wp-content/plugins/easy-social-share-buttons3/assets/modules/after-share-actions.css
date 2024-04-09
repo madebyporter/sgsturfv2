@@ -109,6 +109,12 @@
 	background: linear-gradient(to bottom,  #00abf0 0%,#007bac 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 	color: #fff;
 }
+
+.essbasc-fans-single.essbasc-fans-twitter.essbasc-fans-twitter-x {
+	background-color: #000;
+	background: #000;
+}
+
 .essbasc-fans-single.essbasc-fans-pinterest {
 	background-color: #ae181f;
 	background: #ae181f; /* Old browsers */

@@ -31,6 +31,7 @@ jQuery(document).ready(function($){
 		options['action'] = 'essb_style_library';
 		options['cmd'] = action;
 		options['essb_styleoptions_token'] = $('#essb_styleoptions_token').length ? $('#essb_styleoptions_token').val() : '';
+		options['essb_token'] = $('#essb_token').val();
 
 		if ($('#styles-preloader').length) $('#styles-preloader').fadeIn(100);
 
@@ -52,7 +53,8 @@ jQuery(document).ready(function($){
 		options['action'] = 'essb_style_library';
 		options['cmd'] = action;
 		options['essb_styleoptions_token'] = $('#essb_styleoptions_token').length ? $('#essb_styleoptions_token').val() : '';
-
+		options['essb_token'] = $('#essb_token').val();
+		
 		if ($('#styles-preloader').length) $('#styles-preloader').fadeIn(100);
 
 		$.ajax({

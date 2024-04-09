@@ -138,18 +138,28 @@ if ($group_product->is_type('grouped')):
                   if ($subproduct->get_status() === 'publish') {
                     // Prepare arguments for the card component
                     $card_args = array(
-                      'product_name' => $subproduct->get_name(),
-                      'product_category' => $subproduct_categories,
-                      'product_specs' => array(
-                        'Pile Height' => get_field('specs_pile_height', $subproduct_id) ? get_field('specs_pile_height', $subproduct_id) : 'n/a',
-                        'Total Weight' => get_field('specs_total_weight', $subproduct_id) ? get_field('specs_total_weight', $subproduct_id) : 'n/a',
-                        'Blade' => get_field('specs_blade', $subproduct_id) ? get_field('specs_blade', $subproduct_id) : 'n/a',
-                        'Turf Gauge' => get_field('specs_turf_gauge', $subproduct_id) ? get_field('specs_turf_gauge', $subproduct_id) : 'n/a',
-                        'Blade_Colors' => get_field('specs_blade_colors', $subproduct_id) ? get_field('specs_blade_colors', $subproduct_id) : 'n/a',
-                      ),
-                      'product_photo' => $subproduct_image ? $subproduct_image[0] : SGSTURF_IMAGES_DIR . '/ui-state-zero-simpleproduct.jpg',
-                      'product_link' => $full_url,
+                        'product_name' => $subproduct->get_name(),
+                        'product_category' => $subproduct_categories,
+                        'product_photo' => $subproduct_image ? $subproduct_image[0] : SGSTURF_IMAGES_DIR . '/ui-state-zero-simpleproduct.jpg',
+                        'product_link' => $full_url,
                     );
+
+                    // Check if the product has the 'accessories' category
+                    if (has_term('accessories', 'product_cat', $subproduct_id)) {
+                        // For accessories, get the 'Spec Detail' from the ACF field
+                        $spec_detail = get_field('specs_spec_detail', $subproduct_id);
+                        // Add 'Spec Detail' to the card arguments
+                        $card_args['product_specs'] = array('Spec Detail' => $spec_detail ? $spec_detail : 'No Specs Available');
+                    } else {
+                        // For other categories, get the standard specifications
+                        $card_args['product_specs'] = array(
+                            'Pile Height' => get_field('specs_pile_height', $subproduct_id) ?: 'n/a',
+                            'Total Weight' => get_field('specs_total_weight', $subproduct_id) ?: 'n/a',
+                            'Blade' => get_field('specs_blade', $subproduct_id) ?: 'n/a',
+                            'Turf Gauge' => get_field('specs_turf_gauge', $subproduct_id) ?: 'n/a',
+                            'Blade_Colors' => get_field('specs_blade_colors', $subproduct_id) ?: 'n/a',
+                        );
+                    }
 
 
                     // Render the card component

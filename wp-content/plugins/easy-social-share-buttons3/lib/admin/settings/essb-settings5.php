@@ -253,8 +253,10 @@ if ($drawing_tab == 'update' || $drawing_tab == 'status') { $drawing_tab = 'abou
 	</div>
 </div>
 
+<?php $extra_template_class = (essb_using_svg_icons_sharing() ? ' essb-component-buttons-livepreview-svg': ''); ?>
+
 <!-- Template Selection -->
-<div class="essb-helper-popup" id="essb-templateselect" data-width="800" data-height="auto">
+<div class="essb-helper-popup<?php echo $extra_template_class; ?>" id="essb-templateselect" data-width="800" data-height="auto">
 	<div class="essb-helper-popup-title">
 		Template Selection
 		<a href="#" class="essb-helper-popup-close"></a>
@@ -266,7 +268,7 @@ if ($drawing_tab == 'update' || $drawing_tab == 'status') { $drawing_tab = 'abou
 </div>
 
 <!-- Template Selection -->
-<div class="essb-helper-popup" id="essb-pintemplateselect" data-width="800" data-height="auto">
+<div class="essb-helper-popup<?php echo $extra_template_class; ?>" id="essb-pintemplateselect" data-width="800" data-height="auto">
 	<div class="essb-helper-popup-title">
 		Template Selection
 		<a href="#" class="essb-helper-popup-close"></a>
@@ -278,7 +280,7 @@ if ($drawing_tab == 'update' || $drawing_tab == 'status') { $drawing_tab = 'abou
 </div>
 
 <!-- Button Style Select -->
-<div class="essb-helper-popup" id="essb-buttonstyleselect" data-width="800" data-height="auto">
+<div class="essb-helper-popup<?php echo $extra_template_class; ?>" id="essb-buttonstyleselect" data-width="800" data-height="auto">
 	<div class="essb-helper-popup-title">
 		Button Style
 		<a href="#" class="essb-helper-popup-close"></a>
@@ -290,7 +292,7 @@ if ($drawing_tab == 'update' || $drawing_tab == 'status') { $drawing_tab = 'abou
 </div>
 
 <!-- Button Style Select -->
-<div class="essb-helper-popup" id="essb-pinbuttonstyleselect" data-width="800" data-height="auto">
+<div class="essb-helper-popup<?php echo $extra_template_class; ?>" id="essb-pinbuttonstyleselect" data-width="800" data-height="auto">
 	<div class="essb-helper-popup-title">
 		Button Style
 		<a href="#" class="essb-helper-popup-close"></a>
@@ -302,7 +304,7 @@ if ($drawing_tab == 'update' || $drawing_tab == 'status') { $drawing_tab = 'abou
 </div>
 
 <!-- Share Counter Position Select -->
-<div class="essb-helper-popup" id="essb-counterposselect" data-width="800" data-height="auto">
+<div class="essb-helper-popup<?php echo $extra_template_class; ?>" id="essb-counterposselect" data-width="800" data-height="auto">
 	<div class="essb-helper-popup-title">
 		Single Button Share Counter Style
 		<a href="#" class="essb-helper-popup-close"></a>
@@ -314,7 +316,7 @@ if ($drawing_tab == 'update' || $drawing_tab == 'status') { $drawing_tab = 'abou
 </div>
 
 <!-- Total Share Counter Position Select -->
-<div class="essb-helper-popup" id="essb-totalcounterposselect" data-width="800" data-height="auto">
+<div class="essb-helper-popup<?php echo $extra_template_class; ?>" id="essb-totalcounterposselect" data-width="800" data-height="auto">
 	<div class="essb-helper-popup-title">
 		Single Button Share Counter Style
 		<a href="#" class="essb-helper-popup-close"></a>
@@ -326,7 +328,7 @@ if ($drawing_tab == 'update' || $drawing_tab == 'status') { $drawing_tab = 'abou
 </div>
 
 <!-- Total Share Counter Position Select -->
-<div class="essb-helper-popup" id="essb-animationsselect" data-width="800" data-height="auto">
+<div class="essb-helper-popup<?php echo $extra_template_class; ?>" id="essb-animationsselect" data-width="800" data-height="auto">
 	<div class="essb-helper-popup-title">
 		Animations
 		<a href="#" class="essb-helper-popup-close"></a>
@@ -409,7 +411,8 @@ var essbAdminSettings = {
 		'networks': <?php echo json_encode(essb_available_social_networks()); ?>,
 		'templates': <?php echo json_encode($templates); ?>,
 		'template_classes': <?php echo json_encode($template_classes); ?>,
-		'svg': <?php echo json_encode($network_svg_icons); ?>
+		'svg': <?php echo json_encode($network_svg_icons); ?>,
+	    'svg_icons': <?php echo essb_using_svg_icons_sharing(); ?>
 };
 
 function essbCloseStatusMessage(sender) {

@@ -6,7 +6,7 @@ Gravity Forms Administration Styles
 http: //www.gravityforms.com
 
 Gravity Forms is a Rocketgenius project
-copyright 2008-2021 Rocketgenius Inc.
+copyright 2008-2024 Rocketgenius Inc.
 http: //www.rocketgenius.com
 this may not be re-distributed without the
 express written permission of the author.
@@ -2846,10 +2846,6 @@ html[dir="rtl"] .gform-field__toggle input[type="checkbox"]:checked + .gform-fie
 		border-bottom-color: #3e7da6;
 	}
 
-.gform-form-toolbar__menu a.gf_toolbar_active {
-		cursor: default;
-	}
-
 .gform-form-toolbar__menu > li {
 		display: inline-block;
 		margin: 0;
@@ -2959,6 +2955,7 @@ html[dir="rtl"] .gform-field__toggle input[type="checkbox"]:checked + .gform-fie
 	flex: auto;
 	font-family: inter, -apple-system, blinkmacsystemfont, "Segoe UI", roboto, oxygen-sans, ubuntu, cantarell, "Helvetica Neue", sans-serif;
 	justify-content: flex-end;
+	padding-inline-start: 0.65rem;
 	text-align: right;
 }
 
@@ -5390,9 +5387,26 @@ div.gforms_code pre {
 	height: 18px;
 }
 
-.gform-admin-screen .inline {
+.gform-admin-screen .inline, .gform-admin-screen .editor-sidebar li.next_button_setting.field_setting input:where([type="checkbox"], [type="radio"]) + label.inline[\:has\(\%3E\%20.gf_tooltip\)], .gform-admin-screen .editor-sidebar li.previous_button_setting.field_setting input:where([type="checkbox"], [type="radio"]) + label.inline[\:has\(\%3E\%20.gf_tooltip\)] {
 	display: -moz-inline-stack !important;
 	display: inline-block !important;
+}
+
+.gform-admin-screen .inline, .gform-admin-screen .editor-sidebar li.next_button_setting.field_setting input:where([type="checkbox"], [type="radio"]) + label.inline:has(> .gf_tooltip), .gform-admin-screen .editor-sidebar li.previous_button_setting.field_setting input:where([type="checkbox"], [type="radio"]) + label.inline:has(> .gf_tooltip) {
+	display: -moz-inline-stack !important;
+	display: inline-block !important;
+}
+
+.gform-admin-screen .editor-sidebar input:where([type="checkbox"], [type="radio"]) + label.inline[\:has\(\%3E\%20.gf_tooltip\)] {
+	display: inline !important;
+}
+
+.gform-admin-screen .editor-sidebar input:where([type="checkbox"], [type="radio"]) + label.inline:has(> .gf_tooltip) {
+	display: inline !important;
+}
+
+.gform-admin-screen .editor-sidebar li.email_confirm_setting.field_setting input[type="checkbox"] + label.inline, .gform-admin-screen .editor-sidebar li.post_category_initial_item_setting.field_setting input[type="checkbox"] + label.inline {
+	display: inline !important;
 }
 
 label.float_label {

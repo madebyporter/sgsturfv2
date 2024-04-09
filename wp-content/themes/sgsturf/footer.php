@@ -58,6 +58,24 @@
             <?php dynamic_sidebar('footer_location_2'); ?>
           </div>
         <?php endif; ?>
+
+        <?php if (is_active_sidebar('footer_location_3')): ?>
+          <div id="footer-location-3" class="widget-area">
+            <?php dynamic_sidebar('footer_location_3'); ?>
+          </div>
+        <?php endif; ?>
+
+        <?php if (is_active_sidebar('footer_location_4')): ?>
+          <div id="footer-location-3" class="widget-area">
+            <?php dynamic_sidebar('footer_location_4'); ?>
+          </div>
+        <?php endif; ?>
+
+        <?php if (is_active_sidebar('footer_location_5')): ?>
+          <div id="footer-location-3" class="widget-area">
+            <?php dynamic_sidebar('footer_location_5'); ?>
+          </div>
+        <?php endif; ?>
       </div>
 
     </div>

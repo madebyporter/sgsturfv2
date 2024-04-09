@@ -9,8 +9,8 @@ use WPStaging\Backend\Pro\Licensing\Licensing;
 use WPStaging\Backup\BackupServiceProvider;
 use WPStaging\Basic\BasicServiceProvider;
 use WPStaging\Core\Cron\Cron;
-use WPStaging\Core\Utils\Cache;
 use WPStaging\Core\Utils\Logger;
+use WPStaging\Duplicator\DuplicatorServiceProvider;
 use WPStaging\Framework\Adapter\WpAdapter;
 use WPStaging\Framework\AnalyticsServiceProvider;
 use WPStaging\Framework\AssetServiceProvider;
@@ -25,6 +25,7 @@ use WPStaging\Framework\SettingsServiceProvider;
 use WPStaging\Framework\SiteInfo;
 use WPStaging\Framework\Staging\FirstRun;
 use WPStaging\Framework\Url;
+use WPStaging\Framework\Utils\Cache\Cache;
 use WPStaging\Frontend\Frontend;
 use WPStaging\Frontend\FrontendServiceProvider;
 use WPStaging\Pro\ProServiceProvider;
@@ -40,6 +41,11 @@ final class WPStaging
      * @var WPStaging
      */
     private static $instance;
+
+    /**
+     * @var bool
+     */
+    private static $useBaseContainerSingleton = false;
 
     /**
      * @var Container
@@ -109,6 +115,7 @@ final class WPStaging
 
         $this->container->register(AnalyticsServiceProvider::class);
 
+        $this->container->register(DuplicatorServiceProvider::class);
         $this->container->register(BackupServiceProvider::class);
 
         // Register Pro or Basic Provider, Always prefer registering Pro if both classes found. If both not present throw error
@@ -209,6 +216,15 @@ final class WPStaging
     }
 
     /**
+     * @param bool $useBaseContainerSingleton
+     * @return void
+     */
+    public static function setUseBaseContainerSingleton(bool $useBaseContainerSingleton)
+    {
+        static::$useBaseContainerSingleton = $useBaseContainerSingleton;
+    }
+
+    /**
      * Caching and logging folder
      *
      * @return string
@@ -230,8 +246,7 @@ final class WPStaging
     public static function getInstance()
     {
         if (static::$instance === null) {
-            static::$instance = new WPStaging(new Container());
-            static::getInstance();
+            static::$instance = new WPStaging(new Container(false, static::$useBaseContainerSingleton));
         }
 
         if (!static::$instance->isBootstrapped) {
@@ -249,7 +264,7 @@ final class WPStaging
     {
         if (php_sapi_name() == "cli") {
             $this->isBootstrapped = false;
-            $this->container      = new Container();
+            $this->container      = new Container(false, static::$useBaseContainerSingleton);
         }
     }
 
@@ -281,7 +296,10 @@ final class WPStaging
         // Load globally available functions
         require_once(__DIR__ . "/Utils/functions.php");
 
-        $this->set("cache", new Cache());
+        $cache = WPStaging::make(Cache::class);
+        $cache->setLifetime(-1); // Non-expireable file
+        $cache->setPath(WPStaging::getContentDir());
+        $this->set("cache", $cache);
 
         $this->set("logger", new Logger());
 
@@ -330,10 +348,22 @@ final class WPStaging
      * @param mixed $variable
      *
      * @return $this
-     * @deprecated Refactor implementations of this method to use the Container instead.
+     * @deprecated Use setVar instead.
      *
      */
     public function set($name, $variable)
+    {
+        return $this->setVar($name, $variable);
+    }
+
+    /**
+     * Store a variable in DI container with given name
+     *
+     * @param string $name
+     * @param mixed $variable
+     * @return self
+     */
+    public function setVar(string $name, $variable)
     {
         $this->container->setVar($name, $variable);
 
@@ -346,12 +376,24 @@ final class WPStaging
      * @param string $name
      *
      * @return mixed|null
-     * @deprecated Refactor implementations of this method to use the Container instead.
+     * @deprecated Use getVar instead if you want to retrieve value for a variable set using setVar or set.
      *
      */
     public function get($name)
     {
         return $this->container->_get($name);
+    }
+
+    /**
+     * Get a variable from DI container with given name
+     *
+     * @param string $name
+     * @param mixed $default
+     * @return mixed
+     */
+    public function getVar(string $name, $default = null)
+    {
+        return $this->container->getVar($name, $default);
     }
 
     /**
@@ -428,7 +470,7 @@ final class WPStaging
      */
     public static function isPro()
     {
-        return self::make('WPSTG_PRO');
+        return WPStaging::getInstance()->getVar('WPSTG_PRO', false);
     }
 
     /**
@@ -436,7 +478,7 @@ final class WPStaging
      */
     public static function silenceLogs($silence = true)
     {
-        WPStaging::getInstance()->set('SILENCE_LOGS', $silence);
+        WPStaging::getInstance()->setVar('SILENCE_LOGS', $silence);
     }
 
     /**
@@ -445,7 +487,7 @@ final class WPStaging
     public static function areLogsSilenced()
     {
         try {
-            return self::make('SILENCE_LOGS');
+            return WPStaging::getInstance()->getVar('SILENCE_LOGS', false);
         } catch (Exception $ex) {
             return false;
         }

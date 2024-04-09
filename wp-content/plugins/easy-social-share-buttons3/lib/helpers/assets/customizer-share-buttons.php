@@ -86,24 +86,7 @@ if (!function_exists('essb_register_dynamic_sharebutton_styles')) {
             if ($k == 'more') {
                 ESSB_Dynamic_CSS_Builder::register_header_field('.essb_links.essb_share .essb_link_more_dots a:hover, .essb_links .essb_link_more_dots a:focus, .essb_links.essb_share .essb_link_less a:hover, .essb_links .essb_link_less a:focus', 'background-color', $network_hovercolor, '', true);
                 ESSB_Dynamic_CSS_Builder::register_header_field('.essb_links.essb_share .essb_link_more_dots a:hover, .essb_links .essb_link_more_dots a:focus, .essb_links.essb_share .essb_link_less a:hover, .essb_links .essb_link_less a:focus', 'color', $network_hovertextcolor, '', true);
-            }
-            
-            /**
-             * Icons
-             */
-            
-            if ($network_icon != '') {
-                ESSB_Dynamic_CSS_Builder::register_header_field('.essb_links.essb_share .essb_link_' . $k . ' .essb_icon', 'background', 'url('.esc_url($network_icon).')', '', true);                
-                if ($network_iconbgsize != '') {
-                    ESSB_Dynamic_CSS_Builder::register_header_field('.essb_links.essb_share .essb_link_' . $k . ' .essb_icon', ' background-size', $network_iconbgsize, '', true);
-                }
-            }
-            if ($network_hovericon != '') {
-                ESSB_Dynamic_CSS_Builder::register_header_field('.essb_links.essb_share .essb_link_' . $k . ' a:hover .essb_icon', 'background', 'url('.esc_url($network_hovericon).')', '', true);
-                if ($network_iconbgsize != '') {
-                    ESSB_Dynamic_CSS_Builder::register_header_field('.essb_links.essb_share .essb_link_' . $k . ' a:hover .essb_icon', ' background-size', $network_hovericonbgsize, '', true);
-                }                
-            }
+            }            
         }
         
         /**
@@ -112,16 +95,14 @@ if (!function_exists('essb_register_dynamic_sharebutton_styles')) {
          */
         $global_customizer_iconsize = essb_sanitize_option_value('customizer_iconsize');
         if ($global_customizer_iconsize != '') {
-            $icon_wh = intval($global_customizer_iconsize) * 2;
+            $icon_wh = intval($global_customizer_iconsize) + (intval($global_customizer_iconsize) / 2) ;
             $icon_lt = intval($global_customizer_iconsize) / 2;
             $icon_lt = round($icon_lt);
             
             ESSB_Dynamic_CSS_Builder::register_header_field('.essb_links.essb_share .essb_icon', 'width', $icon_wh, 'px', true);
             ESSB_Dynamic_CSS_Builder::register_header_field('.essb_links.essb_share .essb_icon', 'height', $icon_wh, 'px', true);
 
-            ESSB_Dynamic_CSS_Builder::register_header_field('.essb_links.essb_share .essb_icon:before', 'font-size', $global_customizer_iconsize, 'px', true);
-            ESSB_Dynamic_CSS_Builder::register_header_field('.essb_links.essb_share .essb_icon:before', 'left', $icon_lt, 'px', true);
-            ESSB_Dynamic_CSS_Builder::register_header_field('.essb_links.essb_share .essb_icon:before', 'top', $icon_lt, 'px', true);            
+            ESSB_Dynamic_CSS_Builder::register_header_field('.essb_links.essb_share .essb_icon svg', 'height', $global_customizer_iconsize, 'px', true);
         }
         
         $global_customizer_namesize = essb_sanitize_option_value('customizer_namesize');

@@ -108,7 +108,7 @@
 .essb-control .essb-inner-navigation {
 	background: #eff3fc;
 	width: 230px;
-	font-family: 'Open Sans',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+	font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
 }
 
 .essb-control .essb-navigation-split {
@@ -395,8 +395,8 @@
 }
 
 .essb-options .sub7 {
-	font-family: 'Open Sans', Tahoma, sans-serif;
-	font-size: 14px;
+	font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+	font-size: 15px;
 	font-weight: 600;
 	width: 100%;
 	padding: 15px 20px;
@@ -960,4 +960,49 @@
 
 .essb-options-helprow .help-details .desc.noButton {
 	margin-bottom: 0;
+}
+
+/**
+ * Modification over the admin panel
+ */
+.essb-page-background {
+	background: #eff3fc;
+}
+
+.essb-control-content .essb-control-top {
+	background: #eff3fc;
+	box-shadow: none;
+}
+
+.essb-control-content .essb-control-top.scroll-to-fixed-fixed {
+	box-shadow: none;
+}
+
+.essb-control-content {
+	width: calc(100% - 290px);
+}
+
+.essb-component-buttons-livepreview-svg .essb_item .essb_icon:before,
+.essb-component-networkselect-svg .essb_icon:not(.fa):before {
+	display: none;
+}
+
+.essb-component-networkselect-svg .essb_icon svg,
+.essb_svg_icons_picker .essb_icon svg {
+	fill: #fff;
+	width: 18px;
+	height: 18px;
+}
+
+.essb_svg_icons_picker .essb_icon:before {
+	display: none;
+}
+
+.essb-admin-networkselect {
+	display: inline-flex;
+	align-items: center;
+}
+
+.essb-admin-networkselect .essb-active {
+	margin-left: auto;
 }

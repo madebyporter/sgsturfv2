@@ -1545,7 +1545,7 @@ function essb5_live_preview_single_position($options) {
 		}
 	}
 
-	$code = '<div class="essb-component-buttons-livepreview" data-settings="essb_'.$position.'_global_preview">';
+	$code = '<div class="essb-component-buttons-livepreview'.(essb_using_svg_icons_sharing() ? ' essb-component-buttons-livepreview-svg': '').'" data-settings="essb_'.$position.'_global_preview">';
 	$code .= '</div>';
 
 	$code .= "<script type=\"text/javascript\">

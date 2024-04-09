@@ -36,7 +36,7 @@ class WPSEO_WooCommerce_Schema {
 
 		// Filters & actions below in order of execution.
 		add_filter( 'wpseo_frontend_presenters', [ $this, 'remove_unneeded_presenters' ] );
-		add_filter( 'wpseo_schema_webpage', [ $this, 'filter_webpage' ], 10, 2 );
+		add_filter( 'wpseo_schema_webpage', [ $this, 'filter_webpage' ], 10, 1 );
 		add_filter( 'woocommerce_structured_data_product', [ $this, 'change_product' ], 10, 2 );
 		add_filter( 'woocommerce_structured_data_type_for_page', [ $this, 'remove_woo_breadcrumbs' ] );
 
@@ -86,11 +86,11 @@ class WPSEO_WooCommerce_Schema {
 	 * @return bool False when there's nothing to output, true when we did output something.
 	 */
 	public function output_schema_footer() {
-		if ( empty( $this->data ) || $this->data === [] || ! is_array( $this->data ) ) {
+		if ( ! is_array( $this->data ) || $this->data === [] ) {
 			return false;
 		}
 
-		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- We need to output HTML. If we escape this we break it.
+		// phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped -- We need to output HTML. If we escape this we break it.
 		echo new WPSEO_WooCommerce_Schema_Presenter(
 			[ $this->data ],
 			[
@@ -99,6 +99,7 @@ class WPSEO_WooCommerce_Schema {
 				'yoast-schema-graph--footer',
 			]
 		);
+		// phpcs:enable
 
 		return true;
 	}
@@ -112,10 +113,8 @@ class WPSEO_WooCommerce_Schema {
 	 */
 	public function filter_webpage( $webpage_data ) {
 		if ( is_product() ) {
-			if ( ! is_array( $webpage_data['@type'] ) ) {
-				$webpage_data['@type'] = [ $webpage_data['@type'] ];
-			}
-			$webpage_data['@type'][] = 'ItemPage';
+			// We force the page type to be WebPage and ItemPage.
+			$webpage_data['@type'] = [ 'WebPage', 'ItemPage' ];
 			// We normally add a `ReadAction` on pages, we're replacing with a `BuyAction` on product pages.
 			$webpage_data['potentialAction'] = [
 				'@type'  => 'BuyAction',
@@ -148,7 +147,7 @@ class WPSEO_WooCommerce_Schema {
 		/**
 		 * Filter: 'wpseo_schema_review' - Allow changing the Review type.
 		 *
-		 * @api array $data The Schema Review data.
+		 * @param array $data The Schema Review data.
 		 */
 		$this->data = apply_filters( 'wpseo_schema_review', $this->data );
 
@@ -188,7 +187,7 @@ class WPSEO_WooCommerce_Schema {
 		/**
 		 * Filter: 'wpseo_schema_product' - Allow changing the Product type.
 		 *
-		 * @api array $data The Schema Product data.
+		 * @param array $data The Schema Product data.
 		 */
 		$this->data = apply_filters( 'wpseo_schema_product', $this->data );
 
@@ -381,6 +380,8 @@ class WPSEO_WooCommerce_Schema {
 	 * Add brand to our output.
 	 *
 	 * @param WC_Product $product Product object.
+	 *
+	 * @return void
 	 */
 	private function add_brand( $product ) {
 		$schema_brand = WPSEO_Options::get( 'woo_schema_brand' );
@@ -393,6 +394,8 @@ class WPSEO_WooCommerce_Schema {
 	 * Add manufacturer to our output.
 	 *
 	 * @param WC_Product $product Product object.
+	 *
+	 * @return void
 	 */
 	private function add_manufacturer( $product ) {
 		$schema_manufacturer = WPSEO_Options::get( 'woo_schema_manufacturer' );
@@ -408,6 +411,8 @@ class WPSEO_WooCommerce_Schema {
 	 * @param WC_Product $product   The WooCommerce product we're working with.
 	 * @param string     $taxonomy  The taxonomy to get the attribute's value from.
 	 * @param string     $type      The Schema type to use.
+	 *
+	 * @return void
 	 */
 	private function add_attribute_as( $attribute, $product, $taxonomy, $type = 'Organization' ) {
 		$term = $this->get_primary_term_or_first_term( $taxonomy, $product->get_id() );
@@ -415,13 +420,15 @@ class WPSEO_WooCommerce_Schema {
 		if ( $term !== null ) {
 			$this->data[ $attribute ] = [
 				'@type' => $type,
-				'name'  => \wp_strip_all_tags( $term->name ),
+				'name'  => wp_strip_all_tags( $term->name ),
 			];
 		}
 	}
 
 	/**
 	 * Adds image schema.
+	 *
+	 * @return void
 	 */
 	private function add_image() {
 		/**
@@ -453,9 +460,9 @@ class WPSEO_WooCommerce_Schema {
 	/**
 	 * Add a custom schema property to the Schema output.
 	 *
-	 * @param WC_Product $product The product object.
+	 * @param WC_Product $product     The product object.
 	 * @param string     $option_name The option name.
-	 * @param string     $schema_id The schema identifier to use.
+	 * @param string     $schema_id   The schema identifier to use.
 	 *
 	 * @return void
 	 */

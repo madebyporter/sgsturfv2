@@ -284,7 +284,7 @@ class ESSBActivationManager {
 }
 
 /**
- * Register activation action only if the administration is running
+ * Register activation action only if the administration is running 
  */
 
 if (!function_exists('essb_admin_register_activation_action')) {
@@ -306,7 +306,28 @@ if (!function_exists('essb_admin_register_activation_action')) {
         $domain = sanitize_text_field(isset($_REQUEST['domain']) ? $_REQUEST['domain'] : '');
         $version = sanitize_text_field(isset($_REQUEST['version']) ? $_REQUEST['version'] : '');
         
+        $nonce = sanitize_text_field(isset($_REQUEST['activate_nonce']) ? $_REQUEST['activate_nonce'] : '');
+                
         $execute_code = -1;
+        
+        /**
+         * @since 9.5 - Apply control to reading data for the users with access
+         */
+        $essb_settings_access = essb_option_value('essb_access');
+        if ($essb_settings_access == '') {
+            $essb_settings_access = 'manage_options';
+        }
+        
+        if (!current_user_can($essb_settings_access)) {
+            die(json_encode(array('code' => $execute_code)));
+            exit;
+        }
+        
+        if (!wp_verify_nonce( $nonce, 'essb_activate_nonce_token' )) {
+            die(json_encode(array('code' => $execute_code)));
+            exit;
+        }
+
         
         if ($state == 'activate' && $purchase_code != '' && $activation_code != '') {
             ESSBActivationManager::activate($purchase_code, $activation_code);

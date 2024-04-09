@@ -1597,10 +1597,6 @@ video {
   min-width: 60px;
 }
 
-.min-w-\[230px\] {
-  min-width: 230px;
-}
-
 .flex-1 {
   flex: 1 1 0%;
 }
@@ -2878,11 +2874,6 @@ video {
   padding-right: 1.25rem;
 }
 
-.py-0 {
-  padding-top: 0px;
-  padding-bottom: 0px;
-}
-
 .py-1 {
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
@@ -2945,10 +2936,6 @@ video {
 
 .pt-7 {
   padding-top: 1.75rem;
-}
-
-.pt-\[28rem\] {
-  padding-top: 28rem;
 }
 
 .text-left {
@@ -3034,6 +3021,7 @@ video {
 .text-xl {
   font-size: 1.25rem;
   line-height: 1.75rem;
+  text-transform: uppercase;
 }
 
 .text-xs {
@@ -3136,6 +3124,16 @@ video {
 .text-black {
   --tw-text-opacity: 1;
   color: rgb(36 36 35 / var(--tw-text-opacity));
+}
+
+.text-black h3 {
+  text-transform: uppercase;
+}
+
+h3 .text-xl.font-bold.text-black {
+  --tw-text-opacity: 1;
+  color: rgb(36 36 35 / var(--tw-text-opacity));
+  text-transform: uppercase;
 }
 
 .text-blue-500 {
@@ -4249,10 +4247,6 @@ div.essb-copylink-window div.essb_morepopup_header span::before {
     grid-template-columns: repeat(6, minmax(0, 1fr));
   }
 
-  .sm\:pt-\[34rem\] {
-    padding-top: 34rem;
-  }
-
   .sm\:underline {
     text-decoration-line: underline;
   }
@@ -4291,10 +4285,6 @@ div.essb-copylink-window div.essb_morepopup_header span::before {
     grid-column-start: 8;
   }
 
-  .md\:col-start-10 {
-    grid-column-start: 10;
-  }
-
   .md\:col-end-10 {
     grid-column-end: 10;
   }
@@ -4325,10 +4315,6 @@ div.essb-copylink-window div.essb_morepopup_header span::before {
 
   .md\:col-end-8 {
     grid-column-end: 8;
-  }
-
-  .md\:col-end-9 {
-    grid-column-end: 9;
   }
 
   .md\:m-0 {
@@ -4362,10 +4348,6 @@ div.essb-copylink-window div.essb_morepopup_header span::before {
 
   .md\:inline-block {
     display: inline-block;
-  }
-
-  .md\:flex {
-    display: flex;
   }
 
   .md\:hidden {
@@ -4429,10 +4411,6 @@ div.essb-copylink-window div.essb_morepopup_header span::before {
     padding: 2.5rem;
   }
 
-  .md\:p-20 {
-    padding: 5rem;
-  }
-
   .md\:px-10 {
     padding-left: 2.5rem;
     padding-right: 2.5rem;
@@ -4446,10 +4424,6 @@ div.essb-copylink-window div.essb_morepopup_header span::before {
   .md\:py-10 {
     padding-top: 2.5rem;
     padding-bottom: 2.5rem;
-  }
-
-  .md\:pb-0 {
-    padding-bottom: 0px;
   }
 
   .md\:pb-10 {
@@ -4466,10 +4440,6 @@ div.essb-copylink-window div.essb_morepopup_header span::before {
 
   .md\:pt-0 {
     padding-top: 0px;
-  }
-
-  .md\:pt-\[34rem\] {
-    padding-top: 34rem;
   }
 }
 
@@ -4502,6 +4472,10 @@ div.essb-copylink-window div.essb_morepopup_header span::before {
     grid-column: span 2 / span 2;
   }
 
+  .lg\:col-span-3 {
+    grid-column: span 3 / span 3;
+  }
+
   .lg\:col-span-6 {
     grid-column: span 6 / span 6;
   }
@@ -4510,20 +4484,12 @@ div.essb-copylink-window div.essb_morepopup_header span::before {
     grid-column: span 7 / span 7;
   }
 
-  .lg\:col-span-3 {
-    grid-column: span 3 / span 3;
-  }
-
-  .lg\:col-span-1 {
-    grid-column: span 1 / span 1;
-  }
-
-  .lg\:col-span-12 {
-    grid-column: span 12 / span 12;
-  }
-
   .lg\:col-start-1 {
     grid-column-start: 1;
+  }
+
+  .lg\:col-start-10 {
+    grid-column-start: 10;
   }
 
   .lg\:col-start-11 {
@@ -4540,14 +4506,6 @@ div.essb-copylink-window div.essb_morepopup_header span::before {
 
   .lg\:col-start-7 {
     grid-column-start: 7;
-  }
-
-  .lg\:col-start-10 {
-    grid-column-start: 10;
-  }
-
-  .lg\:col-start-8 {
-    grid-column-start: 8;
   }
 
   .lg\:col-end-10 {
@@ -4691,10 +4649,6 @@ div.essb-copylink-window div.essb_morepopup_header span::before {
     padding: 2.5rem;
   }
 
-  .lg\:p-20 {
-    padding: 5rem;
-  }
-
   .lg\:px-20 {
     padding-left: 5rem;
     padding-right: 5rem;
@@ -4722,10 +4676,6 @@ div.essb-copylink-window div.essb_morepopup_header span::before {
     padding-left: 3rem;
   }
 
-  .lg\:pt-40 {
-    padding-top: 10rem;
-  }
-
   .lg\:text-3xl {
     font-size: 1.875rem;
     line-height: 2.25rem;
@@ -4734,6 +4684,11 @@ div.essb-copylink-window div.essb_morepopup_header span::before {
   .lg\:text-5xl {
     font-size: 3rem;
     line-height: 1;
+  }
+
+  .lg\:text-4xl {
+    font-size: 2.25rem;
+    line-height: 2.5rem;
   }
 
   .group:hover .lg\:group-hover\:flex {
@@ -4849,10 +4804,6 @@ div.essb-copylink-window div.essb_morepopup_header span::before {
 
   .xl\:pt-0 {
     padding-top: 0px;
-  }
-
-  .xl\:pt-40 {
-    padding-top: 10rem;
   }
 }
 

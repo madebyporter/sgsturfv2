@@ -2219,7 +2219,7 @@ background-color: #fff;*/
 
 .essb-network-color-facebook,
 .essb-network-color-facebook_like {
-	background-color: #4769A5 !important;
+	background-color: #0866FF !important;
 	color: #fff !important;
 }
 
@@ -2238,8 +2238,18 @@ background-color: #fff;*/
 	color: #fff !important;
 }
 
+.essb-network-color-twitter_x {
+	background-color: #0f1419!important;
+	color: #fff !important;
+}
+
 .essb-network-color-google {
 	background-color: #bf3727!important;
+	color: #fff !important;
+}
+
+.essb-network-color-copy {
+	background-color: #404040!important;
 	color: #fff !important;
 }
 
