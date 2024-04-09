@@ -58,7 +58,7 @@ body {
   @apply md:col-span-2;
 }
 .mobile-menu .submenu-cards .sub-menu .menu-item a {
-  @apply text-black normal-case tracking-tight leading-tight text-sm font-bold flex flex-col items-start order-1 p-2.5 md:p-5 pb-[calc(0.625rem+83px)] md:pb-[calc(1.25rem+173px)] relative before:flex before:justify-center before:items-center before:absolute before:left-0 before:right-0 before:bottom-0 before:w-full before:h-[83px] md:before:h-[173px] before:content-[""] before:bg-[#EFF0ED] before:order-2 before:bg-no-repeat before:bg-cover;
+  @apply text-clip overflow-hidden md:overflow-visible md:whitespace-normal md:text-overflow-clip text-black normal-case tracking-tight leading-tight text-sm font-bold flex flex-col items-start order-1 p-2.5 md:p-5 pb-[calc(0.625rem+83px)] md:pb-[calc(1.25rem+173px)] relative before:flex before:justify-center before:items-center before:absolute before:left-0 before:right-0 before:bottom-0 before:w-full before:h-[83px] md:before:h-[173px] before:content-[""] before:bg-[#EFF0ED] before:order-2 before:bg-no-repeat before:bg-cover;
 }
 .submenu-default .menu-item a:before {font: var(--fa-font-sharp-light)}
 .submenu-default .sub-menu .submenu-landscape a { @apply before:content-["\f015"] }

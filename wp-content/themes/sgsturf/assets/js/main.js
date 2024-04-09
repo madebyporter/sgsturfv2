@@ -1,3 +1,5 @@
+// Mobile Menu
+
 document.addEventListener('DOMContentLoaded', function() {
   var header = document.querySelector('.header');
   var mobileMenu = document.querySelector('.mobile-menu');
@@ -36,5 +38,15 @@ document.addEventListener('DOMContentLoaded', function() {
     } else {
       openMenu();
     }
+  });
+});
+
+
+// Lightbox
+document.addEventListener("DOMContentLoaded", function() {
+  lightbox.option({
+    'resizeDuration': 200, // Duration of the image resizing animation, in milliseconds. Default is 700.
+    'fadeDuration': 200, // Duration of the image fading animation, in milliseconds. Default is 600.
+    'imageFadeDuration': 200 // Duration of the fading animation for images, in milliseconds. Default is 600.
   });
 });

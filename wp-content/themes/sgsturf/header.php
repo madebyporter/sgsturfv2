@@ -96,7 +96,7 @@
     </div>
     <!-- Start Mobile Menu -->
     <div
-      class="mobile-menu relative p-4 block lg:hidden z-0 overflow-hidden transition-all duration-500 ease-in-out mt-[-479px] md:mt-[-494px]">
+      class="mobile-menu relative p-4 block lg:hidden z-0 overflow-hidden transition-all duration-500 ease-in-out mt-[-1000px]">
       <?php
       wp_nav_menu(
         array(

@@ -189,10 +189,10 @@ add_action('wp_nav_menu_args', function ($args) {
   return $args;
 });
 
-// Mobile Menu
+// JS Scripts
 function theme_enqueue_scripts()
 {
-  wp_enqueue_script('mobile-menu', get_template_directory_uri() . '/assets/js/mobile-menu.js', array(), null, true);
+  wp_enqueue_script('main', get_template_directory_uri() . '/assets/js/main.js', array(), null, true);
 }
 add_action('wp_enqueue_scripts', 'theme_enqueue_scripts');
 
@@ -363,3 +363,14 @@ function populate_products_dropdown($form) {
 
     return $form;
 }
+
+// Lightbox
+function enqueue_lightbox() {
+    // Enqueue Lightbox2 CSS
+    wp_enqueue_style( 'lightbox2-css', 'https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css' );
+
+    // Enqueue Lightbox2 JavaScript
+    wp_enqueue_script( 'lightbox2-js', 'https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js', array('jquery'), false, true );
+}
+
+add_action( 'wp_enqueue_scripts', 'enqueue_lightbox' );
