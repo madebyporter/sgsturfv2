@@ -107,9 +107,6 @@ function card($args)
           elseif ($is_accessory): // If the product is an accessory, display only 'Spec Detail'
             ?>
             <div class="border-t border-stone-500 flex flex-col justify-start text-sm text-black pt-1">
-              <div>
-                Spec Detail:
-              </div>
               <div class="font-normal">
                 <?php 
                   // Access the 'Spec Detail' value directly
@@ -117,7 +114,7 @@ function card($args)
                     $spec_detail = $args['product_specs']['Spec Detail']; 
                     echo esc_html($spec_detail);
                   } else {
-                    echo "No Specs Available";
+                    echo "";
                   }
                 ?>
               </div>

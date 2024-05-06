@@ -149,7 +149,7 @@ if ($group_product->is_type('grouped')):
                         // For accessories, get the 'Spec Detail' from the ACF field
                         $spec_detail = get_field('specs_spec_detail', $subproduct_id);
                         // Add 'Spec Detail' to the card arguments
-                        $card_args['product_specs'] = array('Spec Detail' => $spec_detail ? $spec_detail : 'No Specs Available');
+                        $card_args['product_specs'] = array('Spec Detail' => $spec_detail ? $spec_detail : '');
                     } else {
                         // For other categories, get the standard specifications
                         $card_args['product_specs'] = array(
